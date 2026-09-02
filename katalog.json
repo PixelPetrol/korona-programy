@@ -8,43 +8,47 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "nazwa": "Bruce (LITE)",
-          "opis": "eksperymentalny, NIETESTOWANY na sprzecie",
           "rozmiar": 2418464,
+          "sha256": "bbe754fe117fc2059765b6f5bd9e7c6e47fc05196ce5a1a0efb3001b8264202a",
+          "nazwa": "Bruce (LITE)",
+          "opis": "eksperymentalny, NIETESTOWANY",
           "wersja": "lite",
-          "sha256": "bbe754fe117fc2059765b6f5bd9e7c6e47fc05196ce5a1a0efb3001b8264202a"
-        },
-        {
-          "plik": "bin/cyd24/esp32div.bin",
-          "nazwa": "ESP32-DIV",
-          "opis": "eksperymentalny, NIETESTOWANY na sprzecie",
-          "rozmiar": 2420240,
-          "wersja": "dev",
-          "sha256": "1596751321051ad7f530a3dae81781e5f5c387c2ef8a88a28adbb7b0288d3a53"
+          "kategoria": "zewnetrzne",
+          "autor": "pr3y",
+          "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF). Wariant LITE dla CYD 2.4\". Wersja probna: kolory i dotyk w trakcie poprawiania."
         },
         {
           "plik": "bin/cyd24/marauder.bin",
-          "nazwa": "Marauder",
-          "opis": "audyt WiFi / BLE (Fr4nkFletcher, profil CYD_24)",
           "rozmiar": 1607840,
+          "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405",
+          "nazwa": "Marauder",
+          "opis": "audyt WiFi / BLE",
           "wersja": "1.4.3",
-          "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405"
+          "kategoria": "zewnetrzne",
+          "autor": "justcallmekoko / Fr4nkFletcher",
+          "info": "ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom KORONA zostaja miedzy startami."
         },
         {
           "plik": "bin/cyd24/radar-pion.bin",
-          "nazwa": "Radar ADS-B (pion)",
-          "opis": "SkyCYD 4.4.1 pionowo 240x320",
           "rozmiar": 1498352,
+          "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803",
+          "nazwa": "AirCYD (pion)",
+          "opis": "radar ADS-B, samoloty wokol domu",
           "wersja": "4.4.1",
-          "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803"
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Radar lotniczy na CYD: pozycje z adsb.lol przez wlasny Worker, mapa, pogoda, zdjecia samolotow. Ekran pionowo 240x320. Konfiguracja przez portal WiFi (AP przy pierwszym starcie)."
         },
         {
           "plik": "bin/cyd24/radar-poziom.bin",
-          "nazwa": "Radar ADS-B (poziom)",
-          "opis": "SkyCYD 4.4.1 poziomo 320x240",
           "rozmiar": 1499968,
+          "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca",
+          "nazwa": "AirCYD (poziom)",
+          "opis": "radar ADS-B, ekran poziomo",
           "wersja": "4.4.1",
-          "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca"
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Ta sama aplikacja co AirCYD (pion), ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."
         }
       ]
     },
@@ -54,19 +58,25 @@
       "programy": [
         {
           "plik": "bin/cyd28/radar-pion.bin",
-          "nazwa": "Radar ADS-B (pion)",
-          "opis": "SkyCYD 4.4.1 pionowo; 2.8\" NIETESTOWANE",
           "rozmiar": 1498928,
+          "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
+          "nazwa": "AirCYD (pion)",
+          "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
           "wersja": "4.4.1",
-          "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960"
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."
         },
         {
           "plik": "bin/cyd28/radar-poziom.bin",
-          "nazwa": "Radar ADS-B (poziom)",
-          "opis": "SkyCYD 4.4.1 poziomo; 2.8\" NIETESTOWANE",
           "rozmiar": 1500544,
+          "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e",
+          "nazwa": "AirCYD (poziom)",
+          "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
           "wersja": "4.4.1",
-          "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e"
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."
         }
       ]
     }
