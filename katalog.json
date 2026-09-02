@@ -1,0 +1,7 @@
+{
+  "sklep": "KORONA",
+  "programy": [
+    { "nazwa": "Marauder", "plik": "bin/marauder.bin", "opis": "audyt WiFi / BLE", "rozmiar": 1607840, "wersja": "1.4.3" },
+    { "nazwa": "Radar ADS-B", "plik": "bin/radar.bin", "opis": "samoloty, pionowo", "rozmiar": 1498352, "wersja": "0.1.0" }
+  ]
+}
