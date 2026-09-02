@@ -1,7 +1,74 @@
 {
   "sklep": "KORONA",
-  "programy": [
-    { "nazwa": "Marauder", "plik": "bin/marauder.bin", "opis": "audyt WiFi / BLE", "rozmiar": 1607840, "wersja": "1.4.3" },
-    { "nazwa": "Radar ADS-B", "plik": "bin/radar.bin", "opis": "samoloty, pionowo", "rozmiar": 1498352, "wersja": "0.1.0" }
+  "wersja": 2,
+  "plytki": [
+    {
+      "id": "cyd24",
+      "nazwa": "CYD 2.4\" (ESP32-2432S024)",
+      "programy": [
+        {
+          "plik": "bin/cyd24/bruce.bin",
+          "nazwa": "Bruce (LITE)",
+          "opis": "eksperymentalny, NIETESTOWANY na sprzecie",
+          "rozmiar": 2418464,
+          "wersja": "lite",
+          "sha256": "bbe754fe117fc2059765b6f5bd9e7c6e47fc05196ce5a1a0efb3001b8264202a"
+        },
+        {
+          "plik": "bin/cyd24/esp32div.bin",
+          "nazwa": "ESP32-DIV",
+          "opis": "eksperymentalny, NIETESTOWANY na sprzecie",
+          "rozmiar": 2420240,
+          "wersja": "dev",
+          "sha256": "1596751321051ad7f530a3dae81781e5f5c387c2ef8a88a28adbb7b0288d3a53"
+        },
+        {
+          "plik": "bin/cyd24/marauder.bin",
+          "nazwa": "Marauder",
+          "opis": "audyt WiFi / BLE (Fr4nkFletcher, profil CYD_24)",
+          "rozmiar": 1607840,
+          "wersja": "1.4.3",
+          "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405"
+        },
+        {
+          "plik": "bin/cyd24/radar-pion.bin",
+          "nazwa": "Radar ADS-B (pion)",
+          "opis": "SkyCYD 4.4.1 pionowo 240x320",
+          "rozmiar": 1498352,
+          "wersja": "4.4.1",
+          "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803"
+        },
+        {
+          "plik": "bin/cyd24/radar-poziom.bin",
+          "nazwa": "Radar ADS-B (poziom)",
+          "opis": "SkyCYD 4.4.1 poziomo 320x240",
+          "rozmiar": 1499968,
+          "wersja": "4.4.1",
+          "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca"
+        }
+      ]
+    },
+    {
+      "id": "cyd28",
+      "nazwa": "CYD 2.8\" (ESP32-2432S028R)",
+      "programy": [
+        {
+          "plik": "bin/cyd28/radar-pion.bin",
+          "nazwa": "Radar ADS-B (pion)",
+          "opis": "SkyCYD 4.4.1 pionowo; 2.8\" NIETESTOWANE",
+          "rozmiar": 1498928,
+          "wersja": "4.4.1",
+          "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960"
+        },
+        {
+          "plik": "bin/cyd28/radar-poziom.bin",
+          "nazwa": "Radar ADS-B (poziom)",
+          "opis": "SkyCYD 4.4.1 poziomo; 2.8\" NIETESTOWANE",
+          "rozmiar": 1500544,
+          "wersja": "4.4.1",
+          "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e"
+        }
+      ]
+    }
   ]
 }
