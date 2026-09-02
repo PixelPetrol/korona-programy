@@ -24,8 +24,8 @@ META = {
                           "Ta sama aplikacja co AirCYD (pion), ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."),
     "marauder.bin":     m("Marauder",        "audyt WiFi / BLE",                 "1.4.3", Z, "justcallmekoko / Fr4nkFletcher",
                           "ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom KORONA zostaja miedzy startami."),
-    "bruce.bin":        m("Bruce (LITE)",    "eksperymentalny, NIETESTOWANY",    "lite",  Z, "pr3y",
-                          "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF). Wariant LITE dla CYD 2.4\". Wersja probna: kolory i dotyk w trakcie poprawiania."),
+    "bruce.bin":        m("Bruce (LITE)",    "pentest toolkit; poziomo, probny",  "lite",  Z, "pr3y",
+                          "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE, ekran poziomo. Env KORONA_CYD24: poprawione kolory (INVON). Pierwszy start: Bruce sam prosi o kalibracje dotyku (4 rogi) i zapamietuje ja - KORONA robi migawke jego ustawien."),
     ("cyd28", "radar-pion.bin"):   m("AirCYD (pion)",   "radar ADS-B; 2.8\" NIETESTOWANE",   "4.4.1", A, "Piotr Korona", "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."),
     ("cyd28", "radar-poziom.bin"): m("AirCYD (poziom)", "radar ADS-B; 2.8\" NIETESTOWANE",   "4.4.1", A, "Piotr Korona", "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."),
     # "esp32div.bin": wylaczony z katalogu 02.09 - po starcie zawiesza sie na ekranie poczatkowym (niebieska dioda), bez dotyku.

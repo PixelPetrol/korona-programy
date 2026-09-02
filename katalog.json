@@ -8,14 +8,14 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "rozmiar": 2418464,
-          "sha256": "bbe754fe117fc2059765b6f5bd9e7c6e47fc05196ce5a1a0efb3001b8264202a",
+          "rozmiar": 2418208,
+          "sha256": "74a7f157031d420c0e7a04a296465130940b0c39a6db9e0a8eb2a6410c62deed",
           "nazwa": "Bruce (LITE)",
-          "opis": "eksperymentalny, NIETESTOWANY",
+          "opis": "pentest toolkit; poziomo, probny",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
-          "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF). Wariant LITE dla CYD 2.4\". Wersja probna: kolory i dotyk w trakcie poprawiania."
+          "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE, ekran poziomo. Env KORONA_CYD24: poprawione kolory (INVON). Pierwszy start: Bruce sam prosi o kalibracje dotyku (4 rogi) i zapamietuje ja - KORONA robi migawke jego ustawien."
         },
         {
           "plik": "bin/cyd24/marauder.bin",
