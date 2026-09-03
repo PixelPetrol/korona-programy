@@ -8,8 +8,8 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "rozmiar": 2418208,
-          "sha256": "74a7f157031d420c0e7a04a296465130940b0c39a6db9e0a8eb2a6410c62deed",
+          "rozmiar": 2418160,
+          "sha256": "a0a7895da09a7bc9f4275ed616feb4a07b952d279142513fc8ae1359d73c2fa1",
           "nazwa": "Bruce (LITE)",
           "opis": "pentest toolkit; poziomo, probny",
           "wersja": "lite",
