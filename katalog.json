@@ -62,6 +62,17 @@
           "info": "openHASP zamienia CYD w panel dotykowy Home Assistant: strony/widgety LVGL z pages.jsonl, sterowanie MQTT. Pierwszy start: AP 'HASP-xxxxxx' haslo 'haspadmin', kalibracja 4 rogow, potem WiFi i MQTT przez www 192.168.4.1. Ekran poziomo; rotacje i inwersje zmienia sie w Configuration - Display."
         },
         {
+          "plik": "bin/cyd24/pogoda.bin",
+          "rozmiar": 1619168,
+          "sha256": "15183cc35df85b4e6717b161cbad8a5ce78c5ddb7e8d58efb7d865c1e31fcb91",
+          "nazwa": "Pogoda",
+          "opis": "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY",
+          "wersja": "0.1.36",
+          "kategoria": "zewnetrzne",
+          "autor": "nicholaswilde",
+          "info": "Stacja pogodowa na LVGL: duza temperatura, ikona, prognoza 3-dniowa, wykres godzinowy, motywy. Dane z Open-Meteo bez klucza API - lokalizacja po IP albo wspolrzedne. Pierwszy start: AP 'cyd-weather-station-XXXX' (otwarty), portal 192.168.4.1 (WiFi, lokalizacja, strefa); potem http://cyd-weather-station.local/. Po 'zapisz i restart' plytka wraca do ladowarki i autostart wznawia aplikacje."
+        },
+        {
           "plik": "bin/cyd24/radar-pion.bin",
           "rozmiar": 1498352,
           "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803",
