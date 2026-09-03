@@ -7,6 +7,17 @@
       "nazwa": "CYD 2.4\" (ESP32-2432S024)",
       "programy": [
         {
+          "plik": "bin/cyd24/biuro.bin",
+          "rozmiar": 1107856,
+          "sha256": "df3c4e983ed1a52dd6b705c6b92ea860bda32e484448b9e00e6627c268cc3408",
+          "nazwa": "K-OS Biuro",
+          "opis": "notatnik, kalkulator, kalendarz, pliki, WiFi, QR",
+          "wersja": "1.0.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, menedzer plikow (chroni /korona i /programy), WiFi, generator kodow QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb. Jeden program, moduly w menu. Czyta wspolne pliki K-OS z karty, wiec nie pyta o haslo do sieci i nie kaze kalibrowac dotyku. Dane w /biuro/ na karcie. Sprawdzone na sprzecie: start, odczyt kalibracji z K-OS, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem."
+        },
+        {
           "plik": "bin/cyd24/bruce.bin",
           "rozmiar": 2419792,
           "sha256": "a70f8a2cc1f874f31d85ac1fa7270cd1f850d35ded6f6249a592f7d5298e41db",

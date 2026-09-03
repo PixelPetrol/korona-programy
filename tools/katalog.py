@@ -30,6 +30,8 @@ META = {
                           "Radar lotniczy na CYD: pozycje z adsb.lol przez wlasny Worker, mapa, pogoda, zdjecia samolotow. Ekran pionowo 240x320. Konfiguracja przez portal WiFi (AP przy pierwszym starcie)."),
     "radar-poziom.bin": m("SkyCYD 4.4.1 poziom", "radar ADS-B, ekran poziomo",       "4.4.1", A, "Piotr Korona",
                           "Ta sama aplikacja co SkyCYD pion, ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."),
+    "biuro.bin":        m("K-OS Biuro",      "notatnik, kalkulator, kalendarz, pliki, WiFi, QR", "1.0.0", A, "Piotr Korona",
+                          "Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, menedzer plikow (chroni /korona i /programy), WiFi, generator kodow QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb. Jeden program, moduly w menu. Czyta wspolne pliki K-OS z karty, wiec nie pyta o haslo do sieci i nie kaze kalibrowac dotyku. Dane w /biuro/ na karcie. Sprawdzone na sprzecie: start, odczyt kalibracji z K-OS, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem."),
     "marauder.bin":     m("Marauder",        "audyt WiFi / BLE",                 "1.4.3", Z, "justcallmekoko / Fr4nkFletcher",
                           "ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom K-OS zostaja miedzy startami."),
     "bruce.bin":        m("Bruce (LITE)",    "pentest toolkit WiFi / BLE / IR / RF", "lite", Z, "pr3y",
