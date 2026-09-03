@@ -8,14 +8,25 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "rozmiar": 2418160,
-          "sha256": "a0a7895da09a7bc9f4275ed616feb4a07b952d279142513fc8ae1359d73c2fa1",
+          "rozmiar": 2418672,
+          "sha256": "88e95c98691c2ab22595e7dd19471d65360929decfe599497587811920308fe2",
           "nazwa": "Bruce (LITE)",
           "opis": "pentest toolkit; poziomo, probny",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
           "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE, ekran poziomo. Env KORONA_CYD24: poprawione kolory (INVON). Pierwszy start: Bruce sam prosi o kalibracje dotyku (4 rogi) i zapamietuje ja - KORONA robi migawke jego ustawien."
+        },
+        {
+          "plik": "bin/cyd24/btspeaker.bin",
+          "rozmiar": 1183536,
+          "sha256": "1f2a2d0262230a1e8fe6b537915ecf2a6e947d59fea461f03a1e712ade8727c0",
+          "nazwa": "BT Speaker",
+          "opis": "glosnik Bluetooth A2DP, DAC 8-bit; NIETESTOWANY",
+          "wersja": "1.0.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Odbiornik A2DP: telefon laczy sie z 'KORONA CYD' i gra przez wbudowany 8-bit DAC na GPIO26 (wzmacniacz, zlacze glosnika). Ekran pionowy: stan, tytul/wykonawca (AVRCP), glosnosc; dotyk = prev/pauza/next/glosnosc. Jakosc ogranicza 8-bitowy DAC - gadzet, nie hi-fi. WiFi wylaczone. Zrodlo: porty/btspeaker (MIT; biblioteka audio GPL-3.0)."
         },
         {
           "plik": "bin/cyd24/marauder.bin",
@@ -27,6 +38,28 @@
           "kategoria": "zewnetrzne",
           "autor": "justcallmekoko / Fr4nkFletcher",
           "info": "ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom KORONA zostaja miedzy startami."
+        },
+        {
+          "plik": "bin/cyd24/nerdminer.bin",
+          "rozmiar": 2157264,
+          "sha256": "dd033d344f55227aaa4534a7804383cfd408fb62461028fa52cf5526f908dc80",
+          "nazwa": "NerdMiner v2",
+          "opis": "kopacz-loteria BTC + kurs i bloki; NIETESTOWANY",
+          "wersja": "1.8.3",
+          "kategoria": "zewnetrzne",
+          "autor": "BitMaker-hub",
+          "info": "Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do ladowarki - uruchom program ponownie, ustawienia zostaja dzieki migawce."
+        },
+        {
+          "plik": "bin/cyd24/openhasp.bin",
+          "rozmiar": 1732448,
+          "sha256": "3574a8555d0fccc31d12d88a0df32fa0e20ebaa8cca841ab92d6e9eaea83c231",
+          "nazwa": "openHASP",
+          "opis": "panel dotykowy Home Assistant; NIETESTOWANY",
+          "wersja": "0.7.0",
+          "kategoria": "zewnetrzne",
+          "autor": "Francis Van Roie (fvanroie)",
+          "info": "openHASP zamienia CYD w panel dotykowy Home Assistant: strony/widgety LVGL z pages.jsonl, sterowanie MQTT. Pierwszy start: AP 'HASP-xxxxxx' haslo 'haspadmin', kalibracja 4 rogow, potem WiFi i MQTT przez www 192.168.4.1. Ekran poziomo; rotacje i inwersje zmienia sie w Configuration - Display."
         },
         {
           "plik": "bin/cyd24/radar-pion.bin",
