@@ -7,17 +7,6 @@
       "nazwa": "CYD 2.4\" (ESP32-2432S024)",
       "programy": [
         {
-          "plik": "bin/cyd24/biuro.bin",
-          "rozmiar": 1107856,
-          "sha256": "df3c4e983ed1a52dd6b705c6b92ea860bda32e484448b9e00e6627c268cc3408",
-          "nazwa": "K-OS Biuro",
-          "opis": "notatnik, kalkulator, kalendarz, pliki, WiFi, QR",
-          "wersja": "1.0.0",
-          "kategoria": "autorskie",
-          "autor": "Piotr Korona",
-          "info": "Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, menedzer plikow (chroni /korona i /programy), WiFi, generator kodow QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb. Jeden program, moduly w menu. Czyta wspolne pliki K-OS z karty, wiec nie pyta o haslo do sieci i nie kaze kalibrowac dotyku. Dane w /biuro/ na karcie. Sprawdzone na sprzecie: start, odczyt kalibracji z K-OS, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem."
-        },
-        {
           "plik": "bin/cyd24/bruce.bin",
           "rozmiar": 2419792,
           "sha256": "a70f8a2cc1f874f31d85ac1fa7270cd1f850d35ded6f6249a592f7d5298e41db",
@@ -71,6 +60,17 @@
           "kategoria": "zewnetrzne",
           "autor": "BitMaker-hub",
           "info": "Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do K-OS - uruchom program ponownie, ustawienia zostaja dzieki migawce."
+        },
+        {
+          "plik": "bin/cyd24/office.bin",
+          "rozmiar": 1179984,
+          "sha256": "29110d55c86d0be4c4356c9917a04f141ebb39f78a9502ed760f2c6da224ec45",
+          "nazwa": "K-OS Office",
+          "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
+          "wersja": "1.0.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz w przegladarce, a laduje na karcie. Dalej: kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, menedzer plikow (chroni /korona i /programy), kody QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb oraz kursy walut z NBP po zwyklym HTTP (bez TLS, dziala offline z karty). Motyw i jezyk bierze z ustawien K-OS, nie pyta o haslo do sieci ani o kalibracje dotyku. Dane w /office/ na karcie. Sprawdzone na sprzecie: start, migracja danych ze starej nazwy, motyw i jezyk z K-OS, kalibracja z karty, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem."
         },
         {
           "plik": "bin/cyd24/openhasp.bin",
