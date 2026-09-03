@@ -8,8 +8,8 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "rozmiar": 2419360,
-          "sha256": "be56d4c1ef33a2d840e6c675f9070d24140c99186025909bd1d914bb7b77326e",
+          "rozmiar": 2419792,
+          "sha256": "a70f8a2cc1f874f31d85ac1fa7270cd1f850d35ded6f6249a592f7d5298e41db",
           "nazwa": "Bruce (LITE)",
           "opis": "pentest toolkit WiFi / BLE / IR / RF",
           "wersja": "lite",
