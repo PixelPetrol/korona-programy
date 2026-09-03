@@ -1,0 +1,29 @@
+{
+  "name": "KORONA - ladowarka CYD 2.4\" (ESP32-2432S024R)",
+  "version": "0.3.6",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "obrazy/cyd24/bootloader.bin",
+          "offset": 4096
+        },
+        {
+          "path": "obrazy/cyd24/partitions.bin",
+          "offset": 32768
+        },
+        {
+          "path": "obrazy/cyd24/loader.bin",
+          "offset": 65536
+        },
+        {
+          "path": "obrazy/cyd24/otadata-pusta.bin",
+          "offset": 57344
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "KORONA - ladowarka CYD 2.8\" (ESP32-2432S028R, NIESPRAWDZONA)",
+  "version": "0.3.6",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "obrazy/cyd28/bootloader.bin",
+          "offset": 4096
+        },
+        {
+          "path": "obrazy/cyd28/partitions.bin",
+          "offset": 32768
+        },
+        {
+          "path": "obrazy/cyd28/loader.bin",
+          "offset": 65536
+        },
+        {
+          "path": "obrazy/cyd28/otadata-pusta.bin",
+          "offset": 57344
+        }
+      ]
+    }
+  ]
+}

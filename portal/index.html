@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KORONA — instalacja</title>
+<meta name="description" content="KORONA: ładowarka-menu dla płytek ESP32 Cheap Yellow Display. Wgranie wprost z przeglądarki (WebSerial). / KORONA loader for ESP32 CYD boards — install from the browser.">
+<link rel="icon" type="image/png" href="korona-godlo.png">
+<style>
+/* Styl jak na plytce: motyw "zielony" ladowarki (RGB565 -> hex): tlo 0x0000 #000, akcent 0x07E0
+   #00ff00, tekst 0x0620 #00c600, krawedz 0x02E0 #005d00, ostrzezenie 0xFCC0 #ff9a00, blad #ff0000.
+   Tekst pomocniczy jest jasniejszy niz na ekranie (0x0360 = #006d00 daje na czarnym 3:1, za malo
+   na stronie) - #00b000 to 7:1. Czcionka: terminalowa, jak na plytce. */
+:root{
+  --bg:#000; --card:#070a07; --sel:#00220f; --edge:#005d00; --edge2:#00a000;
+  --txt:#00e600; --txt2:#00b000; --acc:#00ff00; --warn:#ff9a00; --err:#ff3b30; --ink:#001a00;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:15.5px/1.6 var(--mono)}
+a{color:var(--acc);text-decoration:none;border-bottom:1px solid var(--edge)}
+a:hover,a:focus-visible{border-bottom-color:var(--acc);background:var(--sel)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+code,kbd,pre{font-family:var(--mono);font-size:.95em}
+code,kbd{background:var(--sel);border:1px solid var(--edge);border-radius:3px;padding:0 6px;color:var(--acc)}
+kbd{color:var(--txt)}
+pre{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.5}
+pre code{background:none;border:0;padding:0;color:var(--txt)}
+main{max-width:900px;margin:0 auto;padding:22px 20px 60px}
+html[data-lang="pl"] [lang="en"]{display:none!important}
+html[data-lang="en"] [lang="pl"]{display:none!important}
+.top{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:6px}
+.lang{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--txt2);font:700 13px var(--mono);letter-spacing:.08em;padding:6px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--acc);color:var(--ink)}
+.lang button:hover{color:var(--acc)}
+header.hero{text-align:center;padding:10px 0 28px;border-bottom:1px solid var(--edge);margin-bottom:34px}
+.hero img{width:min(300px,70vw);height:auto;display:block;margin:0 auto 18px}
+.hero p.lead{font-size:1.2rem;margin:0 0 10px;color:var(--acc);font-weight:700}
+.hero p.sub{margin:0;color:var(--txt);font-size:.98rem}
+.badge{display:inline-block;margin-top:14px;font:700 13px var(--mono);letter-spacing:.06em;color:var(--acc);border:1px solid var(--edge2);border-radius:4px;padding:4px 12px}
+h2{font-size:1.1rem;letter-spacing:.04em;margin:38px 0 14px;color:var(--acc);text-transform:uppercase}
+h2::before{content:"// ";color:var(--edge2)}
+h2 small{color:var(--txt2);font-weight:400;font-size:.8rem;margin-left:10px;text-transform:none;letter-spacing:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--edge2);border-radius:6px;padding:20px 22px}
+.card h3{margin:0 0 4px;font-size:1.25rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--acc)}
+.tag{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border-radius:3px;padding:3px 8px;border:1px solid}
+.tag.ok{color:var(--acc);border-color:var(--edge2)}
+.tag.warn{color:var(--warn);border-color:var(--warn)}
+.model{color:var(--txt2);font-size:.9rem;margin:0 0 14px}
+.card ul{margin:0 0 16px;padding-left:18px;color:var(--txt)}
+.card ul li{margin:3px 0}
+.card ul li b{color:var(--warn)}
+.inst{margin-top:6px}
+.btn{display:inline-block;background:var(--acc);color:var(--ink);border:1px solid var(--acc);border-radius:4px;padding:13px 20px;font:700 15px var(--mono);cursor:pointer;width:100%}
+.btn:hover{background:#7dff7d}
+.btn.soft{background:transparent;color:var(--warn);border-color:var(--warn)}
+.btn.soft:hover{background:#1f1200}
+esp-web-install-button:not(:defined){display:none}
+.ldg{display:none;color:var(--txt2);font-size:.9rem;padding:10px 0}
+esp-web-install-button:not(:defined) ~ .ldg{display:block}
+.note{color:var(--txt2);font-size:.92rem;margin:8px 0 0}
+.note b{color:var(--txt)}
+ul.terse{margin:0;padding-left:20px}
+ul.terse li{margin:8px 0}
+ul.terse li b{color:var(--acc)}
+.warnbox{border:1px solid var(--warn);border-left-width:4px;background:#120c00;padding:12px 16px;border-radius:0 4px 4px 0;margin:16px 0;color:var(--txt)}
+.warnbox b{color:var(--warn)}
+details{border:1px solid var(--edge);border-radius:4px;margin:10px 0;background:var(--card)}
+summary{cursor:pointer;padding:12px 16px;font-weight:700;color:var(--txt);list-style:none;display:flex;align-items:center;gap:10px}
+summary:hover{background:var(--sel);color:var(--acc)}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"[+]";color:var(--acc);width:34px}
+details[open] summary::before{content:"[-]"}
+details>div{padding:0 16px 16px;color:var(--txt)}
+details>div p{margin:8px 0}
+details>div ul{padding-left:20px}
+details>div li{margin:6px 0}
+details>div li b{color:var(--acc)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--edge);vertical-align:top}
+th{color:var(--acc);font-weight:700}
+td code{white-space:nowrap}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--edge);color:var(--txt2);font-size:.9rem}
+footer p{margin:6px 0}
+@media (max-width:520px){main{padding:16px 14px 50px}.hero p.lead{font-size:1.05rem}}
+</style>
+</head>
+<body>
+<main>
+
+<div class="top" role="group" aria-label="Język / Language">
+  <div class="lang">
+    <button type="button" data-set="pl" aria-pressed="true">PL</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<header class="hero">
+  <img src="logo-korona.png" alt="KORONA — CYD project" width="885" height="792">
+  <p class="lead">
+    <span lang="pl">Menu-ładowarka dla płytek ESP32 „Cheap Yellow Display".</span>
+    <span lang="en">A boot menu for ESP32 “Cheap Yellow Display” boards.</span>
+  </p>
+  <p class="sub">
+    <span lang="pl">Programy na karcie microSD. Dotykasz — startuje. Reset — wracasz do menu.</span>
+    <span lang="en">Apps live on a microSD card. Tap — it runs. Reset — you are back in the menu.</span>
+  </p>
+  <span class="badge">KORONA <!--WER-->0.3.6<!--/WER--></span>
+</header>
+
+<h2>
+  <span lang="pl">Wgraj z przeglądarki</span><span lang="en">Install from the browser</span>
+  <small><span lang="pl">Chrome lub Edge na komputerze · kabel USB do danych</span><span lang="en">Chrome or Edge on a computer · a USB data cable</span></small>
+</h2>
+
+<div class="grid">
+  <section class="card" aria-labelledby="h24">
+    <h3 id="h24">CYD 2.4" <span class="tag ok"><span lang="pl">sprawdzona</span><span lang="en">tested</span></span></h3>
+    <p class="model">ESP32-2432S024R</p>
+    <ul>
+      <li><span lang="pl">ekran ILI9341 240×320, dotyk XPT2046</span><span lang="en">ILI9341 240×320 display, XPT2046 touch</span></li>
+      <li><span lang="pl">podświetlenie GPIO 27</span><span lang="en">backlight on GPIO 27</span></li>
+      <li><span lang="pl">obraz ~1,4 MB</span><span lang="en">image ~1.4 MB</span></li>
+    </ul>
+    <div class="inst">
+      <esp-web-install-button manifest="manifest-cyd24.json">
+        <button class="btn" slot="activate"><span lang="pl">Wgraj KORONĘ · 2.4"</span><span lang="en">Install KORONA · 2.4"</span></button>
+        <span slot="unsupported" class="note"><span lang="pl">Ta przeglądarka nie ma WebSerial — użyj Chrome lub Edge na komputerze, albo drogi z wiersza poleceń niżej.</span><span lang="en">This browser has no WebSerial — use Chrome or Edge on a computer, or the command-line route below.</span></span>
+        <span slot="not-allowed" class="note"><span lang="pl">WebSerial działa tylko po <b>https://</b> albo na <b>localhost</b>.</span><span lang="en">WebSerial works only over <b>https://</b> or on <b>localhost</b>.</span></span>
+      </esp-web-install-button>
+      <div class="ldg"><span lang="pl">Ładuję instalator… Jeśli przycisk nie pojawia się, przeglądarka blokuje skrypt z unpkg.com — użyj drogi z wiersza poleceń niżej.</span><span lang="en">Loading the installer… If no button appears, the browser is blocking the script from unpkg.com — use the command-line route below.</span></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h28">
+    <h3 id="h28">CYD 2.8" <span class="tag warn"><span lang="pl">niesprawdzona</span><span lang="en">untested</span></span></h3>
+    <p class="model">ESP32-2432S028R</p>
+    <ul>
+      <li><span lang="pl">ekran ILI9341 240×320, dotyk XPT2046 na osobnych pinach</span><span lang="en">ILI9341 240×320 display, XPT2046 touch on separate pins</span></li>
+      <li><span lang="pl">podświetlenie GPIO 21</span><span lang="en">backlight on GPIO 21</span></li>
+      <li><span lang="pl"><b>nigdy nie uruchomiona na sprzęcie</b>; w sklepie tylko SkyCYD</span><span lang="en"><b>never run on real hardware</b>; the store has only SkyCYD for it</span></li>
+    </ul>
+    <div class="inst">
+      <esp-web-install-button manifest="manifest-cyd28.json">
+        <button class="btn soft" slot="activate"><span lang="pl">Wgraj KORONĘ · 2.8" (na własne ryzyko)</span><span lang="en">Install KORONA · 2.8" (at your own risk)</span></button>
+        <span slot="unsupported" class="note"><span lang="pl">Ta przeglądarka nie ma WebSerial — użyj Chrome lub Edge na komputerze, albo drogi z wiersza poleceń niżej.</span><span lang="en">This browser has no WebSerial — use Chrome or Edge on a computer, or the command-line route below.</span></span>
+        <span slot="not-allowed" class="note"><span lang="pl">WebSerial działa tylko po <b>https://</b> albo na <b>localhost</b>.</span><span lang="en">WebSerial works only over <b>https://</b> or on <b>localhost</b>.</span></span>
+      </esp-web-install-button>
+      <div class="ldg"><span lang="pl">Ładuję instalator…</span><span lang="en">Loading the installer…</span></div>
+    </div>
+  </section>
+</div>
+
+<p class="note">
+  <span lang="pl">Po naciśnięciu wybierz port z <b>CH340</b> albo <b>usbserial</b> w nazwie. Pytanie <b>Erase device</b> zostaw <b>niezaznaczone</b> — pełne kasowanie czyści też ustawienia ładowarki (WiFi, motyw, kalibrację dotyku). Wgrywanie trwa 1–2 minuty; nie odłączaj kabla.</span>
+  <span lang="en">When asked, pick the port with <b>CH340</b> or <b>usbserial</b> in its name. Leave <b>Erase device</b> <b>unchecked</b> — a full erase also wipes the loader's settings (WiFi, theme, touch calibration). Flashing takes 1–2 minutes; keep the cable in.</span>
+</p>
+
+<h2><span lang="pl">Potem, w 5 punktach</span><span lang="en">Afterwards, in 5 points</span></h2>
+<ul class="terse">
+  <li><span lang="pl"><b>Pierwszy start = kreator.</b> Ładowarka prosi o kalibrację dotyku (4 rogi) i pokazuje menu. Autostart w tym biegu jest pomijany.</span><span lang="en"><b>First boot = wizard.</b> The loader asks for touch calibration (4 corners) and shows the menu. Autostart is skipped on that boot.</span></li>
+  <li><span lang="pl"><b>Karta microSD, FAT32</b> (karty powyżej 32 GB trzeba sformatować na FAT32 osobno). Programy trafiają do <code>/programy/cyd24/</code> albo <code>/programy/cyd28/</code> — jeden plik <code>.bin</code> to jedna aplikacja.</span><span lang="en"><b>microSD card, FAT32</b> (cards over 32 GB need a separate FAT32 format). Apps go to <code>/programy/cyd24/</code> or <code>/programy/cyd28/</code> — one <code>.bin</code> is one app.</span></li>
+  <li><span lang="pl"><b>Najprościej przez sklep:</b> <kbd>ustawienia</kbd> → <kbd>sieć WiFi</kbd> → <kbd>skanuj i połącz</kbd>, potem w menu głównym <kbd>sklep KORONA</kbd>. Programy lecą z GitHuba wprost na kartę.</span><span lang="en"><b>Easiest via the store:</b> <kbd>settings</kbd> → <kbd>WiFi</kbd> → <kbd>scan and connect</kbd>, then <kbd>KORONA store</kbd> in the main menu. Apps download from GitHub straight to the card.</span></li>
+  <li><span lang="pl"><b>Autostart 3 s.</b> Ładowarka sama wchodzi w ostatni program; dotknij ekranu w czasie odliczania, żeby zostać w menu. <b>Reset = powrót do menu.</b></span><span lang="en"><b>Autostart in 3 s.</b> The loader enters the last app by itself; tap the screen during the countdown to stay in the menu. <b>Reset = back to the menu.</b></span></li>
+  <li><span lang="pl"><b>Każda aplikacja ma własne ustawienia</b> — ładowarka trzyma je na karcie osobno, więc się nie mieszają. Nazwa pliku jest kluczem tych ustawień; nazwę do wyświetlania ładowarka trzyma oddzielnie.</span><span lang="en"><b>Each app keeps its own settings</b> — the loader stores them separately on the card, so they never mix. The file name is the key to those settings; the display name is kept separately.</span></li>
+</ul>
+
+<div class="warnbox">
+  <span lang="pl"><b>„Reset wraca do menu" dotyczy programów ze sklepu KORONA.</b> Obcy plik <code>.bin</code> wrzucony na kartę nie zna tej umowy: po starcie płytka będzie w niego wracać po każdym resecie. Wyjście: podłącz USB i wgraj ładowarkę tą stroną jeszcze raz (tryb programowania: trzymaj <kbd>BOOT</kbd> przy podłączaniu). Nic nie ginie na stałe.</span>
+  <span lang="en"><b>“Reset returns to the menu” holds for apps from the KORONA store.</b> A foreign <code>.bin</code> dropped on the card does not know that contract: once started, the board will keep returning to it after every reset. Way out: connect USB and install the loader from this page again (bootloader mode: hold <kbd>BOOT</kbd> while plugging in). Nothing is lost for good.</span>
+</div>
+
+<h2><span lang="pl">Więcej, gdy potrzeba</span><span lang="en">More, when you need it</span></h2>
+
+<details>
+  <summary><span lang="pl">Co to jest KORONA</span><span lang="en">What KORONA is</span></summary>
+  <div>
+    <ul>
+      <li><span lang="pl">Menu na ekranie płytki: wybierasz program z karty, ładowarka kopiuje go do slotu roboczego i uruchamia.</span><span lang="en">A menu on the board's screen: pick an app from the card, the loader copies it to the working slot and runs it.</span></li>
+      <li><span lang="pl">Jedna płytka udaje kilka urządzeń — radar lotniczy SkyCYD, narzędzia WiFi/BLE i inne — bez kabla i bez kompilowania.</span><span lang="en">One board acts as several devices — the SkyCYD aircraft radar, WiFi/BLE tools and more — no cable, no compiling.</span></li>
+      <li><span lang="pl">Sklep przez WiFi, serwer www do zarządzania kartą z telefonu, osobne ustawienia dla każdej aplikacji.</span><span lang="en">A WiFi store, a web server to manage the card from your phone, separate settings per app.</span></li>
+      <li><span lang="pl">Ta strona wgrywa <b>samą ładowarkę</b>. Programy dokładasz potem z płytki.</span><span lang="en">This page installs <b>the loader only</b>. Apps come later, from the board itself.</span></li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary><span lang="pl">Przeglądarki i wymagania</span><span lang="en">Browsers and requirements</span></summary>
+  <div>
+    <ul>
+      <li><span lang="pl"><b>Chrome / Edge na komputerze</b> (89+) — sprawdzona droga.</span><span lang="en"><b>Chrome / Edge on a computer</b> (89+) — the tested route.</span></li>
+      <li><span lang="pl"><b>Firefox na komputerze</b> od wersji 151 ma WebSerial według tabel zgodności MDN — na tej płytce jeszcze nie sprawdzony.</span><span lang="en"><b>Firefox on a computer</b> has WebSerial from version 151 per MDN compatibility data — not yet tried with this board.</span></li>
+      <li><span lang="pl"><b>Safari, iPhone, iPad — nie.</b> Telefon z Androidem — nie (Chrome daje tam WebSerial tylko przez Bluetooth).</span><span lang="en"><b>Safari, iPhone, iPad — no.</b> Android phones — no (Chrome exposes WebSerial there only over Bluetooth).</span></li>
+      <li><span lang="pl">Kabel USB <b>do danych</b>, nie sam zasilający. Sterownik <b>CH340</b>, jeśli system nie widzi portu.</span><span lang="en">A USB <b>data</b> cable, not a charge-only one. The <b>CH340</b> driver if the system shows no port.</span></li>
+      <li><span lang="pl">Strona musi być otwarta po <code>https://</code>. Instalator to <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> ładowany z unpkg.com w przypiętej wersji.</span><span lang="en">The page must be opened over <code>https://</code>. The installer is <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>, loaded from unpkg.com at a pinned version.</span></li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary><span lang="pl">Co trafia do flasha</span><span lang="en">What gets written to flash</span></summary>
+  <div>
+    <p><span lang="pl">Te same trzy pliki i to samo kasowanie wskaźnika rozruchu, co skrypt <code>flash.sh</code> z repozytorium. Układ: 4 MB, ładowarka w partycji <code>factory</code>, uruchamiany program w slocie <code>ota_0</code>. Tablica partycji pod <code>0x8000</code> jest nadpisywana — dane innego firmware'u, które wcześniej tam było, przestają być czytelne.</span><span lang="en">The same three files and the same boot-pointer clear as the repository's <code>flash.sh</code>. Layout: 4 MB, the loader in the <code>factory</code> partition, the running app in the <code>ota_0</code> slot. The partition table at <code>0x8000</code> is overwritten — data left by any previous firmware becomes unreadable.</span></p>
+    <table>
+      <caption class="visually-hidden"></caption>
+      <thead><tr><th scope="col">offset</th><th scope="col"><span lang="pl">plik</span><span lang="en">file</span></th><th scope="col"><span lang="pl">co to jest</span><span lang="en">what it is</span></th></tr></thead>
+      <tbody>
+        <tr><td><code>0x1000</code></td><td><code>bootloader.bin</code></td><td><span lang="pl">bootloader ESP32 (2. stopnia)</span><span lang="en">ESP32 second-stage bootloader</span></td></tr>
+        <tr><td><code>0x8000</code></td><td><code>partitions.bin</code></td><td><span lang="pl">tablica partycji KORONY</span><span lang="en">KORONA partition table</span></td></tr>
+        <tr><td><code>0x10000</code></td><td><code>loader.bin</code></td><td><span lang="pl">ładowarka, partycja <code>factory</code> (1408 KB)</span><span lang="en">the loader, <code>factory</code> partition (1408 KB)</span></td></tr>
+        <tr><td><code>0xe000</code></td><td><code>otadata-pusta.bin</code></td><td><span lang="pl">8192 bajtów <code>0xFF</code>: pusty wskaźnik rozruchu = „startuj <code>factory</code>"; zapisywany ostatni</span><span lang="en">8192 bytes of <code>0xFF</code>: a blank boot pointer = “boot <code>factory</code>”; written last</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary><span lang="pl">Bez przeglądarki: esptool</span><span lang="en">Without a browser: esptool</span></summary>
+  <div>
+    <p><span lang="pl">Jeden scalony obraz pod offset <code>0x0</code>, z pustą <code>otadata</code> w środku. <b>Różnica:</b> ta droga zeruje też partycję <code>nvs</code> aplikacji — ustawienia ostatnio uruchamianego programu przepadają. Ładowarka i sklep nie.</span><span lang="en">One merged image at offset <code>0x0</code>, with a blank <code>otadata</code> inside. <b>Difference:</b> this route also blanks the apps' <code>nvs</code> partition — the last-run app's settings are lost. The loader and store are not.</span></p>
+<pre><code>pip install esptool
+
+# 2.4"                                              (macOS: /dev/cu.usbserial-XXXX, Linux: /dev/ttyUSB0, Windows: COM3)
+esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd24-scalony.bin
+
+# 2.8" (<span lang="pl">niesprawdzona</span><span lang="en">untested</span>)
+esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd28-scalony.bin</code></pre>
+    <p><span lang="pl">Pliki: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · sumy SHA-256: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. Na esptool 4.x program nazywa się <code>esptool.py</code>, a komenda <code>write_flash</code> (z podkreślnikiem).</span><span lang="en">Files: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · SHA-256 sums: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. On esptool 4.x the program is <code>esptool.py</code> and the command is <code>write_flash</code> (underscore).</span></p>
+  </div>
+</details>
+
+<details>
+  <summary><span lang="pl">Gdy coś nie idzie</span><span lang="en">When something goes wrong</span></summary>
+  <div>
+    <ul>
+      <li><span lang="pl"><b>Nie ma portu do wyboru</b> — kabel tylko ładuje albo brak sterownika CH340. Najpierw inny kabel, potem sterownik.</span><span lang="en"><b>No port to pick</b> — a charge-only cable or no CH340 driver. Try another cable first, then the driver.</span></li>
+      <li><span lang="pl"><b>Port jest, ale nie łączy</b> — port trzyma inny program (monitor portu, Arduino IDE, PlatformIO). Zamknij je. Jeśli nadal nic: trzymaj <kbd>BOOT</kbd> podczas podłączania kabla — płytka wchodzi w tryb programowania.</span><span lang="en"><b>Port is there but won't connect</b> — another program holds it (serial monitor, Arduino IDE, PlatformIO). Close them. Still nothing: hold <kbd>BOOT</kbd> while plugging the cable in — the board enters bootloader mode.</span></li>
+      <li><span lang="pl"><b>Wgrało się, ekran czarny</b> — zła płytka: 2.4" i 2.8" mają podświetlenie na innym pinie. Wgraj obraz drugiej.</span><span lang="en"><b>Flashed, screen stays black</b> — wrong board: 2.4" and 2.8" drive the backlight from different pins. Install the other image.</span></li>
+      <li><span lang="pl"><b>Dotyk nie trafia</b> — <kbd>ustawienia</kbd> → <kbd>dotyk</kbd> → <kbd>kalibracja</kbd>. Na 2.8" kalibracja startowa jest zgadywana; jeśli nie da się trafić w menu, ładowarka przyjmuje komendy po USB (115200 b/s), np. <code>RUN:&lt;nazwa&gt;</code>.</span><span lang="en"><b>Touch is off</b> — <kbd>settings</kbd> → <kbd>touch</kbd> → <kbd>calibration</kbd>. On the 2.8" the initial calibration is a guess; if the menu is unreachable, the loader accepts USB commands (115200 baud), e.g. <code>RUN:&lt;name&gt;</code>.</span></li>
+      <li><span lang="pl"><b>Płytka wraca do obcego programu</b> — patrz ramka wyżej: USB, <kbd>BOOT</kbd>, ta strona.</span><span lang="en"><b>The board keeps returning to a foreign app</b> — see the box above: USB, <kbd>BOOT</kbd>, this page.</span></li>
+      <li><span lang="pl"><b>Da się cofnąć.</b> Tryb programowania ESP32 siedzi w ROM-ie, więc żadne wgranie nie psuje płytki na stałe. Wyjątek: płytki z włączonym flash encryption lub secure boot — tam ta strona nie ma zastosowania.</span><span lang="en"><b>It can be undone.</b> The ESP32 bootloader mode lives in ROM, so no flash ever bricks the board. Exception: boards with flash encryption or secure boot enabled — this page does not apply to them.</span></li>
+    </ul>
+  </div>
+</details>
+
+<footer>
+  <p><span lang="pl">KORONA — Piotr Korona. Programy do sklepu: </span><span lang="en">KORONA — Piotr Korona. Store programs: </span><a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a></p>
+  <p><span lang="pl">Instalator: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Zewnętrzne programy w sklepie mają swoich autorów i własne licencje — wymienione w katalogu sklepu.</span><span lang="en">Installer: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Third-party programs in the store have their own authors and licences — listed in the store catalogue.</span></p>
+</footer>
+
+</main>
+
+<script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js?module"></script>
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang button');
+  function set(l,save){
+    root.setAttribute('data-lang',l); root.setAttribute('lang',l);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l));});
+    if(save){try{localStorage.setItem('korona-lang',l);}catch(e){}}
+  }
+  var saved=null; try{saved=localStorage.getItem('korona-lang');}catch(e){}
+  if(saved==='pl'||saved==='en') set(saved,false);
+  else if(navigator.language&&!/^pl/i.test(navigator.language)) set('en',false);
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set,true);});});
+})();
+</script>
+</body>
+</html>
