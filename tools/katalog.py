@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
-"""Generuje katalog.json (format v2, per plytka) z plikow bin/<plytka>/*.bin i tabeli META.
+"""Generuje katalog.json (format v2, per plytka) z plikow bin/<plytka>/*.bin i tabeli META
+oraz z programow uzytkownikow bin/<plytka>/uzytkownicy/*.bin (META z pliku <nazwa>.meta.json obok bina).
 
 Uzycie (z katalogu repo):  python3 tools/katalog.py
-Rozmiary sa czytane z plikow; opisy/wersje z tabeli ponizej. Plik bez wpisu w META
-dostaje nazwe z pliku i pusty opis (i ostrzezenie na stderr).
+Rozmiary sa czytane z plikow; opisy/wersje z tabeli ponizej (programy sklepu) albo z
+<nazwa>.meta.json (programy uzytkownikow - te trafiaja tam automatem z zgloszenia/, patrz
+tools/przyjmij_zgloszenia.py). Plik bez META nie trafia do katalogu (ostrzezenie na stderr).
+
+Kategorie: "autorskie" (programy KORONA / Piotra), "zewnetrzne" (porty cudzych projektow
+robione tu), "uzytkownicy" (zgloszone przez uzytkownikow przez PR do zgloszenia/).
+Ladowarka <= 0.3.6 zna tylko dwie pierwsze i wszystko, co nie jest "autorskie", pokazuje
+w "zewnetrzne" (net.cpp progInCat) - stare wersje zobacza wiec programy uzytkownikow tam.
 """
 import json, os, sys, hashlib
 
@@ -11,10 +18,11 @@ PLYTKI = [
     ("cyd24", 'CYD 2.4" (ESP32-2432S024)'),
     ("cyd28", 'CYD 2.8" (ESP32-2432S028R)'),
 ]
+UZYTK_DIR = "uzytkownicy"          # bin/<plytka>/uzytkownicy/<nazwa>.bin + <nazwa>.meta.json
 # (plytka, plik) albo plik -> dict(nazwa, opis, wersja, kategoria, autor, info); wpis z plytka ma pierwszenstwo.
 # kategoria: "autorskie" (programy KORONA / Piotra) albo "zewnetrzne" (porty cudzych projektow).
 # Plik bez wpisu -> nie trafia do katalogu (zeby nie wystawiac niesprawdzonych binarek).
-A, Z = "autorskie", "zewnetrzne"
+A, Z, U = "autorskie", "zewnetrzne", "uzytkownicy"
 def m(nazwa, opis, wersja, kategoria, autor, info=""):
     return dict(nazwa=nazwa, opis=opis, wersja=wersja, kategoria=kategoria, autor=autor, info=info)
 META = {
@@ -36,28 +44,65 @@ META = {
                           "Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do ladowarki - uruchom program ponownie, ustawienia zostaja dzieki migawce."),
     "pogoda.bin":       m("Pogoda",          "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY", "0.1.36", Z, "nicholaswilde",
                           "Stacja pogodowa na LVGL: duza temperatura, ikona, prognoza 3-dniowa, wykres godzinowy, motywy. Dane z Open-Meteo bez klucza API - lokalizacja po IP albo wspolrzedne. Pierwszy start: AP 'cyd-weather-station-XXXX' (otwarty), portal 192.168.4.1 (WiFi, lokalizacja, strefa); potem http://cyd-weather-station.local/. Po 'zapisz i restart' plytka wraca do ladowarki i autostart wznawia aplikacje."),
-    "esp32div.bin":     m("ESP32-DIV",       "multitool WiFi/BLE/RF; ZAWIESZA SIE - do naprawy", "dev",   Z, "cifertech",
-                          "ESP32-DIV (HaleHound): skaner WiFi/BLE, deauth, RF. Build z 02.09 zawiesza sie na ekranie startowym z niebieska dioda i nie reaguje na dotyk - prawdopodobnie zla konfiguracja dotyku/partycji dla CYD 2.4. Zostaje w sklepie do czasu naprawy (plan w SPEC-LADOWARKA.md)."),
+    "esp32div.bin":     m("ESP32-DIV",       "multitool WiFi/BLE/RF (HaleHound-CYD 2.4\")", "3.3.0", Z, "cifertech / Wontfallo (HaleHound-CYD)",
+                          "HaleHound-CYD: skaner WiFi/BLE, deauth, RF, NFC (moduly opcjonalne). Port KORONA dla CYD 2.4\": dotyk XPT2046 przez magistrale LCD (TFT_eSPI, TOUCH_CS 33) zamiast bit-bangu po pinach ekranu, ktory zamrazal plansze startowa. Sprawdzone na sprzecie 03.09.2026: start, menu, dotyk, RST wraca do ladowarki."),
 }
+# Pola z <nazwa>.meta.json, ktore trafiaja do katalogu (w tej kolejnosci). Reszta (np. model_b, plytka) zostaje w pliku.
+UZYTK_POLA = ("nazwa", "opis", "wersja", "kategoria", "autor", "info", "licencja", "zrodlo", "orientacja", "zgloszono")
 
-root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-out = {"sklep": "KORONA", "wersja": 2, "plytki": []}
-for pid, pname in PLYTKI:
-    d = os.path.join(root, "bin", pid)
-    progs = []
-    if os.path.isdir(d):
-        for f in sorted(os.listdir(d)):
-            if not f.lower().endswith(".bin"): continue
-            p = os.path.join(d, f)
-            meta = META.get((pid, f), META.get(f))
-            if meta is None: print("UWAGA: brak META, pomijam", pid, f, file=sys.stderr); continue
-            with open(p, "rb") as fh: data = fh.read()
-            if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr)
-            e = {"plik": f"bin/{pid}/{f}", "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest()}
-            e.update(meta)
-            progs.append(e)
-    out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
 
-with open(os.path.join(root, "katalog.json"), "w") as fh:
-    json.dump(out, fh, ensure_ascii=False, indent=2); fh.write("\n")
-print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow")
+def wpis(pid, rel, data, meta):
+    e = {"plik": rel, "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+    e.update(meta)
+    return e
+
+
+def meta_uzytkownika(path_json):
+    """META programu uzytkownika: <nazwa>.meta.json obok bina. Kategoria zawsze 'uzytkownicy'."""
+    with open(path_json, encoding="utf-8") as fh:
+        j = json.load(fh)
+    j["kategoria"] = U
+    out = {k: j[k] for k in UZYTK_POLA if k in j}
+    for k in ("nazwa", "opis", "wersja", "autor", "info"):
+        out.setdefault(k, "")
+    return out
+
+
+def main():
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out = {"sklep": "KORONA", "wersja": 2, "plytki": []}
+    for pid, pname in PLYTKI:
+        d = os.path.join(root, "bin", pid)
+        progs = []
+        if os.path.isdir(d):
+            for f in sorted(os.listdir(d)):
+                if not f.lower().endswith(".bin"): continue
+                p = os.path.join(d, f)
+                meta = META.get((pid, f), META.get(f))
+                if meta is None: print("UWAGA: brak META, pomijam", pid, f, file=sys.stderr); continue
+                with open(p, "rb") as fh: data = fh.read()
+                if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr)
+                progs.append(wpis(pid, f"bin/{pid}/{f}", data, meta))
+            du = os.path.join(d, UZYTK_DIR)
+            if os.path.isdir(du):
+                for f in sorted(os.listdir(du)):
+                    if not f.lower().endswith(".bin"): continue
+                    p = os.path.join(du, f)
+                    pj = os.path.join(du, f[:-4] + ".meta.json")
+                    if not os.path.isfile(pj): print("UWAGA: brak", pj, "- pomijam", pid, f, file=sys.stderr); continue
+                    try:
+                        meta = meta_uzytkownika(pj)
+                    except (OSError, ValueError) as e:
+                        print("UWAGA: zly", pj, e, "- pomijam", file=sys.stderr); continue
+                    with open(p, "rb") as fh: data = fh.read()
+                    if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr); continue
+                    progs.append(wpis(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
+        out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
+
+    with open(os.path.join(root, "katalog.json"), "w") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=2); fh.write("\n")
+    print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,63 @@
+# Po merge do main: poprawne zgloszenia z zgloszenia/<id>/ trafiaja do bin/<plytka>/uzytkownicy/,
+# katalog.json jest regenerowany, a wynik commitowany jako github-actions[bot].
+# Wymaga w Settings > Actions > General > Workflow permissions: "Read and write permissions".
+# Zgloszenie odrzucone (np. ktos wgral recznie z pominieciem checka) zostaje w zgloszenia/ i job
+# jest czerwony - trzeba je poprawic albo usunac recznie.
+name: przyjmij
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "zgloszenia/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: przyjmij-main
+  cancel-in-progress: false
+
+jobs:
+  przyjmij:
+    runs-on: ubuntu-latest
+    # commit bota tez dotyka zgloszenia/ (usuwa katalog) - ten warunek przerywa petle
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Przenies zgloszenia do sklepu i przebuduj katalog.json
+        id: przyjmij
+        run: |
+          set +e
+          python3 tools/przyjmij_zgloszenia.py | tee raport.txt
+          KOD=${PIPESTATUS[0]}
+          { echo '```'; cat raport.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          echo "kod=$KOD" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A bin/ katalog.json zgloszenia/
+          if git diff --cached --quiet; then
+            echo "nic do commitowania"; exit 0
+          fi
+          git commit -m "sklep: programy uzytkownikow ${{ steps.przyjmij.outputs.przyjete }}" \
+                     -m "automat: tools/przyjmij_zgloszenia.py + tools/katalog.py (.github/workflows/przyjmij.yml)"
+          git push origin main
+
+      - name: Wynik
+        run: |
+          if [ "${{ steps.przyjmij.outputs.kod }}" != "0" ]; then
+            echo "::error::czesc zgloszen odrzucona - zostaly w zgloszenia/, szczegoly w podsumowaniu"
+            exit 1
+          fi

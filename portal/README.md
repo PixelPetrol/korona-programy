@@ -11,7 +11,8 @@ Autor: Piotr Korona.
 ## 1. Co tu leży
 
 ```
-index.html            strona (bez frameworków; jedyny skrypt to ESP Web Tools z unpkg)
+index.html            strona (bez frameworków; skrypty: ESP Web Tools z unpkg + esptool-js z jsDelivr
+                      ładowany dopiero po kliknięciu „Zrób kopię” — §8)
 manifest-cyd24.json   manifest ESP Web Tools — CYD 2.4" (ESP32-2432S024R)
 manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R, NIESPRAWDZONA)
 zbuduj-obrazy.sh      składa obrazy z wyników builda; NICZEGO NIE WGRYWA na płytkę
@@ -316,3 +317,120 @@ python3 -m http.server 8731
 
 `file://` **nie zadziała** — to nie jest bezpieczny kontekst, przycisk pokaże komunikat
 o `https://`.
+
+---
+
+## 8. Kopia zapasowa płytki (i przywracanie) — NIE TESTOWANE NA SPRZĘCIE
+
+Sekcja **„Najpierw: kopia zapasowa płytki”** na górze strony (nad kartami płytek) czyta cały
+flash ESP32 przez WebSerial i oddaje plik `korona-kopia-YYYYMMDD-HHMM.bin` do pobrania. Pomysł:
+zrobić zrzut tego, co siedzi na płytce, **zanim** wgra się KORONĘ (instalacja nadpisuje
+bootloader, tablicę partycji i program).
+
+### Co robi
+
+1. `navigator.serial.requestPort()` → `new Transport(port)` → `new ESPLoader({transport,
+   baudrate, terminal})` → `loader.main()` (połączenie na 115200 — `romBaudrate` jest w 0.6.1
+   stałą, nie opcją — wykrycie chipu, wgranie stuba, zmiana prędkości na wybraną, odczyt flash ID).
+2. **Chip musi być `ESP32`** (`loader.chip.CHIP_NAME`); S3/C3/inne → komunikat, reset, koniec.
+3. **Rozmiar flasha z ID kostki**: `loader.readFlashId()`, kod `(id>>16)&0xff` →
+   `loader.DETECTED_FLASH_SIZES` → `loader.flashSizeBytes()` — to samo, co robi
+   `ESPLoader.flashId()/detectFlashSize()` w bibliotece. Gdy kodu nie ma w tabeli: **4 MB jako
+   fallback z ostrzeżeniem** w statusie i przy wyniku.
+4. `loader.readFlash(0, size, cb)` → `Uint8Array`; callback `(packet, progress, total)` napędza
+   pasek, procenty, KB/s i ETA.
+5. Weryfikacja: stub esptool po `read_flash` wysyła jeszcze ramkę z 16-bajtowym MD5 (tak czyta ją
+   `esptool.py`; esptool-js jej **nie** zdejmuje z bufora) — strona zdejmuje ją `transport.read()`
+   i porównuje z MD5 policzonym lokalnie; potem dodatkowo pyta stub wprost `loader.flashMd5sum(0,
+   size)`. MD5 jest liczone własną funkcją (Web Crypto nie ma MD5) — sprawdzoną w Node przeciw
+   `crypto.createHash('md5')` na wektorach RFC 1321 i buforze 4 MB. Niezgodność = czerwony status
+   „kopia uszkodzona”; brak możliwości porównania = żółte „(nie udało się porównać)”.
+6. Reset po zakończeniu **dokładnie jak `hardResetDevice()` w esp-web-tools/dist/flash.js**:
+   `transport.setRTS(true)`, 100 ms, `loader.after("hard_reset")`. Uwaga: sama klasa `HardReset`
+   w esptool-js 0.6.1 tylko *zwalnia* RTS (`setRTS(false)`), więc bez wcześniejszego `setRTS(true)`
+   płytka nie dostałaby impulsu. Potem `transport.disconnect()`.
+7. Plik: `Blob` + `a[download]`, rozmiar, **SHA-256** (`crypto.subtle.digest`) i MD5.
+
+Biblioteka: **esptool-js 0.6.1** z jsDelivr jako zbundlowany ESM
+(`https://cdn.jsdelivr.net/npm/esptool-js@0.6.1/+esm`), ładowana **dopiero po pierwszym kliknięciu**
+(`import()`), więc nie obciąża zwykłego wejścia na stronę. Dlaczego jsDelivr, a nie unpkg: `+esm`
+rozwiązuje zależności (`pako`, `atob-lite`) i **dynamiczny import JSON ze stubem flashera**
+(`lib/targets/stub_flasher/stub_flasher_32.json`) — pod `unpkg ...?module` ten import JSON nie
+przejdzie w przeglądarce. ESP Web Tools 10.4.0 deklaruje `"esptool-js": "^0.6.0"`, więc to ta sama
+gałąź biblioteki, na której stoi instalator wyżej. Bez SRI — jsDelivr generuje `+esm` dynamicznie.
+
+Prędkość: domyślnie **460800 b/s**, w rozwijanej liście 115200 (CH340 na CYD nie lubi 921600;
+ESP Web Tools w ogóle nie zmienia prędkości i pracuje na 115200). Orientacyjnie 4 MB: ~1,5–2 min
+przy 460800, ~6–7 min przy 115200.
+
+Stany obsłużone: brak WebSerial (sekcja pokazuje komendę `esptool ... read-flash 0x0 0x400000`),
+brak `https://`, anulowanie wyboru portu, port zajęty (`Failed to open`/`NetworkError`), płytka nie
+odpowiada (`Failed to connect` → podpowiedź BOOT), zły chip, zniknięcie portu w trakcie (zdarzenie
+`disconnect` na `SerialPort` ścigane z `readFlash` przez `Promise.race`), przycisk **Przerwij**
+(rzuca w callbacku postępu → `readFlash` odrzuca; potem reset + zamknięcie portu). W `finally`
+zawsze: reset RTS + `disconnect()`, żeby płytka nie została w bootloaderze.
+
+### Przywracanie
+
+Akapit z komendą (esptool 5.x / 4.x):
+
+```bash
+esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-kopia-YYYYMMDD-HHMM.bin
+# esptool 4.x: esptool.py ... write_flash 0x0 ...
+```
+
+oraz przycisk **„Przywróć z pliku”** — zrobiony, bo da się to poprowadzić przez udokumentowane
+API: `loader.writeFlash({fileArray:[{data, address:0x0}], flashSize:"keep", flashMode:"keep",
+flashFreq:"keep", eraseAll:false, compress:true, reportProgress, calculateMD5Hash})`. To ta sama
+funkcja, którą ESP Web Tools wgrywa manifest. Dlaczego bezpiecznie:
+
+- `_updateImageFlashParams` modyfikuje obraz tylko pod `BOOTLOADER_FLASH_OFFSET` (0x1000 dla ESP32)
+  i tylko gdy któryś parametr ≠ `"keep"` — nasz plik pod `0x0` z trzema `"keep"` idzie bajt w bajt;
+- `flashDeflBegin` kasuje sektory, w które pisze („performs an erase”), więc `eraseAll:false` nie
+  zostawia starych danych w zakresie pliku; zakres **za końcem pliku** zostaje nietknięty (strona
+  o tym mówi, gdy plik jest mniejszy niż flash);
+- `calculateMD5Hash` sprawia, że `writeFlash` po zapisie woła `flashMd5sum` i **rzuca** przy
+  różnicy — weryfikacja za darmo.
+
+Zabezpieczenia: plik musi mieć ≥ 64 KB i bajt `0xE9` pod `0x1000` (magic bootloadera ESP32),
+nie może być większy niż wykryty flash; **dwa `confirm()`** („to nadpisze CAŁY flash…”, „na
+pewno?”). Przerwanie zapisu daje osobny komunikat: flash zapisany częściowo.
+
+### Ograniczenia
+
+- **Zero testów na sprzęcie** — ani kopii, ani przywracania, ani resetu po zakończeniu. Weryfikacja
+  była hostowa: render PL/EN, brak błędów w konsoli, moduł esptool-js ładuje się z jsDelivr,
+  anulowanie wyboru portu → „Nie wybrano portu”, walidacja pliku przy przywracaniu, brak
+  poziomego przewijania na 375 px.
+- Ramka MD5 po `read_flash` to zachowanie **stuba esptool** (C), nie API esptool-js — dlatego jest
+  traktowana miękko (brak ramki ≠ błąd), a właściwą weryfikacją jest `flashMd5sum`.
+- `readFlash` w 0.6.1 skleja pakiety przez `_appendArray` (O(n²)); dla 4 MB to ułamki sekundy,
+  dla 16 MB byłoby wolniej.
+- Timeout na pakiet w `readFlash` to 100 s (`FLASH_READ_TIMEOUT`); przy zerwaniu bez zdarzenia
+  `disconnect` (np. zawieszony CH340) błąd pojawi się dopiero po tym czasie.
+- „Przerwij” działa między pakietami; w trakcie `main()` (kilka sekund) nie ma jak przerwać.
+- Płytki z flash encryption / secure boot: zrzut będzie zaszyfrowany, przywracanie na inną
+  płytkę nie zadziała — CYD-y tego nie mają.
+- Przywracanie **nie sprawdza**, czy plik pochodzi z tej samej płytki; kopia z 2.4" wgrana na
+  2.8" da czarny ekran (inny pin podświetlenia), ale nic trwałego.
+
+### Procedura pierwszego testu na sprzęcie
+
+1. Chrome/Edge, `https://pixelpetrol.github.io/korona-programy/portal/` (albo `python3 -m
+   http.server 8766 --directory portal` i `http://localhost:8766/`).
+2. Płytka na USB, nic innego nie trzyma portu. **Zrób kopię (cały flash)** → wybierz CH340.
+3. Oczekiwane: status „Łączę…”, w „Dzienniku połączenia” linie esptool-js: `Connecting...`,
+   `Chip is ESP32-D0WD...`, `Uploading stub...`, `Running stub...`, `Changing baudrate to 460800`,
+   `Flash ID: ...`, potem `[strona] chip: ESP32`, `[strona] flash ID 0x..., rozmiar 4194304`.
+   Pasek rośnie, status „Czytam… N% · … KB/s · zostało ~…”. Na koniec „Sprawdzam MD5 na płytce…”,
+   „Resetuję…”, zielone „Gotowe: 4 MB…”, pod spodem przycisk pobrania, SHA-256, MD5
+   z „✓ zgodne z sumą policzoną przez płytkę”. **Płytka ma się zrestartować i wrócić do swojego
+   programu** (ekran ożywa) — jeśli zostaje w bootloaderze (czarny ekran), zgłoś: reset RTS
+   wymaga poprawki.
+4. Kontrola krzyżowa: `esptool --chip esp32 --port ... --baud 460800 read-flash 0x0 0x400000 ref.bin`
+   i `shasum -a 256 ref.bin korona-kopia-*.bin` — sumy identyczne (o ile program na płytce nie
+   pisał w NVS między odczytami).
+5. Jeśli 460800 zrywa się („Serial data stream stopped”): 115200 i jeszcze raz.
+6. Przywracanie testuj **tylko na płytce, na której nic Ci nie zależy**: wgraj KORONĘ, potem
+   „Przywróć z pliku” z kopią z punktu 3 → dwa potwierdzenia → pasek „Piszę…” → „Gotowe: flash
+   przywrócony i zweryfikowany (MD5)” → płytka startuje ze starym programem.

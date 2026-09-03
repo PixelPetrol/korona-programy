@@ -1,0 +1,71 @@
+# Sprawdzenie zgloszenia programu uzytkownika (PR dotykajacy zgloszenia/**).
+# Uruchamia tools/sprawdz_zgloszenie.py na wszystkich katalogach w zgloszenia/, wynik wkleja
+# do podsumowania joba (zawsze) i jako komentarz do PR (gdy token ma prawo pisac - przy PR
+# z forka GITHUB_TOKEN jest tylko do odczytu i komentarz sie nie uda; czerwony/zielony check
+# i tak jest widoczny). Nic z PR nie jest WYKONYWANE - skrypty biora sie z galezi PR, wiec
+# przegladajacy ma sprawdzic, czy PR nie zmienia tools/ ani .github/ (patrz README).
+name: zgloszenie
+
+on:
+  pull_request:
+    paths:
+      - "zgloszenia/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  sprawdz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Zmiany poza zgloszenia/ (ostrzezenie dla przegladajacego)
+        run: |
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          POZA=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD | grep -v '^zgloszenia/' || true)
+          if [ -n "$POZA" ]; then
+            echo "::warning::PR zmienia pliki poza zgloszenia/ - sprawdz recznie, zwlaszcza tools/ i .github/:"
+            echo "$POZA"
+            { echo "### ⚠️ PR zmienia pliki poza \`zgloszenia/\`"; echo; echo '```'; echo "$POZA"; echo '```'; echo; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Walidacja zgloszen
+        id: walidacja
+        run: |
+          set +e
+          python3 tools/sprawdz_zgloszenie.py --wszystkie --md > raport.md
+          KOD=$?
+          cat raport.md
+          cat raport.md >> "$GITHUB_STEP_SUMMARY"
+          echo "kod=$KOD" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Komentarz do PR
+        if: always()
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('raport.md', 'utf8');
+            const znacznik = '<!-- korona-zgloszenie -->';
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const { data: komentarze } = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
+            const stary = komentarze.find(k => k.user.type === 'Bot' && k.body.includes(znacznik));
+            const tresc = znacznik + '\n' + body;
+            if (stary) await github.rest.issues.updateComment({ owner, repo, comment_id: stary.id, body: tresc });
+            else await github.rest.issues.createComment({ owner, repo, issue_number, body: tresc });
+
+      - name: Wynik
+        run: |
+          if [ "${{ steps.walidacja.outputs.kod }}" != "0" ]; then
+            echo "::error::zgloszenie odrzucone - szczegoly w podsumowaniu joba"
+            exit 1
+          fi
