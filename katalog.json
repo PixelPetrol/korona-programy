@@ -8,14 +8,14 @@
       "programy": [
         {
           "plik": "bin/cyd24/bruce.bin",
-          "rozmiar": 2418672,
-          "sha256": "88e95c98691c2ab22595e7dd19471d65360929decfe599497587811920308fe2",
+          "rozmiar": 2419360,
+          "sha256": "be56d4c1ef33a2d840e6c675f9070d24140c99186025909bd1d914bb7b77326e",
           "nazwa": "Bruce (LITE)",
-          "opis": "pentest toolkit; poziomo, probny",
+          "opis": "pentest toolkit WiFi / BLE / IR / RF",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
-          "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE, ekran poziomo. Env KORONA_CYD24: poprawione kolory (INVON). Pierwszy start: Bruce sam prosi o kalibracje dotyku (4 rogi) i zapamietuje ja - KORONA robi migawke jego ustawien."
+          "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE. Env KORONA_CYD24: poprawione kolory (INVON). DOTYK: kalibracja jest osobna dla kazdej orientacji ekranu - pierwszy start prosi o cztery rogi w ukladzie poziomym, a po zmianie Config > Orientation Bruce pyta o nie raz dla nowego ukladu i juz go pamieta (KORONA trzyma to w migawce). Bez tego dotyk w pionie nie trafial wcale: TFT_eSPI liczy dotyk z granic kalibracji, ale z wymiarow biezacej rotacji, wiec kalibracja z poziomu dawala w pionie rozciagniecie zamiast obrotu."
         },
         {
           "plik": "bin/cyd24/btspeaker.bin",
