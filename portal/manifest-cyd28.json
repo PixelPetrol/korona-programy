@@ -1,6 +1,6 @@
 {
   "name": "KORONA - ladowarka CYD 2.8\" (ESP32-2432S028R, NIESPRAWDZONA)",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [
