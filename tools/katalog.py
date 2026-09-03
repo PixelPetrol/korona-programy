@@ -36,7 +36,8 @@ META = {
                           "Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do ladowarki - uruchom program ponownie, ustawienia zostaja dzieki migawce."),
     "pogoda.bin":       m("Pogoda",          "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY", "0.1.36", Z, "nicholaswilde",
                           "Stacja pogodowa na LVGL: duza temperatura, ikona, prognoza 3-dniowa, wykres godzinowy, motywy. Dane z Open-Meteo bez klucza API - lokalizacja po IP albo wspolrzedne. Pierwszy start: AP 'cyd-weather-station-XXXX' (otwarty), portal 192.168.4.1 (WiFi, lokalizacja, strefa); potem http://cyd-weather-station.local/. Po 'zapisz i restart' plytka wraca do ladowarki i autostart wznawia aplikacje."),
-    # "esp32div.bin": wylaczony z katalogu 02.09 - po starcie zawiesza sie na ekranie poczatkowym (niebieska dioda), bez dotyku.
+    "esp32div.bin":     m("ESP32-DIV",       "multitool WiFi/BLE/RF; ZAWIESZA SIE - do naprawy", "dev",   Z, "cifertech",
+                          "ESP32-DIV (HaleHound): skaner WiFi/BLE, deauth, RF. Build z 02.09 zawiesza sie na ekranie startowym z niebieska dioda i nie reaguje na dotyk - prawdopodobnie zla konfiguracja dotyku/partycji dla CYD 2.4. Zostaje w sklepie do czasu naprawy (plan w SPEC-LADOWARKA.md)."),
 }
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

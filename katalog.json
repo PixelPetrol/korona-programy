@@ -29,6 +29,17 @@
           "info": "Odbiornik A2DP: telefon laczy sie z 'KORONA CYD' i gra przez wbudowany 8-bit DAC na GPIO26 (wzmacniacz, zlacze glosnika). Ekran pionowy: stan, tytul/wykonawca (AVRCP), glosnosc; dotyk = prev/pauza/next/glosnosc. Jakosc ogranicza 8-bitowy DAC - gadzet, nie hi-fi. WiFi wylaczone. Zrodlo: porty/btspeaker (MIT; biblioteka audio GPL-3.0)."
         },
         {
+          "plik": "bin/cyd24/esp32div.bin",
+          "rozmiar": 2420240,
+          "sha256": "1596751321051ad7f530a3dae81781e5f5c387c2ef8a88a28adbb7b0288d3a53",
+          "nazwa": "ESP32-DIV",
+          "opis": "multitool WiFi/BLE/RF; ZAWIESZA SIE - do naprawy",
+          "wersja": "dev",
+          "kategoria": "zewnetrzne",
+          "autor": "cifertech",
+          "info": "ESP32-DIV (HaleHound): skaner WiFi/BLE, deauth, RF. Build z 02.09 zawiesza sie na ekranie startowym z niebieska dioda i nie reaguje na dotyk - prawdopodobnie zla konfiguracja dotyku/partycji dla CYD 2.4. Zostaje w sklepie do czasu naprawy (plan w SPEC-LADOWARKA.md)."
+        },
+        {
           "plik": "bin/cyd24/marauder.bin",
           "rozmiar": 1607840,
           "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405",
