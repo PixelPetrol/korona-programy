@@ -24,9 +24,9 @@
           "nazwa": "BT Speaker",
           "opis": "glosnik Bluetooth A2DP, DAC 8-bit; NIETESTOWANY",
           "wersja": "1.0.0",
-          "kategoria": "autorskie",
-          "autor": "Piotr Korona",
-          "info": "Odbiornik A2DP: telefon laczy sie z 'KORONA CYD' i gra przez wbudowany 8-bit DAC na GPIO26 (wzmacniacz, zlacze glosnika). Ekran pionowy: stan, tytul/wykonawca (AVRCP), glosnosc; dotyk = prev/pauza/next/glosnosc. Jakosc ogranicza 8-bitowy DAC - gadzet, nie hi-fi. WiFi wylaczone. Zrodlo: porty/btspeaker (MIT; biblioteka audio GPL-3.0)."
+          "kategoria": "zewnetrzne",
+          "autor": "pschatzmann (ESP32-A2DP)",
+          "info": "Odbiornik A2DP na bibliotekach ESP32-A2DP i arduino-audio-tools (pschatzmann); szkic KORONA to tylko warstwa ekranu i dotyku. Telefon laczy sie z 'KORONA CYD' i gra przez wbudowany 8-bit DAC na GPIO26 (wzmacniacz, zlacze glosnika). Ekran pionowy: stan, tytul/wykonawca (AVRCP), glosnosc; dotyk = prev/pauza/next/glosnosc. Jakosc ogranicza 8-bitowy DAC - gadzet, nie hi-fi. WiFi wylaczone. Zrodlo: porty/btspeaker (szkic MIT; biblioteka audio GPL-3.0 -> binarka GPL)."
         },
         {
           "plik": "bin/cyd24/esp32div.bin",
@@ -87,7 +87,7 @@
           "plik": "bin/cyd24/radar-pion.bin",
           "rozmiar": 1498352,
           "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803",
-          "nazwa": "AirCYD (pion)",
+          "nazwa": "AirCYD 4.4.1 pion",
           "opis": "radar ADS-B, samoloty wokol domu",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
@@ -98,12 +98,12 @@
           "plik": "bin/cyd24/radar-poziom.bin",
           "rozmiar": 1499968,
           "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca",
-          "nazwa": "AirCYD (poziom)",
+          "nazwa": "AirCYD 4.4.1 poziom",
           "opis": "radar ADS-B, ekran poziomo",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Ta sama aplikacja co AirCYD (pion), ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."
+          "info": "Ta sama aplikacja co AirCYD pion, ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."
         }
       ]
     },
@@ -115,7 +115,7 @@
           "plik": "bin/cyd28/radar-pion.bin",
           "rozmiar": 1498928,
           "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
-          "nazwa": "AirCYD (pion)",
+          "nazwa": "AirCYD 4.4.1 pion",
           "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
@@ -126,7 +126,7 @@
           "plik": "bin/cyd28/radar-poziom.bin",
           "rozmiar": 1500544,
           "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e",
-          "nazwa": "AirCYD (poziom)",
+          "nazwa": "AirCYD 4.4.1 poziom",
           "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
