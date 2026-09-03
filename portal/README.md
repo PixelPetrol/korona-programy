@@ -1,6 +1,6 @@
-# Portal instalacyjny KORONY — jak to wypuścić
+# Portal instalacyjny K-OS — jak to wypuścić
 
-Statyczna strona, która wgrywa ładowarkę **KORONA** na płytkę CYD wprost z przeglądarki
+Statyczna strona, która wgrywa **K-OS — KORONA OS for CYD** na płytkę CYD wprost z przeglądarki
 (WebSerial, przez [ESP Web Tools](https://esphome.github.io/esp-web-tools/)). Zero backendu —
 kilka plików na GitHub Pages.
 
@@ -17,7 +17,7 @@ manifest-cyd24.json   manifest ESP Web Tools — CYD 2.4" (ESP32-2432S024R)
 manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R, NIESPRAWDZONA)
 zbuduj-obrazy.sh      składa obrazy z wyników builda; NICZEGO NIE WGRYWA na płytkę
                       (skrypt na macOS — patrz §4)
-SELF-UPDATE.md        projekt samoaktualizacji ładowarki (osobny temat, bez kodu)
+SELF-UPDATE.md        projekt samoaktualizacji K-OS (osobny temat, bez kodu)
 obrazy/               <- generowane skryptem, do wypchnięcia razem ze stroną
   SUMY.txt              rozmiary + SHA-256 wszystkich obrazów
   cyd24/                bootloader.bin, partitions.bin, otadata-pusta.bin, loader.bin,
@@ -26,6 +26,11 @@ obrazy/               <- generowane skryptem, do wypchnięcia razem ze stroną
 
 `obrazy/` **trzeba wypchnąć do repo** — to z niego przeglądarka pobiera binarki. Nie wpisuj go
 do `.gitignore`.
+
+Produkt nazywa się **K-OS — KORONA OS for CYD**, ale pliki do pobrania zostają pod starymi
+nazwami (`loader.bin`, `korona-<płytka>-scalony.bin`): to opublikowane adresy, a `loader.bin`
+siedzi w `obrazy/SUMY.txt` i w kodzie samoaktualizacji na płytkach — zmiana nazwy zerwałaby
+aktualizacje działających płytek.
 
 ---
 
@@ -86,7 +91,7 @@ Ja niczego nie commitowałem ani nie pushowałem — wszystko leży w drzewie ro
 
 ---
 
-## 4. Odświeżenie obrazów po nowej wersji ładowarki
+## 4. Odświeżenie obrazów po nowej wersji K-OS
 
 ```bash
 # 1. kompilacja (to jest osobny krok, w loader/ - skrypt portalu nie kompiluje)
@@ -99,7 +104,7 @@ cd "$HOME/Desktop/CYD wifi radar/loader" \
 cd ../portal \
   && ./zbuduj-obrazy.sh \
   && rsync -av --delete ./ ../korona-programy/portal/ \
-  && cd ../korona-programy && git add -A && git commit -m "portal: KORONA 0.3.x" && git push
+  && cd ../korona-programy && git add -A && git commit -m "portal: K-OS 0.3.x" && git push
 ```
 
 Nie rozbijaj tego na osobne linie: kod wyjścia skryptu chroni publikację tylko wtedy, gdy
@@ -134,10 +139,10 @@ Nie rozbijaj tego na osobne linie: kod wyjścia skryptu chroni publikację tylko
 
 **Uwaga na tablicę partycji.** W `.build-*/` leży `loader.ino.partitions.bin`, ale to tablica
 **Arduino** (`huge_app`: `app0`=ota_0 pod `0x10000`, 3 MB, bez `factory`). Wgranie jej zamurowałoby
-układ KORONY. Skrypt jej **nie używa** — generuje własną z CSV. Nie „upraszczaj” tego przez
+układ K-OS. Skrypt jej **nie używa** — generuje własną z CSV. Nie „upraszczaj” tego przez
 skopiowanie pliku z builda.
 
-### Zmierzone (03.09.2026, KORONA 0.3.6)
+### Zmierzone (03.09.2026, K-OS 0.3.6)
 
 | | rozmiar | zapas w `factory` (1 441 792 B) | magic |
 |---|---|---|---|
@@ -163,8 +168,8 @@ luki między częściami, więc `korona-*-scalony.bin` wgrany pod `0x0` **dodatk
 `nvs` aplikacji (`0x9000`–`0xe000`)** — zmierzone: cały ten zakres to `0xFF` w obu scalonych
 plikach. Manifest ESP Web Tools pisze tylko cztery części pod ich offsety i `nvs` **nie rusza**.
 Skutek praktyczny: po `esptool` ostatnio uruchamiana aplikacja startuje z pustymi ustawieniami
-(ładowarka i tak przywraca jej migawkę z karty przed startem, jeśli taka jest), po WebSerial —
-z tym, co miała. Partycji `knvs` ładowarki (`0x3FC000`) żadna z dróg nie dotyka.
+(K-OS i tak przywraca jej migawkę z karty przed startem, jeśli taka jest), po WebSerial —
+z tym, co miała. Partycji `knvs` K-OS (`0x3FC000`) żadna z dróg nie dotyka.
 
 ### Stan obrazów 2.8" w chwili pisania
 
@@ -185,15 +190,15 @@ manifesty są publikowane razem i przycisk 2.8" bez obrazów pokazywałby błąd
 | offset | plik | co to |
 |---|---|---|
 | `0x1000` | `bootloader.bin` | bootloader ESP32 2. stopnia |
-| `0x8000` | `partitions.bin` | tablica partycji KORONY (z CSV) |
-| `0x10000` | `loader.bin` | ładowarka, partycja `factory` (1408 KB) |
+| `0x8000` | `partitions.bin` | tablica partycji K-OS (z CSV) |
+| `0x10000` | `loader.bin` | K-OS, partycja `factory` (1408 KB) |
 | `0xe000` | `otadata-pusta.bin` | 8 KB `0xFF` — czysta `otadata` |
 
 Źródło prawdy dla offsetów: `loader/flash.sh`.
 
 ### Kasowanie `otadata` — jak to obeszliśmy (i że to nie jest udawanie)
 
-`flash.sh` robi `esptool erase_region 0xe000 0x2000`, żeby po wgraniu wystartowała ładowarka,
+`flash.sh` robi `esptool erase_region 0xe000 0x2000`, żeby po wgraniu wystartował K-OS,
 a nie stary program leżący w `ota_0`. **Manifest ESP Web Tools nie ma niczego, co kasuje
 region** — sprawdzone w źródłach, nie w domysłach:
 
@@ -215,7 +220,7 @@ Obejście, którego użyliśmy, jest **równoważne** kasowaniu, a nie przybliż
    `0xe000` i `0x2000` są wielokrotnościami 4096, więc kasowanie nie wychodzi poza `otadata`.
    Efekt: zawartość flasha nieodróżnialna od `erase_region`.
 3. Bootloader ESP-IDF przy `otadata` z `ota_seq == 0xFFFFFFFF` w **obu** sektorach wchodzi
-   w gałąź *„Defaulting to factory image”* — czyli startuje ładowarkę. Dlatego blob ma
+   w gałąź *„Defaulting to factory image”* — czyli startuje K-OS. Dlatego blob ma
    `0x2000`, nie `0x1000`: bootloader czyta oba sektory i wystarczy jeden ważny wpis, żeby
    pojechał w `ota_0`.
 
@@ -226,7 +231,7 @@ w połowie zapisaną `factory`.
 **Czego NIE robić:** nie wgrywać `boot_app0.bin` z katalogu builda pod `0xe000`. Ten plik **nie
 jest** pusty — ma `ota_seq = 1` z poprawną sumą CRC, czyli mówi bootloaderowi „startuj `ota_0`”,
 dokładnie odwrotnie niż trzeba (rozłożone bajt po bajcie: `01 00 00 00 … 9a 98 43 47`). Dla
-domyślnej tablicy Arduino (bez `factory`) to ma sens, dla KORONY jest zabójcze.
+domyślnej tablicy Arduino (bez `factory`) to ma sens, dla K-OS jest zabójcze.
 
 ### `new_install_prompt_erase: true` — i dlaczego nie `false`
 
@@ -237,7 +242,7 @@ Ta flaga **nie ustawia** żadnego kasowania, tylko przełącza ekran instalatora
 - **`true`** → instalator pokazuje pytanie *„Erase device”* z **niezaznaczonym** okienkiem,
   więc domyślną odpowiedzią jest *nie kasuj*.
 
-KORONA nie ma Improv, więc ESP Web Tools **każdą** instalację traktuje jak nową — z `false`
+K-OS nie ma Improv, więc ESP Web Tools **każdą** instalację traktuje jak nową — z `false`
 każde ponowne wgranie czyściłoby całą kostkę, a razem z nią partycję `knvs`: sieci WiFi, motyw
 i kalibrację dotyku. Dlatego `true`. Nasza pusta `otadata` i tak zapewnia start z `factory`,
 więc pełne kasowanie nie jest do niczego potrzebne — zostaje jako świadomy wybór użytkownika
@@ -278,7 +283,7 @@ Bez owijania:
    (plik `korona-<płytka>-scalony.bin` już jest generowany, `merge-bin` wypełnia luki `0xFF` —
    w tym partycję `nvs`, patrz §4).
    To wersja, którą ESPHome serwuje u siebie — tylko cięższa o wypełnienie od `0x0`.
-5. **Portal nie kładzie nic na kartę SD.** Wgrywa wyłącznie ładowarkę. Programy dokładasz ze
+5. **Portal nie kładzie nic na kartę SD.** Wgrywa wyłącznie K-OS. Programy dokładasz ze
    sklepu w menu albo z komputera do `/programy/<płytka>/`. Portal nie sprawdzi nawet, czy karta
    jest w środku.
 6. **Sumy SHA-256 nie są weryfikowane przez przeglądarkę.** `SUMY.txt` jest dla człowieka;
@@ -300,7 +305,7 @@ Bez owijania:
     założenie, nie pomiar.
 11. **Portal nie zmieni tablicy partycji istniejącej instalacji „bezpiecznie”.** Zmienia ją
     (pisze pod `0x8000`), co jest w porządku przy wgrywaniu od zera, ale zawartość starych
-    partycji danych przestaje wtedy pasować. Po zmianie układu partycji ładowarka i tak migruje
+    partycji danych przestaje wtedy pasować. Po zmianie układu partycji K-OS i tak migruje
     swoje ustawienia ze starego `nvs` do `knvs` przy pierwszym starcie.
 
 ---
@@ -324,7 +329,7 @@ o `https://`.
 
 Sekcja **„Najpierw: kopia zapasowa płytki”** na górze strony (nad kartami płytek) czyta cały
 flash ESP32 przez WebSerial i oddaje plik `korona-kopia-YYYYMMDD-HHMM.bin` do pobrania. Pomysł:
-zrobić zrzut tego, co siedzi na płytce, **zanim** wgra się KORONĘ (instalacja nadpisuje
+zrobić zrzut tego, co siedzi na płytce, **zanim** wgra się K-OS (instalacja nadpisuje
 bootloader, tablicę partycji i program).
 
 ### Co robi
@@ -431,6 +436,6 @@ pewno?”). Przerwanie zapisu daje osobny komunikat: flash zapisany częściowo.
    i `shasum -a 256 ref.bin korona-kopia-*.bin` — sumy identyczne (o ile program na płytce nie
    pisał w NVS między odczytami).
 5. Jeśli 460800 zrywa się („Serial data stream stopped”): 115200 i jeszcze raz.
-6. Przywracanie testuj **tylko na płytce, na której nic Ci nie zależy**: wgraj KORONĘ, potem
+6. Przywracanie testuj **tylko na płytce, na której nic Ci nie zależy**: wgraj K-OS, potem
    „Przywróć z pliku” z kopią z punktu 3 → dwa potwierdzenia → pasek „Piszę…” → „Gotowe: flash
    przywrócony i zweryfikowany (MD5)” → płytka startuje ze starym programem.

@@ -1,6 +1,6 @@
 {
-  "name": "KORONA - ladowarka CYD 2.4\" (ESP32-2432S024R)",
-  "version": "0.3.8",
+  "name": "K-OS - KORONA OS for CYD 2.4\" (ESP32-2432S024R)",
+  "version": "0.3.9",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [

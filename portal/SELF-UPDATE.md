@@ -1,9 +1,9 @@
-# Samoaktualizacja ładowarki KORONA — projekt (bez kodu)
+# Samoaktualizacja K-OS — projekt (bez kodu)
 
 Autor: Piotr Korona. Dokument opisuje **plan**, nie implementację — w `loader/` nic tu nie
 jest zmieniane. Pozycja 1 z kolejki w `SPEC-LADOWARKA.md` („portal + self-update”).
 
-Cel: ładowarka aktualizuje **samą siebie** z repo `korona-programy`, bez kabla USB i bez
+Cel: K-OS aktualizuje **sam siebie** z repo `korona-programy`, bez kabla USB i bez
 Maca — z tego samego katalogu obrazów, który serwuje portal
 (`portal/obrazy/<płytka>/loader.bin`).
 
@@ -15,7 +15,7 @@ Tablica partycji (`loader/partitions_loader.csv`):
 
 ```
 otadata    0xe000    0x2000    (8 KB)
-factory    0x10000   0x160000  (1408 KB = 1 441 792 B)  <- ŁADOWARKA
+factory    0x10000   0x160000  (1408 KB = 1 441 792 B)  <- K-OS
 ota_0      0x170000  0x270000  (2496 KB = 2 555 904 B)  <- slot roboczy
 ```
 
@@ -55,14 +55,14 @@ Sprawdzenia **przed** dotknięciem flasha (kolejność ma znaczenie):
    Płytka wystartuje, ale ekran/dotyk będą martwe. Wyjście: portal albo `flash.sh`.
 2. pierwszy bajt pliku `== 0xE9` (magic obrazu ESP32). `zbuduj-obrazy.sh` sprawdza to samo
    na hoście, żeby portal nie serwował śmiecia.
-3. `rozmiar <= 1 441 792` (partycja `factory`). **Tu jest ciasno:** ładowarka 0.3.6 na cyd24
+3. `rozmiar <= 1 441 792` (partycja `factory`). **Tu jest ciasno:** K-OS 0.3.6 na cyd24
    to 1 359 744 B, czyli zapas 82 048 B = 5,7 % (aktualne liczby: `portal/obrazy/SUMY.txt`).
    Komunikat błędu musi podać obie liczby, bo to realny scenariusz („nowa wersja się nie
    mieści").
 4. sha256 pliku na karcie == sha256 z `loader.json`. Bez tego pół-pobrany obraz
    pojedzie do `ota_0`.
 
-Dodatkowo warto sprawdzić, że pobrany obraz **jest ładowarką**, a nie zwykłą aplikacją ze
+Dodatkowo warto sprawdzić, że pobrany obraz **jest K-OS**, a nie zwykłą aplikacją ze
 sklepu (inaczej „aktualizacja” zamieniłaby `factory` na program bez drogi powrotu). Prosto:
 osobny plik `loader.json` (nie `katalog.json`) i osobny ekran w menu; twardo:
 marker w obrazie (np. `esp_app_desc_t.project_name == "korona-loader"` — do sprawdzenia,
@@ -76,7 +76,7 @@ różni się końcówka:
 | krok | uruchomienie aplikacji | samoaktualizacja |
 |---|---|---|
 | `esp_ota_begin/write/end` na `ota_0` | tak | tak (identycznie) |
-| `appStateRestore(nazwa)` | tak | **nie** — startuje ładowarka, nie aplikacja |
+| `appStateRestore(nazwa)` | tak | **nie** — startuje K-OS, nie aplikacja |
 | `setLastApp(nazwa)` | tak | **nie** |
 | `setStateDirtyApp(nazwa)` | tak | **nie**, wręcz `setStateDirtyApp("")` |
 | flaga w `knvs` | nie | **`selfupd` = sha256 oczekiwany** |
@@ -87,9 +87,9 @@ aplikacji i jest nadpisywany migawką przy każdym starcie aplikacji — flaga z
 w najgorszym momencie. Narzędzie już jest: `prOpen()` w `loader/loader/settings.cpp` woła
 `pr.begin(NVS_NS, ro, KORONA_NVS_PART)`, czyli `Preferences` z etykietą partycji `knvs`.
 
-`esp_restart()` → bootloader czyta `otadata` → startuje `ota_0` → **nowa** ładowarka.
+`esp_restart()` → bootloader czyta `otadata` → startuje `ota_0` → **nowy** K-OS.
 
-### Etap 2 — nowa ładowarka kopiuje się do `factory`
+### Etap 2 — nowy K-OS kopiuje się do `factory`
 
 **Ten test musi być pierwszą rzeczą w `setup()`**, przed `sdMount()`,
 `appStateSaveIfDirty()`, `netBegin()` i przed blokiem autostartu w `setup()`
@@ -183,7 +183,7 @@ Zasady przeniesione z `flashAndBoot()`:
 **`disableCore0WDT()` / `disableCore1WDT()` — w ładowarce przy operacjach na flashu: NIE.**
 To reguła **lokalna** dla tego jednego przypadku, nie ogólny zakaz w projekcie:
 
-- **Ładowarka, kasowanie/zapis flasha** (`esp_ota_begin`, `esp_partition_erase_range`,
+- **K-OS, kasowanie/zapis flasha** (`esp_ota_begin`, `esp_partition_erase_range`,
   pętla `esp_partition_write`): na IDF 5 (tu 5.5.5) hook zadania IDLE nadal woła
   `esp_task_wdt_reset()`, a po `disableCore*WDT()` błąd „task not found” leci przez
   `ESP_LOGE` z kodu leżącego **we flashu** — w trakcie kasowania flasha z wyłączonym cache
@@ -214,7 +214,7 @@ Dlatego kolejność sprawdzeń z etapu 0 jest twarda: rozmiar **przed** `esp_ota
 po. Warto też, żeby ekran „o programie” pokazywał ten zapas — nowa grafika albo font potrafi
 zjeść 80 kB bez ostrzeżenia.
 
-Jeśli ładowarka kiedyś przekroczy 1 441 792 B, samoaktualizacja **przestaje być możliwa**:
+Jeśli K-OS kiedyś przekroczy 1 441 792 B, samoaktualizacja **przestaje być możliwa**:
 zmiana tablicy partycji wymaga zapisu pod `0x8000`, a przesunięcie granicy
 `factory`/`ota_0` z działającego obrazu to gwarantowany brick. **Zmiana tablicy = tylko
 portal albo `flash.sh` po USB.** To trzeba napisać w ekranie aktualizacji, nie tylko tutaj.
@@ -231,12 +231,12 @@ Co się dzieje przy zaniku prądu w każdym momencie:
 
 | moment | stan `otadata` | co startuje | co robi |
 |---|---|---|---|
-| w trakcie pobierania na kartę | bez zmian (`factory`) | stara ładowarka | plik `.part` usunięty przez `downloadToCard()`, ponów |
-| w trakcie `esp_ota_begin/write` na `ota_0` | bez zmian (`factory`) | stara ładowarka | `ota_0` jest śmieciem, ale nikt z niego nie startuje; ponów |
-| po `set_boot_partition(ota_0)`, przed kopiowaniem | `ota_0` | **nowa** ładowarka z `ota_0` | flaga `selfupd` w `knvs` → wchodzi w etap 2 |
-| **w trakcie kasowania/zapisu `factory`** | `ota_0` | **nowa** ładowarka z `ota_0` | flaga wciąż jest → kopiuje od początku. `factory` jest połamany, ale **nikt z niego nie startuje** |
+| w trakcie pobierania na kartę | bez zmian (`factory`) | stary K-OS | plik `.part` usunięty przez `downloadToCard()`, ponów |
+| w trakcie `esp_ota_begin/write` na `ota_0` | bez zmian (`factory`) | stary K-OS | `ota_0` jest śmieciem, ale nikt z niego nie startuje; ponów |
+| po `set_boot_partition(ota_0)`, przed kopiowaniem | `ota_0` | **nowy** K-OS z `ota_0` | flaga `selfupd` w `knvs` → wchodzi w etap 2 |
+| **w trakcie kasowania/zapisu `factory`** | `ota_0` | **nowy** K-OS z `ota_0` | flaga wciąż jest → kopiuje od początku. `factory` jest połamany, ale **nikt z niego nie startuje** |
 | po weryfikacji, w trakcie kasowania `otadata` | 8 KB, jeden sektor może być skasowany | `factory` albo `ota_0` — oba mają dobry obraz | flaga jeszcze jest → gałąź „run == factory” czyści flagę, albo etap 2 leci jeszcze raz (kopia identycznych bajtów, nieszkodliwa) |
-| po skasowaniu `otadata`, przed czyszczeniem flagi | czysta (`factory`) | nowa ładowarka z `factory` | gałąź „run == factory” czyści flagę i idzie dalej |
+| po skasowaniu `otadata`, przed czyszczeniem flagi | czysta (`factory`) | nowy K-OS z `factory` | gałąź „run == factory” czyści flagę i idzie dalej |
 
 Czyli: **nie ma stanu, w którym płytka startuje z połamanej partycji.** Cena to okno
 kilkunastu sekund, w którym `factory` jest nieważny, a wyjściem jest wyłącznie `ota_0` —
@@ -260,7 +260,7 @@ cofnięcie wersji nie wymagało internetu.
 ## 4. Otwarte pytania do rozstrzygnięcia przed pisaniem kodu
 
 1. Co Arduino wpisuje w `esp_app_desc_t.project_name` / `.version` przy `arduino-cli
-   compile`? Jeśli coś sensownego, marker „to jest ładowarka” wychodzi darmowo.
+   compile`? Jeśli coś sensownego, marker „to jest K-OS” wychodzi darmowo.
 2. Ile realnie trwa `esp_partition_erase_range` na 1408 KB tej kostki (do zmierzenia na
    sprzęcie) — od tego zależy, czy 90 s w `wdtLong()` wystarcza z zapasem.
 3. Czy `esp_partition_read` z **działającej** partycji jest wystarczająco szybki, czy

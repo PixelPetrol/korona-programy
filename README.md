@@ -1,7 +1,7 @@
-# KORONA - programy dla plytek CYD
+# KORONA - sklep programow dla K-OS
 
-Serwerek z programami (.bin) dla ladowarki **KORONA** (menu-bootloader na ESP32
-"Cheap Yellow Display"). Ladowarka pobiera `katalog.json` i wybrany `.bin`
+Serwerek z programami (.bin) dla **K-OS - KORONA OS for CYD** (menu programow na ESP32
+"Cheap Yellow Display"). K-OS pobiera `katalog.json` i wybrany `.bin`
 wprost z tego repo (raw.githubusercontent.com).
 
 ## Uklad
@@ -22,8 +22,8 @@ portal/                           strona instalacyjna (GitHub Pages) + poradnik 
 ```
 
 Kazdy program to pelny obraz aplikacji ESP32 (magic 0xE9), mieszczacy sie w
-slocie ota_0 ladowarki (2 555 904 B). Program MUSI na poczatku `setup()` kasowac
-partycje otadata ("Model B"), inaczej po resecie nie wroci do ladowarki.
+slocie ota_0 K-OS (2 555 904 B). Program MUSI na poczatku `setup()` kasowac
+partycje otadata ("Model B"), inaczej po resecie nie wroci do K-OS.
 Szczegoly dla autorow: https://pixelpetrol.github.io/korona-programy/portal/programy.html
 
 ## Dodanie programu sklepu (autorskie / zewnetrzne)
@@ -33,7 +33,7 @@ Szczegoly dla autorow: https://pixelpetrol.github.io/korona-programy/portal/prog
 3. `python3 tools/katalog.py`,
 4. `git add -A && git commit && git push`.
 
-Ladowarka na plytce X pokazuje domyslnie programy dla X; przyciskiem
+K-OS na plytce X pokazuje domyslnie programy dla X; przyciskiem
 "inne plytki" mozna pobrac program dla innej plytki (np. przed przeniesieniem karty).
 
 ## Programy uzytkownikow (kategoria `uzytkownicy`)
@@ -41,7 +41,7 @@ Ladowarka na plytce X pokazuje domyslnie programy dla X; przyciskiem
 Kazdy moze zglosic swoj program. Procedura:
 
 1. Przygotuj program wedlug poradnika `portal/programy.html` (Model B, flagi plytki,
-   rozmiar <= 2 555 904 B, czysty obraz aplikacji). Przetestuj na plytce: uruchom pod KORONA,
+   rozmiar <= 2 555 904 B, czysty obraz aplikacji). Przetestuj na plytce: uruchom pod K-OS,
    nacisnij RST - musi wrocic menu.
 2. Zrob fork repo i dodaj katalog `zgloszenia/<id>/` z dwoma plikami: `<id>.bin` i `meta.json`
    (szablon i opis pol: `zgloszenia/README.md`). `<id>` = male litery, cyfry, `-`, `_`; to bedzie
@@ -53,7 +53,7 @@ Kazdy moze zglosic swoj program. Procedura:
    naciska RST. Jesli menu wraca i licencja/autorstwo sie zgadzaja - merge.
 6. Po merge Action `przyjmij` przenosi `.bin` do `bin/<plytka>/uzytkownicy/<id>.bin`, zapisuje
    `<id>.meta.json` obok, przebudowuje `katalog.json` i commituje jako `github-actions[bot]`.
-   Ladowarka widzi program po kilku minutach (raw.githubusercontent cache).
+   K-OS widzi program po kilku minutach (raw.githubusercontent cache).
 
 Aktualizacja: ten sam `<id>`, wyzsza `wersja`, znowu PR. Zgloszenie moze byc scalonym obrazem
 flasha (bootloader + tablica + aplikacja) - automat wycina z niego aplikacje, ale lepiej
@@ -66,10 +66,10 @@ po RST nie wracaja do menu, nie beda przyjete - plytke odzyskuje sie wtedy tylko
 Dla przegladajacego: PR z forka moze zmieniac tez `tools/` i `.github/` - Action ostrzega o
 plikach poza `zgloszenia/`; takich PR nie scalac bez przeczytania roznicy.
 
-### Jak ladowarka traktuje kategorie
+### Jak K-OS traktuje kategorie
 
-`katalog.json` ma pole `kategoria`: `autorskie`, `zewnetrzne`, `uzytkownicy`. Ladowarka <= 0.3.6
+`katalog.json` ma pole `kategoria`: `autorskie`, `zewnetrzne`, `uzytkownicy`. K-OS <= 0.3.6
 zna dwie pierwsze i wszystko, co nie jest `autorskie`, pokazuje w "zewnetrzne" (`net.cpp`,
-`progInCat`) - stare wersje zobacza programy uzytkownikow w tej zakladce. Nowsza ladowarka ma
+`progInCat`) - stare wersje zobacza programy uzytkownikow w tej zakladce. Nowszy K-OS ma
 pokazywac trzecia zakladke "uzytkownicy" (programy zgloszone przez uzytkownikow, sprawdzone
 tylko formalnie: rozmiar, format, reset -> menu; za tresc odpowiada autor).

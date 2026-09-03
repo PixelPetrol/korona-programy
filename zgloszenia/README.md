@@ -41,6 +41,6 @@ ustawien na karcie SD).
 * `model_b: true` to Twoje oswiadczenie, ze program na poczatku `setup()` kasuje `otadata`
   (albo definiuje `verifyRollbackLater()`), czyli RST wraca do menu. Automat tego **nie
   sprawdzi** - przegladajacy uruchomi program i nacisnie RST.
-* Czcionka ladowarki nie ma polskich znakow: `nazwa`, `opis`, `info`, `autor` w ASCII.
+* Czcionka K-OS nie ma polskich znakow: `nazwa`, `opis`, `info`, `autor` w ASCII.
 
 Sprawdz lokalnie przed PR: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>`.

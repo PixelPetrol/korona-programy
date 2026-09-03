@@ -1,5 +1,5 @@
 #!/bin/bash
-# KORONA - skladanie obrazow dla portalu instalacyjnego (ESP Web Tools).
+# K-OS (KORONA OS for CYD) - skladanie obrazow dla portalu instalacyjnego (ESP Web Tools).
 #
 # Bierze GOTOWE wyniki builda z loader/.build-24 i loader/.build-28R i uklada
 # je w portal/obrazy/<plytka>/ tak, jak je ma serwowac GitHub Pages.
@@ -86,10 +86,10 @@ if [ "$SCALONY" = "1" ]; then
   fi
 fi
 
-# --- wersja ladowarki z version.h -> pole "version" w manifestach ---
+# --- wersja K-OS z version.h -> pole "version" w manifestach ---
 WER="$(sed -n 's/.*FW_VERSION[^"]*"\([^"]*\)".*/\1/p' "$LOADER/loader/version.h" | head -1)"
 [ -n "$WER" ] || blad "nie umiem odczytac FW_VERSION z loader/loader/version.h"
-echo "KORONA $WER"
+echo "K-OS $WER"
 [ -n "$ESPTOOL" ] && echo "esptool: $ESPTOOL"
 echo
 
@@ -113,7 +113,7 @@ PY
 # flash.sh robi to przez `esptool erase_region 0xe000 0x2000`. Manifest ESP Web
 # Tools nie umie kasowac regionu, umie tylko ZAPISAC plik pod offsetem - wiec
 # zapisujemy 8192 bajtow 0xFF, co daje dokladnie ten sam stan flasha:
-# otadata "czysta" -> bootloader startuje partycje factory (ladowarke).
+# otadata "czysta" -> bootloader startuje partycje factory (K-OS).
 # NIE WOLNO tu uzyc boot_app0.bin z katalogu builda: ten plik ma ota_seq=1 z
 # poprawnym CRC, czyli mowi bootloaderowi "startuj ota_0" - dokladnie odwrotnie
 # niz chcemy (wystartowalby stary program albo pusty slot).
@@ -155,7 +155,7 @@ sprawdz() {   # sprawdz <BOARD>
   fi
   if [ "$BS" -gt "$FACTORY_SIZE" ]; then
     blad "$I: loader.ino.bin ($BS B) NIE MIESCI SIE w partycji factory ($FACTORY_SIZE B, brakuje $((BS - FACTORY_SIZE)) B).
-       Portal by zamurowal plytke. Nic nie zostalo zapisane. Odchudz ladowarke (grafiki/fonty) i przebuduj:  $JAK"
+       Portal by zamurowal plytke. Nic nie zostalo zapisane. Odchudz K-OS (grafiki/fonty) i przebuduj:  $JAK"
   fi
   printf "   partycja factory  %9d B   zapas %d B (%.1f%%)\n" "$FACTORY_SIZE" "$((FACTORY_SIZE - BS))" \
     "$(python3 -c 'import sys; print(100.0*int(sys.argv[1])/int(sys.argv[2]))' "$((FACTORY_SIZE - BS))" "$FACTORY_SIZE")"
@@ -249,8 +249,8 @@ echo
 
 # --- sumy kontrolne: TYLKO pliki wytworzone w tym biegu -----------------------
 {
-  echo "# KORONA $WER - obrazy portalu, $(date '+%Y-%m-%d %H:%M')"
-  echo "# offsety: bootloader $OFF_BOOTLOADER, tablica $OFF_PARTITIONS, otadata $OFF_OTADATA, factory (ladowarka) $OFF_FACTORY"
+  echo "# K-OS $WER - obrazy portalu, $(date '+%Y-%m-%d %H:%M')"
+  echo "# offsety: bootloader $OFF_BOOTLOADER, tablica $OFF_PARTITIONS, otadata $OFF_OTADATA, factory (K-OS) $OFF_FACTORY"
   echo "# partycja factory: $FACTORY_SIZE B"
   echo
   for f in "${WYTWORZONE[@]}"; do
@@ -260,4 +260,4 @@ echo
 echo "sumy kontrolne: obrazy/SUMY.txt"
 sed 's/^/  /' "$OUT/SUMY.txt"
 echo
-echo "GOTOWE: cyd24 cyd28 (KORONA $WER). Publikacja: patrz README.md §4."
+echo "GOTOWE: cyd24 cyd28 (K-OS $WER). Publikacja: patrz README.md §4."

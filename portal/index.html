@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KORONA — instalacja</title>
-<meta name="description" content="KORONA: ładowarka-menu dla płytek ESP32 Cheap Yellow Display. Wgranie wprost z przeglądarki (WebSerial). / KORONA loader for ESP32 CYD boards — install from the browser.">
+<title>K-OS — instalacja</title>
+<meta name="description" content="K-OS — KORONA OS for CYD: menu programów dla płytek ESP32 Cheap Yellow Display, wgrywane wprost z przeglądarki (WebSerial). / K-OS — KORONA OS for CYD: a program menu for ESP32 CYD boards, installed from the browser.">
 <link rel="icon" type="image/png" href="korona-godlo.png">
 <style>
-/* Styl jak na plytce: motyw "zielony" ladowarki (RGB565 -> hex): tlo 0x0000 #000, akcent 0x07E0
+/* Styl jak na plytce: motyw "zielony" K-OS (RGB565 -> hex): tlo 0x0000 #000, akcent 0x07E0
    #00ff00, tekst 0x0620 #00c600, krawedz 0x02E0 #005d00, ostrzezenie 0xFCC0 #ff9a00, blad #ff0000.
    Tekst pomocniczy jest jasniejszy niz na ekranie (0x0360 = #006d00 daje na czarnym 3:1, za malo
    na stronie) - #00b000 to 7:1. Czcionka: terminalowa, jak na plytce. */
@@ -23,6 +23,14 @@ a:hover,a:focus-visible{border-bottom-color:var(--acc);background:var(--sel)}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 code,kbd,pre{font-family:var(--mono);font-size:.95em}
 code,kbd{background:var(--sel);border:1px solid var(--edge);border-radius:3px;padding:0 6px;color:var(--acc)}
+/* Dlugie nazwy w tekscie (esp_ota_mark_app_valid_cancel_rollback) nie maja gdzie sie zlamac i na
+   waskim ekranie wychodzilyby za krawedz. W blokach <pre> zostaje wewnetrzne przewijanie. */
+code{overflow-wrap:anywhere}
+pre code{overflow-wrap:normal}
+th,td{overflow-wrap:anywhere}
+/* Tabela nie zwezi komorki ponizej najdluzszego slowa, wiec kazda jedzie we wlasnym pojemniku
+   z przewijaniem w poziomie - strona sama nigdy nie przewija sie na boki. */
+.tw{overflow-x:auto;max-width:100%}
 kbd{color:var(--txt)}
 pre{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.5}
 pre code{background:none;border:0;padding:0;color:var(--txt)}
@@ -124,26 +132,26 @@ pre.log{max-height:220px;overflow:auto;font-size:.8rem;margin:10px 0 0;white-spa
 <header class="hero">
   <img src="logo-korona.png" alt="KORONA — CYD project" width="885" height="792">
   <p class="lead">
-    <span lang="pl">Menu-ładowarka dla płytek ESP32 „Cheap Yellow Display".</span>
-    <span lang="en">A boot menu for ESP32 “Cheap Yellow Display” boards.</span>
+    <span lang="pl">K-OS — KORONA OS for CYD. Menu programów dla płytek ESP32 „Cheap Yellow Display".</span>
+    <span lang="en">K-OS — KORONA OS for CYD. A program menu for ESP32 “Cheap Yellow Display” boards.</span>
   </p>
   <p class="sub">
     <span lang="pl">Programy na karcie microSD. Dotykasz — startuje. Reset — wracasz do menu.</span>
     <span lang="en">Apps live on a microSD card. Tap — it runs. Reset — you are back in the menu.</span>
   </p>
-  <span class="badge">KORONA <!--WER-->0.3.8<!--/WER--></span>
-  <p class="sub" style="margin-top:14px"><span lang="pl">Piszesz własny program? → <a href="programy.html">jak przygotować go pod KORONĘ</a></span><span lang="en">Writing your own app? → <a href="programy.html">how to make it KORONA-ready</a></span></p>
+  <span class="badge">K-OS <!--WER-->0.3.9<!--/WER--></span>
+  <p class="sub" style="margin-top:14px"><span lang="pl">Piszesz własny program? → <a href="programy.html">jak przygotować go pod K-OS</a></span><span lang="en">Writing your own app? → <a href="programy.html">how to make it K-OS-ready</a></span></p>
 </header>
 
 <h2 id="kopia-h">
   <span lang="pl">Najpierw: kopia zapasowa płytki</span><span lang="en">First: back up the board</span>
-  <small><span lang="pl">zrzut całego flasha do pliku, zanim wgrasz KORONĘ</span><span lang="en">dump the whole flash to a file before installing KORONA</span></small>
+  <small><span lang="pl">zrzut całego flasha do pliku, zanim wgrasz K-OS</span><span lang="en">dump the whole flash to a file before installing K-OS</span></small>
 </h2>
 
 <section class="card kopia" id="kopia" aria-labelledby="kopia-h">
   <p style="margin:0 0 10px">
-    <span lang="pl">Wgranie KORONY nadpisuje bootloader, tablicę partycji i program, który dziś siedzi na płytce. Ta kopia czyta <b>cały flash</b> (zwykle 4 MB) przez USB i oddaje jeden plik <code>.bin</code>. Z niego da się wrócić do stanu sprzed instalacji — jedną komendą albo przyciskiem niżej.</span>
-    <span lang="en">Installing KORONA overwrites the bootloader, the partition table and whatever program lives on the board today. This backup reads the <b>entire flash</b> (usually 4 MB) over USB into a single <code>.bin</code> file. It lets you return to the pre-install state — with one command or the button below.</span>
+    <span lang="pl">Wgranie K-OS nadpisuje bootloader, tablicę partycji i program, który dziś siedzi na płytce. Ta kopia czyta <b>cały flash</b> (zwykle 4 MB) przez USB i oddaje jeden plik <code>.bin</code>. Z niego da się wrócić do stanu sprzed instalacji — jedną komendą albo przyciskiem niżej.</span>
+    <span lang="en">Installing K-OS overwrites the bootloader, the partition table and whatever program lives on the board today. This backup reads the <b>entire flash</b> (usually 4 MB) over USB into a single <code>.bin</code> file. It lets you return to the pre-install state — with one command or the button below.</span>
   </p>
   <ul style="margin:0 0 6px;padding-left:18px">
     <li><span lang="pl">Czas: 4 MB przy 460800 b/s to około <b>1,5–2 min</b>; przy 115200 b/s około 6–7 min.</span><span lang="en">Time: 4 MB at 460800 baud takes about <b>1.5–2 min</b>; at 115200 baud about 6–7 min.</span></li>
@@ -227,7 +235,7 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
     </ul>
     <div class="inst">
       <esp-web-install-button manifest="manifest-cyd24.json">
-        <button class="btn" slot="activate"><span lang="pl">Wgraj KORONĘ · 2.4"</span><span lang="en">Install KORONA · 2.4"</span></button>
+        <button class="btn" slot="activate"><span lang="pl">Wgraj K-OS · 2.4"</span><span lang="en">Install K-OS · 2.4"</span></button>
         <span slot="unsupported" class="note"><span lang="pl">Ta przeglądarka nie ma WebSerial — użyj Chrome lub Edge na komputerze, albo drogi z wiersza poleceń niżej.</span><span lang="en">This browser has no WebSerial — use Chrome or Edge on a computer, or the command-line route below.</span></span>
         <span slot="not-allowed" class="note"><span lang="pl">WebSerial działa tylko po <b>https://</b> albo na <b>localhost</b>.</span><span lang="en">WebSerial works only over <b>https://</b> or on <b>localhost</b>.</span></span>
       </esp-web-install-button>
@@ -245,7 +253,7 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
     </ul>
     <div class="inst">
       <esp-web-install-button manifest="manifest-cyd28.json">
-        <button class="btn soft" slot="activate"><span lang="pl">Wgraj KORONĘ · 2.8" (na własne ryzyko)</span><span lang="en">Install KORONA · 2.8" (at your own risk)</span></button>
+        <button class="btn soft" slot="activate"><span lang="pl">Wgraj K-OS · 2.8" (na własne ryzyko)</span><span lang="en">Install K-OS · 2.8" (at your own risk)</span></button>
         <span slot="unsupported" class="note"><span lang="pl">Ta przeglądarka nie ma WebSerial — użyj Chrome lub Edge na komputerze, albo drogi z wiersza poleceń niżej.</span><span lang="en">This browser has no WebSerial — use Chrome or Edge on a computer, or the command-line route below.</span></span>
         <span slot="not-allowed" class="note"><span lang="pl">WebSerial działa tylko po <b>https://</b> albo na <b>localhost</b>.</span><span lang="en">WebSerial works only over <b>https://</b> or on <b>localhost</b>.</span></span>
       </esp-web-install-button>
@@ -255,34 +263,34 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
 </div>
 
 <p class="note">
-  <span lang="pl">Po naciśnięciu wybierz port z <b>CH340</b> albo <b>usbserial</b> w nazwie. Pytanie <b>Erase device</b> zostaw <b>niezaznaczone</b> — pełne kasowanie czyści też ustawienia ładowarki (WiFi, motyw, kalibrację dotyku). Wgrywanie trwa 1–2 minuty; nie odłączaj kabla.</span>
-  <span lang="en">When asked, pick the port with <b>CH340</b> or <b>usbserial</b> in its name. Leave <b>Erase device</b> <b>unchecked</b> — a full erase also wipes the loader's settings (WiFi, theme, touch calibration). Flashing takes 1–2 minutes; keep the cable in.</span>
+  <span lang="pl">Po naciśnięciu wybierz port z <b>CH340</b> albo <b>usbserial</b> w nazwie. Pytanie <b>Erase device</b> zostaw <b>niezaznaczone</b> — pełne kasowanie czyści też ustawienia K-OS (WiFi, motyw, kalibrację dotyku). Wgrywanie trwa 1–2 minuty; nie odłączaj kabla.</span>
+  <span lang="en">When asked, pick the port with <b>CH340</b> or <b>usbserial</b> in its name. Leave <b>Erase device</b> <b>unchecked</b> — a full erase also wipes the K-OS settings (WiFi, theme, touch calibration). Flashing takes 1–2 minutes; keep the cable in.</span>
 </p>
 
 <h2><span lang="pl">Potem, w 5 punktach</span><span lang="en">Afterwards, in 5 points</span></h2>
 <ul class="terse">
-  <li><span lang="pl"><b>Pierwszy start = kreator.</b> Ładowarka prosi o kalibrację dotyku (4 rogi) i pokazuje menu. Autostart w tym biegu jest pomijany.</span><span lang="en"><b>First boot = wizard.</b> The loader asks for touch calibration (4 corners) and shows the menu. Autostart is skipped on that boot.</span></li>
+  <li><span lang="pl"><b>Pierwszy start = kreator.</b> K-OS prosi o kalibrację dotyku (4 rogi) i pokazuje menu. Autostart w tym biegu jest pomijany.</span><span lang="en"><b>First boot = wizard.</b> K-OS asks for touch calibration (4 corners) and shows the menu. Autostart is skipped on that boot.</span></li>
   <li><span lang="pl"><b>Karta microSD, FAT32</b> (karty powyżej 32 GB trzeba sformatować na FAT32 osobno). Programy trafiają do <code>/programy/cyd24/</code> albo <code>/programy/cyd28/</code> — jeden plik <code>.bin</code> to jedna aplikacja.</span><span lang="en"><b>microSD card, FAT32</b> (cards over 32 GB need a separate FAT32 format). Apps go to <code>/programy/cyd24/</code> or <code>/programy/cyd28/</code> — one <code>.bin</code> is one app.</span></li>
   <li><span lang="pl"><b>Najprościej przez sklep:</b> <kbd>ustawienia</kbd> → <kbd>sieć WiFi</kbd> → <kbd>skanuj i połącz</kbd>, potem w menu głównym <kbd>sklep KORONA</kbd>. Programy lecą z GitHuba wprost na kartę.</span><span lang="en"><b>Easiest via the store:</b> <kbd>settings</kbd> → <kbd>WiFi</kbd> → <kbd>scan and connect</kbd>, then <kbd>KORONA store</kbd> in the main menu. Apps download from GitHub straight to the card.</span></li>
-  <li><span lang="pl"><b>Autostart 3 s.</b> Ładowarka sama wchodzi w ostatni program; dotknij ekranu w czasie odliczania, żeby zostać w menu. <b>Reset = powrót do menu.</b></span><span lang="en"><b>Autostart in 3 s.</b> The loader enters the last app by itself; tap the screen during the countdown to stay in the menu. <b>Reset = back to the menu.</b></span></li>
-  <li><span lang="pl"><b>Każda aplikacja ma własne ustawienia</b> — ładowarka trzyma je na karcie osobno, więc się nie mieszają. Nazwa pliku jest kluczem tych ustawień; nazwę do wyświetlania ładowarka trzyma oddzielnie.</span><span lang="en"><b>Each app keeps its own settings</b> — the loader stores them separately on the card, so they never mix. The file name is the key to those settings; the display name is kept separately.</span></li>
+  <li><span lang="pl"><b>Autostart 3 s.</b> K-OS sam wchodzi w ostatni program; dotknij ekranu w czasie odliczania, żeby zostać w menu. <b>Reset = powrót do menu.</b></span><span lang="en"><b>Autostart in 3 s.</b> K-OS enters the last app by itself; tap the screen during the countdown to stay in the menu. <b>Reset = back to the menu.</b></span></li>
+  <li><span lang="pl"><b>Każda aplikacja ma własne ustawienia</b> — K-OS trzyma je na karcie osobno, więc się nie mieszają. Nazwa pliku jest kluczem tych ustawień; nazwę do wyświetlania K-OS trzyma oddzielnie.</span><span lang="en"><b>Each app keeps its own settings</b> — K-OS stores them separately on the card, so they never mix. The file name is the key to those settings; the display name is kept separately.</span></li>
 </ul>
 
 <div class="warnbox">
-  <span lang="pl"><b>„Reset wraca do menu" dotyczy programów ze sklepu KORONA.</b> Obcy plik <code>.bin</code> wrzucony na kartę nie zna tej umowy: po starcie płytka będzie w niego wracać po każdym resecie. Wyjście: podłącz USB i wgraj ładowarkę tą stroną jeszcze raz (tryb programowania: trzymaj <kbd>BOOT</kbd> przy podłączaniu). Nic nie ginie na stałe.</span>
-  <span lang="en"><b>“Reset returns to the menu” holds for apps from the KORONA store.</b> A foreign <code>.bin</code> dropped on the card does not know that contract: once started, the board will keep returning to it after every reset. Way out: connect USB and install the loader from this page again (bootloader mode: hold <kbd>BOOT</kbd> while plugging in). Nothing is lost for good.</span>
+  <span lang="pl"><b>„Reset wraca do menu" dotyczy programów ze sklepu KORONA.</b> Obcy plik <code>.bin</code> wrzucony na kartę nie zna tej umowy: po starcie płytka będzie w niego wracać po każdym resecie. Wyjście: podłącz USB i wgraj K-OS tą stroną jeszcze raz (tryb programowania: trzymaj <kbd>BOOT</kbd> przy podłączaniu). Nic nie ginie na stałe.</span>
+  <span lang="en"><b>“Reset returns to the menu” holds for apps from the KORONA store.</b> A foreign <code>.bin</code> dropped on the card does not know that contract: once started, the board will keep returning to it after every reset. Way out: connect USB and install K-OS from this page again (bootloader mode: hold <kbd>BOOT</kbd> while plugging in). Nothing is lost for good.</span>
 </div>
 
 <h2><span lang="pl">Więcej, gdy potrzeba</span><span lang="en">More, when you need it</span></h2>
 
 <details>
-  <summary><span lang="pl">Co to jest KORONA</span><span lang="en">What KORONA is</span></summary>
+  <summary><span lang="pl">Co to jest K-OS</span><span lang="en">What K-OS is</span></summary>
   <div>
     <ul>
-      <li><span lang="pl">Menu na ekranie płytki: wybierasz program z karty, ładowarka kopiuje go do slotu roboczego i uruchamia.</span><span lang="en">A menu on the board's screen: pick an app from the card, the loader copies it to the working slot and runs it.</span></li>
+      <li><span lang="pl">Menu na ekranie płytki: wybierasz program z karty, K-OS kopiuje go do slotu roboczego i uruchamia.</span><span lang="en">A menu on the board's screen: pick an app from the card, K-OS copies it to the working slot and runs it.</span></li>
       <li><span lang="pl">Jedna płytka udaje kilka urządzeń — radar lotniczy SkyCYD, narzędzia WiFi/BLE i inne — bez kabla i bez kompilowania.</span><span lang="en">One board acts as several devices — the SkyCYD aircraft radar, WiFi/BLE tools and more — no cable, no compiling.</span></li>
       <li><span lang="pl">Sklep przez WiFi, serwer www do zarządzania kartą z telefonu, osobne ustawienia dla każdej aplikacji.</span><span lang="en">A WiFi store, a web server to manage the card from your phone, separate settings per app.</span></li>
-      <li><span lang="pl">Ta strona wgrywa <b>samą ładowarkę</b>. Programy dokładasz potem z płytki.</span><span lang="en">This page installs <b>the loader only</b>. Apps come later, from the board itself.</span></li>
+      <li><span lang="pl">Ta strona wgrywa <b>sam K-OS</b>. Programy dokładasz potem z płytki.</span><span lang="en">This page installs <b>K-OS only</b>. Apps come later, from the board itself.</span></li>
     </ul>
   </div>
 </details>
@@ -303,24 +311,24 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
 <details>
   <summary><span lang="pl">Co trafia do flasha</span><span lang="en">What gets written to flash</span></summary>
   <div>
-    <p><span lang="pl">Te same trzy pliki i to samo kasowanie wskaźnika rozruchu, co skrypt <code>flash.sh</code> z repozytorium. Układ: 4 MB, ładowarka w partycji <code>factory</code>, uruchamiany program w slocie <code>ota_0</code>. Tablica partycji pod <code>0x8000</code> jest nadpisywana — dane innego firmware'u, które wcześniej tam było, przestają być czytelne.</span><span lang="en">The same three files and the same boot-pointer clear as the repository's <code>flash.sh</code>. Layout: 4 MB, the loader in the <code>factory</code> partition, the running app in the <code>ota_0</code> slot. The partition table at <code>0x8000</code> is overwritten — data left by any previous firmware becomes unreadable.</span></p>
-    <table>
+    <p><span lang="pl">Te same trzy pliki i to samo kasowanie wskaźnika rozruchu, co skrypt <code>flash.sh</code> z repozytorium. Układ: 4 MB, K-OS w partycji <code>factory</code>, uruchamiany program w slocie <code>ota_0</code>. Tablica partycji pod <code>0x8000</code> jest nadpisywana — dane innego firmware'u, które wcześniej tam było, przestają być czytelne.</span><span lang="en">The same three files and the same boot-pointer clear as the repository's <code>flash.sh</code>. Layout: 4 MB, K-OS in the <code>factory</code> partition, the running app in the <code>ota_0</code> slot. The partition table at <code>0x8000</code> is overwritten — data left by any previous firmware becomes unreadable.</span></p>
+    <div class="tw"><table>
       <caption class="visually-hidden"></caption>
       <thead><tr><th scope="col">offset</th><th scope="col"><span lang="pl">plik</span><span lang="en">file</span></th><th scope="col"><span lang="pl">co to jest</span><span lang="en">what it is</span></th></tr></thead>
       <tbody>
         <tr><td><code>0x1000</code></td><td><code>bootloader.bin</code></td><td><span lang="pl">bootloader ESP32 (2. stopnia)</span><span lang="en">ESP32 second-stage bootloader</span></td></tr>
-        <tr><td><code>0x8000</code></td><td><code>partitions.bin</code></td><td><span lang="pl">tablica partycji KORONY</span><span lang="en">KORONA partition table</span></td></tr>
-        <tr><td><code>0x10000</code></td><td><code>loader.bin</code></td><td><span lang="pl">ładowarka, partycja <code>factory</code> (1408 KB)</span><span lang="en">the loader, <code>factory</code> partition (1408 KB)</span></td></tr>
+        <tr><td><code>0x8000</code></td><td><code>partitions.bin</code></td><td><span lang="pl">tablica partycji K-OS</span><span lang="en">K-OS partition table</span></td></tr>
+        <tr><td><code>0x10000</code></td><td><code>loader.bin</code></td><td><span lang="pl">K-OS, partycja <code>factory</code> (1408 KB)</span><span lang="en">K-OS, <code>factory</code> partition (1408 KB)</span></td></tr>
         <tr><td><code>0xe000</code></td><td><code>otadata-pusta.bin</code></td><td><span lang="pl">8192 bajtów <code>0xFF</code>: pusty wskaźnik rozruchu = „startuj <code>factory</code>"; zapisywany ostatni</span><span lang="en">8192 bytes of <code>0xFF</code>: a blank boot pointer = “boot <code>factory</code>”; written last</span></td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 </details>
 
 <details>
   <summary><span lang="pl">Bez przeglądarki: esptool</span><span lang="en">Without a browser: esptool</span></summary>
   <div>
-    <p><span lang="pl">Jeden scalony obraz pod offset <code>0x0</code>, z pustą <code>otadata</code> w środku. <b>Różnica:</b> ta droga zeruje też partycję <code>nvs</code> aplikacji — ustawienia ostatnio uruchamianego programu przepadają. Ładowarka i sklep nie.</span><span lang="en">One merged image at offset <code>0x0</code>, with a blank <code>otadata</code> inside. <b>Difference:</b> this route also blanks the apps' <code>nvs</code> partition — the last-run app's settings are lost. The loader and store are not.</span></p>
+    <p><span lang="pl">Jeden scalony obraz pod offset <code>0x0</code>, z pustą <code>otadata</code> w środku. <b>Różnica:</b> ta droga zeruje też partycję <code>nvs</code> aplikacji — ustawienia ostatnio uruchamianego programu przepadają. K-OS i sklep nie.</span><span lang="en">One merged image at offset <code>0x0</code>, with a blank <code>otadata</code> inside. <b>Difference:</b> this route also blanks the apps' <code>nvs</code> partition — the last-run app's settings are lost. K-OS and the store are not.</span></p>
 <pre><code>pip install esptool
 
 # 2.4"                                              (macOS: /dev/cu.usbserial-XXXX, Linux: /dev/ttyUSB0, Windows: COM3)
@@ -339,7 +347,7 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
       <li><span lang="pl"><b>Nie ma portu do wyboru</b> — kabel tylko ładuje albo brak sterownika CH340. Najpierw inny kabel, potem sterownik.</span><span lang="en"><b>No port to pick</b> — a charge-only cable or no CH340 driver. Try another cable first, then the driver.</span></li>
       <li><span lang="pl"><b>Port jest, ale nie łączy</b> — port trzyma inny program (monitor portu, Arduino IDE, PlatformIO). Zamknij je. Jeśli nadal nic: trzymaj <kbd>BOOT</kbd> podczas podłączania kabla — płytka wchodzi w tryb programowania.</span><span lang="en"><b>Port is there but won't connect</b> — another program holds it (serial monitor, Arduino IDE, PlatformIO). Close them. Still nothing: hold <kbd>BOOT</kbd> while plugging the cable in — the board enters bootloader mode.</span></li>
       <li><span lang="pl"><b>Wgrało się, ekran czarny</b> — zła płytka: 2.4" i 2.8" mają podświetlenie na innym pinie. Wgraj obraz drugiej.</span><span lang="en"><b>Flashed, screen stays black</b> — wrong board: 2.4" and 2.8" drive the backlight from different pins. Install the other image.</span></li>
-      <li><span lang="pl"><b>Dotyk nie trafia</b> — <kbd>ustawienia</kbd> → <kbd>dotyk</kbd> → <kbd>kalibracja</kbd>. Na 2.8" kalibracja startowa jest zgadywana; jeśli nie da się trafić w menu, ładowarka przyjmuje komendy po USB (115200 b/s), np. <code>RUN:&lt;nazwa&gt;</code>.</span><span lang="en"><b>Touch is off</b> — <kbd>settings</kbd> → <kbd>touch</kbd> → <kbd>calibration</kbd>. On the 2.8" the initial calibration is a guess; if the menu is unreachable, the loader accepts USB commands (115200 baud), e.g. <code>RUN:&lt;name&gt;</code>.</span></li>
+      <li><span lang="pl"><b>Dotyk nie trafia</b> — <kbd>ustawienia</kbd> → <kbd>dotyk</kbd> → <kbd>kalibracja</kbd>. Na 2.8" kalibracja startowa jest zgadywana; jeśli nie da się trafić w menu, K-OS przyjmuje komendy po USB (115200 b/s), np. <code>RUN:&lt;nazwa&gt;</code>.</span><span lang="en"><b>Touch is off</b> — <kbd>settings</kbd> → <kbd>touch</kbd> → <kbd>calibration</kbd>. On the 2.8" the initial calibration is a guess; if the menu is unreachable, K-OS accepts USB commands (115200 baud), e.g. <code>RUN:&lt;name&gt;</code>.</span></li>
       <li><span lang="pl"><b>Płytka wraca do obcego programu</b> — patrz ramka wyżej: USB, <kbd>BOOT</kbd>, ta strona.</span><span lang="en"><b>The board keeps returning to a foreign app</b> — see the box above: USB, <kbd>BOOT</kbd>, this page.</span></li>
       <li><span lang="pl"><b>Da się cofnąć.</b> Tryb programowania ESP32 siedzi w ROM-ie, więc żadne wgranie nie psuje płytki na stałe. Wyjątek: płytki z włączonym flash encryption lub secure boot — tam ta strona nie ma zastosowania.</span><span lang="en"><b>It can be undone.</b> The ESP32 bootloader mode lives in ROM, so no flash ever bricks the board. Exception: boards with flash encryption or secure boot enabled — this page does not apply to them.</span></li>
     </ul>
@@ -347,7 +355,7 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
 </details>
 
 <footer>
-  <p><span lang="pl">KORONA — Piotr Korona. Programy do sklepu: </span><span lang="en">KORONA — Piotr Korona. Store programs: </span><a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a></p>
+  <p><span lang="pl">K-OS — KORONA OS for CYD · Piotr Korona. Programy do sklepu: </span><span lang="en">K-OS — KORONA OS for CYD · Piotr Korona. Store programs: </span><a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a></p>
   <p><span lang="pl">Instalator: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Zewnętrzne programy w sklepie mają swoich autorów i własne licencje — wymienione w katalogu sklepu.</span><span lang="en">Installer: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Third-party programs in the store have their own authors and licences — listed in the store catalogue.</span></p>
 </footer>
 
@@ -413,14 +421,14 @@ const T = {
     md5zle: "✗ NIE ZGADZA SIĘ z sumą policzoną przez płytkę — kopia jest uszkodzona, zrób ją jeszcze raz (najlepiej na 115200 b/s)",
     md5brak: "(nie udało się porównać z płytką)",
     przerwano: "Przerwano na żądanie. Płytka zresetowana, port zamknięty.",
-    przerwanoZapis: "Przerwano zapis — flash jest zapisany TYLKO CZĘŚCIOWO. Płytka może nie startować; wgraj kopię jeszcze raz albo KORONĘ.",
+    przerwanoZapis: "Przerwano zapis — flash jest zapisany TYLKO CZĘŚCIOWO. Płytka może nie startować; wgraj kopię jeszcze raz albo K-OS.",
     odlaczono: "Płytka zniknęła z USB w trakcie (odłączony kabel?). Kopia NIEPEŁNA — podłącz ponownie i zacznij od nowa.",
     blad: (m) => `Błąd: ${m}`,
     bladBaud: " Spróbuj 115200 b/s.",
     // przywracanie
     plikZly: "Ten plik nie wygląda na zrzut flasha ESP32 (brak bajtu 0xE9 pod 0x1000 albo za mały). Nie wgrywam.",
     plikDuzy: (f, fl) => `Plik (${f}) jest większy niż flash na płytce (${fl}). Nie wgrywam.`,
-    potw1: (n, s) => `UWAGA: to nadpisze CAŁY flash płytki (od 0x0) zawartością pliku:\n\n${n} (${s})\n\nWszystko, co teraz jest na płytce — także KORONA i jej ustawienia — przepadnie. Kontynuować?`,
+    potw1: (n, s) => `UWAGA: to nadpisze CAŁY flash płytki (od 0x0) zawartością pliku:\n\n${n} (${s})\n\nWszystko, co teraz jest na płytce — także K-OS i jego ustawienia — przepadnie. Kontynuować?`,
     potw2: "Drugie potwierdzenie: na pewno? Nie odłączaj kabla, aż zobaczysz „Gotowe”.",
     pisze: (p, done, total) => `Piszę… ${p}% · ${done} / ${total} (skompresowane)`,
     weryf: "Weryfikuję MD5 zapisanego flasha…",
@@ -446,13 +454,13 @@ const T = {
     md5zle: "✗ DOES NOT MATCH the sum computed by the board — the backup is corrupt, redo it (preferably at 115200 baud)",
     md5brak: "(could not compare with the board)",
     przerwano: "Aborted on request. Board reset, port closed.",
-    przerwanoZapis: "Write aborted — the flash is only PARTIALLY written. The board may not boot; write the backup again, or KORONA.",
+    przerwanoZapis: "Write aborted — the flash is only PARTIALLY written. The board may not boot; write the backup again, or K-OS.",
     odlaczono: "The board vanished from USB mid-way (cable unplugged?). Backup INCOMPLETE — reconnect and start over.",
     blad: (m) => `Error: ${m}`,
     bladBaud: " Try 115200 baud.",
     plikZly: "This file does not look like an ESP32 flash dump (no 0xE9 byte at 0x1000, or too small). Not writing.",
     plikDuzy: (f, fl) => `The file (${f}) is larger than the board's flash (${fl}). Not writing.`,
-    potw1: (n, s) => `WARNING: this overwrites the WHOLE flash of the board (from 0x0) with the file:\n\n${n} (${s})\n\nEverything on the board now — including KORONA and its settings — will be gone. Continue?`,
+    potw1: (n, s) => `WARNING: this overwrites the WHOLE flash of the board (from 0x0) with the file:\n\n${n} (${s})\n\nEverything on the board now — including K-OS and its settings — will be gone. Continue?`,
     potw2: "Second confirmation: really? Do not unplug the cable until you see “Done”.",
     pisze: (p, done, total) => `Writing… ${p}% · ${done} / ${total} (compressed)`,
     weryf: "Verifying MD5 of the written flash…",

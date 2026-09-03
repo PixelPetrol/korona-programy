@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KORONA — program pod KORONĘ w 10 minut</title>
-<meta name="description" content="Jak przygotować własny program na ESP32 CYD, żeby chodził pod ładowarką KORONA: Model B (reset wraca do menu), flagi płytki, dotyk, pamięć, rozmiar, zgłoszenie do sklepu. / How to build an app for the KORONA loader on ESP32 CYD boards.">
+<title>K-OS — program pod K-OS w 10 minut</title>
+<meta name="description" content="Jak przygotować własny program na ESP32 CYD, żeby chodził pod K-OS: wymóg K-OS: Model B (reset wraca do menu), flagi płytki, dotyk, pamięć, rozmiar, zgłoszenie do sklepu. / How to build an app for K-OS — KORONA OS for CYD, on ESP32 CYD boards.">
 <link rel="icon" type="image/png" href="korona-godlo.png">
 <style>
-/* Styl skopiowany z index.html (motyw "zielony" ladowarki) - ma wygladac identycznie. */
+/* Styl skopiowany z index.html (motyw "zielony" K-OS) - ma wygladac identycznie. */
 :root{
   --bg:#000; --card:#070a07; --sel:#00220f; --edge:#005d00; --edge2:#00a000;
   --txt:#00e600; --txt2:#00b000; --acc:#00ff00; --warn:#ff9a00; --err:#ff3b30; --ink:#001a00;
@@ -20,6 +20,14 @@ a:hover,a:focus-visible{border-bottom-color:var(--acc);background:var(--sel)}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 code,kbd,pre{font-family:var(--mono);font-size:.95em}
 code,kbd{background:var(--sel);border:1px solid var(--edge);border-radius:3px;padding:0 6px;color:var(--acc)}
+/* Dlugie nazwy w tekscie (esp_ota_mark_app_valid_cancel_rollback) nie maja gdzie sie zlamac i na
+   waskim ekranie wychodzilyby za krawedz. W blokach <pre> zostaje wewnetrzne przewijanie. */
+code{overflow-wrap:anywhere}
+pre code{overflow-wrap:normal}
+th,td{overflow-wrap:anywhere}
+/* Tabela nie zwezi komorki ponizej najdluzszego slowa, wiec kazda jedzie we wlasnym pojemniku
+   z przewijaniem w poziomie - strona sama nigdy nie przewija sie na boki. */
+.tw{overflow-x:auto;max-width:100%}
 kbd{color:var(--txt)}
 pre{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.5}
 pre code{background:none;border:0;padding:0;color:var(--txt)}
@@ -85,7 +93,7 @@ ol.check>li .why{color:var(--txt2);font-size:.9rem}
 <main>
 
 <div class="top">
-  <a class="back" href="index.html"><span lang="pl">← instalacja KORONY</span><span lang="en">← installing KORONA</span></a>
+  <a class="back" href="index.html"><span lang="pl">← instalacja K-OS</span><span lang="en">← installing K-OS</span></a>
   <div class="lang" role="group" aria-label="Język / Language">
     <button type="button" data-set="pl" aria-pressed="true">PL</button>
     <button type="button" data-set="en" aria-pressed="false">EN</button>
@@ -94,10 +102,10 @@ ol.check>li .why{color:var(--txt2);font-size:.9rem}
 
 <header class="hero">
   <img src="korona-godlo.png" alt="KORONA" width="512" height="512">
-  <h1><span lang="pl">Program pod KORONĘ w 10 minut</span><span lang="en">A KORONA app in 10 minutes</span></h1>
+  <h1><span lang="pl">Program pod K-OS w 10 minut</span><span lang="en">A K-OS app in 10 minutes</span></h1>
   <p class="sub">
-    <span lang="pl">Dla autorów: co dopisać do własnego programu na ESP32 CYD, żeby startował z menu KORONY i po resecie do niego wracał. Potem — jak go zgłosić do sklepu.</span>
-    <span lang="en">For developers: what to add to your ESP32 CYD program so it starts from the KORONA menu and returns to it on reset. Then — how to submit it to the store.</span>
+    <span lang="pl">Dla autorów: co dopisać do własnego programu na ESP32 CYD, żeby startował z menu K-OS i po resecie do niego wracał. Potem — jak go zgłosić do sklepu.</span>
+    <span lang="en">For developers: what to add to your ESP32 CYD program so it starts from the K-OS menu and returns to it on reset. Then — how to submit it to the store.</span>
   </p>
   <span class="badge"><span lang="pl">płytka</span><span lang="en">board</span> CYD 2.4" ESP32-2432S024R · <span lang="pl">slot</span><span lang="en">slot</span> 2 555 904 B</span>
 </header>
@@ -115,24 +123,24 @@ ol.check>li .why{color:var(--txt2);font-size:.9rem}
 </ol>
 </section>
 
-<h2 id="co"><span lang="pl">1. Co to znaczy „program pod KORONĘ"</span><span lang="en">1. What “a KORONA app” means</span></h2>
+<h2 id="co"><span lang="pl">1. Co to znaczy „program pod K-OS"</span><span lang="en">1. What “a K-OS app” means</span></h2>
 <ul class="terse">
   <li><span lang="pl"><b>Czysty obraz aplikacji ESP32.</b> To, co Arduino / PlatformIO zapisuje jako <code>*.ino.bin</code> / <code>firmware.bin</code>: bajt 0 = <code>0xE9</code>. Bez bootloadera, bez tablicy partycji, nie plik „merged" (ten automat sklepu rozpozna i wytnie z niego aplikację, ale na kartę SD wrzucaj czysty).</span><span lang="en"><b>A plain ESP32 application image.</b> What Arduino / PlatformIO writes as <code>*.ino.bin</code> / <code>firmware.bin</code>: byte 0 = <code>0xE9</code>. No bootloader, no partition table, not a “merged” file (the store automation recognises and extracts the app from a merged file, but put a plain image on the SD card).</span></li>
-  <li><span lang="pl"><b>Slot <code>ota_0</code> = 2 555 904 B</b> (0x270000) pod adresem 0x170000. KORONA kopiuje tam Twój <code>.bin</code> z karty i uruchamia go. Obraz ESP32 nie jest przywiązany do adresu, więc kompilujesz normalnie.</span><span lang="en"><b>Slot <code>ota_0</code> = 2 555 904 B</b> (0x270000) at address 0x170000. KORONA copies your <code>.bin</code> from the card into it and boots it. An ESP32 image is not tied to an address, so you build normally.</span></li>
-  <li><span lang="pl"><b>Tablica partycji ładowarki.</b> Twoja własna tablica (schemat z Arduino, <code>partitions.csv</code> z PlatformIO) jest IGNOROWANA — program widzi <code>nvs</code> 20 KB, <code>spiffs</code> 112 KB i tyle.</span><span lang="en"><b>The loader’s partition table.</b> Your own table (Arduino partition scheme, PlatformIO <code>partitions.csv</code>) is IGNORED — the program sees <code>nvs</code> 20 KB, <code>spiffs</code> 112 KB and that is all.</span></li>
-  <li><span lang="pl"><b>Migawki ustawień.</b> Przed startem KORONA przywraca <code>nvs</code>+<code>spiffs</code> Twojego programu z karty, a po powrocie do menu je zapisuje. Każdy program ma własne ustawienia, WiFi zapamiętane raz zostaje. Klucz migawki = nazwa pliku <code>.bin</code>.</span><span lang="en"><b>Settings snapshots.</b> Before starting, KORONA restores your program’s <code>nvs</code>+<code>spiffs</code> from the card, and saves them when you return to the menu. Each program keeps its own settings; WiFi saved once stays saved. The snapshot key is the <code>.bin</code> file name.</span></li>
+  <li><span lang="pl"><b>Slot <code>ota_0</code> = 2 555 904 B</b> (0x270000) pod adresem 0x170000. K-OS kopiuje tam Twój <code>.bin</code> z karty i uruchamia go. Obraz ESP32 nie jest przywiązany do adresu, więc kompilujesz normalnie.</span><span lang="en"><b>Slot <code>ota_0</code> = 2 555 904 B</b> (0x270000) at address 0x170000. K-OS copies your <code>.bin</code> from the card into it and boots it. An ESP32 image is not tied to an address, so you build normally.</span></li>
+  <li><span lang="pl"><b>Tablica partycji K-OS.</b> Twoja własna tablica (schemat z Arduino, <code>partitions.csv</code> z PlatformIO) jest IGNOROWANA — program widzi <code>nvs</code> 20 KB, <code>spiffs</code> 112 KB i tyle.</span><span lang="en"><b>The K-OS partition table.</b> Your own table (Arduino partition scheme, PlatformIO <code>partitions.csv</code>) is IGNORED — the program sees <code>nvs</code> 20 KB, <code>spiffs</code> 112 KB and that is all.</span></li>
+  <li><span lang="pl"><b>Migawki ustawień.</b> Przed startem K-OS przywraca <code>nvs</code>+<code>spiffs</code> Twojego programu z karty, a po powrocie do menu je zapisuje. Każdy program ma własne ustawienia, WiFi zapamiętane raz zostaje. Klucz migawki = nazwa pliku <code>.bin</code>.</span><span lang="en"><b>Settings snapshots.</b> Before starting, K-OS restores your program’s <code>nvs</code>+<code>spiffs</code> from the card, and saves them when you return to the menu. Each program keeps its own settings; WiFi saved once stays saved. The snapshot key is the <code>.bin</code> file name.</span></li>
 </ul>
 
 <h2 id="modelb"><span lang="pl">2. Model B — reset wraca do menu</span><span lang="en">2. Model B — reset returns to the menu</span><small><span lang="pl">jedyny twardy wymóg</span><span lang="en">the one hard requirement</span></small></h2>
 <div class="warnbox">
-  <span lang="pl"><b>Bez tego reset nie wraca do menu i płytkę odzyskasz tylko po USB.</b> Bootloader ESP32 wybiera partycję po <code>otadata</code>; KORONA ustawia tam „uruchom <code>ota_0</code>". Twój program musi to skasować na samym początku — wtedy następny RST trafia do <code>factory</code>, czyli do menu.</span>
-  <span lang="en"><b>Without this, reset does not return to the menu and the board is recoverable only over USB.</b> The ESP32 bootloader picks the partition from <code>otadata</code>; KORONA writes “boot <code>ota_0</code>” there. Your program must erase it right at the start — then the next RST lands in <code>factory</code>, i.e. the menu.</span>
+  <span lang="pl"><b>Bez tego reset nie wraca do menu i płytkę odzyskasz tylko po USB.</b> Bootloader ESP32 wybiera partycję po <code>otadata</code>; K-OS ustawia tam „uruchom <code>ota_0</code>". Twój program musi to skasować na samym początku — wtedy następny RST trafia do <code>factory</code>, czyli do menu.</span>
+  <span lang="en"><b>Without this, reset does not return to the menu and the board is recoverable only over USB.</b> The ESP32 bootloader picks the partition from <code>otadata</code>; K-OS writes “boot <code>ota_0</code>” there. Your program must erase it right at the start — then the next RST lands in <code>factory</code>, i.e. the menu.</span>
 </div>
 <p><span lang="pl">Wklej na początek <code>setup()</code> (Arduino i ESP-IDF, każdy rdzeń):</span><span lang="en">Paste at the top of <code>setup()</code> (Arduino and ESP-IDF, any core):</span></p>
 <pre><code>#include &lt;esp_partition.h&gt;
 
 void setup() {
-  <i>// KORONA "Model B": kasuj otadata -> kazdy RST wraca do menu</i>
+  <i>// K-OS "Model B": kasuj otadata -> kazdy RST wraca do menu</i>
   const esp_partition_t* od = esp_partition_find_first(
       ESP_PARTITION_TYPE_DATA, ESP_PARTITION_SUBTYPE_DATA_OTA, NULL);
   if (od) esp_partition_erase_range(od, 0, od->size);
@@ -142,7 +150,7 @@ void setup() {
 <details>
   <summary><span lang="pl">Alternatywa (tylko rdzeń Arduino): <code>verifyRollbackLater()</code></span><span lang="en">Alternative (Arduino core only): <code>verifyRollbackLater()</code></span></summary>
   <div>
-    <p><span lang="pl">Rdzenie Arduino 2.0.x i 3.x mają <code>CONFIG_APP_ROLLBACK_ENABLE</code>, a bootloader KORONY ma <code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y</code>. Obraz uruchomiony po raz pierwszy jest w stanie „do potwierdzenia" — jeśli go nie potwierdzisz, bootloader przy resecie sam wraca do <code>factory</code>. Wystarczy jedna linia na poziomie pliku i <b>nie wołać</b> <code>esp_ota_mark_app_valid_cancel_rollback()</code>:</span><span lang="en">Arduino cores 2.0.x and 3.x have <code>CONFIG_APP_ROLLBACK_ENABLE</code>, and KORONA’s bootloader has <code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y</code>. An image booted for the first time is “pending verification” — if you never confirm it, the bootloader falls back to <code>factory</code> on reset by itself. One file-level line, and <b>do not call</b> <code>esp_ota_mark_app_valid_cancel_rollback()</code>:</span></p>
+    <p><span lang="pl">Rdzenie Arduino 2.0.x i 3.x mają <code>CONFIG_APP_ROLLBACK_ENABLE</code>, a bootloader K-OS ma <code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y</code>. Obraz uruchomiony po raz pierwszy jest w stanie „do potwierdzenia" — jeśli go nie potwierdzisz, bootloader przy resecie sam wraca do <code>factory</code>. Wystarczy jedna linia na poziomie pliku i <b>nie wołać</b> <code>esp_ota_mark_app_valid_cancel_rollback()</code>:</span><span lang="en">Arduino cores 2.0.x and 3.x have <code>CONFIG_APP_ROLLBACK_ENABLE</code>, and the K-OS bootloader has <code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y</code>. An image booted for the first time is “pending verification” — if you never confirm it, the bootloader falls back to <code>factory</code> on reset by itself. One file-level line, and <b>do not call</b> <code>esp_ota_mark_app_valid_cancel_rollback()</code>:</span></p>
 <pre><code>bool verifyRollbackLater() { return true; }</code></pre>
     <p><span lang="pl">Dlaczego to jest potrzebne: rdzeń Arduino w <code>initArduino()</code> (<code>esp32-hal-misc.c</code>) sam potwierdza obraz, chyba że <code>verifyRollbackLater()</code> zwróci <code>true</code>. Zmierzone 03.09.2026 na rdzeniach 2.0.17 i 3.3.11.</span><span lang="en">Why this is needed: the Arduino core confirms the image itself in <code>initArduino()</code> (<code>esp32-hal-misc.c</code>) unless <code>verifyRollbackLater()</code> returns <code>true</code>. Measured 2026-09-03 on cores 2.0.17 and 3.3.11.</span></p>
     <p><span lang="pl">Model B jest pewniejszy (działa też w ESP-IDF i gdy ktoś zbuduje bootloader bez rollbacku) — jeśli możesz, użyj Modelu B.</span><span lang="en">Model B is the safer choice (works in ESP-IDF too, and with a bootloader built without rollback) — use Model B if you can.</span></p>
@@ -151,18 +159,18 @@ void setup() {
 <details>
   <summary><span lang="pl">Program sam robi <code>ESP.restart()</code> (np. po zapisie WiFi)?</span><span lang="en">Does your program call <code>ESP.restart()</code> (e.g. after saving WiFi)?</span></summary>
   <div>
-    <p><span lang="pl">Po restarcie wraca menu KORONY — to zamierzone. Użytkownik uruchamia program ponownie (albo robi to autostart), ustawienia zostają dzięki migawce. Napisz o tym w polu <code>info</code> zgłoszenia, jak robią to NerdMiner i Pogoda w sklepie.</span><span lang="en">After the restart the KORONA menu comes back — by design. The user starts the program again (or autostart does), settings survive thanks to the snapshot. Mention it in the <code>info</code> field of your submission, as NerdMiner and Pogoda do in the store.</span></p>
+    <p><span lang="pl">Po restarcie wraca menu K-OS — to zamierzone. Użytkownik uruchamia program ponownie (albo robi to autostart), ustawienia zostają dzięki migawce. Napisz o tym w polu <code>info</code> zgłoszenia, jak robią to NerdMiner i Pogoda w sklepie.</span><span lang="en">After the restart the K-OS menu comes back — by design. The user starts the program again (or autostart does), settings survive thanks to the snapshot. Mention it in the <code>info</code> field of your submission, as NerdMiner and Pogoda do in the store.</span></p>
   </div>
 </details>
 
 <h2 id="flagi"><span lang="pl">3. Flagi płytki S024R dla TFT_eSPI</span><span lang="en">3. Board flags for TFT_eSPI (S024R)</span><small><span lang="pl">zmierzone na sprzęcie, nie z internetu</span><span lang="en">measured on hardware, not copied from the web</span></small></h2>
-<p><span lang="pl">Konfiguruj TFT_eSPI flagami kompilatora, nie edycją <code>User_Setup.h</code> w bibliotece (aktualizacja biblioteki kasuje ustawienia). Ten zestaw chodzi w SkyCYD, KORONIE i portach ze sklepu.</span><span lang="en">Configure TFT_eSPI with compiler flags, not by editing <code>User_Setup.h</code> inside the library (a library update wipes it). This exact set runs SkyCYD, KORONA and the store ports.</span></p>
+<p><span lang="pl">Konfiguruj TFT_eSPI flagami kompilatora, nie edycją <code>User_Setup.h</code> w bibliotece (aktualizacja biblioteki kasuje ustawienia). Ten zestaw chodzi w SkyCYD, K-OS i portach ze sklepu.</span><span lang="en">Configure TFT_eSPI with compiler flags, not by editing <code>User_Setup.h</code> inside the library (a library update wipes it). This exact set runs SkyCYD, K-OS and the store ports.</span></p>
 <p><b>platformio.ini</b></p>
 <pre><code>[env:cyd24]
 platform = espressif32
 board = esp32dev
 framework = arduino
-board_build.partitions = huge_app.csv   <i>; i tak ignorowane pod KORONA, ale build musi sie zmiescic</i>
+board_build.partitions = huge_app.csv   <i>; i tak ignorowane pod K-OS, ale build musi sie zmiescic</i>
 build_flags =
   -DUSER_SETUP_LOADED=1
   -DILI9341_2_DRIVER=1
@@ -181,14 +189,14 @@ build_flags =
 <details>
   <summary><span lang="pl">Reszta pinów płytki 2.4" (S024R)</span><span lang="en">The other 2.4" (S024R) board pins</span></summary>
   <div>
-    <table>
+    <div class="tw"><table>
       <tr><th><span lang="pl">co</span><span lang="en">what</span></th><th>GPIO</th><th><span lang="pl">uwagi</span><span lang="en">notes</span></th></tr>
       <tr><td><span lang="pl">podświetlenie</span><span lang="en">backlight</span></td><td>27</td><td><span lang="pl"><code>HIGH</code> = świeci; PWM do ściemniania</span><span lang="en"><code>HIGH</code> = on; PWM for dimming</span></td></tr>
       <tr><td><span lang="pl">dotyk XPT2046</span><span lang="en">touch XPT2046</span></td><td>CS 33, IRQ 36</td><td><span lang="pl">na TEJ SAMEJ magistrali co LCD (HSPI 12/13/14) — stąd <code>TOUCH_CS=33</code> i <code>tft.getTouch()</code></span><span lang="en">on the SAME bus as the LCD (HSPI 12/13/14) — hence <code>TOUCH_CS=33</code> and <code>tft.getTouch()</code></span></td></tr>
       <tr><td><span lang="pl">dioda RGB</span><span lang="en">RGB LED</span></td><td>R 4, G 16, B 17</td><td><span lang="pl">aktywna niskim stanem (<code>LOW</code> = świeci)</span><span lang="en">active low (<code>LOW</code> = on)</span></td></tr>
       <tr><td><span lang="pl">głośnik / DAC</span><span lang="en">speaker / DAC</span></td><td>26</td><td><span lang="pl">8-bit DAC, wzmacniacz na płytce</span><span lang="en">8-bit DAC, on-board amplifier</span></td></tr>
       <tr><td><span lang="pl">karta SD</span><span lang="en">SD card</span></td><td>SCK 18, MISO 19, MOSI 23, CS 5</td><td>VSPI</td></tr>
-    </table>
+    </table></div>
     <p><span lang="pl"><b>2.8" (2432S028R, <code>cyd28</code>):</b> dotyk na osobnych pinach (CLK 25, MOSI 32, MISO 39, CS 33), podświetlenie GPIO 21. Ten profil nie był ostatnio sprawdzany na sprzęcie — zgłaszaj dla 2.8" tylko to, co sam uruchomiłeś.</span><span lang="en"><b>2.8" (2432S028R, <code>cyd28</code>):</b> touch on separate pins (CLK 25, MOSI 32, MISO 39, CS 33), backlight GPIO 21. This profile has not been verified on hardware recently — submit for the 2.8" only what you have run yourself.</span></p>
   </div>
 </details>
@@ -215,17 +223,17 @@ void kalibruj() {
 }</code></pre>
 
 <h2 id="pamiec"><span lang="pl">5. Pamięć</span><span lang="en">5. Storage and memory</span></h2>
-<table>
+<div class="tw"><table>
   <tr><th><span lang="pl">partycja</span><span lang="en">partition</span></th><th><span lang="pl">rozmiar</span><span lang="en">size</span></th><th><span lang="pl">uwagi</span><span lang="en">notes</span></th></tr>
   <tr><td><code>nvs</code></td><td>20 KB (0x5000)</td><td><span lang="pl"><code>Preferences</code>, WiFi z rdzenia — starczy; migawka per program</span><span lang="en"><code>Preferences</code>, the core’s WiFi store — enough; snapshot per program</span></td></tr>
   <tr><td><code>spiffs</code></td><td>112 KB (0x1C000)</td><td><span lang="pl">etykieta <code>spiffs</code>; montuj LittleFS albo SPIFFS z <code>formatOnFail=true</code> — pierwszy start dostaje niesformatowaną partycję</span><span lang="en">label <code>spiffs</code>; mount LittleFS or SPIFFS with <code>formatOnFail=true</code> — the first start gets an unformatted partition</span></td></tr>
   <tr><td><code>ota_0</code></td><td>2 555 904 B</td><td><span lang="pl">Twój program. Brak drugiego slotu — OTA wewnątrz programu nie zadziała</span><span lang="en">your program. There is no second slot — in-app OTA will not work</span></td></tr>
   <tr><td>PSRAM</td><td>—</td><td><span lang="pl">płytka nie ma; kompiluj z <code>PSRAM=disabled</code>; wolnej sterty jest niewiele, gdy chodzi WiFi — duże bufory trzymaj w rozsądku</span><span lang="en">the board has none; build with <code>PSRAM=disabled</code>; free heap is tight once WiFi is up — keep big buffers modest</span></td></tr>
-</table>
+</table></div>
 <pre><code>#include &lt;LittleFS.h&gt;
 if (!LittleFS.begin(<b>true</b>, "/littlefs", 10, "spiffs")) { <i>/* formatOnFail=true, etykieta partycji "spiffs" */</i> }
 <i>// SPIFFS:  SPIFFS.begin(true);</i></code></pre>
-<p class="note"><span lang="pl"><b>Bez własnej tablicy partycji.</b> Jeśli Twój projekt ma <code>partitions.csv</code> z większym SPIFFS/FATFS albo dwoma slotami OTA — pod KORONĄ tego nie ma. Program, który wymaga np. 1 MB na pliki, nie jest programem pod KORONĘ (chyba że przeniesiesz dane na kartę SD).</span><span lang="en"><b>No custom partition table.</b> If your project ships a <code>partitions.csv</code> with a bigger SPIFFS/FATFS or two OTA slots — none of that exists under KORONA. A program that needs e.g. 1 MB of files is not a KORONA app (unless you move the data to the SD card).</span></p>
+<p class="note"><span lang="pl"><b>Bez własnej tablicy partycji.</b> Jeśli Twój projekt ma <code>partitions.csv</code> z większym SPIFFS/FATFS albo dwoma slotami OTA — pod K-OS tego nie ma. Program, który wymaga np. 1 MB na pliki, nie jest programem pod K-OS (chyba że przeniesiesz dane na kartę SD).</span><span lang="en"><b>No custom partition table.</b> If your project ships a <code>partitions.csv</code> with a bigger SPIFFS/FATFS or two OTA slots — none of that exists under K-OS. A program that needs e.g. 1 MB of files is not a K-OS app (unless you move the data to the SD card).</span></p>
 
 <h2 id="rozmiar"><span lang="pl">6. Rozmiar i format pliku</span><span lang="en">6. File size and format</span></h2>
 <pre><code>ls -l build/moj_program.ino.bin          <i># &lt;= 2555904</i>
@@ -239,9 +247,9 @@ python3 tools/sprawdz_bin.py build/moj_program.ino.bin</code></pre>
 
 <h2 id="test"><span lang="pl">7. Test na płytce</span><span lang="en">7. Test on the board</span></h2>
 <ol class="check">
-  <li><span lang="pl">Skopiuj <code>.bin</code> na kartę do <code>/programy/cyd24/</code> (2.8": <code>/programy/cyd28/</code>). Nazwa pliku = nazwa w menu i klucz migawki. Albo przez www ładowarki: <a href="http://korona.local/">http://korona.local/</a> → wgraj plik (płytka musi być w Twojej sieci WiFi).</span><span lang="en">Copy the <code>.bin</code> to the card into <code>/programy/cyd24/</code> (2.8": <code>/programy/cyd28/</code>). File name = menu name and snapshot key. Or via the loader’s web page: <a href="http://korona.local/">http://korona.local/</a> → upload (the board must be on your WiFi).</span></li>
-  <li><span lang="pl">W menu KORONY dotknij program → startuje (kopia do <code>ota_0</code> trwa kilka sekund).</span><span lang="en">In the KORONA menu tap the program → it starts (the copy into <code>ota_0</code> takes a few seconds).</span></li>
-  <li><span lang="pl"><b>Naciśnij RST.</b> Musi wrócić menu KORONY. Jeśli wraca Twój program — brakuje Modelu B (sekcja 2); płytkę odzyskasz wgrywając KORONĘ po USB ze <a href="index.html">strony instalacji</a>.</span><span lang="en"><b>Press RST.</b> The KORONA menu must come back. If your program comes back instead — Model B is missing (section 2); recover the board by re-flashing KORONA over USB from the <a href="index.html">install page</a>.</span></li>
+  <li><span lang="pl">Skopiuj <code>.bin</code> na kartę do <code>/programy/cyd24/</code> (2.8": <code>/programy/cyd28/</code>). Nazwa pliku = nazwa w menu i klucz migawki. Albo przez www K-OS: <a href="http://korona.local/">http://korona.local/</a> → wgraj plik (płytka musi być w Twojej sieci WiFi).</span><span lang="en">Copy the <code>.bin</code> to the card into <code>/programy/cyd24/</code> (2.8": <code>/programy/cyd28/</code>). File name = menu name and snapshot key. Or via the K-OS web page: <a href="http://korona.local/">http://korona.local/</a> → upload (the board must be on your WiFi).</span></li>
+  <li><span lang="pl">W menu K-OS dotknij program → startuje (kopia do <code>ota_0</code> trwa kilka sekund).</span><span lang="en">In the K-OS menu tap the program → it starts (the copy into <code>ota_0</code> takes a few seconds).</span></li>
+  <li><span lang="pl"><b>Naciśnij RST.</b> Musi wrócić menu K-OS. Jeśli wraca Twój program — brakuje Modelu B (sekcja 2); płytkę odzyskasz wgrywając K-OS po USB ze <a href="index.html">strony instalacji</a>.</span><span lang="en"><b>Press RST.</b> The K-OS menu must come back. If your program comes back instead — Model B is missing (section 2); recover the board by re-flashing K-OS over USB from the <a href="index.html">install page</a>.</span></li>
   <li><span lang="pl">Uruchom drugi raz: ustawienia (WiFi, kalibracja) mają być zapamiętane — to test migawki <code>nvs</code>/<code>spiffs</code>.</span><span lang="en">Start it a second time: settings (WiFi, calibration) must persist — that tests the <code>nvs</code>/<code>spiffs</code> snapshot.</span></li>
   <li><span lang="pl">Kolory w negatywie → brak <code>TFT_INVERSION_ON</code>. Dotyk „obok" → kalibracja w złej rotacji. Reset po kilku sekundach kalibracji → WDT.</span><span lang="en">Colours inverted → missing <code>TFT_INVERSION_ON</code>. Touch lands “next to” the target → calibration in the wrong rotation. Reset a few seconds into calibration → WDT.</span></li>
 </ol>
@@ -252,11 +260,11 @@ python3 tools/sprawdz_bin.py build/moj_program.ino.bin</code></pre>
   <li><span lang="pl">Dodaj katalog <code>zgloszenia/&lt;id&gt;/</code> z dwoma plikami: <code>&lt;id&gt;.bin</code> i <code>meta.json</code>. <code>&lt;id&gt;</code>: 2–32 znaki, małe litery, cyfry, <code>-</code>, <code>_</code> — to będzie nazwa pliku w sklepie i klucz ustawień na karcie, <b>nie zmienia się po publikacji</b>.</span><span lang="en">Add a folder <code>zgloszenia/&lt;id&gt;/</code> with two files: <code>&lt;id&gt;.bin</code> and <code>meta.json</code>. <code>&lt;id&gt;</code>: 2–32 chars, lowercase letters, digits, <code>-</code>, <code>_</code> — it becomes the store file name and the settings key on the card, <b>never changes after publication</b>.</span></li>
   <li><span lang="pl">Sprawdź lokalnie: <code>python3 tools/sprawdz_zgloszenie.py zgloszenia/&lt;id&gt;</code>.</span><span lang="en">Check locally: <code>python3 tools/sprawdz_zgloszenie.py zgloszenia/&lt;id&gt;</code>.</span></li>
   <li><span lang="pl">Otwórz Pull Request. Automat sprawdza format i <code>meta.json</code> i wkleja raport do PR (zielony/czerwony check). Przeglądający robi to, czego automat nie umie: uruchamia program i naciska RST.</span><span lang="en">Open a Pull Request. The automation checks the format and <code>meta.json</code> and posts a report to the PR (green/red check). The reviewer does what automation cannot: runs the program and presses RST.</span></li>
-  <li><span lang="pl">Po merge program trafia do <code>bin/&lt;płytka&gt;/uzytkownicy/</code> i do <code>katalog.json</code>; ładowarka widzi go w sklepie po kilku minutach. Aktualizacja = ten sam <code>&lt;id&gt;</code>, wyższa <code>wersja</code>, kolejny PR.</span><span lang="en">After the merge the program lands in <code>bin/&lt;board&gt;/uzytkownicy/</code> and in <code>katalog.json</code>; the loader shows it in the store within minutes. An update = the same <code>&lt;id&gt;</code>, a higher <code>wersja</code>, another PR.</span></li>
+  <li><span lang="pl">Po merge program trafia do <code>bin/&lt;płytka&gt;/uzytkownicy/</code> i do <code>katalog.json</code>; K-OS widzi go w sklepie po kilku minutach. Aktualizacja = ten sam <code>&lt;id&gt;</code>, wyższa <code>wersja</code>, kolejny PR.</span><span lang="en">After the merge the program lands in <code>bin/&lt;board&gt;/uzytkownicy/</code> and in <code>katalog.json</code>; K-OS shows it in the store within minutes. An update = the same <code>&lt;id&gt;</code>, a higher <code>wersja</code>, another PR.</span></li>
 </ol>
 <p><b>meta.json</b></p>
 <pre><code>{
-  "nazwa":      "Zegar binarny",                  <i>// nazwa w menu, &lt;= 40 znakow, ASCII (czcionka ladowarki nie ma polskich znakow)</i>
+  "nazwa":      "Zegar binarny",                  <i>// nazwa w menu, &lt;= 40 znakow, ASCII (czcionka K-OS nie ma polskich znakow)</i>
   "opis":       "zegar binarny z NTP, 3 motywy",  <i>// jedna linia, &lt;= 60</i>
   "wersja":     "1.0.0",
   "autor":      "Jan Kowalski",                   <i>// autor PROGRAMU - przy porcie: oryginalny autor, nie Ty</i>
@@ -282,20 +290,20 @@ python3 tools/sprawdz_bin.py build/moj_program.ino.bin</code></pre>
 
 <h2 id="obce"><span lang="pl">9. Czego NIE da się zrobić z gotowym obcym .bin</span><span lang="en">9. What you can NOT do with a ready-made third-party .bin</span></h2>
 <div class="warnbox">
-  <span lang="pl"><b>Obcej binarki bez źródła nie da się zawrócić do menu.</b> Format tak — automat wycina aplikację ze scalonego obrazu, sprawdza rozmiar, liczy sumy. Ale powrót po resecie to kod, który musi być <em>w programie</em>. Zmierzone 03.09.2026: bootloader KORONY ma rollback, więc niepotwierdzony obraz wróciłby do <code>factory</code> — tylko że rdzeń Arduino (2.0.17 i 3.3.11) potwierdza obraz sam w <code>initArduino()</code>, zanim wykona się choć jedna linia <code>setup()</code>. Każda binarka Arduino zatwierdza się więc sama i pętla wraca do niej. Bez źródła nie ma czego zmienić.</span>
-  <span lang="en"><b>A third-party binary without source cannot be made to return to the menu.</b> The format, yes — the automation extracts the app from a merged image, checks the size, computes hashes. But returning on reset is code that has to live <em>inside the program</em>. Measured 2026-09-03: KORONA’s bootloader has rollback enabled, so an unconfirmed image would fall back to <code>factory</code> — except the Arduino core (2.0.17 and 3.3.11) confirms the image itself in <code>initArduino()</code>, before a single line of <code>setup()</code> runs. Every Arduino binary therefore confirms itself and the loop comes back to it. Without source there is nothing to change.</span>
+  <span lang="pl"><b>Obcej binarki bez źródła nie da się zawrócić do menu.</b> Format tak — automat wycina aplikację ze scalonego obrazu, sprawdza rozmiar, liczy sumy. Ale powrót po resecie to kod, który musi być <em>w programie</em>. Zmierzone 03.09.2026: bootloader K-OS ma rollback, więc niepotwierdzony obraz wróciłby do <code>factory</code> — tylko że rdzeń Arduino (2.0.17 i 3.3.11) potwierdza obraz sam w <code>initArduino()</code>, zanim wykona się choć jedna linia <code>setup()</code>. Każda binarka Arduino zatwierdza się więc sama i pętla wraca do niej. Bez źródła nie ma czego zmienić.</span>
+  <span lang="en"><b>A third-party binary without source cannot be made to return to the menu.</b> The format, yes — the automation extracts the app from a merged image, checks the size, computes hashes. But returning on reset is code that has to live <em>inside the program</em>. Measured 2026-09-03: the K-OS bootloader has rollback enabled, so an unconfirmed image would fall back to <code>factory</code> — except the Arduino core (2.0.17 and 3.3.11) confirms the image itself in <code>initArduino()</code>, before a single line of <code>setup()</code> runs. Every Arduino binary therefore confirms itself and the loop comes back to it. Without source there is nothing to change.</span>
 </div>
-<table>
+<div class="tw"><table>
   <tr><th><span lang="pl">chcesz</span><span lang="en">you want</span></th><th></th><th><span lang="pl">jak</span><span lang="en">how</span></th></tr>
-  <tr><td><span lang="pl">uruchomić obcy <code>.bin</code> z karty pod KORONĄ</span><span lang="en">run a foreign <code>.bin</code> from the card under KORONA</span></td><td><span class="tag warn"><span lang="pl">raz</span><span lang="en">once</span></span></td><td><span lang="pl">zadziała, ale RST wraca do tego programu, nie do menu; wracasz przez USB (<a href="index.html">instalacja</a>)</span><span lang="en">works, but RST returns to that program, not to the menu; you come back over USB (<a href="index.html">install page</a>)</span></td></tr>
+  <tr><td><span lang="pl">uruchomić obcy <code>.bin</code> z karty pod K-OS</span><span lang="en">run a foreign <code>.bin</code> from the card under K-OS</span></td><td><span class="tag warn"><span lang="pl">raz</span><span lang="en">once</span></span></td><td><span lang="pl">zadziała, ale RST wraca do tego programu, nie do menu; wracasz przez USB (<a href="index.html">instalacja</a>)</span><span lang="en">works, but RST returns to that program, not to the menu; you come back over USB (<a href="index.html">install page</a>)</span></td></tr>
   <tr><td><span lang="pl">„naprawić" binarkę automatem (patch, wstrzyknięcie kodu)</span><span lang="en">“fix” the binary automatically (patch, code injection)</span></td><td><span class="tag no">nie</span></td><td><span lang="pl">obraz ma doklejony SHA-256 i sumę kontrolną; wstrzyknięcie 6 linii C do cudzego <code>setup()</code> to nie jest automat, to reverse engineering</span><span lang="en">the image carries an appended SHA-256 and checksum; injecting six lines of C into someone’s <code>setup()</code> is reverse engineering, not automation</span></td></tr>
   <tr><td><span lang="pl">mieć obcy program w sklepie</span><span lang="en">get a third-party program into the store</span></td><td><span class="tag ok">tak</span></td><td><span lang="pl">fork źródeł → Model B (6 linii) → build z flagami CYD → test RST → zgłoszenie (sekcja 8). Tak powstały wszystkie porty w sklepie.</span><span lang="en">fork the source → Model B (6 lines) → build with the CYD flags → RST test → submission (section 8). That is how every port in the store was made.</span></td></tr>
   <tr><td><span lang="pl">program w ESP-IDF, nie Arduino</span><span lang="en">an ESP-IDF program, not Arduino</span></td><td><span class="tag ok">tak</span></td><td><span lang="pl">ten sam Model B (<code>esp_partition_erase_range</code>) w <code>app_main()</code>; alternatywa: nie wołać <code>esp_ota_mark_app_valid_cancel_rollback()</code> — ale tylko gdy Twoja aplikacja nie ma własnego mechanizmu potwierdzania; tak czy inaczej rozstrzyga test RST</span><span lang="en">the same Model B (<code>esp_partition_erase_range</code>) in <code>app_main()</code>; alternative: never call <code>esp_ota_mark_app_valid_cancel_rollback()</code> — but only if your app has no confirmation logic of its own; either way the RST test decides</span></td></tr>
-</table>
+</table></div>
 
 <footer>
-  <p><a href="index.html"><span lang="pl">← instalacja KORONY</span><span lang="en">← installing KORONA</span></a> · <a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a> · <a href="https://github.com/PixelPetrol/korona-programy/blob/main/zgloszenia/README.md"><span lang="pl">szablon zgłoszenia</span><span lang="en">submission template</span></a></p>
-  <p><span lang="pl">KORONA — Piotr Korona. Wartości na tej stronie (piny, flagi, rozmiary, zachowanie rdzenia Arduino) pochodzą z pomiarów na płytce ESP32-2432S024R, nie z dokumentacji sprzedawcy.</span><span lang="en">KORONA — Piotr Korona. The values on this page (pins, flags, sizes, Arduino core behaviour) come from measurements on an ESP32-2432S024R board, not from a vendor datasheet.</span></p>
+  <p><a href="index.html"><span lang="pl">← instalacja K-OS</span><span lang="en">← installing K-OS</span></a> · <a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a> · <a href="https://github.com/PixelPetrol/korona-programy/blob/main/zgloszenia/README.md"><span lang="pl">szablon zgłoszenia</span><span lang="en">submission template</span></a></p>
+  <p><span lang="pl">K-OS — KORONA OS for CYD · Piotr Korona. Wartości na tej stronie (piny, flagi, rozmiary, zachowanie rdzenia Arduino) pochodzą z pomiarów na płytce ESP32-2432S024R, nie z dokumentacji sprzedawcy.</span><span lang="en">K-OS — KORONA OS for CYD · Piotr Korona. The values on this page (pins, flags, sizes, Arduino core behaviour) come from measurements on an ESP32-2432S024R board, not from a vendor datasheet.</span></p>
 </footer>
 
 </main>
