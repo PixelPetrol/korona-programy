@@ -64,13 +64,13 @@
         {
           "plik": "bin/cyd24/office.bin",
           "rozmiar": 1191360,
-          "sha256": "0590192b25e504348e7abd6fc7738fc81af484e2b19f8ba5da37f0ede97e88a2",
+          "sha256": "46e88783600cf157cfc76f4e8f761fea3919148491f4381025e7acf490bab87e",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
-          "wersja": "1.1.0",
+          "wersja": "1.1.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz w przegladarce, a laduje na karcie. Dalej: kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, DWUPANELOWY menedzer plikow w duchu Total Commandera (panele jeden nad drugim, bo ekran jest waski: zaznaczanie wielu, kopiowanie z paskiem postepu i przerwaniem, przenoszenie, kasowanie drzewa po przeliczeniu; /korona tylko do czytania, kasowania .bin z /programy odmawia, zeby nie zostawiac sierot po migawkach), kody QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb oraz kursy walut z NBP po zwyklym HTTP (bez TLS, dziala offline z karty). Motyw i jezyk bierze z ustawien K-OS, nie pyta o haslo do sieci ani o kalibracje dotyku. Dane w /office/ na karcie. Sprawdzone na sprzecie: start, migracja danych ze starej nazwy, motyw i jezyk z K-OS, kalibracja z karty, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem."
+          "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz w przegladarce, a laduje na karcie. Dalej: kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, DWUPANELOWY menedzer plikow w duchu Total Commandera (panele jeden nad drugim, bo ekran jest waski: zaznaczanie wielu, kopiowanie z paskiem postepu i przerwaniem, przenoszenie, kasowanie drzewa po przeliczeniu; /korona tylko do czytania, kasowania .bin z /programy odmawia, zeby nie zostawiac sierot po migawkach), kody QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb oraz kursy walut z NBP po zwyklym HTTP (bez TLS, dziala offline z karty). Motyw i jezyk bierze z ustawien K-OS, nie pyta o haslo do sieci ani o kalibracje dotyku. Dane w /office/ na karcie. Sprawdzone na sprzecie: start, migracja danych ze starej nazwy, motyw i jezyk z K-OS, kalibracja z karty, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem. 1.1.1: sam kod jest ten sam co w 1.1.0 - poprawiony jest WYLACZNIE numer wersji w binarce, bo obraz wystawiony jako 1.1.0 pokazywal na ekranie startowym i w 'o programie' napis 1.0.0 (APP_VERSION nie zostal wtedy podbity)."
         },
         {
           "plik": "bin/cyd24/openhasp.bin",
