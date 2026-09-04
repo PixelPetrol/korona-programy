@@ -40,6 +40,17 @@
           "info": "HaleHound-CYD: skaner WiFi/BLE, deauth, RF, NFC (moduly opcjonalne). Port K-OS dla CYD 2.4\": dotyk XPT2046 przez magistrale LCD (TFT_eSPI, TOUCH_CS 33) zamiast bit-bangu po pinach ekranu, ktory zamrazal plansze startowa. Sprawdzone na sprzecie 03.09.2026: start, menu, dotyk, RST wraca do K-OS."
         },
         {
+          "plik": "bin/cyd24/gry-vol1.bin",
+          "rozmiar": 528128,
+          "sha256": "6104895ae1bb2d828645c797b96b70ff901e39f0247488b1b88e209564284fa0",
+          "nazwa": "K-OS Gry vol. 1",
+          "opis": "2048 i Lunar Lander; WCZESNA WERSJA",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Pierwszy tom gier dla K-OS, po polsku i po angielsku, orientacja pionowa. Dwie gry: 2048 w wersji K-OS oraz LUNAR LANDER z 30 poziomami nazwanymi od prawdziwych miejsc na Ksiezycu i dalej w ukladzie slonecznym - fizyka lotu z grawitacja, wiatrem, obrotem i paliwem, silnik glowny i dwa silniczki RCS pod palcem, warunki ladowania jak w oryginale (predkosc pionowa, pozioma i kat). Silnik gier rysuje do bufora 4-bitowego obejmujacego SAMA arene, wiec pasek stanu i strefa dotykowa nie kosztuja klatek; dotyk czytany wprost z XPT2046, bo getTouch z TFT_eSPI zabiera tyle czasu co cala klatka. Wyniki i postep na karcie w /gry/. Motyw i jezyk z ustawien K-OS. WCZESNA WERSJA: menu tomu to na razie zwykla lista - docelowy wyglad kafelkow i maskotka czekaja na decyzje. Poziomy od 15 w gore sa bardzo trudne albo niemozliwe przy oryginalnej tabeli wiatru (przy kacie ladowania +-0,15 rad ladownik rownowazy tylko czesc znoszenia, wiec cale dotkniecie musi zmiescic sie w oknie krotszym niz 2 sekundy) - w kodzie jest gotowa galka LL_WIND_SCALE do zlagodzenia, domyslnie wylaczona, bo tabela poziomow zostaje taka, jak zostala zaprojektowana. Sprawdzone testami na hoscie: 2,19 mln sprawdzen, zero bledow, w tym przechodzalnosc wszystkich 30 poziomow przez wyszukiwanie i 360 przebiegow losowego trzaskania w przyciski. NIESPRAWDZONE NA SPRZECIE - liczba klatek na sekunde jest na razie modelem, nie pomiarem."
+        },
+        {
           "plik": "bin/cyd24/marauder.bin",
           "rozmiar": 1607840,
           "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405",
