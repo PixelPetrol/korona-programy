@@ -145,6 +145,28 @@
       "nazwa": "CYD 2.8\" (ESP32-2432S028R)",
       "programy": [
         {
+          "plik": "bin/cyd28/bruce.bin",
+          "rozmiar": 2417360,
+          "sha256": "035f34b48eace824f4101d3f573c06564e45b368d4781ac6243dab9261ad2c05",
+          "nazwa": "Bruce (LITE)",
+          "opis": "pentest toolkit WiFi / BLE / IR / RF; 2.8\" NIESPRAWDZONE",
+          "wersja": "lite",
+          "kategoria": "zewnetrzne",
+          "autor": "pr3y",
+          "info": "Wersja dla CYD 2.8\" (2432S028R) ze srodowiska KORONA_CYD28, zbudowana z natywnego profilu autora `CYD-2432S028` - dotyk na dedykowanych pinach, bez naszej latki dla 2.4\". Kolory bez odwracania, bo baza dla tej plytki nie definiuje TFT_INVERSION_ON. Powrot do K-OS po RST zapewniony. NIESPRAWDZONE NA SPRZECIE. Znane ryzyko: domyslna korekta rotacji dotyku w InputHandler sklada sie z wewnetrzna rotacja sterownika - to kod upstreamowy uzywany przez spolecznosc na prawdziwych 2.8\", ale my go nie potwierdzilismy."
+        },
+        {
+          "plik": "bin/cyd28/esp32div.bin",
+          "rozmiar": 2420240,
+          "sha256": "0c68c29f6f4f2ac2792ad0911b204986bb6de0d50ceface4bc9ed576c57c176e",
+          "nazwa": "ESP32-DIV",
+          "opis": "multitool WiFi/BLE/RF; 2.8\" NIESPRAWDZONE",
+          "wersja": "3.3.0",
+          "kategoria": "zewnetrzne",
+          "autor": "cifertech / Wontfallo (HaleHound-CYD)",
+          "info": "Wersja dla CYD 2.8\" (2432S028R). Zbudowana z NATYWNEGO profilu autora - na tej plytce dotyk XPT2046 siedzi na wlasnych pinach (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), wiec nasza poprawka dotyku dla 2.4\" nie jest tu w ogole uzywana i zero linii kodu trzeba bylo zmieniac. Powrot do K-OS po RST zapewniony (kasowanie otadata bezwarunkowe). NIESPRAWDZONE NA SPRZECIE - baza kodu dziala na 2.4\", ale tej binarki nikt jeszcze nie uruchomil."
+        },
+        {
           "plik": "bin/cyd28/radar-pion.bin",
           "rozmiar": 1498928,
           "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
