@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-OS — zgłoś własny program</title>
+<meta name="description" content="Sprawdź swój plik .bin dla K-OS wprost w przeglądarce (plik nigdzie się nie wysyła) i zbuduj gotowe zgłoszenie do sklepu K-OS. / Check your K-OS .bin in the browser — the file never leaves your device — and build a ready submission for the K-OS store.">
+<link rel="icon" type="image/png" href="korona-godlo.png">
+<style>
+/* Styl skopiowany z index.html / programy.html (motyw "zielony" K-OS) - ma wygladac identycznie.
+   Nowe tu sa tylko: strefa na plik, formularz i wynik sprawdzenia. */
+:root{
+  --bg:#000; --card:#070a07; --sel:#00220f; --edge:#005d00; --edge2:#00a000;
+  --txt:#00e600; --txt2:#00b000; --acc:#00ff00; --warn:#ff9a00; --err:#ff3b30; --ink:#001a00;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:15.5px/1.6 var(--mono)}
+a{color:var(--acc);text-decoration:none;border-bottom:1px solid var(--edge)}
+a:hover,a:focus-visible{border-bottom-color:var(--acc);background:var(--sel)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+code,kbd,pre{font-family:var(--mono);font-size:.95em}
+code,kbd{background:var(--sel);border:1px solid var(--edge);border-radius:3px;padding:0 6px;color:var(--acc)}
+code{overflow-wrap:anywhere}
+pre code{overflow-wrap:normal}
+th,td{overflow-wrap:anywhere}
+.tw{overflow-x:auto;max-width:100%}
+kbd{color:var(--txt)}
+pre{background:var(--card);border:1px solid var(--edge);border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.5}
+pre code{background:none;border:0;padding:0;color:var(--txt)}
+main{max-width:900px;margin:0 auto;padding:22px 20px 60px}
+html[data-lang="pl"] [lang="en"]{display:none!important}
+html[data-lang="en"] [lang="pl"]{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.top a.back{border:0;color:var(--txt2);font-size:.9rem}
+.top a.back:hover{color:var(--acc);background:none}
+.lang{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--txt2);font:700 13px var(--mono);letter-spacing:.08em;padding:6px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--acc);color:var(--ink)}
+.lang button:hover{color:var(--acc)}
+header.hero{text-align:center;padding:10px 0 28px;border-bottom:1px solid var(--edge);margin-bottom:34px}
+.hero img{width:min(220px,55vw);height:auto;display:block;margin:0 auto 18px}
+.hero h1{font-size:1.5rem;margin:0 0 10px;color:var(--acc);letter-spacing:.02em}
+.hero p.sub{margin:0;color:var(--txt);font-size:.98rem}
+.badge{display:inline-block;margin-top:14px;font:700 13px var(--mono);letter-spacing:.06em;color:var(--acc);border:1px solid var(--edge2);border-radius:4px;padding:4px 12px}
+h2{font-size:1.1rem;letter-spacing:.04em;margin:38px 0 14px;color:var(--acc);text-transform:uppercase}
+h2::before{content:"// ";color:var(--edge2)}
+h2 small{color:var(--txt2);font-weight:400;font-size:.8rem;margin-left:10px;text-transform:none;letter-spacing:0}
+.card{background:var(--card);border:1px solid var(--edge2);border-radius:6px;padding:20px 22px}
+.note{color:var(--txt2);font-size:.92rem;margin:8px 0 0}
+.note b{color:var(--txt)}
+ul.terse{margin:0;padding-left:20px}
+ul.terse li{margin:8px 0}
+ul.terse li b{color:var(--acc)}
+.warnbox{border:1px solid var(--warn);border-left-width:4px;background:#120c00;padding:12px 16px;border-radius:0 4px 4px 0;margin:16px 0;color:var(--txt)}
+.warnbox b{color:var(--warn)}
+.warnbox p{margin:6px 0}
+.warnbox.err{border-color:var(--err);background:#160404}
+.warnbox.err b{color:var(--err)}
+details{border:1px solid var(--edge);border-radius:4px;margin:10px 0;background:var(--card)}
+summary{cursor:pointer;padding:12px 16px;font-weight:700;color:var(--txt);list-style:none;display:flex;align-items:center;gap:10px}
+summary:hover{background:var(--sel);color:var(--acc)}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"[+]";color:var(--acc);width:34px}
+details[open] summary::before{content:"[-]"}
+details>ul,details>p{padding:0 16px}
+details>ul{padding-left:38px}
+details>p:last-child{padding-bottom:14px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--edge);vertical-align:top}
+th{color:var(--acc);font-weight:700}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--edge);color:var(--txt2);font-size:.9rem}
+footer p{margin:6px 0}
+.tag{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border-radius:3px;padding:3px 8px;border:1px solid}
+.tag.ok{color:var(--acc);border-color:var(--edge2)}
+.tag.warn{color:var(--warn);border-color:var(--warn)}
+.tag.no{color:var(--err);border-color:var(--err)}
+
+/* --- strefa na plik --- */
+.strefa{border:1px dashed var(--edge2);border-radius:6px;background:var(--card);padding:26px 20px;text-align:center}
+.strefa.nad{background:var(--sel);border-color:var(--acc)}
+.strefa p{margin:6px 0}
+.btn{font:700 14px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--acc);
+     border:1px solid var(--acc);border-radius:4px;padding:10px 18px;cursor:pointer;margin:10px 6px 4px}
+.btn:hover:enabled{background:var(--txt);border-color:var(--txt)}
+.btn:disabled{background:none;color:var(--txt2);border-color:var(--edge);cursor:not-allowed}
+.btn.plain{background:none;color:var(--acc);border-color:var(--edge2)}
+.btn.plain:hover:enabled{background:var(--sel)}
+.btn.zrobione{background:var(--txt2);border-color:var(--txt2)}
+#nazwapliku{color:var(--txt2);font-size:.9rem}
+
+/* --- wynik sprawdzenia --- */
+#wynik{margin-top:18px}
+.wynik-nag{margin:0 0 10px;font-weight:700;overflow-wrap:anywhere}
+.lbl{margin:14px 0 4px;font:700 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--txt2)}
+.lbl.zle{color:var(--err)}
+.lbl.ostrz{color:var(--warn)}
+ul.msg{margin:0;padding-left:22px;font-size:.93rem}
+ul.msg li{margin:5px 0}
+ul.msg.zle li{color:var(--err)}
+ul.msg.ostrz li{color:var(--warn)}
+td.zle,span.zle{color:var(--err)}
+td small,span small{color:var(--txt2)}
+.warnbox.modelb{border-color:var(--err);background:#160404}
+.warnbox.modelb b{color:var(--err)}
+
+/* --- formularz --- */
+.pola{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
+.pole{display:flex;flex-direction:column;min-width:0}
+.pole.szer{grid-column:1/-1}
+.pole label{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+.pole .hint{color:var(--txt2);font-size:.85rem;line-height:1.45;margin:4px 0 0}
+.pole input,.pole select,.pole textarea{
+  background:#000;color:var(--txt);border:1px solid var(--edge2);border-radius:4px;
+  font:15px var(--mono);padding:8px 10px;width:100%}
+.pole input:focus,.pole select:focus,.pole textarea:focus{outline:2px solid var(--acc);outline-offset:1px}
+.pole textarea{resize:vertical;min-height:76px}
+.zgoda{display:flex;gap:10px;align-items:flex-start;margin:18px 0 0;border:1px solid var(--err);border-left-width:4px;background:#160404;padding:12px 16px;border-radius:0 4px 4px 0}
+.zgoda input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc);flex:none}
+.zgoda b{color:var(--err)}
+#metabledy{margin-top:16px}
+#metajson{margin-top:6px}
+#sciezki{color:var(--txt2)}
+.przyciski{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.przyciski .btn{margin:0}
+@media (max-width:520px){main{padding:16px 14px 50px}.hero h1{font-size:1.2rem}.btn{width:100%;margin:8px 0 0}.przyciski .btn{width:100%}}
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a class="back" href="programy.html"><span lang="pl">← program pod K-OS w 10 minut</span><span lang="en">← a K-OS app in 10 minutes</span></a>
+  <div class="lang" role="group" aria-label="Język / Language">
+    <button type="button" data-set="pl" aria-pressed="true">PL</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<header class="hero">
+  <img src="korona-godlo.png" alt="KORONA" width="512" height="512">
+  <h1><span lang="pl">Zgłoś własny program</span><span lang="en">Submit your own program</span></h1>
+  <p class="sub">
+    <span lang="pl">Wybierz swój <code>.bin</code>: strona sprawdzi go tutaj, w Twojej przeglądarce, pokaże, co z niego odczytała, i zbuduje gotowe zgłoszenie do sklepu K-OS.</span>
+    <span lang="en">Pick your <code>.bin</code>: the page checks it here, in your own browser, shows what it read out of it, and builds a ready-made submission for the K-OS store.</span>
+  </p>
+  <span class="badge"><span lang="pl">plik nigdzie się nie wysyła</span><span lang="en">the file is never uploaded</span></span>
+</header>
+
+<div class="warnbox">
+  <p>
+    <span lang="pl"><b>Portal jest statyczny — nie ma tu czego przyjąć pliku.</b> Dlatego sprawdzanie dzieje się u Ciebie: <code>FileReader</code> czyta plik z dysku, <code>crypto.subtle</code> liczy sumę. Żaden bajt nie wychodzi poza tę kartę przeglądarki. Sam plik <code>.bin</code> dołączysz na końcu na GitHubie — tam, gdzie i tak trafiają zgłoszenia.</span>
+    <span lang="en"><b>This portal is static — there is nothing here to receive a file.</b> So the checking happens on your side: <code>FileReader</code> reads the file from disk, <code>crypto.subtle</code> computes the hash. Not a byte leaves this browser tab. You attach the <code>.bin</code> itself at the end, on GitHub — where submissions go anyway.</span>
+  </p>
+</div>
+
+<h2 id="krok1"><span lang="pl">1. Plik .bin</span><span lang="en">1. The .bin file</span><small><span lang="pl">te same reguły co <code>tools/sprawdz_bin.py</code></span><span lang="en">the same rules as <code>tools/sprawdz_bin.py</code></span></small></h2>
+<div class="strefa" id="strefa">
+  <p><span lang="pl">Przeciągnij tu plik albo</span><span lang="en">Drop a file here, or</span></p>
+  <input type="file" id="plik" accept=".bin,application/octet-stream" hidden>
+  <button type="button" class="btn" id="wybierz"><span lang="pl">wybierz plik .bin</span><span lang="en">choose a .bin file</span></button>
+  <p id="nazwapliku"></p>
+  <p class="note">
+    <span lang="pl">Arduino IDE: <kbd>Sketch</kbd> → <kbd>Export Compiled Binary</kbd> → <code>*.ino.bin</code> (nie <code>*.ino.merged.bin</code>). PlatformIO: <code>.pio/build/&lt;env&gt;/firmware.bin</code>.</span>
+    <span lang="en">Arduino IDE: <kbd>Sketch</kbd> → <kbd>Export Compiled Binary</kbd> → <code>*.ino.bin</code> (not <code>*.ino.merged.bin</code>). PlatformIO: <code>.pio/build/&lt;env&gt;/firmware.bin</code>.</span>
+  </p>
+</div>
+
+<div id="wynik" hidden></div>
+
+<details>
+  <summary><span lang="pl">co dokładnie jest sprawdzane</span><span lang="en">what exactly gets checked</span></summary>
+  <ul class="terse">
+    <li><span lang="pl"><b>magic <code>0xE9</code></b> na bajcie 0 — czysty obraz aplikacji ESP32.</span><span lang="en"><b>Magic <code>0xE9</code></b> at byte 0 — a plain ESP32 application image.</span></li>
+    <li><span lang="pl"><b>obraz scalony</b>: <code>0xE9</code> pod <code>0x1000</code> plus tablica partycji <code>AA 50</code> pod <code>0x8000</code> — wtedy oceniana jest aplikacja wycięta spod <code>0x10000</code>.</span><span lang="en"><b>Merged image</b>: <code>0xE9</code> at <code>0x1000</code> plus an <code>AA 50</code> partition table at <code>0x8000</code> — then the application carved out at <code>0x10000</code> is what gets judged.</span></li>
+    <li><span lang="pl"><b>długość obrazu z nagłówka</b> (segmenty + suma kontrolna + opcjonalny SHA-256), nie z rozmiaru pliku — dlatego wycinek ze scalonego obrazu jest bajt w bajt tym, co wyszło z kompilatora.</span><span lang="en"><b>Image length from the header</b> (segments + checksum + optional SHA-256), not from the file size — that is why the extract from a merged image is byte for byte what the compiler produced.</span></li>
+    <li><span lang="pl"><b><code>esp_app_desc_t</code></b> spod <code>0x20</code> (<code>magic_word == 0xABCD5432</code>): <code>project_name</code>, <code>version</code>, <code>idf_ver</code>, data i godzina kompilacji.</span><span lang="en"><b><code>esp_app_desc_t</code></b> at <code>0x20</code> (<code>magic_word == 0xABCD5432</code>): <code>project_name</code>, <code>version</code>, <code>idf_ver</code>, build date and time.</span></li>
+    <li><span lang="pl"><b>układ</b> z nagłówka: musi być zwykły ESP32, nie S2/S3/C3.</span><span lang="en"><b>Chip</b> from the header: must be a plain ESP32, not an S2/S3/C3.</span></li>
+    <li><span lang="pl"><b>rozmiar</b> wobec slotu <code>ota_0</code> = 2 555 904 B, z zapasem w bajtach.</span><span lang="en"><b>Size</b> against the <code>ota_0</code> slot = 2,555,904 B, with the headroom in bytes.</span></li>
+    <li><span lang="pl"><b>sha256</b> pliku i obrazu (i zgodność SHA-256 doklejonego do obrazu) — ten sam numer, który policzy automat w PR.</span><span lang="en"><b>sha256</b> of the file and of the image (and whether the SHA-256 appended to the image matches) — the same number the PR automation computes.</span></li>
+  </ul>
+  <p class="note">
+    <span lang="pl">Źródłem prawdy jest <code>tools/sprawdz_bin.py</code> w repo <code>korona-programy</code>; <code>zglos.js</code> to jego przepisana kopia, a <code>tools/sprawdz_zgodnosc_js.py</code> pilnuje, żeby liczby w obu były te same.</span>
+    <span lang="en">The source of truth is <code>tools/sprawdz_bin.py</code> in the <code>korona-programy</code> repo; <code>zglos.js</code> is a transcription of it, and <code>tools/sprawdz_zgodnosc_js.py</code> keeps the numbers in both from drifting apart.</span>
+  </p>
+</details>
+
+<div id="krok2" hidden>
+
+<h2 id="krok2h"><span lang="pl">2. Opis programu</span><span lang="en">2. Describing the program</span><small><span lang="pl">z tego powstaje <code>meta.json</code></span><span lang="en">this becomes <code>meta.json</code></span></small></h2>
+<section class="card">
+<div class="pola">
+
+  <div class="pole szer">
+    <label for="f_id">id</label>
+    <input id="f_id" type="text" inputmode="latin" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="zegar-binarny">
+    <p class="hint">
+      <span lang="pl">2–32 znaki: małe litery <code>a-z</code>, cyfry, <code>-</code>, <code>_</code>. <b>To zostaje na zawsze</b> — <code>id</code> jest nazwą pliku w sklepie i <b>kluczem migawki ustawień na karcie</b>, więc po publikacji nie da się go zmienić bez utraty ustawień użytkowników.</span>
+      <span lang="en">2–32 chars: lowercase <code>a-z</code>, digits, <code>-</code>, <code>_</code>. <b>This is permanent</b> — the <code>id</code> is the store file name and <b>the key of the settings snapshot on the card</b>, so after publication it cannot change without losing users’ settings.</span>
+    </p>
+  </div>
+
+  <div class="pole">
+    <label for="f_nazwa"><span lang="pl">nazwa</span><span lang="en">nazwa (name)</span></label>
+    <input id="f_nazwa" type="text" maxlength="40" placeholder="Zegar binarny">
+    <p class="hint"><span lang="pl">w menu K-OS, ≤ 40 znaków, ASCII</span><span lang="en">shown in the K-OS menu, ≤ 40 chars, ASCII</span></p>
+  </div>
+
+  <div class="pole">
+    <label for="f_wersja"><span lang="pl">wersja</span><span lang="en">wersja (version)</span></label>
+    <input id="f_wersja" type="text" maxlength="16" placeholder="1.0.0">
+    <p class="hint"><span lang="pl">≤ 16 znaków; aktualizacja = ten sam <code>id</code>, wyższa wersja</span><span lang="en">≤ 16 chars; an update = the same <code>id</code>, a higher version</span></p>
+  </div>
+
+  <div class="pole szer">
+    <label for="f_opis"><span lang="pl">opis</span><span lang="en">opis (one-line description)</span></label>
+    <input id="f_opis" type="text" maxlength="60" placeholder="zegar binarny z NTP, 3 motywy">
+    <p class="hint"><span lang="pl">jedna linia, ≤ 60 znaków, ASCII</span><span lang="en">a single line, ≤ 60 chars, ASCII</span></p>
+  </div>
+
+  <div class="pole">
+    <label for="f_autor"><span lang="pl">autor</span><span lang="en">autor (author)</span></label>
+    <input id="f_autor" type="text" maxlength="60" placeholder="Jan Kowalski">
+    <p class="hint"><span lang="pl">autor <b>programu</b>. Port cudzego projektu → tu oryginalny autor, siebie wpisz niżej w <code>zglaszajacy</code>.</span><span lang="en">the author of the <b>program</b>. Porting someone else’s project → the original author here, yourself in <code>zglaszajacy</code> below.</span></p>
+  </div>
+
+  <div class="pole">
+    <label for="f_licencja"><span lang="pl">licencja</span><span lang="en">licencja (licence)</span></label>
+    <input id="f_licencja" type="text" maxlength="40" placeholder="MIT">
+    <p class="hint"><span lang="pl">GPL / LGPL / AGPL → <code>zrodlo</code> obowiązkowe</span><span lang="en">GPL / LGPL / AGPL → <code>zrodlo</code> is mandatory</span></p>
+  </div>
+
+  <div class="pole szer">
+    <label for="f_zrodlo"><span lang="pl">zrodlo</span><span lang="en">zrodlo (source URL)</span></label>
+    <input id="f_zrodlo" type="url" maxlength="200" placeholder="https://github.com/jkowalski/cyd-binclock">
+    <p class="hint"><span lang="pl">adres źródeł <em>tej</em> wersji (Twój fork ze zmianami, nie sam upstream)</span><span lang="en">the sources of <em>this</em> build (your fork with your changes, not just upstream)</span></p>
+  </div>
+
+  <div class="pole">
+    <label for="f_plytka"><span lang="pl">plytka</span><span lang="en">plytka (board)</span></label>
+    <select id="f_plytka">
+      <option value="cyd24" selected>cyd24 — CYD 2.4" (ESP32-2432S024R)</option>
+      <option value="cyd28">cyd28 — CYD 2.8" (ESP32-2432S028R)</option>
+    </select>
+    <p class="hint"><span lang="pl">zgłaszaj tylko tę płytkę, na której sam uruchomiłeś program</span><span lang="en">submit only for the board you have actually run it on</span></p>
+  </div>
+
+  <div class="pole">
+    <label for="f_orientacja"><span lang="pl">orientacja</span><span lang="en">orientacja (orientation)</span></label>
+    <select id="f_orientacja">
+      <option value="pion" selected>pion</option>
+      <option value="poziom">poziom</option>
+    </select>
+    <p class="hint"><span lang="pl">jak program rysuje ekran</span><span lang="en">how the program draws the screen</span></p>
+  </div>
+
+  <div class="pole szer">
+    <label for="f_info">info</label>
+    <textarea id="f_info" maxlength="600" placeholder="Pierwszy start: AP 'BinClock' bez hasla, ustawienia na 192.168.4.1. Dotyk: lewa polowa ekranu = motyw, prawa = jasnosc."></textarea>
+    <p class="hint"><span lang="pl">≤ 600 znaków, ASCII. To widzi użytkownik w karcie programu: pierwszy start, nazwa AP, hasło, sterowanie, co robi RST.</span><span lang="en">≤ 600 chars, ASCII. This is what the user sees on the program card: first run, AP name, password, controls, what RST does.</span></p>
+  </div>
+
+  <div class="pole szer">
+    <label for="f_zglaszajacy"><span lang="pl">zglaszajacy (opcjonalnie)</span><span lang="en">zglaszajacy (optional)</span></label>
+    <input id="f_zglaszajacy" type="text" maxlength="60" placeholder="jkowalski">
+    <p class="hint"><span lang="pl">Twój nick na GitHubie, gdy zgłaszasz nie swój program</span><span lang="en">your GitHub handle, when the program is not yours</span></p>
+  </div>
+
+</div>
+
+<label class="zgoda" for="f_modelb">
+  <input type="checkbox" id="f_modelb">
+  <span>
+    <b>model_b</b>
+    <span lang="pl"> — oświadczam, że <b>uruchomiłem ten program pod K-OS i nacisnąłem RST, a wróciło menu K-OS</b> (program kasuje <code>otadata</code> na początku <code>setup()</code> albo definiuje <code>verifyRollbackLater()</code>). Tego nie da się odczytać z binarki — ani ta strona, ani automat w PR tego nie sprawdzą. <a href="programy.html#modelb">jak to dopisać</a> · <a href="programy.html#test">jak to sprawdzić</a></span>
+    <span lang="en"> — I declare that I <b>ran this program under K-OS, pressed RST, and the K-OS menu came back</b> (the program erases <code>otadata</code> at the start of <code>setup()</code>, or defines <code>verifyRollbackLater()</code>). This cannot be read out of a binary — neither this page nor the PR automation can check it. <a href="programy.html#modelb">how to add it</a> · <a href="programy.html#test">how to test it</a></span>
+  </span>
+</label>
+
+<div id="metabledy"></div>
+</section>
+
+<h2 id="krok3"><span lang="pl">3. Gotowe zgłoszenie</span><span lang="en">3. The finished submission</span></h2>
+<section class="card">
+<p><b>meta.json</b></p>
+<pre><code id="metajson">{}</code></pre>
+<p class="note"><span lang="pl">Docelowe miejsce w repozytorium:</span><span lang="en">Where it goes in the repository:</span></p>
+<pre><code id="sciezki">zgloszenia/&lt;id&gt;/&lt;id&gt;.bin
+zgloszenia/&lt;id&gt;/meta.json</code></pre>
+
+<div class="przyciski">
+  <button type="button" class="btn" id="btn-issue" disabled><span lang="pl">otwórz zgłoszenie na GitHubie</span><span lang="en">open the submission on GitHub</span></button>
+  <button type="button" class="btn plain" id="btn-kopiuj" disabled><span lang="pl">kopiuj meta.json</span><span lang="en">copy meta.json</span></button>
+  <button type="button" class="btn plain" id="btn-meta" disabled><span lang="pl">pobierz meta.json</span><span lang="en">download meta.json</span></button>
+</div>
+
+<div id="dlugie" hidden class="warnbox">
+  <p><b><span lang="pl">Treść wyszła za długa na adres URL.</span><span lang="en">The text came out too long for a URL.</span></b>
+     <span lang="pl">Skróć <code>info</code> albo skopiuj treść poniżej i wklej ją ręcznie w <a href="https://github.com/PixelPetrol/korona-programy/issues/new">nowym zgłoszeniu</a>.</span>
+     <span lang="en">Shorten <code>info</code>, or copy the text below and paste it into a <a href="https://github.com/PixelPetrol/korona-programy/issues/new">new issue</a> by hand.</span></p>
+  <pre><code id="dlugatresc"></code></pre>
+</div>
+
+<p class="note" style="margin-top:16px">
+  <span lang="pl"><b>Przycisk otwiera nowe zgłoszenie (issue)</b> w <a href="https://github.com/PixelPetrol/korona-programy">PixelPetrol/korona-programy</a> z wpisaną już treścią: wynikiem sprawdzenia, sumami i <code>meta.json</code>. Plik <code>.bin</code> dołącz tam sam — GitHub nie przyjmuje załączników <code>.bin</code>, więc spakuj go do <code>.zip</code> i przeciągnij, albo podaj link do wydania.</span>
+  <span lang="en"><b>The button opens a new issue</b> in <a href="https://github.com/PixelPetrol/korona-programy">PixelPetrol/korona-programy</a>, pre-filled with the check results, the hashes and your <code>meta.json</code>. Attach the <code>.bin</code> yourself there — GitHub does not accept <code>.bin</code> attachments, so zip it and drag it in, or link to a release.</span>
+</p>
+<p class="note">
+  <span lang="pl"><b>Znasz gita?</b> Prostsza droga dla przeglądającego to od razu Pull Request: fork, katalog <code>zgloszenia/&lt;id&gt;/</code> z powyższymi dwoma plikami, <code>python3 tools/sprawdz_zgloszenie.py zgloszenia/&lt;id&gt;</code> na próbę i PR. Automat wkleja raport do PR, a po scaleniu program sam trafia do sklepu. <a href="programy.html#sklep">pełna instrukcja</a></span>
+  <span lang="en"><b>Comfortable with git?</b> The easier path for the reviewer is a Pull Request straight away: fork, a <code>zgloszenia/&lt;id&gt;/</code> folder with the two files above, <code>python3 tools/sprawdz_zgloszenie.py zgloszenia/&lt;id&gt;</code> as a dry run, then the PR. The automation posts its report to the PR, and after the merge the program lands in the store by itself. <a href="programy.html#sklep">full instructions</a></span>
+</p>
+</section>
+
+</div><!-- /krok2 -->
+
+<footer>
+  <p><a href="programy.html"><span lang="pl">← program pod K-OS w 10 minut</span><span lang="en">← a K-OS app in 10 minutes</span></a> · <a href="index.html"><span lang="pl">instalacja K-OS</span><span lang="en">installing K-OS</span></a> · <a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a></p>
+  <p><span lang="pl">K-OS — KORONA OS for CYD · Piotr Korona. Sprawdzanie pliku odbywa się wyłącznie w Twojej przeglądarce, według reguł z <code>tools/sprawdz_bin.py</code>. Strona nie potrafi sprawdzić Modelu B — to jedyna rzecz, którą musisz zmierzyć na płytce.</span><span lang="en">K-OS — KORONA OS for CYD · Piotr Korona. The file is checked purely inside your browser, following the rules in <code>tools/sprawdz_bin.py</code>. The page cannot check Model B — that is the one thing you have to measure on the board.</span></p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang button');
+  function set(l,save){
+    root.setAttribute('data-lang',l); root.setAttribute('lang',l);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l));});
+    if(save){try{localStorage.setItem('korona-lang',l);}catch(e){}}
+  }
+  var saved=null; try{saved=localStorage.getItem('korona-lang');}catch(e){}
+  if(saved==='pl'||saved==='en') set(saved,false);
+  else if(navigator.language&&!/^pl/i.test(navigator.language)) set('en',false);
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set,true);});});
+})();
+</script>
+<script src="zglos.js"></script>
+</body>
+</html>

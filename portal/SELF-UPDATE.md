@@ -137,7 +137,7 @@ esp_restart()
 ```
 
 To dokładnie „Model B” tego projektu — ten sam dwuwiersz, który ma każdy program ze sklepu
-(`porty/btspeaker/btspeaker/btspeaker.ino`, `adsb_pion/adsb_pion/adsb_pion.ino` i pozostałe programy sklepu)
+(`adsb_pion/adsb_pion/adsb_pion.ino` i pozostałe programy sklepu)
 i który po stronie hosta robi `loader/flash.sh` (`erase_region 0xe000 0x2000`), a po stronie
 portalu — zapis 8 KB `0xFF` pod `0xe000`.
 
@@ -192,7 +192,7 @@ To reguła **lokalna** dla tego jednego przypadku, nie ogólny zakaz w projekcie
 - **Porty ze sklepu, wokół `tft.calibrateTouch()`**: tam `disableCore0WDT()` /
   `disableCore1WDT()` (i włączenie z powrotem po kalibracji) jest **WYMAGANE** — kalibracja
   blokuje pętlę w oczekiwaniu na dotyk, cache jest włączony, a bez tego watchdog ubija
-  program. Tak robią openHASP, BT Speaker, NerdMiner i Bruce; reguła jest spisana
+  program. Tak robią openHASP, NerdMiner i Bruce; reguła jest spisana
   w `SPEC-LADOWARKA.md`. Ten dokument jej **nie** uchyla.
 
 ### (b) Obraz nie jest przywiązany do offsetu

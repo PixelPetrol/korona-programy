@@ -15,6 +15,9 @@ index.html            strona (bez frameworków; skrypty: ESP Web Tools z unpkg +
                       ładowany dopiero po kliknięciu „Zrób kopię” — §8)
 manifest-cyd24.json   manifest ESP Web Tools — CYD 2.4" (ESP32-2432S024R)
 manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R, NIESPRAWDZONA)
+programy.html         dla autorów: jak napisać program pod K-OS i jak go zgłosić
+zglos.html            zgłoszenie programu: sprawdzanie .bin w przeglądarce + formularz (§9)
+zglos.js              walidator .bin i meta.json w JS — KOPIA reguł z tools/sprawdz_bin.py (§9)
 zbuduj-obrazy.sh      składa obrazy z wyników builda; NICZEGO NIE WGRYWA na płytkę
                       (skrypt na macOS — patrz §4)
 SELF-UPDATE.md        projekt samoaktualizacji K-OS (osobny temat, bez kodu)
@@ -303,7 +306,11 @@ Bez owijania:
 10. **Nie sprawdzone z szyfrowaniem flasha ani secure boot.** Gdyby któraś płytka miała to
     włączone, wgranie jawnej `otadata` da śmieć. Na CYD-ach z Aliexpress tego nie ma, ale to
     założenie, nie pomiar.
-11. **Portal nie zmieni tablicy partycji istniejącej instalacji „bezpiecznie”.** Zmienia ją
+11. **Strona zgłoszenia (`zglos.html`) nie przyjmie pliku i nie sprawdzi Modelu B.** Pages nie
+    ma backendu — `.bin` zostaje na dysku użytkownika, na GitHuba dokłada go on sam. A tego,
+    czy program kasuje `otadata` w `setup()`, nie da się wyczytać z binarki: rozstrzyga
+    dopiero RST na płytce. Strona mówi to wprost przy każdym pliku (§9).
+12. **Portal nie zmieni tablicy partycji istniejącej instalacji „bezpiecznie”.** Zmienia ją
     (pisze pod `0x8000`), co jest w porządku przy wgrywaniu od zera, ale zawartość starych
     partycji danych przestaje wtedy pasować. Po zmianie układu partycji K-OS i tak migruje
     swoje ustawienia ze starego `nvs` do `knvs` przy pierwszym starcie.
@@ -322,6 +329,12 @@ python3 -m http.server 8731
 
 `file://` **nie zadziała** — to nie jest bezpieczny kontekst, przycisk pokaże komunikat
 o `https://`.
+
+`zglos.html` (§9) chodzi i z `file://`, i po http: z `file://` w części przeglądarek nie ma
+`crypto.subtle`, więc sha256 liczy zapasowa implementacja w `zglos.js` (ten sam wynik,
+sprawdzone wobec `hashlib`). Po `http://localhost:8731/` sprawdzi się też odczyt
+`../katalog.json` (kolizje `<id>` z programami sklepu) — z `file://` to po prostu odpada
+po cichu, bo i tak sprawdzi to automat w PR.
 
 ---
 
@@ -439,3 +452,44 @@ pewno?”). Przerwanie zapisu daje osobny komunikat: flash zapisany częściowo.
 6. Przywracanie testuj **tylko na płytce, na której nic Ci nie zależy**: wgraj K-OS, potem
    „Przywróć z pliku” z kopią z punktu 3 → dwa potwierdzenia → pasek „Piszę…” → „Gotowe: flash
    przywrócony i zweryfikowany (MD5)” → płytka startuje ze starym programem.
+
+---
+
+## 9. Strona zgłoszenia programu (`zglos.html`)
+
+Portal jest statyczny, więc **nie ma czego przyjąć pliku** — i nie stawiamy pod to serwera.
+`zglos.html` sprawdza `.bin` **u użytkownika w przeglądarce** (`FileReader` + `crypto.subtle`,
+żaden bajt nie wychodzi z karty), pokazuje to, co odczytał z nagłówka i `esp_app_desc_t`,
+składa `meta.json` z formularza i otwiera na GitHubie **zgłoszenie z wpisaną treścią**
+(`issues/new?title=…&body=…`, ten sam chwyt co `ISSUES_URL` w `loader/loader/settings.cpp`).
+Sam `.bin` użytkownik dołącza już na GitHubie — plik i tak musi przejść przez PR do
+`zgloszenia/<id>/`, żeby ruszył automat (`.github/workflows/zgloszenie.yml`).
+
+**Czego strona nie sprawdza: Modelu B.** Kasowania `otadata` w `setup()` nie da się wyczytać
+z binarki (to kod, nie tekst) — strona mówi to wprost przy **każdym** pliku, także poprawnym,
+i linkuje do `programy.html#modelb` i `#test`. `model_b` w formularzu jest oświadczeniem
+autora, dokładnie tak jak w `meta.json`.
+
+### Rozjazd walidatorów
+
+`zglos.js` to **druga kopia** reguł z `tools/sprawdz_bin.py` (format `.bin`)
+i `tools/sprawdz_zgloszenie.py` (pola `meta.json`) — przepisana do JS, bo Pythona
+w przeglądarce nie ma. Liczby, offsety, limity i regułę na `<id>` trzyma w jednym,
+oznaczonym bloku `POCZATEK REGUL … KONIEC REGUL` na górze pliku, a pilnuje ich:
+
+```bash
+cd korona-programy && python3 tools/sprawdz_zgodnosc_js.py        # 0 = zgodne, 1 = rozjazd
+# przed rsync-em, na źródle portalu:
+python3 tools/sprawdz_zgodnosc_js.py "../portal/zglos.js"
+```
+
+Skrypt importuje oba walidatory i porównuje z blokiem `REGULY`: offsety, `OTA0_SIZE`,
+magiczne bajty, tablicę układów, wzorzec `<id>`, listy `PLYTKI`/`ORIENT`/`WYMAGANE`
+i wszystkie limity długości pól. **Zmieniasz regułę w `tools/` — popraw też `zglos.js`
+i uruchom to.** Warto wpiąć w `.github/workflows/zgloszenie.yml` jako dodatkowy krok.
+
+Sprawdzone (07.09.2026): 23 prawdziwe pliki (`bin/cyd24/*.bin`, `bin/cyd28/*.bin`,
+`portal/obrazy/cyd24/{loader,bootloader,partitions,korona-cyd24-scalony}.bin`) dają w JS
+i w `sprawdz_bin.py` **identyczny wynik** — rodzaj, rozmiar obrazu, zapas, sha256, `app_desc`
+i komplet komunikatów. Ze scalonego obrazu 2.4" JS wycina aplikację o sha256 równym
+`loader.bin` (`9519026f…`), czyli dokładnie to, co obiecuje docstring `sprawdz_bin.py`.

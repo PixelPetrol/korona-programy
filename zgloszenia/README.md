@@ -7,6 +7,10 @@ byc wiec zwykle pusty (poza tym README).
 Jak zglosic - krok po kroku: https://pixelpetrol.github.io/korona-programy/portal/programy.html
 (sekcja "jak zglosic do sklepu") albo `../README.md` -> "Programy uzytkownikow".
 
+Najkrotsza droga: https://pixelpetrol.github.io/korona-programy/portal/zglos.html - sprawdza
+.bin w przegladarce (te same reguly co tools/sprawdz_bin.py, plik nigdzie sie nie wysyla),
+sklada meta.json z formularza i otwiera gotowe zgloszenie na GitHubie.
+
 ## Uklad zgloszenia
 
 ```
@@ -43,4 +47,5 @@ ustawien na karcie SD).
   sprawdzi** - przegladajacy uruchomi program i nacisnie RST.
 * Czcionka K-OS nie ma polskich znakow: `nazwa`, `opis`, `info`, `autor` w ASCII.
 
-Sprawdz lokalnie przed PR: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>`.
+Sprawdz lokalnie przed PR: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>`
+(albo w przegladarce: portal/zglos.html).

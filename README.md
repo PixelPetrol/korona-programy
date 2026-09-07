@@ -16,7 +16,9 @@ tools/katalog.py                  generuje katalog.json z bin/ (tabela META + *.
 tools/sprawdz_bin.py              czy .bin nadaje sie do slotu ota_0 (czysty/scalony, rozmiar, app_desc)
 tools/sprawdz_zgloszenie.py       walidator zgloszenia (meta.json + .bin)
 tools/przyjmij_zgloszenia.py      przenosi poprawne zgloszenia do bin/<plytka>/uzytkownicy/
+tools/sprawdz_zgodnosc_js.py      czy portal/zglos.js nie rozjechal sie z regulami z tools/
 portal/                           strona instalacyjna (GitHub Pages) + poradnik dla autorow (programy.html)
+                                  + zglos.html: sprawdzenie .bin w przegladarce i gotowe zgloszenie
 .github/workflows/zgloszenie.yml  PR z zgloszeniem -> walidacja + komentarz
 .github/workflows/przyjmij.yml    merge do main -> przeniesienie + katalog.json + commit bota
 ```
@@ -40,13 +42,18 @@ K-OS na plytce X pokazuje domyslnie programy dla X; przyciskiem
 
 Kazdy moze zglosic swoj program. Procedura:
 
+0. Najkrotsza droga: https://pixelpetrol.github.io/korona-programy/portal/zglos.html
+   - sprawdza `.bin` w przegladarce (te same reguly co `tools/sprawdz_bin.py`, plik nigdzie
+   sie nie wysyla), sklada `meta.json` i otwiera gotowe zgloszenie na GitHubie. Reszta punktow
+   to ta sama droga recznie, przez PR.
 1. Przygotuj program wedlug poradnika `portal/programy.html` (Model B, flagi plytki,
    rozmiar <= 2 555 904 B, czysty obraz aplikacji). Przetestuj na plytce: uruchom pod K-OS,
    nacisnij RST - musi wrocic menu.
 2. Zrob fork repo i dodaj katalog `zgloszenia/<id>/` z dwoma plikami: `<id>.bin` i `meta.json`
    (szablon i opis pol: `zgloszenia/README.md`). `<id>` = male litery, cyfry, `-`, `_`; to bedzie
    nazwa pliku w sklepie i klucz ustawien na karcie - nie zmienia sie po publikacji.
-3. Sprawdz lokalnie: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>`.
+3. Sprawdz lokalnie: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>` (albo w przegladarce
+   na `portal/zglos.html`).
 4. Otworz Pull Request. Action `zgloszenie` sprawdza zgloszenie i wkleja raport (rozmiar,
    sha256, app_desc, bledy). Czerwony check = popraw i wypchnij jeszcze raz.
 5. Przegladajacy (Piotr) robi to, czego automat nie umie: wgrywa `.bin` na karte, uruchamia,
