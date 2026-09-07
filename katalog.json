@@ -18,17 +18,6 @@
           "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE. Env KORONA_CYD24: poprawione kolory (INVON). DOTYK: kalibracja jest osobna dla kazdej orientacji ekranu - pierwszy start prosi o cztery rogi w ukladzie poziomym, a po zmianie Config > Orientation Bruce pyta o nie raz dla nowego ukladu i juz go pamieta (K-OS trzyma to w migawce). Bez tego dotyk w pionie nie trafial wcale: TFT_eSPI liczy dotyk z granic kalibracji, ale z wymiarow biezacej rotacji, wiec kalibracja z poziomu dawala w pionie rozciagniecie zamiast obrotu."
         },
         {
-          "plik": "bin/cyd24/btspeaker.bin",
-          "rozmiar": 1183536,
-          "sha256": "1f2a2d0262230a1e8fe6b537915ecf2a6e947d59fea461f03a1e712ade8727c0",
-          "nazwa": "BT Speaker",
-          "opis": "glosnik Bluetooth A2DP, DAC 8-bit; NIETESTOWANY",
-          "wersja": "1.0.0",
-          "kategoria": "zewnetrzne",
-          "autor": "pschatzmann (ESP32-A2DP)",
-          "info": "Odbiornik A2DP na bibliotekach ESP32-A2DP i arduino-audio-tools (pschatzmann); szkic K-OS to tylko warstwa ekranu i dotyku. Telefon laczy sie z 'KORONA CYD' i gra przez wbudowany 8-bit DAC na GPIO26 (wzmacniacz, zlacze glosnika). Ekran pionowy: stan, tytul/wykonawca (AVRCP), glosnosc; dotyk = prev/pauza/next/glosnosc. Jakosc ogranicza 8-bitowy DAC - gadzet, nie hi-fi. WiFi wylaczone. Zrodlo: porty/btspeaker (szkic MIT; biblioteka audio GPL-3.0 -> binarka GPL)."
-        },
-        {
           "plik": "bin/cyd24/esp32div.bin",
           "rozmiar": 2424304,
           "sha256": "1ad1eab2d98eec68f77c6490c5bf196ab0217074787d1e7f34bf05ee858d3d5c",
