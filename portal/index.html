@@ -354,6 +354,19 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
   </div>
 </details>
 
+<details>
+  <summary><span lang="pl">Co K-OS wysyła</span><span lang="en">What K-OS sends</span></summary>
+  <div>
+    <p><span lang="pl"><b>Raz na dobę płytka wysyła cztery rzeczy: losowy numer tej instalacji, wersję K-OS, model płytki i to, ile razy otwarto każdy program.</b> Nie wysyła MAC, IP, nazwy sieci ani godzin uruchomień.</span><span lang="en"><b>Once a day the board sends four things: a random number for this install, the K-OS version, the board model and how many times each program was opened.</b> No MAC, no IP, no network name, no clock times.</span></p>
+    <ul>
+      <li><span lang="pl"><b>Numer instalacji to 16 losowych bajtów</b> wylosowanych na płytce przy pierwszym starcie — <b>nie adres MAC</b>. Leży w pamięci K-OS i w <code>/korona/&lt;płytka&gt;/instalacja.txt</code> na karcie. Nie mówi nic o sprzęcie; służy tylko do tego, żeby ta sama płytka nie policzyła się dwa razy.</span><span lang="en"><b>The install number is 16 random bytes</b> drawn on the board at first boot — <b>not the MAC address</b>. It lives in the K-OS settings and in <code>/korona/&lt;board&gt;/instalacja.txt</code> on the card. It says nothing about the hardware; it only stops the same board from being counted twice.</span></li>
+      <li><span lang="pl"><b>Po co to jest:</b> żeby wiedzieć, ile płytek naprawdę chodzi i które programy warto rozwijać. Podsumowanie jest jawne — same liczby zbiorcze, bez numerów instalacji.</span><span lang="en"><b>Why:</b> to know how many boards are actually running and which programs are worth the work. The summary is public — totals only, no install numbers.</span></li>
+      <li><span lang="pl"><b>Jak wyłączyć:</b> <kbd>ustawienia</kbd> → <kbd>system</kbd> → <kbd>statystyki użycia</kbd>. Domyślnie jest to włączone. Wyłączone znaczy <b>żadnego zapytania</b> — nie „zapytanie bez danych".</span><span lang="en"><b>How to turn it off:</b> <kbd>settings</kbd> → <kbd>system</kbd> → <kbd>usage statistics</kbd>. It is on by default. Off means <b>no request at all</b> — not “a request with no data”.</span></li>
+      <li><span lang="pl">Osobno od tego: sklep i aktualizacje pobierają pliki z GitHuba, a programy takie jak SkyCYD czy stacja pogodowa łączą się z własnymi źródłami. To zwykłe pobieranie — logi po stronie tamtych serwisów są ich, nie nasze.</span><span lang="en">Separately: the store and updates download files from GitHub, and programs like SkyCYD or the weather station reach their own sources. That is plain downloading — logs on those services are theirs, not ours.</span></li>
+    </ul>
+  </div>
+</details>
+
 <footer>
   <p><span lang="pl">K-OS — KORONA OS for CYD · Piotr Korona. Programy do sklepu: </span><span lang="en">K-OS — KORONA OS for CYD · Piotr Korona. Store programs: </span><a href="https://github.com/PixelPetrol/korona-programy">github.com/PixelPetrol/korona-programy</a></p>
   <p><span lang="pl">Instalator: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Zewnętrzne programy w sklepie mają swoich autorów i własne licencje — wymienione w katalogu sklepu.</span><span lang="en">Installer: <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a> (ESPHome). Third-party programs in the store have their own authors and licences — listed in the store catalogue.</span></p>
