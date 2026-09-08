@@ -107,7 +107,9 @@ function kartaProgramu(pr, oceny){
   var pr2 = el("div");
   var t = el("div","tyt");
   t.appendChild(el("b", null, pr.nazwa||pr.plik));
-  t.appendChild(el("span","meta","v"+(pr.wersja||"?")+" · "+Math.round((pr.rozmiar||0)/1024)+" kB · "+(pr.autor||"")));
+  /* "v" tylko przed numerem. Bruce ma wersje "lite" i wychodzilo z tego "vlite". */
+  var wer = String(pr.wersja||"?");
+  t.appendChild(el("span","meta",(/^\d/.test(wer)?"v":"")+wer+" · "+Math.round((pr.rozmiar||0)/1024)+" kB · "+(pr.autor||"")));
   pr2.appendChild(t);
 
   var baza = (pr.plik||"").split("/").pop().replace(/\.bin$/,"");
