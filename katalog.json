@@ -273,6 +273,30 @@
       "nazwa": "CYD 2.8\" ST7789 (ESP32-2432S028 \"2 USB\")",
       "programy": [
         {
+          "plik": "bin/cyd28s/bruce.bin",
+          "rozmiar": 2417328,
+          "sha256": "719fbadc354aeb549ff61ade5d23d7fdb0961f8317badefbe11c56da00c0fa29",
+          "nazwa": "Bruce (LITE)",
+          "opis": "pentest toolkit WiFi / BLE / IR / RF; ST7789 NIESPRAWDZONE",
+          "wersja": "lite",
+          "kategoria": "zewnetrzne",
+          "autor": "pr3y",
+          "info": "Bruce dla CYD 2.8\" w rewizji z dwoma gniazdami USB - ta sama plytka co cyd28, ale z panelem ST7789. Piny ekranu, dotyku, podswietlenia i karty SD sa identyczne; zmienil sie wylacznie uklad sterujacy wyswietlaczem, wiec obraz powstaje z tego samego kodu, a rozni sie sterownikiem, kolejnoscia kolorow",
+          "info_pelny": "info/cyd28s/bruce.bin.txt"
+        },
+        {
+          "plik": "bin/cyd28s/esp32div.bin",
+          "rozmiar": 2420176,
+          "sha256": "9ded3ab19004a66391dae370f59b24ba1be4c95f9511292c49e99ed382c7dfe6",
+          "nazwa": "ESP32-DIV",
+          "opis": "multitool WiFi/BLE/RF; ST7789 NIESPRAWDZONE",
+          "wersja": "3.3.0",
+          "kategoria": "zewnetrzne",
+          "autor": "cifertech / Wontfallo (HaleHound-CYD)",
+          "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB). Sprzetowo identyczna ze zwyklym modelem 2.8\" - te same piny ekranu, ten sam dotyk XPT2046, podswietlenie GPIO 21 - rozni sie wylacznie sterownikiem wyswietlacza.",
+          "info_pelny": "info/cyd28s/esp32div.bin.txt"
+        },
+        {
           "plik": "bin/cyd28s/gry-vol1.bin",
           "rozmiar": 608192,
           "sha256": "603069e9cfcebb8a7f8181a33d222e1cdd2c16f066d56b5d74ceaddb5c539e8b",
