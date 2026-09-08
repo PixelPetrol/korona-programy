@@ -51,6 +51,17 @@
           "info": "ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom K-OS zostaja miedzy startami."
         },
         {
+          "plik": "bin/cyd24/mesh.bin",
+          "rozmiar": 869824,
+          "sha256": "5b5e5a3a0299f2d2707ce383ec01ecb27734f4357fa3bc80cd5fec1afcff1843",
+          "nazwa": "K-OS Handset",
+          "opis": "komunikator MeshCore po Bluetooth",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Komunikator dla wlasnego wezla MeshCore, polaczony z nim po Bluetooth LE - plytka jest SLUCHAWKA, a wezel radiem. Rozmowy prywatne i kanaly, pisanie klawiatura ekranowa, powiadomienie brzeczykiem i dioda, historia rozmow na karcie w /mesh/. Dziala tez bez wezla: pokazuje ostatnie rozmowy z karty i mowi wprost, dlaczego nie ma polaczenia. WEZLA NIE NADPISUJE I NIE KONFIGURUJE - to nie jest deklaracja w komentarzu, tylko biala lista dziewieciu rozkazow tylko do odczytu w kodzie, pilnowana testem. Uklady bajtow protokolu companion sprawdzone w zrodle firmware MeshCore, nie w dokumentacji - w trzech miejscach dokumentacja mowi co innego niz kod. Motyw, jezyk i kalibracje bierze z K-OS. Testy na hoscie: 249 sprawdzen z ASAN i UBSAN, w tym przelot po wszystkich 256 kodach ramek. NIESPRAWDZONE NA SPRZECIE. Czego jeszcze nie ma: konfiguracji wezla, map, zarzadzania kanalami i wersji poziomej."
+        },
+        {
           "plik": "bin/cyd24/meteo-pion.bin",
           "rozmiar": 1149728,
           "sha256": "4f094768c72ddfb37c4873af608deec9dc2f4b46df7eaebc70fdbf49c92a0ab7",
@@ -178,6 +189,17 @@
           "info": "Ten sam tom gier co na 2.4\", zbudowany dla CYD 2.8\" (2432S028R): dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Gry nie maja wlasnej kalibracji - biora ja z K-OS; gdy dla tej plytki nie ma jej na karcie, tom mowi o tym wprost na starcie zamiast uzywac zgadywanych liczb. NIESPRAWDZONE NA SPRZECIE."
         },
         {
+          "plik": "bin/cyd28/mesh.bin",
+          "rozmiar": 868944,
+          "sha256": "d0e78ec410315dc0cc96b81f41f610ec446e2950723569776ba3408c9e82e5d9",
+          "nazwa": "K-OS Handset",
+          "opis": "komunikator MeshCore po Bluetooth; 2.8\" NIESPRAWDZONE",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Ten sam komunikator co na 2.4\", zbudowany dla CYD 2.8\" (2432S028R): dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Komunikator dla wlasnego wezla MeshCore, polaczony z nim po Bluetooth LE - plytka jest SLUCHAWKA, a wezel radiem. Rozmowy prywatne i kanaly, pisanie klawiatura ekranowa, powiadomienie brzeczykiem i dioda, historia rozmow na karcie w /mesh/. Dziala tez bez wezla: pokazuje ostatnie rozmowy z karty i mowi wprost, dlaczego nie ma polaczenia. WEZLA NIE NADPISUJE I NIE KONFIGURUJE - to nie jest deklaracja w komentarzu, tylko biala lista dziewieciu rozkazow tylko do odczytu w kodzie, pilnowana testem. Uklady bajtow protokolu companion sprawdzone w zrodle firmware MeshCore, nie w dokumentacji - w trzech miejscach dokumentacja mowi co innego niz kod. Motyw, jezyk i kalibracje bierze z K-OS. Testy na hoscie: 249 sprawdzen z ASAN i UBSAN, w tym przelot po wszystkich 256 kodach ramek. NIESPRAWDZONE NA SPRZECIE. Czego jeszcze nie ma: konfiguracji wezla, map, zarzadzania kanalami i wersji poziomej."
+        },
+        {
           "plik": "bin/cyd28/meteo-pion.bin",
           "rozmiar": 1148816,
           "sha256": "006df7b197587e3b9fdebd3ae752c9165888bab7815b6b87dd63b55350bbd0b8",
@@ -248,6 +270,17 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Ten sam tom gier co na 2.8\", przebudowany dla rewizji z panelem ST7789 (plytka z dwoma gniazdami USB). Dotyk, piny i podswietlenie GPIO 21 sa takie same jak w wersji ILI9341. Gry nie maja wlasnej kalibracji - biora ja z K-OS; gdy dla tej plytki nie ma jej na karcie, tom mowi o tym wprost na starcie zamiast uzywac zgadywanych liczb (plik /korona/cyd28s/dotyk.txt). NIESPRAWDZONE NA SPRZECIE."
+        },
+        {
+          "plik": "bin/cyd28s/mesh.bin",
+          "rozmiar": 868848,
+          "sha256": "8ec81be63813526a84db6c97f5b564c0250236dbbb12f1d278b98441dd0c8ac5",
+          "nazwa": "K-OS Handset",
+          "opis": "komunikator MeshCore po Bluetooth; ST7789 NIESPRAWDZONE",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB). Komunikator dla wlasnego wezla MeshCore, polaczony z nim po Bluetooth LE - plytka jest SLUCHAWKA, a wezel radiem. Rozmowy prywatne i kanaly, pisanie klawiatura ekranowa, powiadomienie brzeczykiem i dioda, historia rozmow na karcie w /mesh/. Dziala tez bez wezla: pokazuje ostatnie rozmowy z karty i mowi wprost, dlaczego nie ma polaczenia. WEZLA NIE NADPISUJE I NIE KONFIGURUJE - to nie jest deklaracja w komentarzu, tylko biala lista dziewieciu rozkazow tylko do odczytu w kodzie, pilnowana testem. Uklady bajtow protokolu companion sprawdzone w zrodle firmware MeshCore, nie w dokumentacji - w trzech miejscach dokumentacja mowi co innego niz kod. Motyw, jezyk i kalibracje bierze z K-OS. Testy na hoscie: 249 sprawdzen z ASAN i UBSAN, w tym przelot po wszystkich 256 kodach ramek. NIESPRAWDZONE NA SPRZECIE. Czego jeszcze nie ma: konfiguracji wezla, map, zarzadzania kanalami i wersji poziomej."
         },
         {
           "plik": "bin/cyd28s/meteo-pion.bin",
