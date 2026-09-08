@@ -1,0 +1,1 @@
+Wersja pozioma dla CYD 2.8". Uwaga: na tej plytce kalibracja idzie WPROST w orientacji poziomej, a nie przez przeliczenie z pionowej - przeliczona zgadywanka byla by nadal zgadywanka. NIESPRAWDZONE NA SPRZECIE.

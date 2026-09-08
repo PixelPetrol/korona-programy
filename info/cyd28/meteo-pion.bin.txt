@@ -1,0 +1,1 @@
+Stacja pogodowa dla CYD 2.8" (2432S028R), orientacja pionowa. Dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Przy braku kalibracji systemowej dla tej plytki program proponuje wlasna zamiast uzywac zgadywanki. NIESPRAWDZONE NA SPRZECIE.

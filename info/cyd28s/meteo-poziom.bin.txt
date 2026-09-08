@@ -1,0 +1,1 @@
+Wersja pozioma dla CYD 2.8" ze sterownikiem ST7789. Jak w pozostalych wersjach poziomych kalibracja dotyku idzie WPROST w orientacji poziomej, bo kalibracja z pionu daje w poziomie rozciagniecie, a nie obrot. NIESPRAWDZONE NA SPRZECIE.

@@ -1,0 +1,1 @@
+Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do K-OS - uruchom program ponownie, ustawienia zostaja dzieki migawce.
