@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 """Ikony programow dla ekranu glownego K-OS: bin/<plytka>/<nazwa>.ico
 
-FORMAT JEST TEN SAM, CO IKON WBUDOWANYCH W K-OS - i to nie jest wygoda, tylko decyzja:
-  * maska alfa 4-bit, 32x32, dwa piksele na bajt, STARSZY POLBAJT PIERWSZY = 512 B na ikone,
+SKAD RYSUNKI: **Material Symbols Outlined** (Google, Apache-2.0) - te same, z ktorych
+zrobione sa ikony wbudowane w K-OS (loader/tools/gen_assets.py). Dzieki temu ikona
+programu i ikona systemowa obok niej wygladaja jak jedna rodzina, a nie jak dwa swiaty.
+Pierwsza wersja tego skryptu rysowala ksztalty recznie z prostokatow i kol - wygladalo
+to znosnie, ale gorzej niz komplet robiony przez zawodowcow, ktory i tak juz mamy.
+
+FORMAT JEST TEN SAM, CO IKON WBUDOWANYCH - i to nie jest wygoda, tylko decyzja:
+  * maska alfa 4-bit, 32x32, dwa piksele na bajt, STARSZY POLBAJT PIERWSZY = 512 B,
   * rysuje ja ta sama funkcja co ikony systemowe (blitMask w loader/loader/assets.cpp),
     wiec K-OS nie potrzebuje ani jednej nowej linii kodu graficznego,
   * maska BIERZE KOLOR Z MOTYWU - ikona jest zielona w zielonym i zlota w zlotym.
@@ -12,12 +18,14 @@ FORMAT JEST TEN SAM, CO IKON WBUDOWANYCH W K-OS - i to nie jest wygoda, tylko de
 Gdy ikony nie ma, K-OS rysuje KAFELEK Z INICJALAMI nazwy - nigdy nie moze zabraknac,
 a odroznia programy lepiej niz jeden wspolny znak zapytania dla wszystkich.
 
-Rysujemy z prymitywow w poczworna skala i usredniamy - stad gladkie krawedzie bez
-zadnej biblioteki graficznej. Zero zaleznosci: sam Python.
+CZEGO POTRZEBUJE: PIL (jest) oraz `qlmanage` z macOS do rasteryzacji SVG - dokladnie ta
+sama droga co gen_assets.py, zeby nie wprowadzac drugiej zaleznosci na to samo.
+Pliki SVG sa cache'owane w art/icons/, wiec drugi przebieg nie rusza sieci.
 
 Uzycie (z katalogu repo):  python3 tools/ikony.py
 """
-import os, sys, struct, zlib
+import os, re, shutil, struct, subprocess, sys, tempfile, zlib
+from PIL import Image, ImageChops
 
 S = 32          # docelowy bok ikony
 SS = 4          # nadprobkowanie
@@ -164,21 +172,72 @@ def i_kilof(p):                     # nerdminer: kilof
     p.linia(19, 4, 29, 14, 3)
     d = Plotno(); d.kolo(24, 9, 3); p.wytnij(d)
 
-RYSUNKI = {
-    "gry-vol1":     i_pad,
-    "meteo-pion":   i_chmura,
-    "meteo-poziom": i_chmura,
-    "pogoda":       i_chmura,
-    "office":       i_dokument,
-    "mesh":         i_antena,
-    "radar-pion":   i_samolot,
-    "radar-poziom": i_samolot,
-    "bruce":        i_nietoperz,
-    "marauder":     i_radar,
-    "esp32div":     i_uklad,
-    "openhasp":     i_dom,
-    "nerdminer":    i_kilof,
+# program (nazwa pliku .bin bez rozszerzenia) -> nazwa ikony Material Symbols.
+# Dobierane pod TRESC programu, nie pod jego logo: w 32 px czytelny jest tylko prosty
+# znak, a nie znak firmowy. Nazwy sprawdzone - kazda musi istniec w Material Symbols,
+# inaczej skrypt konczy sie bledem zamiast po cichu pominac ikone.
+IKONY = {
+    "gry-vol1":     "sports_esports",     # pad
+    "meteo-pion":   "rainy",              # chmura z deszczem
+    "meteo-poziom": "rainy",
+    "pogoda":       "partly_cloudy_day",
+    "office":       "description",        # kartka z tekstem
+    "mesh":         "forum",              # dymki rozmowy
+    "radar-pion":   "flight",             # samolot
+    "radar-poziom": "flight",
+    "bruce":        "security",           # tarcza
+    "marauder":     "wifi_find",          # wifi z lupa
+    "esp32div":     "memory",             # scalak
+    "openhasp":     "home",               # dom
+    "nerdminer":    "currency_bitcoin",
 }
+MATERIAL_URL = ("https://fonts.gstatic.com/s/i/short-term/release/"
+                "materialsymbolsoutlined/{name}/default/24px.svg")
+SVG_PX = 320                     # rasteryzujemy duzo i schodzimy LANCZOSEM - jak w gen_assets
+ICONS_DIR = os.path.join(ROOT, "art", "icons")
+
+
+def sciagnij(nazwy):
+    os.makedirs(ICONS_DIR, exist_ok=True)
+    for n in sorted(set(nazwy)):
+        dst = os.path.join(ICONS_DIR, n + ".svg")
+        if os.path.exists(dst):
+            continue
+        print("sciagam %s" % n)
+        kod = subprocess.run(["curl", "-s", "-o", dst, "-w", "%{http_code}",
+                              MATERIAL_URL.format(name=n)],
+                             capture_output=True, text=True).stdout.strip()
+        if kod != "200":
+            if os.path.exists(dst):
+                os.remove(dst)
+            sys.exit("ikony: nie ma ikony '%s' (HTTP %s) - dobierz inna nazwe w IKONY" % (n, kod))
+
+
+def rasteryzuj(nazwy):
+    """SVG -> maska alfy 32x32 w 16 poziomach. Ta sama droga co gen_assets.py."""
+    tmp = tempfile.mkdtemp(prefix="korona-ikony-")
+    pliki = []
+    for n in sorted(set(nazwy)):
+        with open(os.path.join(ICONS_DIR, n + ".svg"), encoding="utf-8") as f:
+            svg = f.read()
+        svg = re.sub(r'\swidth="[^"]*"', ' width="%d"' % SVG_PX, svg, count=1)
+        svg = re.sub(r'\sheight="[^"]*"', ' height="%d"' % SVG_PX, svg, count=1)
+        svg = re.sub(r'fill="#[0-9a-fA-F]{3,8}"', 'fill="#000000"', svg)
+        pth = os.path.join(tmp, n + ".svg")
+        with open(pth, "w", encoding="utf-8") as f:
+            f.write(svg)
+        pliki.append(pth)
+    subprocess.run(["qlmanage", "-t", "-s", str(SVG_PX), "-o", tmp] + pliki,
+                   capture_output=True, check=True)
+    out = {}
+    for n in sorted(set(nazwy)):
+        png_ = os.path.join(tmp, n + ".svg.png")
+        if not os.path.exists(png_):
+            sys.exit("ikony: qlmanage nie wyrenderowal %s" % n)
+        im = ImageChops.invert(Image.open(png_).convert("L")).resize((S, S), Image.LANCZOS)
+        out[n] = bytearray((px * 15 + 127) // 255 for px in im.getdata())
+    shutil.rmtree(tmp, ignore_errors=True)
+    return out
 
 
 # --------------------------------------------------------------------- podglad
@@ -211,10 +270,9 @@ def arkusz(ikony, sciezka, skala=3):
 
 
 def main():
-    zrobione = {}
-    for nazwa, rys in RYSUNKI.items():
-        p = Plotno(); rys(p)
-        zrobione[nazwa] = p.alfa()
+    sciagnij(IKONY.values())
+    maski = rasteryzuj(IKONY.values())
+    zrobione = {prog: maski[nazwa] for prog, nazwa in IKONY.items()}
 
     ile = 0
     for plytka in sorted(os.listdir(os.path.join(ROOT, "bin"))):
@@ -226,15 +284,16 @@ def main():
                 continue
             baza = f[:-4]
             if baza not in zrobione:
-                print("UWAGA: brak rysunku dla %s (K-OS pokaze inicjaly)" % baza, file=sys.stderr)
+                print("UWAGA: brak ikony dla %s (K-OS pokaze inicjaly)" % baza, file=sys.stderr)
                 continue
             with open(os.path.join(d, baza + ".ico"), "wb") as fh:
                 fh.write(pakuj(zrobione[baza]))
             ile += 1
-    art = os.path.join(ROOT, "art"); os.makedirs(art, exist_ok=True)
-    arkusz(zrobione, os.path.join(art, "podglad-ikony.png"))
-    print("ikony: %d rysunkow -> %d plikow .ico po %d B (podglad: art/podglad-ikony.png)"
-          % (len(zrobione), ile, S*S//2))
+    art = os.path.join(ROOT, "art")
+    os.makedirs(art, exist_ok=True)
+    arkusz({p: zrobione[p] for p in sorted(zrobione)}, os.path.join(art, "podglad-ikony.png"))
+    print("ikony: %d rysunkow Material Symbols -> %d plikow .ico po %d B (podglad: art/podglad-ikony.png)"
+          % (len(set(IKONY.values())), ile, S * S // 2))
 
 
 if __name__ == "__main__":
