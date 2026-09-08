@@ -92,9 +92,44 @@ META = {
 UZYTK_POLA = ("nazwa", "opis", "wersja", "kategoria", "autor", "info", "licencja", "zrodlo", "orientacja", "zgloszono")
 
 
+# ROZMIAR KATALOGU JEST OGRANICZENIEM SPRZETOWYM, NIE ESTETYCZNYM.
+# K-OS pobiera katalog.json W CALOSCI do Stringa, a potem parsuje go do JsonDocument -
+# oba zyja w RAM naraz, na plytce bez PSRAM. 08.09.2026 katalog urosl z 22,9 kB do 35,1 kB
+# (dlugie opisy nowych programow) i SKLEP NA PLYTCE PRZESTAL DZIALAC. Stad dwie rzeczy:
+#   1. do katalogu idzie tylko SKROT opisu, a pelny tekst ladzie w info/<plytka>/<plik>.txt
+#      (pole "info_pelny" wskazuje sciezke - portal moze go pokazac, K-OS pobrac na zadanie);
+#   2. generator SAM SIE ZATRZYMUJE, gdy plik przekroczy KATALOG_STOP - patrz koniec main().
+INFO_MAX = 300          # znakow opisu w samym katalogu
+KATALOG_OSTRZEZ = 20000 # B - powyzej tego glosne ostrzezenie
+KATALOG_STOP = 26000    # B - powyzej tego generator konczy sie bledem i nie zapisuje pliku
+ROOT = ""               # ustawiane w main()
+
+
+def skroc_info(pelny):
+    """Zwraca (skrot, czy_uciety). Tnie na granicy zdania, a nie w polowie slowa."""
+    if len(pelny) <= INFO_MAX:
+        return pelny, False
+    ciach = pelny.rfind(". ", 0, INFO_MAX)
+    if ciach < INFO_MAX // 2:
+        ciach = pelny.rfind(" ", 0, INFO_MAX)
+    if ciach <= 0:
+        ciach = INFO_MAX
+    return pelny[:ciach + 1].rstrip(), True
+
+
 def wpis(pid, rel, data, meta):
     e = {"plik": rel, "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest()}
     e.update(meta)
+    pelny = e.get("info", "")
+    krotki, uciety = skroc_info(pelny)
+    if uciety:
+        nazwa = rel.rsplit("/", 1)[-1]
+        sciezka = os.path.join(ROOT, "info", pid, nazwa + ".txt")
+        os.makedirs(os.path.dirname(sciezka), exist_ok=True)
+        with open(sciezka, "w", encoding="utf-8") as fh:
+            fh.write(pelny + "\n")
+        e["info"] = krotki
+        e["info_pelny"] = "info/%s/%s.txt" % (pid, nazwa)
     return e
 
 
@@ -110,7 +145,9 @@ def meta_uzytkownika(path_json):
 
 
 def main():
+    global ROOT
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ROOT = root
     out = {"sklep": "KORONA", "wersja": 2, "plytki": []}
     for pid, pname in PLYTKI:
         d = os.path.join(root, "bin", pid)
@@ -140,9 +177,22 @@ def main():
                     progs.append(wpis(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
         out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
 
+    tekst = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
+    rozmiar = len(tekst.encode("utf-8"))
+    if rozmiar > KATALOG_STOP:
+        print("BLAD: katalog ma %d B, a limit to %d B. NIC NIE ZAPISANO.\n"
+              "      Plytka pobiera katalog w calosci do RAM - za duzy plik wywala sklep.\n"
+              "      Skroc opisy w META albo zmniejsz INFO_MAX." % (rozmiar, KATALOG_STOP),
+              file=sys.stderr)
+        sys.exit(1)
     with open(os.path.join(root, "katalog.json"), "w") as fh:
-        json.dump(out, fh, ensure_ascii=False, indent=2); fh.write("\n")
-    print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow")
+        fh.write(tekst)
+    print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow,",
+          rozmiar, "B")
+    if rozmiar > KATALOG_OSTRZEZ:
+        print("UWAGA: katalog ma %d B (prog ostrzegawczy %d, twardy %d). Zbliza sie do granicy,\n"
+              "       przy ktorej sklep na plytce przestaje dzialac." % (rozmiar, KATALOG_OSTRZEZ, KATALOG_STOP),
+              file=sys.stderr)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1 @@
+Ten sam tom gier co na 2.4", zbudowany dla CYD 2.8" (2432S028R): dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Gry nie maja wlasnej kalibracji - biora ja z K-OS; gdy dla tej plytki nie ma jej na karcie, tom mowi o tym wprost na starcie zamiast uzywac zgadywanych liczb. NIESPRAWDZONE NA SPRZECIE.

@@ -1,0 +1,1 @@
+Stacja pogodowa dla CYD 2.8" w rewizji ze sterownikiem ST7789 (plytka z dwoma gniazdami USB), orientacja pionowa. Zbudowana z tego samego zrodla co wersja cyd28 - rozni sie tylko flagami sterownika ekranu. NIESPRAWDZONE NA SPRZECIE. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, to jest poprawka na jedna flage.
