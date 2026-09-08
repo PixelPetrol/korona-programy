@@ -34,6 +34,7 @@ h1{font-size:1.5rem;margin:0 0 4px;color:var(--acc)}
 .tyt b{color:var(--acc);font-size:1.05rem}
 .meta,.oc{color:var(--txt2);font-size:.9rem}
 .gw{color:var(--warn);letter-spacing:2px}
+.gw.slabe{color:var(--txt2)}
 .opis{margin:6px 0 0}
 details summary{cursor:pointer;color:var(--txt2);margin-top:6px}
 details p{white-space:pre-wrap;margin:8px 0 0}
@@ -115,10 +116,18 @@ function kartaProgramu(pr, oceny){
   var baza = (pr.plik||"").split("/").pop().replace(/\.bin$/,"");
   var o = oceny && oceny[baza];
   if (o){
+    /* GWIAZDKI WIDAC ZAWSZE, takze przy jednym glosie. Pierwsza wersja chowala je ponizej
+       trzech glosow i zostawal sam napis "1 glos" - wygladalo to jak brak funkcji, a nie
+       jak ostroznosc. Prog zostaje, ale decyduje juz tylko o KOLORZE: pelny akcent gdy
+       glosow starczy, przygaszone gdy to jeszcze nie jest ocena, tylko czyjes zdanie.
+       Liczba glosow jest przy nich zawsze, wiec nikt nie bierze jednej piatki za pewnik. */
+    var pewne = o.ile >= 3;
     var w = el("div","oc");
-    if (o.ile >= 3){ var g=el("span","gw",gwiazdki(o.srednia)); w.appendChild(g);
-                     w.appendChild(el("span",null," "+o.srednia.toFixed(1).replace(".",",")+" ("+o.ile+")")); }
-    else            w.appendChild(el("span",null,o.ile+(o.ile===1?" glos":" glosy")+" — za malo na srednia"));
+    var g = el("span", pewne ? "gw" : "gw slabe", gwiazdki(o.srednia));
+    w.appendChild(g);
+    w.appendChild(el("span", null, " " + o.srednia.toFixed(1).replace(".", ",") +
+                   "  ·  " + o.ile + (o.ile === 1 ? " glos" : " glosy") +
+                   (pewne ? "" : " — za malo na pewna srednia")));
     pr2.appendChild(w);
   }
 
