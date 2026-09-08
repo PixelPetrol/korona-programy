@@ -53,24 +53,24 @@
         {
           "plik": "bin/cyd24/meteo-pion.bin",
           "rozmiar": 1149728,
-          "sha256": "b8b43b10a2ec00aa3a717300fbbe25702c016180da3e455e0d691d64355ff1dd",
+          "sha256": "4f094768c72ddfb37c4873af608deec9dc2f4b46df7eaebc70fdbf49c92a0ab7",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW, 4 widoki",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Stacja pogodowa pod palec, po polsku i po angielsku, w orientacji PIONOWEJ. Cztery widoki przelaczane w menu (domyslnie Konsola, dalej Kafelki, Radar i Zegar) - wybor wraca po restarcie. Pogoda z Open-Meteo jednym zapytaniem CSV po zwyklym HTTP, bez klucza: stan biezacy, 5 dni, 24 godziny, nowcast co kwadrans, wschod i zachod slonca oraz faza ksiezyca. Radar opadow to siatka IMGW-PIB 64x64 o zasiegu 119 km, brana z tego samego serwera co zdjecia w SkyCYD - pod opadami rysowane sa rzeki, granice i nazwy okolicznych miejscowosci z pliku wektorowego na karcie (Natural Earth, domena publiczna, oraz GeoNames na CC BY 4.0 - atrybucja na ekranie 'o programie'). Miejscowosc wpisuje sie klawiatura ekranowa, a nazwy z sieci sa transliterowane, bo czcionki maja tylko ASCII. Motyw i jezyk bierze z ustawien K-OS albo mozna wybrac jeden z trzech wlasnych (Burza, Swit, Neon). Dziala bez sieci - pokazuje ostatnie dane z karty z data. Wskaznik baterii pojawia sie WYLACZNIE wtedy, gdy ktos sam przylutuje dzielnik napiecia do GPIO35 i odczyt jest wiarygodny; sam dzielnik tylko MIERZY, zasilania plytki z ogniwa ten program nie rozwiazuje. Dane w /meteo/ na karcie. SPRAWDZONE NA SPRZECIE 04.09.2026: start, motyw i jezyk z K-OS, kalibracja z karty, polaczenie z siecia, pobranie pogody (5 blokow) i klatki radaru IMGW, zapis do trybu offline, powrot do K-OS po RST. 0.1.1 naprawia urwany adres zapytania (bufor 560 znakow na adres dlugi na 589 - serwer oddawal HTTP 400 i pogody nie bylo wcale). PLIK MAPY /meteo/mapa.bin trzeba wgrac osobno na karte - bez niego radar dziala, ale bez rzek i nazw."
+          "info": "Stacja pogodowa pod palec, po polsku i po angielsku, w orientacji PIONOWEJ. Cztery widoki przelaczane w menu (domyslnie Konsola, dalej Kafelki, Radar i Zegar) - wybor wraca po restarcie. Pogoda z Open-Meteo jednym zapytaniem CSV po zwyklym HTTP, bez klucza: stan biezacy, 5 dni, 24 godziny, nowcast co kwadrans, wschod i zachod slonca oraz faza ksiezyca. Radar opadow to siatka IMGW-PIB 64x64 o zasiegu 119 km, brana z tego samego serwera co zdjecia w SkyCYD - pod opadami rysowane sa rzeki, granice i nazwy okolicznych miejscowosci z pliku wektorowego na karcie (Natural Earth, domena publiczna, oraz GeoNames na CC BY 4.0 - atrybucja na ekranie 'o programie'). Miejscowosc wpisuje sie klawiatura ekranowa, a nazwy z sieci sa transliterowane, bo czcionki maja tylko ASCII. Motyw i jezyk bierze z ustawien K-OS albo mozna wybrac jeden z trzech wlasnych (Burza, Swit, Neon). Dziala bez sieci - pokazuje ostatnie dane z karty z data. Wskaznik baterii pojawia sie WYLACZNIE wtedy, gdy ktos sam przylutuje dzielnik napiecia do GPIO35 i odczyt jest wiarygodny; sam dzielnik tylko MIERZY, zasilania plytki z ogniwa ten program nie rozwiazuje. Dane w /meteo/ na karcie. SPRAWDZONE NA SPRZECIE 04.09.2026: start, motyw i jezyk z K-OS, kalibracja z karty, polaczenie z siecia, pobranie pogody (5 blokow) i klatki radaru IMGW, zapis do trybu offline, powrot do K-OS po RST. 0.1.1 naprawia urwany adres zapytania (bufor 560 znakow na adres dlugi na 589 - serwer oddawal HTTP 400 i pogody nie bylo wcale). PLIK MAPY /meteo/mapa.bin trzeba wgrac osobno na karte - bez niego radar dziala, ale bez rzek i nazw. 0.2.1: KILKA SIECI WiFi - program bierze z karty cala liste zapamietanych sieci (K-OS pamieta ich teraz do szesciu) i NAJPIERW SKANUJE, zeby sprobowac tylko tych, ktore widac, od najmocniejszej. Dotad kazda niewidoczna siec kosztowala pelne 12 sekund czekania na starcie. Sieci z ukrytym SSID probowane sa na koncu, wiec dalej dzialaja."
         },
         {
           "plik": "bin/cyd24/meteo-poziom.bin",
           "rozmiar": 1151712,
-          "sha256": "95839e75699fa307340e3155cfeddfbf2d00fe0b81e520ece2761ca408538e73",
+          "sha256": "ec281e86a6cff2fa434bf6dcee7f91bf6137990866e5d7db1397222b1ad44921",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Ta sama stacja pogodowa co Meteo K-OS pion, ale w orientacji POZIOMEJ 320x240. Radar ma tu kwadratowa siatke przy lewej krawedzi i panel boczny z najsilniejsza komorka opadu, legenda i wiekiem klatki (na czerwono, gdy klatka ma ponad 10 minut). Konsola pokazuje ikone pogody i trzy pola szczegolow. UWAGA: kalibracja dotyku w TFT_eSPI jest wazna tylko dla obrotu, w ktorym ja zrobiono, wiec przy pierwszym uruchomieniu program proponuje kalibracje przeliczona z ustawien K-OS i pokazuje ekran sprawdzajacy z krzyzykiem - trzeba go dotknac. Jesli nie trafia, przechodzi do pelnej kalibracji czterech rogow i zapisuje wynik osobno, w /meteo/dotyk-poziom.txt oraz w migawce K-OS. Pliku kalibracji systemu nie nadpisuje. NIESPRAWDZONE NA SPRZECIE - zbudowane z tego samego zrodla co wersja pionowa, ktora sprawdzono."
+          "info": "Ta sama stacja pogodowa co Meteo K-OS pion, ale w orientacji POZIOMEJ 320x240. Radar ma tu kwadratowa siatke przy lewej krawedzi i panel boczny z najsilniejsza komorka opadu, legenda i wiekiem klatki (na czerwono, gdy klatka ma ponad 10 minut). Konsola pokazuje ikone pogody i trzy pola szczegolow. UWAGA: kalibracja dotyku w TFT_eSPI jest wazna tylko dla obrotu, w ktorym ja zrobiono, wiec przy pierwszym uruchomieniu program proponuje kalibracje przeliczona z ustawien K-OS i pokazuje ekran sprawdzajacy z krzyzykiem - trzeba go dotknac. Jesli nie trafia, przechodzi do pelnej kalibracji czterech rogow i zapisuje wynik osobno, w /meteo/dotyk-poziom.txt oraz w migawce K-OS. Pliku kalibracji systemu nie nadpisuje. NIESPRAWDZONE NA SPRZECIE - zbudowane z tego samego zrodla co wersja pionowa, ktora sprawdzono. 0.2.1: KILKA SIECI WiFi - program bierze z karty cala liste zapamietanych sieci (K-OS pamieta ich teraz do szesciu) i NAJPIERW SKANUJE, zeby sprobowac tylko tych, ktore widac, od najmocniejszej. Dotad kazda niewidoczna siec kosztowala pelne 12 sekund czekania na starcie. Sieci z ukrytym SSID probowane sa na koncu, wiec dalej dzialaja."
         },
         {
           "plik": "bin/cyd24/nerdminer.bin",
@@ -86,13 +86,13 @@
         {
           "plik": "bin/cyd24/office.bin",
           "rozmiar": 1197680,
-          "sha256": "97434ff7ccd5dde293d87394485e2e35b09822c26e7959f60e6b3468926e15c9",
+          "sha256": "4ed7052ee8e9838bfcbe61fc1bef101b2b3a7d400953791b14de9b98b3c02e15",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
-          "wersja": "1.3.0",
+          "wersja": "1.3.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz w przegladarce, a laduje na karcie. Dalej: kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, DWUPANELOWY menedzer plikow w duchu Total Commandera (panele jeden nad drugim, bo ekran jest waski: zaznaczanie wielu, kopiowanie z paskiem postepu i przerwaniem, przenoszenie, kasowanie drzewa po przeliczeniu; /korona tylko do czytania, kasowania .bin z /programy odmawia, zeby nie zostawiac sierot po migawkach), kody QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb oraz kursy walut z NBP po zwyklym HTTP (bez TLS, dziala offline z karty). Motyw i jezyk bierze z ustawien K-OS, nie pyta o haslo do sieci ani o kalibracje dotyku. Dane w /office/ na karcie. Sprawdzone na sprzecie: start, migracja danych ze starej nazwy, motyw i jezyk z K-OS, kalibracja z karty, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem. 1.2.0: ZAPIS, KTORY NIE TRACI DANYCH - piec miejsc pisalo na karte bez sprawdzenia wyniku albo kasowalo jedyna ocalala kopie pliku (najgorsze: notatnik mowil 'zapisane' przy pelnej karcie, a notatki nie bylo nigdzie); wszystkie przepisane na jeden wspolny wzorzec: plik roboczy, sprawdzony kazdy zapis i fclose, podmiana przez .bak, przy niepowodzeniu stara tresc wraca i nic sie nie kasuje. Wzorzec nie rusza pliku, ktory nie jest jego (.part i .bak to legalne nazwy na FAT), a po zaniku zasilania w polowie podmiany oddaje plik na swoje miejsce przy nastepnym starcie i mowi o tym na ekranie. Do tego dioda RGB (cztery sygnaly: alarm minutnika, koniec kopiowania, blad zapisu, dzialajacy serwer notatek), zegar NTP w kalendarzu (dotad nie synchronizowal sie wcale, jesli nie wszedles wczesniej w kursy albo notatki przez www), krotsze czekanie na siec (6 s na siec zamiast 9 s, dotyk przerywa) i uczciwe komunikaty, gdy K-OS nie udostepnia sieci programom. Wersja 1.1.1 (sam numer w binarce, kod jak 1.1.0) nie byla wydana osobno - weszla w 1.2.0."
+          "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz w przegladarce, a laduje na karcie. Dalej: kalkulator z tasma i kolejnoscia dzialan, kalendarz z zegarem NTP i notatkami dnia, DWUPANELOWY menedzer plikow w duchu Total Commandera (panele jeden nad drugim, bo ekran jest waski: zaznaczanie wielu, kopiowanie z paskiem postepu i przerwaniem, przenoszenie, kasowanie drzewa po przeliczeniu; /korona tylko do czytania, kasowania .bin z /programy odmawia, zeby nie zostawiac sierot po migawkach), kody QR (takze WIFI: dla gosci), stoper z minutnikiem, konwerter jednostek i liczb oraz kursy walut z NBP po zwyklym HTTP (bez TLS, dziala offline z karty). Motyw i jezyk bierze z ustawien K-OS, nie pyta o haslo do sieci ani o kalibracje dotyku. Dane w /office/ na karcie. Sprawdzone na sprzecie: start, migracja danych ze starej nazwy, motyw i jezyk z K-OS, kalibracja z karty, powrot do K-OS po RST; modulow nie sprawdzano jeszcze palcem. 1.2.0: ZAPIS, KTORY NIE TRACI DANYCH - piec miejsc pisalo na karte bez sprawdzenia wyniku albo kasowalo jedyna ocalala kopie pliku (najgorsze: notatnik mowil 'zapisane' przy pelnej karcie, a notatki nie bylo nigdzie); wszystkie przepisane na jeden wspolny wzorzec: plik roboczy, sprawdzony kazdy zapis i fclose, podmiana przez .bak, przy niepowodzeniu stara tresc wraca i nic sie nie kasuje. Wzorzec nie rusza pliku, ktory nie jest jego (.part i .bak to legalne nazwy na FAT), a po zaniku zasilania w polowie podmiany oddaje plik na swoje miejsce przy nastepnym starcie i mowi o tym na ekranie. Do tego dioda RGB (cztery sygnaly: alarm minutnika, koniec kopiowania, blad zapisu, dzialajacy serwer notatek), zegar NTP w kalendarzu (dotad nie synchronizowal sie wcale, jesli nie wszedles wczesniej w kursy albo notatki przez www), krotsze czekanie na siec (6 s na siec zamiast 9 s, dotyk przerywa) i uczciwe komunikaty, gdy K-OS nie udostepnia sieci programom. Wersja 1.1.1 (sam numer w binarce, kod jak 1.1.0) nie byla wydana osobno - weszla w 1.2.0. 1.3.1: KILKA SIECI WiFi. K-OS umie teraz zapamietac do szesciu sieci, a Office bierze je wszystkie z karty i - to jest cala roznica, ktora sie czuje - NAJPIERW SKANUJE, potem probuje tylko te zapamietane sieci, ktore naprawde widac, od najmocniejszej. Dotad proby szly po kolei i kazda niewidoczna siec kosztowala pelne 12 sekund czekania, wiec przy czterech zapamietanych sieciach start poza domem potrafil trwac minute. Siec z ukrytym SSID nadal dziala: takich, ktorych skan nie pokazal, program probuje na koncu."
         },
         {
           "plik": "bin/cyd24/openhasp.bin",
@@ -180,10 +180,10 @@
         {
           "plik": "bin/cyd28/meteo-pion.bin",
           "rozmiar": 1148816,
-          "sha256": "2cd925c942dcb35235a8658e17c0e62ba5d1fb78d4a20313ddff8203e0eb92ed",
+          "sha256": "006df7b197587e3b9fdebd3ae752c9165888bab7815b6b87dd63b55350bbd0b8",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Stacja pogodowa dla CYD 2.8\" (2432S028R), orientacja pionowa. Dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Przy braku kalibracji systemowej dla tej plytki program proponuje wlasna zamiast uzywac zgadywanki. NIESPRAWDZONE NA SPRZECIE."
@@ -191,10 +191,10 @@
         {
           "plik": "bin/cyd28/meteo-poziom.bin",
           "rozmiar": 1150816,
-          "sha256": "b5abe54df0a89ba3156f9215c8563860fccc18218fcea3a1fdc4f5fc01c6973a",
+          "sha256": "e51fb62030632126bc6b50df1669ab9e21b1910e5a51cbdad435161325ceea31",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja pozioma dla CYD 2.8\". Uwaga: na tej plytce kalibracja idzie WPROST w orientacji poziomej, a nie przez przeliczenie z pionowej - przeliczona zgadywanka byla by nadal zgadywanka. NIESPRAWDZONE NA SPRZECIE."
@@ -202,10 +202,10 @@
         {
           "plik": "bin/cyd28/office.bin",
           "rozmiar": 1197664,
-          "sha256": "979bdacb2a817c2c81c683e09bb9a9544ff422a6185875b0d17a69b2a2a3905a",
+          "sha256": "23f73ec4b5f026f9f84af8ae4466bafb79a87a23017585e74d65b4b9d961ef43",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; 2.8\" NIESPRAWDZONE",
-          "wersja": "1.3.0",
+          "wersja": "1.3.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "To samo Office co na 2.4\", zbudowane dla CYD 2.8\" (2432S028R). Na tej plytce dotyk XPT2046 siedzi na WLASNYCH pinach (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), a nie na magistrali ekranu, wiec czyta sie go bit-bangiem - to samo rozwiazanie, ktore od dawna dziala w K-OS. Podswietlenie na GPIO 21 zamiast 27. WAZNE: domyslna kalibracja dotyku dla 2.8\" jest ZGADYWANA i program o tym wie - przy pierwszym starcie bez pliku /korona/cyd28/dotyk.txt pokazuje pelnoekranowe ostrzezenie i proponuje kalibracje czterech rogow, zamiast po cichu uzyc zlych liczb. Ten ekran nie ma przyciskow celowo, bo przy zlej kalibracji przycisk moze byc nie do trafienia - liczy sie dowolne dotkniecie czytane surowo z przetwornika. NIESPRAWDZONE NA SPRZECIE."
@@ -241,10 +241,10 @@
         {
           "plik": "bin/cyd28s/meteo-pion.bin",
           "rozmiar": 1148688,
-          "sha256": "8820d19d320f5e2f073d3a2eca4b514c5eda5f21ada2829cea794ddad71a31cd",
+          "sha256": "134f473c768e02f017f2c35d63f6e38934337ae1ea7d9c7db7b4477ee9aeff6f",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Stacja pogodowa dla CYD 2.8\" w rewizji ze sterownikiem ST7789 (plytka z dwoma gniazdami USB), orientacja pionowa. Zbudowana z tego samego zrodla co wersja cyd28 - rozni sie tylko flagami sterownika ekranu. NIESPRAWDZONE NA SPRZECIE. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, to jest poprawka na jedna flage."
@@ -252,10 +252,10 @@
         {
           "plik": "bin/cyd28s/meteo-poziom.bin",
           "rozmiar": 1150704,
-          "sha256": "26fce04fe642060130ec9592955533f8b7865a6b757af046f78017b286002ca6",
+          "sha256": "b03abd32cb138856a9c0a52f1d46eab78b8bd98e173ed404189b1bd9a1447d58",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "wersja": "0.2.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja pozioma dla CYD 2.8\" ze sterownikiem ST7789. Jak w pozostalych wersjach poziomych kalibracja dotyku idzie WPROST w orientacji poziomej, bo kalibracja z pionu daje w poziomie rozciagniecie, a nie obrot. NIESPRAWDZONE NA SPRZECIE."
@@ -263,10 +263,10 @@
         {
           "plik": "bin/cyd28s/office.bin",
           "rozmiar": 1197584,
-          "sha256": "b2360518f7582964da5b84058788252f9c857317af74abac7bdb3009c8721ca5",
+          "sha256": "7938977363e95ad87bf1d913cd9373d3354c159ed51e90e2966b21c2e60078f7",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE",
-          "wersja": "1.3.0",
+          "wersja": "1.3.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "To samo Office co na 2.8\", przebudowane dla rewizji ze sterownikiem ekranu ST7789 (plytka z DWOMA gniazdami USB, czasem opisywana jako v3). Dotyk, piny i podswietlenie GPIO 21 sa TAKIE SAME jak w wersji ILI9341 - rozni sie wylacznie sterownik ekranu, ktorego nie da sie wybrac w czasie dzialania, bo jest wkompilowany w biblioteke. Dlatego ta plytka ma osobny identyfikator (cyd28s) i osobne obrazy. NIESPRAWDZONE NA SPRZECIE, I NIE DA SIE TEGO SPRAWDZIC BEZ TEJ PLYTKI. Dwie rzeczy widac w sekunde po pierwszym starcie i obie sa do poprawienia jedna flaga, bez ruszania kodu: caly obraz jako NEGATYW oraz CZERWONY ZAMIENIONY Z NIEBIESKIM. Jesli tak wyjdzie - napisz, poprawka to jeden przebudowany obraz. Kalibracja dotyku lezy w /korona/cyd28s/dotyk.txt i trzeba ja zrobic raz osobno, mimo ze panel dotykowy jest ten sam co w cyd28."
