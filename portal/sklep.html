@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-OS — sklep</title>
+<meta name="description" content="Programy dla K-OS na płytki ESP32 Cheap Yellow Display: opisy, wersje, oceny i pliki do pobrania. / Programs for K-OS on ESP32 CYD boards: descriptions, versions, ratings and downloads.">
+<link rel="icon" type="image/png" href="korona-godlo.png">
+<style>
+/* Ten sam motyw co reszta portalu i co plytka (K-OS "zielony"). */
+:root{
+  --bg:#000; --card:#070a07; --sel:#00220f; --edge:#005d00; --edge2:#00a000;
+  --txt:#00e600; --txt2:#00b000; --acc:#00ff00; --warn:#ff9a00; --err:#ff3b30;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:15.5px/1.6 var(--mono)}
+a{color:var(--acc);text-decoration:none;border-bottom:1px solid var(--edge)}
+a:hover{border-bottom-color:var(--acc);background:var(--sel)}
+main{max-width:940px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.5rem;margin:0 0 4px;color:var(--acc)}
+.pod{color:var(--txt2);margin:0 0 20px}
+.plytki{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.plytki button{font:inherit;color:var(--txt);background:var(--card);border:2px solid var(--edge);
+  border-radius:8px;padding:8px 14px;cursor:pointer}
+.plytki button[aria-pressed=true]{background:var(--sel);border-color:var(--acc);color:var(--acc)}
+.lista{display:grid;gap:14px}
+.p{display:grid;grid-template-columns:56px 1fr;gap:14px;background:var(--card);
+  border:2px solid var(--edge);border-radius:10px;padding:14px;box-shadow:4px 4px 0 #041a04}
+.p canvas{width:48px;height:48px;image-rendering:pixelated}
+.ini{width:48px;height:48px;display:grid;place-items:center;border:2px solid var(--edge2);
+  border-radius:10px;color:var(--acc);font-weight:700}
+.tyt{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.tyt b{color:var(--acc);font-size:1.05rem}
+.meta,.oc{color:var(--txt2);font-size:.9rem}
+.gw{color:var(--warn);letter-spacing:2px}
+.opis{margin:6px 0 0}
+details summary{cursor:pointer;color:var(--txt2);margin-top:6px}
+details p{white-space:pre-wrap;margin:8px 0 0}
+.ost{color:var(--warn)}
+footer{color:var(--txt2);margin-top:28px;font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<h1>K-OS — sklep</h1>
+<p class="pod">Programy dla płytek CYD. To samo, co widzi płytka w menu <b>sklep</b> —
+tu tylko wygodniej się czyta. <a href="index.html">wgraj K-OS</a> ·
+<a href="zglos.html">zgłoś swój program</a></p>
+
+<div class="plytki" id="plytki"></div>
+<div class="lista" id="lista">wczytuję…</div>
+
+<footer id="stopka"></footer>
+</main>
+<script>
+/* Strona jest STATYCZNA - wszystko leci z przegladarki:
+     katalog-<plytka>.json  - lista programow (ten sam plik, ktory pobiera plytka),
+     info/<plytka>/<plik>.pl.txt - pelny opis, dociagany dopiero po rozwinieciu,
+     bin/<plytka>/<nazwa>.ico    - ikona, maska alfa 4-bit 32x32 (512 B), rysowana na canvas,
+     Worker /oceny?b=<plytka>    - gwiazdki.
+   Zaden z tych zasobow nie jest konieczny: brak ikony daje inicjaly, brak ocen po prostu
+   nie pokazuje gwiazdek, brak opisu chowa rozwijanie. Strona ma dzialac takze wtedy,
+   gdy Worker milczy - dokladnie jak sklep na plytce. */
+var BAZA = "https://raw.githubusercontent.com/PixelPetrol/korona-programy/main/";
+var OCENY = "https://k-os-stat.juskabluzka.workers.dev/oceny?b=";
+var PLYTKI = [];
+var biezaca = null;
+
+function el(t, k, tx){ var e=document.createElement(t); if(k) e.className=k; if(tx!=null) e.textContent=tx; return e; }
+
+function inicjaly(n){
+  var s = n.replace(/[-_]/g," ").split(/\s+/).filter(Boolean);
+  return (s.length>1 ? s[0][0]+s[1][0] : n.slice(0,2)).toUpperCase();
+}
+function gwiazdki(sr){                      // srednia 0..5 -> pelne i puste gwiazdki
+  var p = Math.round(sr), s = "";
+  for (var i=0;i<5;i++) s += i<p ? "★" : "☆";
+  return s;
+}
+/* Maska 4-bit na canvas: dwa piksele w bajcie, starszy polbajt pierwszy - tak samo,
+   jak czyta ja blitMask() na plytce. Kolor bierzemy z motywu strony, tak jak plytka
+   bierze go z motywu systemu. */
+function rysujIko(cv, buf){
+  var S=32, d=cv.getContext("2d").createImageData(S,S), o=0;
+  for (var i=0;i<S*S;i+=2){
+    var b = buf[i>>1], a1 = (b>>4)&15, a2 = b&15;
+    d.data[o++]=0; d.data[o++]=255; d.data[o++]=0; d.data[o++]=a1*17;
+    d.data[o++]=0; d.data[o++]=255; d.data[o++]=0; d.data[o++]=a2*17;
+  }
+  cv.width=S; cv.height=S; cv.getContext("2d").putImageData(d,0,0);
+}
+
+function kartaProgramu(pr, oceny){
+  var k = el("div","p");
+  var lewa = el("div");
+  var ico = pr.ikona;
+  if (ico){
+    var cv = document.createElement("canvas");
+    lewa.appendChild(cv);
+    fetch(BAZA+ico).then(function(r){ return r.ok ? r.arrayBuffer() : Promise.reject(); })
+      .then(function(a){ if (a.byteLength===512) rysujIko(cv, new Uint8Array(a)); else throw 0; })
+      .catch(function(){ lewa.innerHTML=""; lewa.appendChild(el("div","ini",inicjaly(pr.nazwa||""))); });
+  } else lewa.appendChild(el("div","ini",inicjaly(pr.nazwa||"")));
+  k.appendChild(lewa);
+
+  var pr2 = el("div");
+  var t = el("div","tyt");
+  t.appendChild(el("b", null, pr.nazwa||pr.plik));
+  t.appendChild(el("span","meta","v"+(pr.wersja||"?")+" · "+Math.round((pr.rozmiar||0)/1024)+" kB · "+(pr.autor||"")));
+  pr2.appendChild(t);
+
+  var baza = (pr.plik||"").split("/").pop().replace(/\.bin$/,"");
+  var o = oceny && oceny[baza];
+  if (o){
+    var w = el("div","oc");
+    if (o.ile >= 3){ var g=el("span","gw",gwiazdki(o.srednia)); w.appendChild(g);
+                     w.appendChild(el("span",null," "+o.srednia.toFixed(1).replace(".",",")+" ("+o.ile+")")); }
+    else            w.appendChild(el("span",null,o.ile+(o.ile===1?" glos":" glosy")+" — za malo na srednia"));
+    pr2.appendChild(w);
+  }
+
+  var op = (pr.opis && (pr.opis.pl || pr.opis.en)) || pr.opis || "";
+  if (typeof op === "string" && op) {
+    var d = el("p","opis",op);
+    if (/NIESPRAWDZONE|NIETESTOWAN/.test(op)) d.className="opis ost";
+    pr2.appendChild(d);
+  }
+
+  var sc = pr.info && (pr.info.pl || pr.info.en);
+  if (sc){
+    var det = document.createElement("details");
+    det.appendChild(el("summary",null,"caly opis"));
+    var tresc = el("p",null,"wczytuję…");
+    det.appendChild(tresc);
+    det.addEventListener("toggle", function(){
+      if (!det.open || det.dataset.gotowe) return;
+      det.dataset.gotowe = "1";
+      fetch(BAZA+sc).then(function(r){ return r.ok ? r.text() : Promise.reject(); })
+        .then(function(x){ tresc.textContent = x.trim(); })
+        .catch(function(){ tresc.textContent = "nie udalo sie pobrac opisu"; });
+    });
+    pr2.appendChild(det);
+  }
+
+  var dl = el("div","meta");
+  var a = el("a",null,"pobierz .bin"); a.href = BAZA+pr.plik; a.download="";
+  dl.appendChild(a);
+  pr2.appendChild(dl);
+  k.appendChild(pr2);
+  return k;
+}
+
+function pokaz(id){
+  biezaca = id;
+  Array.prototype.forEach.call(document.querySelectorAll("#plytki button"), function(b){
+    b.setAttribute("aria-pressed", String(b.dataset.id === id));
+  });
+  var lista = document.getElementById("lista");
+  lista.textContent = "wczytuję…";
+  var oceny = null;
+  fetch(OCENY+encodeURIComponent(id)).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){ oceny = j && j.oceny; })
+    .catch(function(){})                                  /* brak ocen nie moze zatrzymac listy */
+    .then(function(){ return fetch(BAZA+"katalog-"+id+".json"); })
+    .then(function(r){ return r.json(); })
+    .then(function(k){
+      lista.innerHTML = "";
+      (k.programy||[]).forEach(function(pr){ lista.appendChild(kartaProgramu(pr, oceny)); });
+      document.getElementById("stopka").textContent =
+        (k.programy||[]).length + " programow dla " + (k.nazwa||id) +
+        (oceny ? "" : "  ·  ocen nie udalo sie pobrac");
+    })
+    .catch(function(){ lista.textContent = "nie udalo sie pobrac katalogu"; });
+}
+
+fetch(BAZA+"plytki.json").then(function(r){ return r.json(); }).then(function(p){
+  PLYTKI = p;
+  var box = document.getElementById("plytki");
+  p.forEach(function(b){
+    var btn = el("button", null, b.nazwa || b.id);
+    btn.dataset.id = b.id;
+    btn.addEventListener("click", function(){ pokaz(b.id); });
+    box.appendChild(btn);
+  });
+  pokaz(p[0].id);
+}).catch(function(){ document.getElementById("lista").textContent = "nie udalo sie pobrac listy plytek"; });
+</script>
+</body>
+</html>
