@@ -1,0 +1,216 @@
+{
+  "sklep": "KORONA",
+  "wersja": 3,
+  "plytka": "cyd24",
+  "nazwa": "CYD 2.4\" (ESP32-2432S024)",
+  "programy": [
+    {
+      "plik": "bin/cyd24/bruce.bin",
+      "rozmiar": 2419792,
+      "sha256": "a70f8a2cc1f874f31d85ac1fa7270cd1f850d35ded6f6249a592f7d5298e41db",
+      "nazwa": "Bruce (LITE)",
+      "wersja": "lite",
+      "kategoria": "zewnetrzne",
+      "autor": "pr3y",
+      "opis": {
+        "pl": "pentest toolkit WiFi / BLE / IR / RF",
+        "en": "WiFi / BLE / IR / RF pentest toolkit"
+      },
+      "info": {
+        "pl": "info/cyd24/bruce.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/esp32div.bin",
+      "rozmiar": 2424304,
+      "sha256": "1ad1eab2d98eec68f77c6490c5bf196ab0217074787d1e7f34bf05ee858d3d5c",
+      "nazwa": "ESP32-DIV",
+      "wersja": "3.3.0",
+      "kategoria": "zewnetrzne",
+      "autor": "cifertech / Wontfallo (HaleHound-CYD)",
+      "opis": {
+        "pl": "multitool WiFi/BLE/RF (HaleHound-CYD 2.4\")",
+        "en": "WiFi/BLE/RF multitool (HaleHound-CYD 2.4\")"
+      },
+      "info": {
+        "pl": "info/cyd24/esp32div.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/gry-vol1.bin",
+      "rozmiar": 623280,
+      "sha256": "c2bd2b5ddc4324431e795a3afb3a9c664b7922ba2fb97b805b37f952026579f1",
+      "nazwa": "K-OS GAME VOL1",
+      "wersja": "0.8.0",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot",
+        "en": "2048, Lunar Lander, Overload, Punch-Through, Payload and Longshot"
+      },
+      "info": {
+        "pl": "info/cyd24/gry-vol1.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/marauder.bin",
+      "rozmiar": 1607840,
+      "sha256": "e1a07763f1c5404f699531b8f7f80b56f660f5a9a2040ab330e218fe40d8a405",
+      "nazwa": "Marauder",
+      "wersja": "1.4.3",
+      "kategoria": "zewnetrzne",
+      "autor": "justcallmekoko / Fr4nkFletcher",
+      "opis": {
+        "pl": "audyt WiFi / BLE",
+        "en": "WiFi / BLE auditing"
+      },
+      "info": {
+        "pl": "info/cyd24/marauder.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/mesh.bin",
+      "rozmiar": 873600,
+      "sha256": "22c73b7b4edb8061b22d2f696f5bdbd425d3ae6af76b2fcd77c471b6f06e5ec2",
+      "nazwa": "K-OS Handset",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "komunikator MeshCore po Bluetooth",
+        "en": "MeshCore messenger over Bluetooth"
+      },
+      "info": {
+        "pl": "info/cyd24/mesh.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/meteo-pion.bin",
+      "rozmiar": 1149728,
+      "sha256": "4f094768c72ddfb37c4873af608deec9dc2f4b46df7eaebc70fdbf49c92a0ab7",
+      "nazwa": "Meteo K-OS pion",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "pogoda, radar opadow IMGW, 4 widoki",
+        "en": "weather, IMGW rain radar, 4 views"
+      },
+      "info": {
+        "pl": "info/cyd24/meteo-pion.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/meteo-poziom.bin",
+      "rozmiar": 1151712,
+      "sha256": "ec281e86a6cff2fa434bf6dcee7f91bf6137990866e5d7db1397222b1ad44921",
+      "nazwa": "Meteo K-OS poziom",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "pogoda, radar opadow IMGW; NIESPRAWDZONE",
+        "en": "weather, IMGW rain radar; UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/meteo-poziom.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/nerdminer.bin",
+      "rozmiar": 2157264,
+      "sha256": "dd033d344f55227aaa4534a7804383cfd408fb62461028fa52cf5526f908dc80",
+      "nazwa": "NerdMiner v2",
+      "wersja": "1.8.3",
+      "kategoria": "zewnetrzne",
+      "autor": "BitMaker-hub",
+      "opis": {
+        "pl": "kopacz-loteria BTC + kurs i bloki; NIETESTOWANY",
+        "en": "BTC lottery miner, price and blocks; UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/nerdminer.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/office.bin",
+      "rozmiar": 1197680,
+      "sha256": "4ed7052ee8e9838bfcbe61fc1bef101b2b3a7d400953791b14de9b98b3c02e15",
+      "nazwa": "K-OS Office",
+      "wersja": "1.3.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
+        "en": "notes, calculator, calendar, files, QR, rates"
+      },
+      "info": {
+        "pl": "info/cyd24/office.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/openhasp.bin",
+      "rozmiar": 1732448,
+      "sha256": "3574a8555d0fccc31d12d88a0df32fa0e20ebaa8cca841ab92d6e9eaea83c231",
+      "nazwa": "openHASP",
+      "wersja": "0.7.0",
+      "kategoria": "zewnetrzne",
+      "autor": "Francis Van Roie (fvanroie)",
+      "opis": {
+        "pl": "panel dotykowy Home Assistant; NIETESTOWANY",
+        "en": "Home Assistant touch panel; UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/openhasp.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/pogoda.bin",
+      "rozmiar": 1619168,
+      "sha256": "15183cc35df85b4e6717b161cbad8a5ce78c5ddb7e8d58efb7d865c1e31fcb91",
+      "nazwa": "Pogoda",
+      "wersja": "0.1.36",
+      "kategoria": "zewnetrzne",
+      "autor": "nicholaswilde",
+      "opis": {
+        "pl": "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY",
+        "en": "weather forecast, Open-Meteo, no key; UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/pogoda.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/radar-pion.bin",
+      "rozmiar": 1498352,
+      "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803",
+      "nazwa": "SkyCYD 4.4.1 pion",
+      "wersja": "4.4.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "radar ADS-B, samoloty wokol domu",
+        "en": "ADS-B radar, planes around your home"
+      },
+      "info": {
+        "pl": "info/cyd24/radar-pion.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd24/radar-poziom.bin",
+      "rozmiar": 1499968,
+      "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca",
+      "nazwa": "SkyCYD 4.4.1 poziom",
+      "wersja": "4.4.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "radar ADS-B, ekran poziomo",
+        "en": "ADS-B radar, landscape screen"
+      },
+      "info": {
+        "pl": "info/cyd24/radar-poziom.bin.pl.txt"
+      }
+    }
+  ]
+}

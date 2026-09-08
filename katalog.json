@@ -16,7 +16,7 @@
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
           "info": "Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE. Env KORONA_CYD24: poprawione kolory (INVON).",
-          "info_pelny": "info/cyd24/bruce.bin.txt"
+          "info_pelny": "info/cyd24/bruce.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/esp32div.bin",
@@ -28,7 +28,7 @@
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)",
           "info": "HaleHound-CYD: skaner WiFi/BLE, deauth, RF, NFC (moduly opcjonalne). Port K-OS dla CYD 2.4\": dotyk XPT2046 przez magistrale LCD (TFT_eSPI, TOUCH_CS 33) zamiast bit-bangu po pinach ekranu, ktory",
-          "info_pelny": "info/cyd24/esp32div.bin.txt"
+          "info_pelny": "info/cyd24/esp32div.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/gry-vol1.bin",
@@ -40,7 +40,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Pierwszy tom gier dla K-OS, po polsku i po angielsku, orientacja pionowa. Dwie gry: 2048 w wersji K-OS oraz LUNAR LANDER z 30 poziomami nazwanymi od prawdziwych miejsc na Ksiezycu i dalej w ukladzie",
-          "info_pelny": "info/cyd24/gry-vol1.bin.txt"
+          "info_pelny": "info/cyd24/gry-vol1.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/marauder.bin",
@@ -63,7 +63,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Komunikator dla wlasnego wezla MeshCore, polaczony z nim po Bluetooth LE - plytka jest SLUCHAWKA, a wezel radiem.",
-          "info_pelny": "info/cyd24/mesh.bin.txt"
+          "info_pelny": "info/cyd24/mesh.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/meteo-pion.bin",
@@ -75,7 +75,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Stacja pogodowa pod palec, po polsku i po angielsku, w orientacji PIONOWEJ. Cztery widoki przelaczane w menu (domyslnie Konsola, dalej Kafelki, Radar i Zegar) - wybor wraca po restarcie.",
-          "info_pelny": "info/cyd24/meteo-pion.bin.txt"
+          "info_pelny": "info/cyd24/meteo-pion.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/meteo-poziom.bin",
@@ -87,7 +87,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Ta sama stacja pogodowa co Meteo K-OS pion, ale w orientacji POZIOMEJ 320x240. Radar ma tu kwadratowa siatke przy lewej krawedzi i panel boczny z najsilniejsza komorka opadu, legenda i wiekiem klatki",
-          "info_pelny": "info/cyd24/meteo-poziom.bin.txt"
+          "info_pelny": "info/cyd24/meteo-poziom.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/nerdminer.bin",
@@ -99,7 +99,7 @@
           "kategoria": "zewnetrzne",
           "autor": "BitMaker-hub",
           "info": "Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc).",
-          "info_pelny": "info/cyd24/nerdminer.bin.txt"
+          "info_pelny": "info/cyd24/nerdminer.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/office.bin",
@@ -111,7 +111,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Pakiet biurowy pod palec, po polsku i po angielsku. Notatnik pisany takze Z KLAWIATURY KOMPUTERA: Office podnosi na czas tego ekranu maly serwer i pokazuje adres oraz kod QR, wiec dlugi tekst piszesz",
-          "info_pelny": "info/cyd24/office.bin.txt"
+          "info_pelny": "info/cyd24/office.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/openhasp.bin",
@@ -123,7 +123,7 @@
           "kategoria": "zewnetrzne",
           "autor": "Francis Van Roie (fvanroie)",
           "info": "openHASP zamienia CYD w panel dotykowy Home Assistant: strony/widgety LVGL z pages.jsonl, sterowanie MQTT.",
-          "info_pelny": "info/cyd24/openhasp.bin.txt"
+          "info_pelny": "info/cyd24/openhasp.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/pogoda.bin",
@@ -135,7 +135,7 @@
           "kategoria": "zewnetrzne",
           "autor": "nicholaswilde",
           "info": "Stacja pogodowa na LVGL: duza temperatura, ikona, prognoza 3-dniowa, wykres godzinowy, motywy. Dane z Open-Meteo bez klucza API - lokalizacja po IP albo wspolrzedne.",
-          "info_pelny": "info/cyd24/pogoda.bin.txt"
+          "info_pelny": "info/cyd24/pogoda.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/radar-pion.bin",
@@ -175,7 +175,7 @@
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
           "info": "Wersja dla CYD 2.8\" (2432S028R) ze srodowiska KORONA_CYD28, zbudowana z natywnego profilu autora `CYD-2432S028` - dotyk na dedykowanych pinach, bez naszej latki dla 2.4\".",
-          "info_pelny": "info/cyd28/bruce.bin.txt"
+          "info_pelny": "info/cyd28/bruce.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/esp32div.bin",
@@ -187,7 +187,7 @@
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)",
           "info": "Wersja dla CYD 2.8\" (2432S028R). Zbudowana z NATYWNEGO profilu autora - na tej plytce dotyk XPT2046 siedzi na wlasnych pinach (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), wiec nasza poprawka dotyku dla",
-          "info_pelny": "info/cyd28/esp32div.bin.txt"
+          "info_pelny": "info/cyd28/esp32div.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/gry-vol1.bin",
@@ -199,7 +199,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Ten sam tom gier co na 2.4\", zbudowany dla CYD 2.8\" (2432S028R): dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21.",
-          "info_pelny": "info/cyd28/gry-vol1.bin.txt"
+          "info_pelny": "info/cyd28/gry-vol1.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/marauder.bin",
@@ -211,7 +211,7 @@
           "kategoria": "zewnetrzne",
           "autor": "justcallmekoko / Fr4nkFletcher",
           "info": "ESP32 Marauder dla CYD 2.8\" (2432S028R) z panelem ILI9341. Dotyk XPT2046 dziala przez OSOBNA, programowa magistrale SPI (CLK 25, MOSI 32, MISO 39) - dolaczony do projektu wariant biblioteki TFT_eSPI",
-          "info_pelny": "info/cyd28/marauder.bin.txt"
+          "info_pelny": "info/cyd28/marauder.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/mesh.bin",
@@ -223,7 +223,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Ten sam komunikator co na 2.4\", zbudowany dla CYD 2.8\" (2432S028R): dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21.",
-          "info_pelny": "info/cyd28/mesh.bin.txt"
+          "info_pelny": "info/cyd28/mesh.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/meteo-pion.bin",
@@ -235,7 +235,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Stacja pogodowa dla CYD 2.8\" (2432S028R), orientacja pionowa. Dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21.",
-          "info_pelny": "info/cyd28/meteo-pion.bin.txt"
+          "info_pelny": "info/cyd28/meteo-pion.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/meteo-poziom.bin",
@@ -247,7 +247,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja pozioma dla CYD 2.8\". Uwaga: na tej plytce kalibracja idzie WPROST w orientacji poziomej, a nie przez przeliczenie z pionowej - przeliczona zgadywanka byla by nadal zgadywanka.",
-          "info_pelny": "info/cyd28/meteo-poziom.bin.txt"
+          "info_pelny": "info/cyd28/meteo-poziom.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/office.bin",
@@ -259,7 +259,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "To samo Office co na 2.4\", zbudowane dla CYD 2.8\" (2432S028R). Na tej plytce dotyk XPT2046 siedzi na WLASNYCH pinach (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), a nie na magistrali ekranu, wiec czyta",
-          "info_pelny": "info/cyd28/office.bin.txt"
+          "info_pelny": "info/cyd28/office.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28/radar-pion.bin",
@@ -299,7 +299,7 @@
           "kategoria": "zewnetrzne",
           "autor": "pr3y",
           "info": "Bruce dla CYD 2.8\" w rewizji z dwoma gniazdami USB - ta sama plytka co cyd28, ale z panelem ST7789. Piny ekranu, dotyku, podswietlenia i karty SD sa identyczne; zmienil sie wylacznie uklad sterujacy",
-          "info_pelny": "info/cyd28s/bruce.bin.txt"
+          "info_pelny": "info/cyd28s/bruce.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/esp32div.bin",
@@ -311,7 +311,7 @@
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)",
           "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB). Sprzetowo identyczna ze zwyklym modelem 2.8\" - te same piny ekranu, ten sam dotyk XPT2046, podswietlenie GPIO 21 - rozni sie",
-          "info_pelny": "info/cyd28s/esp32div.bin.txt"
+          "info_pelny": "info/cyd28s/esp32div.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/gry-vol1.bin",
@@ -323,7 +323,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Ten sam tom gier co na 2.8\", przebudowany dla rewizji z panelem ST7789 (plytka z dwoma gniazdami USB). Dotyk, piny i podswietlenie GPIO 21 sa takie same jak w wersji ILI9341.",
-          "info_pelny": "info/cyd28s/gry-vol1.bin.txt"
+          "info_pelny": "info/cyd28s/gry-vol1.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/marauder.bin",
@@ -335,7 +335,7 @@
           "kategoria": "zewnetrzne",
           "autor": "justcallmekoko / Fr4nkFletcher",
           "info": "Marauder dla CYD 2.8\" w rewizji 2 USB, z panelem ST7789. Sprzetowo identyczny z wersja cyd28 - te same piny ekranu, ten sam dotyk na osobnej magistrali, podswietlenie GPIO 21 - rozni sie wylacznie",
-          "info_pelny": "info/cyd28s/marauder.bin.txt"
+          "info_pelny": "info/cyd28s/marauder.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/mesh.bin",
@@ -347,7 +347,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB). Komunikator dla wlasnego wezla MeshCore, polaczony z nim po Bluetooth LE - plytka jest SLUCHAWKA, a wezel radiem.",
-          "info_pelny": "info/cyd28s/mesh.bin.txt"
+          "info_pelny": "info/cyd28s/mesh.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/meteo-pion.bin",
@@ -359,7 +359,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Stacja pogodowa dla CYD 2.8\" w rewizji ze sterownikiem ST7789 (plytka z dwoma gniazdami USB), orientacja pionowa.",
-          "info_pelny": "info/cyd28s/meteo-pion.bin.txt"
+          "info_pelny": "info/cyd28s/meteo-pion.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/meteo-poziom.bin",
@@ -371,7 +371,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja pozioma dla CYD 2.8\" ze sterownikiem ST7789. Jak w pozostalych wersjach poziomych kalibracja dotyku idzie WPROST w orientacji poziomej, bo kalibracja z pionu daje w poziomie rozciagniecie, a",
-          "info_pelny": "info/cyd28s/meteo-poziom.bin.txt"
+          "info_pelny": "info/cyd28s/meteo-poziom.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/office.bin",
@@ -383,7 +383,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "To samo Office co na 2.8\", przebudowane dla rewizji ze sterownikiem ekranu ST7789 (plytka z DWOMA gniazdami USB, czasem opisywana jako v3).",
-          "info_pelny": "info/cyd28s/office.bin.txt"
+          "info_pelny": "info/cyd28s/office.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/radar-pion.bin",
@@ -395,7 +395,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB) - zbudowana, NIE SPRAWDZONA NA SPRZECIE.",
-          "info_pelny": "info/cyd28s/radar-pion.bin.txt"
+          "info_pelny": "info/cyd28s/radar-pion.bin.pl.txt"
         },
         {
           "plik": "bin/cyd28s/radar-poziom.bin",
@@ -407,7 +407,7 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB) - zbudowana, NIE SPRAWDZONA NA SPRZECIE.",
-          "info_pelny": "info/cyd28s/radar-poziom.bin.txt"
+          "info_pelny": "info/cyd28s/radar-poziom.bin.pl.txt"
         }
       ]
     }

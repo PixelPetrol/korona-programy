@@ -1,0 +1,168 @@
+{
+  "sklep": "KORONA",
+  "wersja": 3,
+  "plytka": "cyd28",
+  "nazwa": "CYD 2.8\" (ESP32-2432S028R)",
+  "programy": [
+    {
+      "plik": "bin/cyd28/bruce.bin",
+      "rozmiar": 2417360,
+      "sha256": "035f34b48eace824f4101d3f573c06564e45b368d4781ac6243dab9261ad2c05",
+      "nazwa": "Bruce (LITE)",
+      "wersja": "lite",
+      "kategoria": "zewnetrzne",
+      "autor": "pr3y",
+      "opis": {
+        "pl": "pentest toolkit WiFi / BLE / IR / RF; 2.8\" NIESPRAWDZONE",
+        "en": "WiFi / BLE / IR / RF pentest toolkit; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/bruce.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/esp32div.bin",
+      "rozmiar": 2420240,
+      "sha256": "0c68c29f6f4f2ac2792ad0911b204986bb6de0d50ceface4bc9ed576c57c176e",
+      "nazwa": "ESP32-DIV",
+      "wersja": "3.3.0",
+      "kategoria": "zewnetrzne",
+      "autor": "cifertech / Wontfallo (HaleHound-CYD)",
+      "opis": {
+        "pl": "multitool WiFi/BLE/RF; 2.8\" NIESPRAWDZONE",
+        "en": "WiFi/BLE/RF multitool; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/esp32div.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/gry-vol1.bin",
+      "rozmiar": 622256,
+      "sha256": "6ad55f4c58d0f713a7e337204999d6b8790e7fe33297bf9150f17b1de9cc9f32",
+      "nazwa": "K-OS GAME VOL1",
+      "wersja": "0.8.0",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "2048, Lunar Lander, Overload, Punch-Through i Payload; 2.8\" NIESPRAWDZONE",
+        "en": "2048, Lunar Lander, Overload, Punch-Through and Payload; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/gry-vol1.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/marauder.bin",
+      "rozmiar": 1589360,
+      "sha256": "8f018278844fa8b3a8458647a8c9da87f9888434c602e7e8a1129ec6b6abad03",
+      "nazwa": "Marauder",
+      "wersja": "1.4.3",
+      "kategoria": "zewnetrzne",
+      "autor": "justcallmekoko / Fr4nkFletcher",
+      "opis": {
+        "pl": "audyt WiFi / BLE; 2.8\" NIESPRAWDZONE",
+        "en": "WiFi / BLE auditing; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/marauder.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/mesh.bin",
+      "rozmiar": 872704,
+      "sha256": "c73c5f6294d32379dd67a97b0e0c8a750b2c87d28cc1d59a0d970281a1b98f32",
+      "nazwa": "K-OS Handset",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "komunikator MeshCore po Bluetooth; 2.8\" NIESPRAWDZONE",
+        "en": "MeshCore messenger over Bluetooth; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/mesh.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/meteo-pion.bin",
+      "rozmiar": 1148816,
+      "sha256": "006df7b197587e3b9fdebd3ae752c9165888bab7815b6b87dd63b55350bbd0b8",
+      "nazwa": "Meteo K-OS pion",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
+        "en": "weather, IMGW rain radar; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/meteo-pion.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/meteo-poziom.bin",
+      "rozmiar": 1150816,
+      "sha256": "e51fb62030632126bc6b50df1669ab9e21b1910e5a51cbdad435161325ceea31",
+      "nazwa": "Meteo K-OS poziom",
+      "wersja": "0.2.3",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
+        "en": "weather, IMGW rain radar; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/meteo-poziom.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/office.bin",
+      "rozmiar": 1197664,
+      "sha256": "23f73ec4b5f026f9f84af8ae4466bafb79a87a23017585e74d65b4b9d961ef43",
+      "nazwa": "K-OS Office",
+      "wersja": "1.3.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; 2.8\" NIESPRAWDZONE",
+        "en": "notes, calculator, calendar, files, QR, rates; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/office.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/radar-pion.bin",
+      "rozmiar": 1498928,
+      "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
+      "nazwa": "SkyCYD 4.4.1 pion",
+      "wersja": "4.4.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
+        "en": "ADS-B radar; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/radar-pion.bin.pl.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28/radar-poziom.bin",
+      "rozmiar": 1500544,
+      "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e",
+      "nazwa": "SkyCYD 4.4.1 poziom",
+      "wersja": "4.4.1",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
+        "en": "ADS-B radar; 2.8\" UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/radar-poziom.bin.pl.txt"
+      }
+    }
+  ]
+}

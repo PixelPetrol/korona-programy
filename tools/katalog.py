@@ -27,8 +27,13 @@ UZYTK_DIR = "uzytkownicy"          # bin/<plytka>/uzytkownicy/<nazwa>.bin + <naz
 # kategoria: "autorskie" (programy K-OS / Piotra) albo "zewnetrzne" (porty cudzych projektow).
 # Plik bez wpisu -> nie trafia do katalogu (zeby nie wystawiac niesprawdzonych binarek).
 A, Z, U = "autorskie", "zewnetrzne", "uzytkownicy"
-def m(nazwa, opis, wersja, kategoria, autor, info=""):
-    return dict(nazwa=nazwa, opis=opis, wersja=wersja, kategoria=kategoria, autor=autor, info=info)
+def m(nazwa, opis, wersja, kategoria, autor, info="", opis_en="", info_en=""):
+    """opis_en / info_en sa OPCJONALNE i puste az do przetlumaczenia. Pustych NIE wystawiamy
+    jako angielskich - K-OS pokaze wtedy polska wersje i napisze, ze to zastepstwo. Wpisanie
+    tu polskiego tekstu pod etykieta 'en' byloby gorsze niz brak: uzytkownik nie wiedzialby,
+    ze czyta nie ten jezyk."""
+    return dict(nazwa=nazwa, opis=opis, wersja=wersja, kategoria=kategoria, autor=autor, info=info,
+                opis_en=opis_en, info_en=info_en)
 META = {
     "radar-pion.bin":   m("SkyCYD 4.4.1 pion",   "radar ADS-B, samoloty wokol domu", "4.4.1", A, "Piotr Korona",
                           "Radar lotniczy na CYD: pozycje z adsb.lol przez wlasny Worker, mapa, pogoda, zdjecia samolotow. Ekran pionowo 240x320. Konfiguracja przez portal WiFi (AP przy pierwszym starcie)."),
@@ -125,19 +130,122 @@ def skroc_info(pelny):
     return pelny[:ciach + 1].rstrip(), True
 
 
+# Limit dlugosci pliku opisu. K-OS czyta go do bufora o stalym rozmiarze i powyzej tego
+# i tak ucina - lepiej, zeby uciecie bylo tutaj, swiadome, niz tam, w polowie zdania.
+INFO_PLIK_MAX = 2500
+
+# --- ANGIELSKIE JEDNOZDANIOWCE ------------------------------------------------------------
+# Opisy sa skladane: TRZON + ewentualny przyrostek o stanie sprawdzenia. Tlumaczymy wiec
+# jedno i drugie osobno, zamiast trzydziestu gotowych zdan - inaczej kazda zmiana jednego
+# slowa w polskim wymagalaby recznego poprawienia kilku wpisow angielskich.
+# NIEZNANY TRZON DAJE PUSTY WYNIK, a nie polski tekst pod etykieta "en": lepiej, zeby K-OS
+# napisal "opis tylko po polsku", niz zeby czlowiek czytal nie ten jezyk, nie wiedzac o tym.
+TRZON_EN = {
+    "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot":
+        "2048, Lunar Lander, Overload, Punch-Through, Payload and Longshot",
+    "2048, Lunar Lander, Overload, Punch-Through i Payload":
+        "2048, Lunar Lander, Overload, Punch-Through and Payload",
+    "audyt WiFi / BLE": "WiFi / BLE auditing",
+    "komunikator MeshCore po Bluetooth": "MeshCore messenger over Bluetooth",
+    "kopacz-loteria BTC + kurs i bloki": "BTC lottery miner, price and blocks",
+    'multitool WiFi/BLE/RF (HaleHound-CYD 2.4")': 'WiFi/BLE/RF multitool (HaleHound-CYD 2.4")',
+    "multitool WiFi/BLE/RF": "WiFi/BLE/RF multitool",
+    "notatnik, kalkulator, kalendarz, pliki, QR, kursy":
+        "notes, calculator, calendar, files, QR, rates",
+    "panel dotykowy Home Assistant": "Home Assistant touch panel",
+    "pentest toolkit WiFi / BLE / IR / RF": "WiFi / BLE / IR / RF pentest toolkit",
+    "pogoda, radar opadow IMGW, 4 widoki": "weather, IMGW rain radar, 4 views",
+    "pogoda, radar opadow IMGW": "weather, IMGW rain radar",
+    "prognoza pogody, Open-Meteo bez klucza": "weather forecast, Open-Meteo, no key",
+    "radar ADS-B, ekran poziomo": "ADS-B radar, landscape screen",
+    "radar ADS-B, samoloty wokol domu": "ADS-B radar, planes around your home",
+    "radar ADS-B": "ADS-B radar",
+}
+PRZYROSTEK_EN = {
+    '2.8" NIESPRAWDZONE': '2.8" UNTESTED',
+    '2.8" NIETESTOWANE':  '2.8" UNTESTED',
+    "ST7789 NIESPRAWDZONE": "ST7789 UNTESTED",
+    "NIESPRAWDZONE": "UNTESTED",
+    "NIETESTOWANY": "UNTESTED",
+    "NIETESTOWANE": "UNTESTED",
+}
+
+
+def opis_en_auto(pl):
+    if not pl:
+        return ""
+    trzon, _, ogon = pl.partition("; ")
+    en = TRZON_EN.get(trzon.strip())
+    if not en:
+        return ""
+    if ogon:
+        o = PRZYROSTEK_EN.get(ogon.strip())
+        if not o:
+            return ""          # nieznany przyrostek - wolimy nic niz polowe po polsku
+        en += "; " + o
+    return en
+
+
+
+def zapisz_info(pid, nazwa_pliku, lang, tekst):
+    """Pelny opis na dysk: info/<plytka>/<plik>.<jezyk>.txt. Zwraca sciezke wzgledna albo None.
+    ASCII bez ogonkow, bez recznego lamania wierszy - K-OS lamie sam do szerokosci ekranu,
+    a pojedynczy znak konca linii jest u niego nowym wierszem."""
+    if not tekst:
+        return None
+    if len(tekst) > INFO_PLIK_MAX:
+        tekst = tekst[:INFO_PLIK_MAX].rsplit(" ", 1)[0] + " ..."
+    rel = "info/%s/%s.%s.txt" % (pid, nazwa_pliku, lang)
+    sciezka = os.path.join(ROOT, rel)
+    os.makedirs(os.path.dirname(sciezka), exist_ok=True)
+    with open(sciezka, "w", encoding="utf-8") as fh:
+        fh.write(tekst + "\n")
+    return rel
+
+
 def wpis(pid, rel, data, meta):
+    """Wpis do STAREGO katalogu v2 - jeden wspolny plik, tylko po polsku.
+    Ten format zostaje, bo czyta go i starszy K-OS, i strona www w przegladarce
+    (PAGE_HTML w net.cpp wypisuje p.opis WPROST, wiec musi to byc napis, nie obiekt)."""
     e = {"plik": rel, "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest()}
-    e.update(meta)
+    e.update({k: v for k, v in meta.items() if k not in ("opis_en", "info_en")})
+    nazwa = rel.rsplit("/", 1)[-1]
     pelny = e.get("info", "")
     krotki, uciety = skroc_info(pelny)
+    sc_pl = zapisz_info(pid, nazwa, "pl", pelny)
+    zapisz_info(pid, nazwa, "en", meta.get("info_en", ""))
     if uciety:
-        nazwa = rel.rsplit("/", 1)[-1]
-        sciezka = os.path.join(ROOT, "info", pid, nazwa + ".txt")
-        os.makedirs(os.path.dirname(sciezka), exist_ok=True)
-        with open(sciezka, "w", encoding="utf-8") as fh:
-            fh.write(pelny + "\n")
         e["info"] = krotki
-        e["info_pelny"] = "info/%s/%s.txt" % (pid, nazwa)
+        if sc_pl:
+            e["info_pelny"] = sc_pl
+    return e
+
+
+def wpis3(pid, rel, data, meta):
+    """Wpis do katalogu v3 - JEDEN PLIK NA PLYTKE, opisy dwujezyczne i BEZ dlugiego tekstu.
+    Dlugi opis lezy w info/ i K-OS pobiera go dopiero przy otwarciu karty programu, prosto
+    na karte SD. Dzieki temu rozmiar katalogu przestal byc granica - a byl: 08.09.2026
+    katalog urosl do 35 kB i sklep na plytce przestal dzialac."""
+    nazwa = rel.rsplit("/", 1)[-1]
+    e = {"plik": rel, "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+         "nazwa": meta.get("nazwa", ""),
+         # WERSJA MUSI BYC ZAWSZE: K-OS wpisuje ja w nazwe pliku opisu na karcie i to ona
+         # uniewaznia opis po aktualizacji programu. Bez niej opis nigdy by sie nie odswiezyl.
+         "wersja": meta.get("wersja") or "0",
+         "kategoria": meta.get("kategoria", "zewnetrzne"),
+         "autor": meta.get("autor", "")}
+    opis = {"pl": meta.get("opis", "")}
+    en = meta.get("opis_en") or opis_en_auto(meta.get("opis", ""))
+    if en:
+        opis["en"] = en
+    e["opis"] = opis
+    info = {}
+    if meta.get("info"):
+        info["pl"] = "info/%s/%s.pl.txt" % (pid, nazwa)
+    if meta.get("info_en"):
+        info["en"] = "info/%s/%s.en.txt" % (pid, nazwa)
+    if info:
+        e["info"] = info
     return e
 
 
@@ -157,9 +265,11 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ROOT = root
     out = {"sklep": "KORONA", "wersja": 2, "plytki": []}
+    v3 = {}                       # pid -> lista wpisow do katalog-<plytka>.json
     for pid, pname in PLYTKI:
         d = os.path.join(root, "bin", pid)
         progs = []
+        progs3 = []
         if os.path.isdir(d):
             for f in sorted(os.listdir(d)):
                 if not f.lower().endswith(".bin"): continue
@@ -169,6 +279,7 @@ def main():
                 with open(p, "rb") as fh: data = fh.read()
                 if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr)
                 progs.append(wpis(pid, f"bin/{pid}/{f}", data, meta))
+                progs3.append(wpis3(pid, f"bin/{pid}/{f}", data, meta))
             du = os.path.join(d, UZYTK_DIR)
             if os.path.isdir(du):
                 for f in sorted(os.listdir(du)):
@@ -183,7 +294,9 @@ def main():
                     with open(p, "rb") as fh: data = fh.read()
                     if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr); continue
                     progs.append(wpis(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
+                    progs3.append(wpis3(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
         out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
+        v3[pid] = {"sklep": "KORONA", "wersja": 3, "plytka": pid, "nazwa": pname, "programy": progs3}
 
     tekst = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     rozmiar = len(tekst.encode("utf-8"))
@@ -197,6 +310,28 @@ def main():
         fh.write(tekst)
     print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow,",
           rozmiar, "B")
+    # --- format v3: JEDEN PLIK NA PLYTKE + maly spis plytek -------------------------------
+    # Plytka pobiera odtad TYLKO swoja liste, a nie wszystkie trzy. Dlugie opisy siedza
+    # w info/ i schodza na karte dopiero przy otwarciu karty programu.
+    for pid, pname in PLYTKI:
+        t3 = json.dumps(v3[pid], ensure_ascii=False, indent=2) + "\n"
+        with open(os.path.join(root, "katalog-%s.json" % pid), "w") as fh:
+            fh.write(t3)
+        print("  katalog-%s.json: %d programow, %d B" % (pid, len(v3[pid]["programy"]),
+                                                         len(t3.encode("utf-8"))))
+    # Spis plytek - potrzebny K-OS do kafelka "inne plytki". Bez niego trzeba by po to
+    # dociagac caly stary katalog.json, czyli dokladnie to, od czego uciekamy.
+    with open(os.path.join(root, "plytki.json"), "w") as fh:
+        fh.write(json.dumps([{"id": i, "nazwa": n} for i, n in PLYTKI],
+                            ensure_ascii=False, indent=2) + "\n")
+
+    # --- ile opisow czeka na angielski ---------------------------------------------------
+    braki = sum(1 for pid, _ in PLYTKI for e in v3[pid]["programy"] if "en" not in e.get("opis", {}))
+    ile = sum(len(v3[pid]["programy"]) for pid, _ in PLYTKI)
+    if braki:
+        print("  angielski: brakuje %d z %d opisow (K-OS pokaze polski i napisze, ze to zastepstwo)"
+              % (braki, ile))
+
     if rozmiar > KATALOG_OSTRZEZ:
         print("UWAGA: katalog ma %d B (prog ostrzegawczy %d, twardy %d). Zbliza sie do granicy,\n"
               "       przy ktorej sklep na plytce przestaje dzialac." % (rozmiar, KATALOG_OSTRZEZ, KATALOG_STOP),
