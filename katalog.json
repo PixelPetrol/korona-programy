@@ -233,6 +233,45 @@
           "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."
         }
       ]
+    },
+    {
+      "id": "cyd28s",
+      "nazwa": "CYD 2.8\" ST7789 (ESP32-2432S028 \"2 USB\")",
+      "programy": [
+        {
+          "plik": "bin/cyd28s/meteo-pion.bin",
+          "rozmiar": 1148688,
+          "sha256": "8820d19d320f5e2f073d3a2eca4b514c5eda5f21ada2829cea794ddad71a31cd",
+          "nazwa": "Meteo K-OS pion",
+          "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
+          "wersja": "0.2.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Stacja pogodowa dla CYD 2.8\" w rewizji ze sterownikiem ST7789 (plytka z dwoma gniazdami USB), orientacja pionowa. Zbudowana z tego samego zrodla co wersja cyd28 - rozni sie tylko flagami sterownika ekranu. NIESPRAWDZONE NA SPRZECIE. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, to jest poprawka na jedna flage."
+        },
+        {
+          "plik": "bin/cyd28s/meteo-poziom.bin",
+          "rozmiar": 1150704,
+          "sha256": "26fce04fe642060130ec9592955533f8b7865a6b757af046f78017b286002ca6",
+          "nazwa": "Meteo K-OS poziom",
+          "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
+          "wersja": "0.2.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja pozioma dla CYD 2.8\" ze sterownikiem ST7789. Jak w pozostalych wersjach poziomych kalibracja dotyku idzie WPROST w orientacji poziomej, bo kalibracja z pionu daje w poziomie rozciagniecie, a nie obrot. NIESPRAWDZONE NA SPRZECIE."
+        },
+        {
+          "plik": "bin/cyd28s/office.bin",
+          "rozmiar": 1197584,
+          "sha256": "b2360518f7582964da5b84058788252f9c857317af74abac7bdb3009c8721ca5",
+          "nazwa": "K-OS Office",
+          "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE",
+          "wersja": "1.3.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "To samo Office co na 2.8\", przebudowane dla rewizji ze sterownikiem ekranu ST7789 (plytka z DWOMA gniazdami USB, czasem opisywana jako v3). Dotyk, piny i podswietlenie GPIO 21 sa TAKIE SAME jak w wersji ILI9341 - rozni sie wylacznie sterownik ekranu, ktorego nie da sie wybrac w czasie dzialania, bo jest wkompilowany w biblioteke. Dlatego ta plytka ma osobny identyfikator (cyd28s) i osobne obrazy. NIESPRAWDZONE NA SPRZECIE, I NIE DA SIE TEGO SPRAWDZIC BEZ TEJ PLYTKI. Dwie rzeczy widac w sekunde po pierwszym starcie i obie sa do poprawienia jedna flaga, bez ruszania kodu: caly obraz jako NEGATYW oraz CZERWONY ZAMIENIONY Z NIEBIESKIM. Jesli tak wyjdzie - napisz, poprawka to jeden przebudowany obraz. Kalibracja dotyku lezy w /korona/cyd28s/dotyk.txt i trzeba ja zrobic raz osobno, mimo ze panel dotykowy jest ten sam co w cyd28."
+        }
+      ]
     }
   ]
 }

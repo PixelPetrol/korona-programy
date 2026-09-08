@@ -260,6 +260,25 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
       <div class="ldg"><span lang="pl">Ładuję instalator…</span><span lang="en">Loading the installer…</span></div>
     </div>
   </section>
+
+  <section class="card" aria-labelledby="h28s">
+    <h3 id="h28s">CYD 2.8" ST7789 <span class="tag warn"><span lang="pl">niesprawdzona</span><span lang="en">untested</span></span></h3>
+    <p class="model">ESP32-2432S028 &bdquo;2 USB&rdquo;</p>
+    <ul>
+      <li><span lang="pl">ekran <b>ST7789</b> 240×320 — nowsza rewizja tej samej płytki 2.8"</span><span lang="en"><b>ST7789</b> 240×320 display — a newer revision of the same 2.8" board</span></li>
+      <li><span lang="pl">dotyk, piny i podświetlenie GPIO 21 <b>takie same</b> jak w wersji ILI9341</span><span lang="en">touch, pins and GPIO 21 backlight are <b>identical</b> to the ILI9341 version</span></li>
+      <li><span lang="pl"><b>nigdy nie uruchomiona na sprzęcie.</b> Jeśli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim — napisz, to jedna flaga do poprawienia</span><span lang="en"><b>never run on real hardware.</b> If the image comes out inverted, or with red and blue swapped — tell us, it is a one-flag fix</span></li>
+      <li><span lang="pl">masz dwa gniazda USB na płytce? To najpewniej ta wersja</span><span lang="en">two USB sockets on the board? Then this is most likely your version</span></li>
+    </ul>
+    <div class="inst">
+      <esp-web-install-button manifest="manifest-cyd28s.json">
+        <button class="btn soft" slot="activate"><span lang="pl">Wgraj K-OS · 2.8" ST7789 (na własne ryzyko)</span><span lang="en">Install K-OS · 2.8" ST7789 (at your own risk)</span></button>
+        <span slot="unsupported" class="note"><span lang="pl">Ta przeglądarka nie ma WebSerial — użyj Chrome lub Edge na komputerze, albo drogi z wiersza poleceń niżej.</span><span lang="en">This browser has no WebSerial — use Chrome or Edge on a computer, or the command-line route below.</span></span>
+        <span slot="not-allowed" class="note"><span lang="pl">WebSerial działa tylko po <b>https://</b> albo na <b>localhost</b>.</span><span lang="en">WebSerial works only over <b>https://</b> or on <b>localhost</b>.</span></span>
+      </esp-web-install-button>
+      <div class="ldg"><span lang="pl">Ładuję instalator…</span><span lang="en">Loading the installer…</span></div>
+    </div>
+  </section>
 </div>
 
 <p class="note">
@@ -335,8 +354,11 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
 esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd24-scalony.bin
 
 # 2.8" (<span lang="pl">niesprawdzona</span><span lang="en">untested</span>)
-esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd28-scalony.bin</code></pre>
-    <p><span lang="pl">Pliki: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · sumy SHA-256: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. Na esptool 4.x program nazywa się <code>esptool.py</code>, a komenda <code>write_flash</code> (z podkreślnikiem).</span><span lang="en">Files: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · SHA-256 sums: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. On esptool 4.x the program is <code>esptool.py</code> and the command is <code>write_flash</code> (underscore).</span></p>
+esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd28-scalony.bin
+
+# 2.8" ST7789 / "2 USB" (<span lang="pl">niesprawdzona</span><span lang="en">untested</span>)
+esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd28s-scalony.bin</code></pre>
+    <p><span lang="pl">Pliki: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · <a href="obrazy/cyd28s/korona-cyd28s-scalony.bin">korona-cyd28s-scalony.bin</a> · sumy SHA-256: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. Na esptool 4.x program nazywa się <code>esptool.py</code>, a komenda <code>write_flash</code> (z podkreślnikiem).</span><span lang="en">Files: <a href="obrazy/cyd24/korona-cyd24-scalony.bin">korona-cyd24-scalony.bin</a> · <a href="obrazy/cyd28/korona-cyd28-scalony.bin">korona-cyd28-scalony.bin</a> · <a href="obrazy/cyd28s/korona-cyd28s-scalony.bin">korona-cyd28s-scalony.bin</a> · SHA-256 sums: <a href="obrazy/SUMY.txt">obrazy/SUMY.txt</a>. On esptool 4.x the program is <code>esptool.py</code> and the command is <code>write_flash</code> (underscore).</span></p>
   </div>
 </details>
 

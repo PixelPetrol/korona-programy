@@ -42,7 +42,7 @@ var REGULY = {
   LIM_info:       600,
   LIM_zglaszajacy: 60,
   ID_RE_SRC:      "^[a-z0-9][a-z0-9_-]{1,31}$",
-  PLYTKI:         ["cyd24", "cyd28"],
+  PLYTKI:         ["cyd24", "cyd28", "cyd28s"],
   ORIENT:         ["pion", "poziom"],
   WYMAGANE:       ["nazwa", "opis", "wersja", "autor", "licencja", "zrodlo", "plytka", "orientacja", "model_b", "info"]
 };

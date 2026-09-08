@@ -17,6 +17,10 @@ import json, os, sys, hashlib
 PLYTKI = [
     ("cyd24", 'CYD 2.4" (ESP32-2432S024)'),
     ("cyd28", 'CYD 2.8" (ESP32-2432S028R)'),
+    # Nowsza rewizja tej samej plytki 2.8": panel ST7789 zamiast ILI9341. Piny, dotyk i
+    # podswietlenie IDENTYCZNE - ale sterownik ekranu jest wkompilowany w TFT_eSPI, wiec
+    # binarki musza byc osobne i plytka musi miec wlasny identyfikator.
+    ("cyd28s", 'CYD 2.8" ST7789 (ESP32-2432S028 "2 USB")'),
 ]
 UZYTK_DIR = "uzytkownicy"          # bin/<plytka>/uzytkownicy/<nazwa>.bin + <nazwa>.meta.json
 # (plytka, plik) albo plik -> dict(nazwa, opis, wersja, kategoria, autor, info); wpis z plytka ma pierwszenstwo.
@@ -56,6 +60,15 @@ META = {
                           "Wersja dla CYD 2.8\" (2432S028R) ze srodowiska KORONA_CYD28, zbudowana z natywnego profilu autora `CYD-2432S028` - dotyk na dedykowanych pinach, bez naszej latki dla 2.4\". Kolory bez odwracania, bo baza dla tej plytki nie definiuje TFT_INVERSION_ON. Powrot do K-OS po RST zapewniony. NIESPRAWDZONE NA SPRZECIE. Znane ryzyko: domyslna korekta rotacji dotyku w InputHandler sklada sie z wewnetrzna rotacja sterownika - to kod upstreamowy uzywany przez spolecznosc na prawdziwych 2.8\", ale my go nie potwierdzilismy."),
     ("cyd28", "radar-pion.bin"):   m("SkyCYD 4.4.1 pion",   "radar ADS-B; 2.8\" NIETESTOWANE", "4.4.1", A, "Piotr Korona", "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."),
     ("cyd28", "radar-poziom.bin"): m("SkyCYD 4.4.1 poziom", "radar ADS-B; 2.8\" NIETESTOWANE", "4.4.1", A, "Piotr Korona", "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."),
+    # --- CYD 2.8" ST7789 (rewizja "2 USB") -----------------------------------------------
+    # Te same zrodla co wersje cyd28, przebudowane z -DST7789_DRIVER. Zaden z tych obrazow
+    # nie byl uruchomiony na tej rewizji plytki - i nie da sie tego sprawdzic bez niej.
+    ("cyd28s", "office.bin"): m("K-OS Office", "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE", "1.3.0", A, "Piotr Korona",
+                          "To samo Office co na 2.8\", przebudowane dla rewizji ze sterownikiem ekranu ST7789 (plytka z DWOMA gniazdami USB, czasem opisywana jako v3). Dotyk, piny i podswietlenie GPIO 21 sa TAKIE SAME jak w wersji ILI9341 - rozni sie wylacznie sterownik ekranu, ktorego nie da sie wybrac w czasie dzialania, bo jest wkompilowany w biblioteke. Dlatego ta plytka ma osobny identyfikator (cyd28s) i osobne obrazy. NIESPRAWDZONE NA SPRZECIE, I NIE DA SIE TEGO SPRAWDZIC BEZ TEJ PLYTKI. Dwie rzeczy widac w sekunde po pierwszym starcie i obie sa do poprawienia jedna flaga, bez ruszania kodu: caly obraz jako NEGATYW oraz CZERWONY ZAMIENIONY Z NIEBIESKIM. Jesli tak wyjdzie - napisz, poprawka to jeden przebudowany obraz. Kalibracja dotyku lezy w /korona/cyd28s/dotyk.txt i trzeba ja zrobic raz osobno, mimo ze panel dotykowy jest ten sam co w cyd28."),
+    ("cyd28s", "meteo-pion.bin"): m("Meteo K-OS pion", "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE", "0.2.0", A, "Piotr Korona",
+                          "Stacja pogodowa dla CYD 2.8\" w rewizji ze sterownikiem ST7789 (plytka z dwoma gniazdami USB), orientacja pionowa. Zbudowana z tego samego zrodla co wersja cyd28 - rozni sie tylko flagami sterownika ekranu. NIESPRAWDZONE NA SPRZECIE. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, to jest poprawka na jedna flage."),
+    ("cyd28s", "meteo-poziom.bin"): m("Meteo K-OS poziom", "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE", "0.2.0", A, "Piotr Korona",
+                          "Wersja pozioma dla CYD 2.8\" ze sterownikiem ST7789. Jak w pozostalych wersjach poziomych kalibracja dotyku idzie WPROST w orientacji poziomej, bo kalibracja z pionu daje w poziomie rozciagniecie, a nie obrot. NIESPRAWDZONE NA SPRZECIE."),
     "openhasp.bin":     m("openHASP",        "panel dotykowy Home Assistant; NIETESTOWANY", "0.7.0", Z, "Francis Van Roie (fvanroie)",
                           "openHASP zamienia CYD w panel dotykowy Home Assistant: strony/widgety LVGL z pages.jsonl, sterowanie MQTT. Pierwszy start: AP 'HASP-xxxxxx' haslo 'haspadmin', kalibracja 4 rogow, potem WiFi i MQTT przez www 192.168.4.1. Ekran poziomo; rotacje i inwersje zmienia sie w Configuration - Display."),
     "nerdminer.bin":    m("NerdMiner v2",    "kopacz-loteria BTC + kurs i bloki; NIETESTOWANY", "1.8.3", Z, "BitMaker-hub",

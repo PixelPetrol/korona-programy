@@ -1,7 +1,7 @@
 #!/bin/bash
 # K-OS (KORONA OS for CYD) - skladanie obrazow dla portalu instalacyjnego (ESP Web Tools).
 #
-# Bierze GOTOWE wyniki builda z loader/.build-24 i loader/.build-28R i uklada
+# Bierze GOTOWE wyniki builda z loader/.build-24, .build-28R i .build-28R-st7789 i uklada
 # je w portal/obrazy/<plytka>/ tak, jak je ma serwowac GitHub Pages.
 #
 # TEN SKRYPT NICZEGO NIE WGRYWA NA PLYTKE. Nie dotyka portu szeregowego,
@@ -21,8 +21,9 @@
 #                                     publikacji zawsze z domyslnym SCALONY=1)
 #
 # Kompilacja to OSOBNY krok, robiony recznie w loader/:
-#   ./build.sh            (2.4")
-#   BOARD=28R ./build.sh  (2.8")
+#   ./build.sh                        (2.4")
+#   BOARD=28R ./build.sh              (2.8" ILI9341)
+#   BOARD=28R PANEL=st7789 ./build.sh (2.8" ST7789, rewizja "2 USB")
 #
 # Przenosnosc: pisane i sprawdzane na macOS. Rozmiar pliku i czas modyfikacji
 # ida przez python3 (nie `stat -f`/`date -r`), sort -V jest w GNU i BSD sort -
@@ -125,16 +126,28 @@ PY
 
 # --- plytki ------------------------------------------------------------------
 # (bash 3.2 z macOS nie ma tablic asocjacyjnych - stad funkcje)
-PLYTKI=(24 28R)
-id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; *) blad "nieznana plytka $1" ;; esac; }
-opis_plytki() { case "$1" in 24) echo 'CYD 2.4" ESP32-2432S024R' ;; 28R) echo 'CYD 2.8" ESP32-2432S028R - NIESPRAWDZONA' ;; esac; }
+# Element tablicy to SUFIKS KATALOGU BUILDA (.build-<element>), a nie sama plytka - odkad
+# 2.8" ma dwie rewizje panelu, jedna plytka daje dwa katalogi (.build-28R i .build-28R-st7789).
+PLYTKI=(24 28R 28R-st7789)
+id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; 28R-st7789) echo cyd28s ;; *) blad "nieznana plytka $1" ;; esac; }
+opis_plytki() { case "$1" in
+                  24)         echo 'CYD 2.4" ESP32-2432S024R' ;;
+                  28R)        echo 'CYD 2.8" ESP32-2432S028R - NIESPRAWDZONA' ;;
+                  28R-st7789) echo 'CYD 2.8" ST7789 ESP32-2432S028 "2 USB" - NIESPRAWDZONA' ;;
+                esac; }
+# Podpowiedz, jak zbudowac brakujacy obraz - rozna dla panelu ST7789.
+jak_zbudowac() { case "$1" in
+                   24)         echo 'cd loader && ./build.sh' ;;
+                   28R)        echo 'cd loader && BOARD=28R ./build.sh' ;;
+                   28R-st7789) echo 'cd loader && BOARD=28R PANEL=st7789 ./build.sh' ;;
+                 esac; }
 
 # ETAP 1: kontrola. Nic nie pisze do obrazy/. Kazdy problem = przerwanie.
 sprawdz() {   # sprawdz <BOARD>
   local B="$1" SRC="$LOADER/.build-$1" BIN I O
   I="$(id_plytki "$B")"; O="$(opis_plytki "$B")"
   BIN="$SRC/loader.ino.bin"
-  local JAK="cd loader && $([ "$B" = 24 ] || echo "BOARD=$B ")./build.sh"
+  local JAK; JAK="$(jak_zbudowac "$B")"
   [ -f "$BIN" ] || blad "$I ($O): nie ma $BIN
        Zbuduj:  $JAK"
   [ -f "$SRC/loader.ino.bootloader.bin" ] || blad "$I: nie ma $SRC/loader.ino.bootloader.bin - przebuduj:  $JAK"
@@ -162,7 +175,7 @@ sprawdz() {   # sprawdz <BOARD>
 }
 
 for B in "${PLYTKI[@]}"; do sprawdz "$B"; done
-echo "kontrola OK - obie plytki maja swiezy obraz $WER mieszczacy sie w factory"
+echo "kontrola OK - wszystkie ${#PLYTKI[@]} obrazy $WER swieze i mieszczace sie w factory"
 echo
 
 # ETAP 2: kopiowanie. Katalog plytki kasowany w calosci - stare pliki nie moga
@@ -260,4 +273,6 @@ echo
 echo "sumy kontrolne: obrazy/SUMY.txt"
 sed 's/^/  /' "$OUT/SUMY.txt"
 echo
-echo "GOTOWE: cyd24 cyd28 (K-OS $WER). Publikacja: patrz README.md §4."
+GOTOWE_ID=""
+for B in "${PLYTKI[@]}"; do GOTOWE_ID="$GOTOWE_ID $(id_plytki "$B")"; done
+echo "GOTOWE:$GOTOWE_ID (K-OS $WER). Publikacja: patrz README.md §4."

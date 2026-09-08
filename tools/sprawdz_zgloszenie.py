@@ -39,7 +39,7 @@ sys.path.insert(0, HERE)
 import sprawdz_bin  # noqa: E402
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{1,31}$")
-PLYTKI = ("cyd24", "cyd28")
+PLYTKI = ("cyd24", "cyd28", "cyd28s")   # cyd28s: rewizja 2.8" z panelem ST7789 ("2 USB")
 ORIENT = ("pion", "poziom")
 WYMAGANE = ("nazwa", "opis", "wersja", "autor", "licencja", "zrodlo", "plytka", "orientacja", "model_b", "info")
 LIMITY = {"nazwa": 40, "opis": 60, "wersja": 16, "autor": 60, "licencja": 40, "zrodlo": 200, "info": 600, "zglaszajacy": 60}
