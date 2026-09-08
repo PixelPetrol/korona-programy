@@ -245,12 +245,13 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
   </section>
 
   <section class="card" aria-labelledby="h28">
-    <h3 id="h28">CYD 2.8" <span class="tag warn"><span lang="pl">niesprawdzona</span><span lang="en">untested</span></span></h3>
+    <h3 id="h28">CYD 2.8" <span class="tag warn"><span lang="pl">sprawdzona częściowo</span><span lang="en">partly tested</span></span></h3>
     <p class="model">ESP32-2432S028R</p>
     <ul>
       <li><span lang="pl">ekran ILI9341 240×320, dotyk XPT2046 na osobnych pinach</span><span lang="en">ILI9341 240×320 display, XPT2046 touch on separate pins</span></li>
       <li><span lang="pl">podświetlenie GPIO 21</span><span lang="en">backlight on GPIO 21</span></li>
-      <li><span lang="pl"><b>nigdy nie uruchomiona na sprzęcie</b>; w sklepie tylko SkyCYD</span><span lang="en"><b>never run on real hardware</b>; the store has only SkyCYD for it</span></li>
+      <li><span lang="pl"><b>uruchomiona na sprzęcie</b> (K-OS 0.4.3, zewnętrzny tester): system wstaje, ekran, karta, sklep, uruchamianie programów i WiFi działają. <b>Niesprawdzone: dotyk</b> — kalibracja startowa jest zgadywana i może być przekręcona — <b>oraz komendy po USB</b></span><span lang="en"><b>run on real hardware</b> (K-OS 0.4.3, an outside tester): the system boots; screen, SD card, store, launching apps and WiFi all work. <b>Unverified: touch</b> — the start-up calibration is a guess and may be off — <b>and the USB commands</b></span></li>
+      <li><span lang="pl">sklep ma dla niej własną listę programów, ale <b>żaden z nich nie był na niej sprawdzony</b></span><span lang="en">the store carries its own list of apps for this board, but <b>none of them has been tested on it</b></span></li>
     </ul>
     <div class="inst">
       <esp-web-install-button manifest="manifest-cyd28.json">
@@ -354,7 +355,7 @@ esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0
 # 2.4"                                              (macOS: /dev/cu.usbserial-XXXX, Linux: /dev/ttyUSB0, Windows: COM3)
 esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd24-scalony.bin
 
-# 2.8" (<span lang="pl">niesprawdzona</span><span lang="en">untested</span>)
+# 2.8" (<span lang="pl">dotyk niesprawdzony</span><span lang="en">touch unverified</span>)
 esptool --chip esp32 --port /dev/cu.usbserial-XXXX --baud 460800 write-flash 0x0 korona-cyd28-scalony.bin
 
 # 2.8" ST7789 / "2 USB" (<span lang="pl">niesprawdzona</span><span lang="en">untested</span>)

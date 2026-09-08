@@ -1,1 +1,1 @@
-Aircraft radar on the CYD: positions from adsb.lol through our own Worker, map, weather, aircraft photos. Screen in portrait 240x320. Configuration through a WiFi portal (AP on the first start).
+Aircraft radar on the CYD: positions from adsb.lol through our own Worker, map, weather, aircraft photos. Screen in portrait 240x320. Configuration through a WiFi portal (AP on the first start). The SkyCYD interface is in Polish only.

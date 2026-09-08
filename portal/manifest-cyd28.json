@@ -1,5 +1,5 @@
 {
-  "name": "K-OS - KORONA OS for CYD 2.8\" (ESP32-2432S028R, NIESPRAWDZONA)",
+  "name": "K-OS - KORONA OS for CYD 2.8\" (ESP32-2432S028R, dotyk niesprawdzony)",
   "version": "0.7.0",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,

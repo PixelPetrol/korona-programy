@@ -157,8 +157,8 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
-        "en": "ADS-B radar; 2.8\" UNTESTED"
+        "pl": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
+        "en": "ADS-B radar; 2.8\" UNTESTED; Polish only"
       },
       "ikona": "bin/cyd28/radar-pion.ico",
       "info": {
@@ -175,8 +175,8 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
-        "en": "ADS-B radar; 2.8\" UNTESTED"
+        "pl": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
+        "en": "ADS-B radar; 2.8\" UNTESTED; Polish only"
       },
       "ikona": "bin/cyd28/radar-poziom.ico",
       "info": {

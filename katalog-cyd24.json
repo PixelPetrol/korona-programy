@@ -211,8 +211,8 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B, samoloty wokol domu",
-        "en": "ADS-B radar, planes around your home"
+        "pl": "radar ADS-B, samoloty wokol domu; tylko po polsku",
+        "en": "ADS-B radar, planes around your home; Polish only"
       },
       "ikona": "bin/cyd24/radar-pion.ico",
       "info": {
@@ -229,8 +229,8 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B, ekran poziomo",
-        "en": "ADS-B radar, landscape screen"
+        "pl": "radar ADS-B, ekran poziomo; tylko po polsku",
+        "en": "ADS-B radar, landscape screen; Polish only"
       },
       "ikona": "bin/cyd24/radar-poziom.ico",
       "info": {

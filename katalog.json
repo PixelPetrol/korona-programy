@@ -142,22 +142,23 @@
           "rozmiar": 1498352,
           "sha256": "dc849185a48970f8d31e45ccdade5bf0057cf007e4b0f3531bafa753c8cce803",
           "nazwa": "SkyCYD 4.4.1 pion",
-          "opis": "radar ADS-B, samoloty wokol domu",
+          "opis": "radar ADS-B, samoloty wokol domu; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Radar lotniczy na CYD: pozycje z adsb.lol przez wlasny Worker, mapa, pogoda, zdjecia samolotow. Ekran pionowo 240x320. Konfiguracja przez portal WiFi (AP przy pierwszym starcie)."
+          "info": "Radar lotniczy na CYD: pozycje z adsb.lol przez wlasny Worker, mapa, pogoda, zdjecia samolotow. Ekran pionowo 240x320. Konfiguracja przez portal WiFi (AP przy pierwszym starcie).",
+          "info_pelny": "info/cyd24/radar-pion.bin.pl.txt"
         },
         {
           "plik": "bin/cyd24/radar-poziom.bin",
           "rozmiar": 1499968,
           "sha256": "8f7ee1ffcca4c5ea1c1199a5f5ca6949316ba2466e381fba2cc8213eeee899ca",
           "nazwa": "SkyCYD 4.4.1 poziom",
-          "opis": "radar ADS-B, ekran poziomo",
+          "opis": "radar ADS-B, ekran poziomo; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Ta sama aplikacja co SkyCYD pion, ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej."
+          "info": "Ta sama aplikacja co SkyCYD pion, ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej. Interfejs SkyCYD jest tylko po polsku."
         }
       ]
     },
@@ -266,22 +267,22 @@
           "rozmiar": 1498928,
           "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
           "nazwa": "SkyCYD 4.4.1 pion",
-          "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
+          "opis": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."
+          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie. Interfejs SkyCYD jest tylko po polsku."
         },
         {
           "plik": "bin/cyd28/radar-poziom.bin",
           "rozmiar": 1500544,
           "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e",
           "nazwa": "SkyCYD 4.4.1 poziom",
-          "opis": "radar ADS-B; 2.8\" NIETESTOWANE",
+          "opis": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
-          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie."
+          "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie. Interfejs SkyCYD jest tylko po polsku."
         }
       ]
     },
@@ -390,7 +391,7 @@
           "rozmiar": 1498832,
           "sha256": "9a0fba811c5965979d1b4f15267bacd7a45ee6392b27b43903c26404d6f1c23a",
           "nazwa": "SkyCYD 4.4.1 pion",
-          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE",
+          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
@@ -402,7 +403,7 @@
           "rozmiar": 1500432,
           "sha256": "a4c37cb085d888e197d525fe05a02fa52bb93f3534973ade83853a81e4a63a9e",
           "nazwa": "SkyCYD 4.4.1 poziom",
-          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE",
+          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.1",
           "kategoria": "autorskie",
           "autor": "Piotr Korona",

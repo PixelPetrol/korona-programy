@@ -1,1 +1,1 @@
-A version for the CYD 2.8" (2432S028R) - built, not tested on hardware.
+A version for the CYD 2.8" (2432S028R) - built, not tested on hardware. The SkyCYD interface is in Polish only.

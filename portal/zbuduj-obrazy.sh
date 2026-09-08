@@ -132,7 +132,7 @@ PLYTKI=(24 28R 28R-st7789)
 id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; 28R-st7789) echo cyd28s ;; *) blad "nieznana plytka $1" ;; esac; }
 opis_plytki() { case "$1" in
                   24)         echo 'CYD 2.4" ESP32-2432S024R' ;;
-                  28R)        echo 'CYD 2.8" ESP32-2432S028R - NIESPRAWDZONA' ;;
+                  28R)        echo 'CYD 2.8" ESP32-2432S028R - dotyk niesprawdzony' ;;
                   28R-st7789) echo 'CYD 2.8" ST7789 ESP32-2432S028 "2 USB" - NIESPRAWDZONA' ;;
                 esac; }
 # Podpowiedz, jak zbudowac brakujacy obraz - rozna dla panelu ST7789.
@@ -272,6 +272,13 @@ echo
 } > "$OUT/SUMY.txt"
 echo "sumy kontrolne: obrazy/SUMY.txt"
 sed 's/^/  /' "$OUT/SUMY.txt"
+echo
+
+# --- tabela rozmiarow w README: GENEROWANA z SUMY.txt -------------------------
+# Recznie utrzymywana tabela rozjechala sie z obrazami o cala wersje K-OS i ludzie
+# sprawdzajacy pobrany plik wzgledem README mysleli, ze maja uszkodzone pobranie.
+# Zrodlo prawdy jest jedno: SUMY.txt wyzej.
+python3 "$HERE/tabela-rozmiarow.py" "$OUT/SUMY.txt" "$HERE/README.md"
 echo
 GOTOWE_ID=""
 for B in "${PLYTKI[@]}"; do GOTOWE_ID="$GOTOWE_ID $(id_plytki "$B")"; done

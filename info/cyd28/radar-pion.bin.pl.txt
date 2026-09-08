@@ -1,1 +1,1 @@
-Wersja dla CYD 2.8" (2432S028R) - zbudowana, nie sprawdzona na sprzecie.
+Wersja dla CYD 2.8" (2432S028R) - zbudowana, nie sprawdzona na sprzecie. Interfejs SkyCYD jest tylko po polsku.

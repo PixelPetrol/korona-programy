@@ -14,17 +14,21 @@ Autor: Piotr Korona.
 index.html            strona (bez frameworków; skrypty: ESP Web Tools z unpkg + esptool-js z jsDelivr
                       ładowany dopiero po kliknięciu „Zrób kopię” — §8)
 manifest-cyd24.json   manifest ESP Web Tools — CYD 2.4" (ESP32-2432S024R)
-manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R, NIESPRAWDZONA)
+manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R; dotyk niesprawdzony)
+manifest-cyd28s.json  manifest ESP Web Tools — CYD 2.8" ST7789 (ESP32-2432S028 „2 USB”, NIESPRAWDZONA)
 programy.html         dla autorów: jak napisać program pod K-OS i jak go zgłosić
 zglos.html            zgłoszenie programu: sprawdzanie .bin w przeglądarce + formularz (§9)
 zglos.js              walidator .bin i meta.json w JS — KOPIA reguł z tools/sprawdz_bin.py (§9)
 zbuduj-obrazy.sh      składa obrazy z wyników builda; NICZEGO NIE WGRYWA na płytkę
                       (skrypt na macOS — patrz §4)
+tabela-rozmiarow.py   przepisuje tabelę rozmiarów w tym README z obrazy/SUMY.txt;
+                      woła ją zbuduj-obrazy.sh, ręcznie tej tabeli się nie poprawia
 SELF-UPDATE.md        projekt samoaktualizacji K-OS (osobny temat, bez kodu)
 obrazy/               <- generowane skryptem, do wypchnięcia razem ze stroną
   SUMY.txt              rozmiary + SHA-256 wszystkich obrazów
   cyd24/                bootloader.bin, partitions.bin, otadata-pusta.bin, loader.bin,
   cyd28/                korona-<płytka>-scalony.bin
+  cyd28s/
 ```
 
 `obrazy/` **trzeba wypchnąć do repo** — to z niego przeglądarka pobiera binarki. Nie wpisuj go
@@ -121,6 +125,8 @@ Nie rozbijaj tego na osobne linie: kod wyjścia skryptu chroni publikację tylko
 - składa `korona-<płytka>-scalony.bin` przez `esptool merge-bin` (`SCALONY=0` wyłącza),
 - wpisuje wersję z `loader/loader/version.h` w oba manifesty **i w `index.html`**
   (znacznik `<!--WER-->…<!--/WER-->`),
+- przepisuje tabelę rozmiarów w tym README (§„Zmierzone”) z `obrazy/SUMY.txt` przez
+  `tabela-rozmiarow.py` — tabeli **nie poprawia się ręcznie**,
 - liczy SHA-256 i rozmiary do `obrazy/SUMY.txt` — **tylko plików wytworzonych w tym biegu**
   (katalog `obrazy/<płytka>/` jest przed kopiowaniem kasowany w całości, więc stare pliki
   nie zostają),
@@ -145,22 +151,39 @@ Nie rozbijaj tego na osobne linie: kod wyjścia skryptu chroni publikację tylko
 układ K-OS. Skrypt jej **nie używa** — generuje własną z CSV. Nie „upraszczaj” tego przez
 skopiowanie pliku z builda.
 
-### Zmierzone (03.09.2026, K-OS 0.3.6)
+<!--TABELA-ROZMIAROW-->
+### Zmierzone — K-OS 0.7.0, 2026-09-08 16:18
 
-| | rozmiar | zapas w `factory` (1 441 792 B) | magic |
+**Tabela jest generowana** z `obrazy/SUMY.txt` przez `zbuduj-obrazy.sh`
+(`tabela-rozmiarow.py`) — nie poprawiaj jej ręcznie, następny bieg skryptu i tak ją
+nadpisze. Rozbieżność między tą tabelą a pobranym plikiem oznacza uszkodzone
+pobranie, a nie nieaktualną dokumentację.
+
+| plik | rozmiar | zapas w `factory` (1 441 792 B) | SHA-256 |
 |---|---|---|---|
-| `cyd24/loader.bin` | 1 359 744 B | 82 048 B (5,7 %) | `0xE9` |
-| `cyd28/loader.bin` | 1 357 504 B | 84 288 B (5,8 %) | `0xE9` |
-| `bootloader.bin` (oba) | 24 992 B | — | — |
-| `partitions.bin` (oba) | 3 072 B | — | — |
-| `otadata-pusta.bin` (oba) | 8 192 B | — | — |
-| `korona-cyd24-scalony.bin` | 1 425 280 B | — | — |
-| `korona-cyd28-scalony.bin` | 1 423 040 B | — | — |
+| `cyd24/loader.bin` | 1 415 328 B | 26 464 B (1,8 %) | `136ccc09ba884e46c720f789392c376fab75bff6e5905f2b52674fc374111f17` |
+| `cyd24/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
+| `cyd24/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
+| `cyd24/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
+| `cyd24/korona-cyd24-scalony.bin` | 1 480 864 B | — | `075682652def10290949d7c59583dbe722159272e5869c740496c86a03de7a6a` |
+| `cyd28/loader.bin` | 1 413 040 B | 28 752 B (2,0 %) | `a9810c387a2ad64a269a3e6638ab82a973ec281f47507155a9cce3f21aa92268` |
+| `cyd28/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
+| `cyd28/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
+| `cyd28/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
+| `cyd28/korona-cyd28-scalony.bin` | 1 478 576 B | — | `01f043475f68617e42e85c76531b4065079e6fbac6c858d935d50a90f9543522` |
+| `cyd28s/loader.bin` | 1 412 944 B | 28 848 B (2,0 %) | `affbf5c26e399d238bd20718263732137918c80ca520950b6a43383a1f48786c` |
+| `cyd28s/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
+| `cyd28s/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
+| `cyd28s/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
+| `cyd28s/korona-cyd28s-scalony.bin` | 1 478 480 B | — | `163a55255c0c615728de13caaed676265472ab5a6e80d478a228ae3fe4dbc728` |
 
-Oba obrazy mieszczą się w `factory` z zapasem, ale zapas jest **poniżej 6 %** — kolejna
-grafika albo font mogą go zjeść. Gdy obraz przestanie się mieścić, skrypt przerywa **przed**
-zapisaniem czegokolwiek do `obrazy/`, manifestów i `index.html`, więc przy publikacji przez
-`&&` (wyżej) taki obraz nie ma jak trafić do repo.
+Najciaśniej jest w `cyd24/loader.bin`: zapas 26 464 B (1,8 %) w partycji `factory`.
+<!--/TABELA-ROZMIAROW-->
+
+Zapas w `factory` topnieje z każdą grafiką i fontem — ile go zostało, mówi wiersz pod tabelą.
+Gdy obraz przestanie się mieścić, skrypt przerywa **przed** zapisaniem czegokolwiek do
+`obrazy/`, manifestów i `index.html`, więc przy publikacji przez `&&` (wyżej) taki obraz nie
+ma jak trafić do repo.
 
 Sprawdzone dodatkowo w scalonym obrazie 2.4": `0x0`–`0x1000` samo `0xFF`, magic `0xE9`
 pod `0x1000`, wpis tablicy partycji (`AA 50`) pod `0x8000`, **cały zakres `0xe000`–`0x10000` to
@@ -174,11 +197,17 @@ Skutek praktyczny: po `esptool` ostatnio uruchamiana aplikacja startuje z pustym
 (K-OS i tak przywraca jej migawkę z karty przed startem, jeśli taka jest), po WebSerial —
 z tym, co miała. Partycji `knvs` K-OS (`0x3FC000`) żadna z dróg nie dotyka.
 
-### Stan obrazów 2.8" w chwili pisania
+### Stan obrazów 2.8"
 
-`loader/.build-28R/` jest zbudowany 03.09.2026 14:07 z `version.h` = 0.3.6 (obraz zawiera ciąg
-`0.3.6`, sprawdzone `grep -a`), więc obrazy `cyd28` i `manifest-cyd28.json` są spójne.
-Płytka 2.8" nadal jest **niesprawdzona na sprzęcie** (§6).
+Wersja i data obrazów są w nagłówku tabeli wyżej (czyli w `obrazy/SUMY.txt`) — skrypt nie
+pozwoli zapisać obrazu starszego niż `version.h`, więc obrazy `cyd28`/`cyd28s` i manifesty
+zawsze pochodzą z tego samego biegu co binarka.
+
+Płytka 2.8" ILI9341 (`cyd28`) **wystartowała na sprzęcie**: zewnętrzny tester uruchomił na
+ESP32-2432S028R K-OS 0.4.3 — system wstaje, ekran, karta, sklep, uruchamianie programów i WiFi
+działają. **Niesprawdzone zostają dotyk** (kalibracja startowa jest zgadywana, więc może być
+przekręcona) **i komendy po USB**. Rewizja ST7789 (`cyd28s`) nie była uruchomiona na żadnej
+płytce (§6).
 
 Gdyby `.build-28R/` kiedyś zniknęło albo zestarzało się względem `version.h`, skrypt **przerwie
 z błędem przed zapisem czegokolwiek** — nie ma trybu „pomiń jedną płytkę”, bo strona i oba
@@ -273,9 +302,12 @@ Bez owijania:
    scalonego obrazu, renderowanie strony i to, że `<esp-web-install-button>` wchodzi w stan
    *aktywny* na `localhost` (`isSupported`/`isAllowed`/`isSecureContext` = `true`, widoczny
    slot `activate`). **Pierwsze prawdziwe wgranie z portalu jest przed Tobą.**
-2. **Obrazy 2.8" nigdy nie działały na płytce.** To nie wina portalu — cały profil `28R`
-   (`build.sh`, `ui.cpp`) jest przygotowany „w ciemno”. Strona mówi to wprost i przycisk jest
-   pomarańczowy, ale portal nie ma jak tego sprawdzić.
+2. **Obraz 2.8" jest sprawdzony tylko częściowo, a ST7789 wcale.** Na ESP32-2432S028R
+   (`cyd28`) zewnętrzny tester uruchomił K-OS 0.4.3: ekran, karta, sklep, uruchamianie
+   programów i WiFi działają — ale **dotyku i komend po USB nikt nie potwierdził**, a domyślna
+   kalibracja dotyku jest zgadywana. Rewizja ST7789 (`cyd28s`) nadal jest przygotowana
+   „w ciemno”. Strona mówi to wprost i przyciski obu wersji 2.8" są pomarańczowe, ale portal
+   nie ma jak tego sprawdzić.
 3. **Portal nie rozpozna, jaką masz płytkę.** ESP32 nie zdradza modelu obudowy — 2.4" i 2.8"
    są elektronicznie tym samym chipem. Wybór jest ręczny; zły wybór to czarny ekran albo martwy
    dotyk (odkręcalne: wgraj drugi obraz).
