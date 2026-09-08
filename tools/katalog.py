@@ -239,6 +239,13 @@ def wpis3(pid, rel, data, meta):
     if en:
         opis["en"] = en
     e["opis"] = opis
+    # IKONA PROGRAMU: maska alfa 4-bit 32x32, 512 B, ten sam format co ikony wbudowane
+    # w K-OS - rysuje ja ta sama funkcja i bierze kolor z motywu. Robi je tools/ikony.py.
+    # Gdy pliku nie ma, K-OS pokazuje kafelek z inicjalami nazwy: zastepnika nie moze
+    # zabraknac, a inicjaly odrozniaja programy lepiej niz jeden wspolny znak dla wszystkich.
+    ico = rel[:-4] + ".ico"
+    if os.path.exists(os.path.join(ROOT, ico)):
+        e["ikona"] = ico
     info = {}
     if meta.get("info"):
         info["pl"] = "info/%s/%s.pl.txt" % (pid, nazwa)

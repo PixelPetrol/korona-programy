@@ -16,6 +16,7 @@
         "pl": "pentest toolkit WiFi / BLE / IR / RF",
         "en": "WiFi / BLE / IR / RF pentest toolkit"
       },
+      "ikona": "bin/cyd24/bruce.ico",
       "info": {
         "pl": "info/cyd24/bruce.bin.pl.txt"
       }
@@ -32,6 +33,7 @@
         "pl": "multitool WiFi/BLE/RF (HaleHound-CYD 2.4\")",
         "en": "WiFi/BLE/RF multitool (HaleHound-CYD 2.4\")"
       },
+      "ikona": "bin/cyd24/esp32div.ico",
       "info": {
         "pl": "info/cyd24/esp32div.bin.pl.txt"
       }
@@ -48,6 +50,7 @@
         "pl": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot",
         "en": "2048, Lunar Lander, Overload, Punch-Through, Payload and Longshot"
       },
+      "ikona": "bin/cyd24/gry-vol1.ico",
       "info": {
         "pl": "info/cyd24/gry-vol1.bin.pl.txt"
       }
@@ -64,6 +67,7 @@
         "pl": "audyt WiFi / BLE",
         "en": "WiFi / BLE auditing"
       },
+      "ikona": "bin/cyd24/marauder.ico",
       "info": {
         "pl": "info/cyd24/marauder.bin.pl.txt"
       }
@@ -80,6 +84,7 @@
         "pl": "komunikator MeshCore po Bluetooth",
         "en": "MeshCore messenger over Bluetooth"
       },
+      "ikona": "bin/cyd24/mesh.ico",
       "info": {
         "pl": "info/cyd24/mesh.bin.pl.txt"
       }
@@ -96,6 +101,7 @@
         "pl": "pogoda, radar opadow IMGW, 4 widoki",
         "en": "weather, IMGW rain radar, 4 views"
       },
+      "ikona": "bin/cyd24/meteo-pion.ico",
       "info": {
         "pl": "info/cyd24/meteo-pion.bin.pl.txt"
       }
@@ -112,6 +118,7 @@
         "pl": "pogoda, radar opadow IMGW; NIESPRAWDZONE",
         "en": "weather, IMGW rain radar; UNTESTED"
       },
+      "ikona": "bin/cyd24/meteo-poziom.ico",
       "info": {
         "pl": "info/cyd24/meteo-poziom.bin.pl.txt"
       }
@@ -128,6 +135,7 @@
         "pl": "kopacz-loteria BTC + kurs i bloki; NIETESTOWANY",
         "en": "BTC lottery miner, price and blocks; UNTESTED"
       },
+      "ikona": "bin/cyd24/nerdminer.ico",
       "info": {
         "pl": "info/cyd24/nerdminer.bin.pl.txt"
       }
@@ -144,6 +152,7 @@
         "pl": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
         "en": "notes, calculator, calendar, files, QR, rates"
       },
+      "ikona": "bin/cyd24/office.ico",
       "info": {
         "pl": "info/cyd24/office.bin.pl.txt"
       }
@@ -160,6 +169,7 @@
         "pl": "panel dotykowy Home Assistant; NIETESTOWANY",
         "en": "Home Assistant touch panel; UNTESTED"
       },
+      "ikona": "bin/cyd24/openhasp.ico",
       "info": {
         "pl": "info/cyd24/openhasp.bin.pl.txt"
       }
@@ -176,6 +186,7 @@
         "pl": "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY",
         "en": "weather forecast, Open-Meteo, no key; UNTESTED"
       },
+      "ikona": "bin/cyd24/pogoda.ico",
       "info": {
         "pl": "info/cyd24/pogoda.bin.pl.txt"
       }
@@ -192,6 +203,7 @@
         "pl": "radar ADS-B, samoloty wokol domu",
         "en": "ADS-B radar, planes around your home"
       },
+      "ikona": "bin/cyd24/radar-pion.ico",
       "info": {
         "pl": "info/cyd24/radar-pion.bin.pl.txt"
       }
@@ -208,6 +220,7 @@
         "pl": "radar ADS-B, ekran poziomo",
         "en": "ADS-B radar, landscape screen"
       },
+      "ikona": "bin/cyd24/radar-poziom.ico",
       "info": {
         "pl": "info/cyd24/radar-poziom.bin.pl.txt"
       }

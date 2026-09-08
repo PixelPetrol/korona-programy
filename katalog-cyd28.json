@@ -16,6 +16,7 @@
         "pl": "pentest toolkit WiFi / BLE / IR / RF; 2.8\" NIESPRAWDZONE",
         "en": "WiFi / BLE / IR / RF pentest toolkit; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/bruce.ico",
       "info": {
         "pl": "info/cyd28/bruce.bin.pl.txt"
       }
@@ -32,6 +33,7 @@
         "pl": "multitool WiFi/BLE/RF; 2.8\" NIESPRAWDZONE",
         "en": "WiFi/BLE/RF multitool; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/esp32div.ico",
       "info": {
         "pl": "info/cyd28/esp32div.bin.pl.txt"
       }
@@ -48,6 +50,7 @@
         "pl": "2048, Lunar Lander, Overload, Punch-Through i Payload; 2.8\" NIESPRAWDZONE",
         "en": "2048, Lunar Lander, Overload, Punch-Through and Payload; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/gry-vol1.ico",
       "info": {
         "pl": "info/cyd28/gry-vol1.bin.pl.txt"
       }
@@ -64,6 +67,7 @@
         "pl": "audyt WiFi / BLE; 2.8\" NIESPRAWDZONE",
         "en": "WiFi / BLE auditing; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/marauder.ico",
       "info": {
         "pl": "info/cyd28/marauder.bin.pl.txt"
       }
@@ -80,6 +84,7 @@
         "pl": "komunikator MeshCore po Bluetooth; 2.8\" NIESPRAWDZONE",
         "en": "MeshCore messenger over Bluetooth; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/mesh.ico",
       "info": {
         "pl": "info/cyd28/mesh.bin.pl.txt"
       }
@@ -96,6 +101,7 @@
         "pl": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
         "en": "weather, IMGW rain radar; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/meteo-pion.ico",
       "info": {
         "pl": "info/cyd28/meteo-pion.bin.pl.txt"
       }
@@ -112,6 +118,7 @@
         "pl": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
         "en": "weather, IMGW rain radar; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/meteo-poziom.ico",
       "info": {
         "pl": "info/cyd28/meteo-poziom.bin.pl.txt"
       }
@@ -128,6 +135,7 @@
         "pl": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; 2.8\" NIESPRAWDZONE",
         "en": "notes, calculator, calendar, files, QR, rates; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/office.ico",
       "info": {
         "pl": "info/cyd28/office.bin.pl.txt"
       }
@@ -144,6 +152,7 @@
         "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
         "en": "ADS-B radar; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/radar-pion.ico",
       "info": {
         "pl": "info/cyd28/radar-pion.bin.pl.txt"
       }
@@ -160,6 +169,7 @@
         "pl": "radar ADS-B; 2.8\" NIETESTOWANE",
         "en": "ADS-B radar; 2.8\" UNTESTED"
       },
+      "ikona": "bin/cyd28/radar-poziom.ico",
       "info": {
         "pl": "info/cyd28/radar-poziom.bin.pl.txt"
       }
