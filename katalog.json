@@ -314,6 +314,28 @@
           "kategoria": "autorskie",
           "autor": "Piotr Korona",
           "info": "To samo Office co na 2.8\", przebudowane dla rewizji ze sterownikiem ekranu ST7789 (plytka z DWOMA gniazdami USB, czasem opisywana jako v3). Dotyk, piny i podswietlenie GPIO 21 sa TAKIE SAME jak w wersji ILI9341 - rozni sie wylacznie sterownik ekranu, ktorego nie da sie wybrac w czasie dzialania, bo jest wkompilowany w biblioteke. Dlatego ta plytka ma osobny identyfikator (cyd28s) i osobne obrazy. NIESPRAWDZONE NA SPRZECIE, I NIE DA SIE TEGO SPRAWDZIC BEZ TEJ PLYTKI. Dwie rzeczy widac w sekunde po pierwszym starcie i obie sa do poprawienia jedna flaga, bez ruszania kodu: caly obraz jako NEGATYW oraz CZERWONY ZAMIENIONY Z NIEBIESKIM. Jesli tak wyjdzie - napisz, poprawka to jeden przebudowany obraz. Kalibracja dotyku lezy w /korona/cyd28s/dotyk.txt i trzeba ja zrobic raz osobno, mimo ze panel dotykowy jest ten sam co w cyd28."
+        },
+        {
+          "plik": "bin/cyd28s/radar-pion.bin",
+          "rozmiar": 1498832,
+          "sha256": "9a0fba811c5965979d1b4f15267bacd7a45ee6392b27b43903c26404d6f1c23a",
+          "nazwa": "SkyCYD 4.4.1 pion",
+          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE",
+          "wersja": "4.4.1",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB) - zbudowana, NIE SPRAWDZONA NA SPRZECIE. Na tej rewizji o kolorach decyduja DWA przelaczniki, nie jeden: sterownik ST7789 w bibliotece wysyla INVON bezwarunkowo przy starcie, a sam radar juz po inicjalizacji ustawia inwersje po swojemu. Profil ustawia oba tak, zeby wyszlo zgodnie z kanonicznym ustawieniem tej plytki. Gdyby obraz mimo to wyszedl negatywem - da sie to przelaczyc WPROST W MENU radaru (ustawienia -> inwersja), bez przebudowywania niczego."
+        },
+        {
+          "plik": "bin/cyd28s/radar-poziom.bin",
+          "rozmiar": 1500432,
+          "sha256": "a4c37cb085d888e197d525fe05a02fa52bb93f3534973ade83853a81e4a63a9e",
+          "nazwa": "SkyCYD 4.4.1 poziom",
+          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE",
+          "wersja": "4.4.1",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Wersja dla CYD 2.8\" z panelem ST7789 (plytka z dwoma gniazdami USB) - zbudowana, NIE SPRAWDZONA NA SPRZECIE. Na tej rewizji o kolorach decyduja DWA przelaczniki, nie jeden: sterownik ST7789 w bibliotece wysyla INVON bezwarunkowo przy starcie, a sam radar juz po inicjalizacji ustawia inwersje po swojemu. Profil ustawia oba tak, zeby wyszlo zgodnie z kanonicznym ustawieniem tej plytki. Gdyby obraz mimo to wyszedl negatywem - da sie to przelaczyc WPROST W MENU radaru (ustawienia -> inwersja), bez przebudowywania niczego. Orientacja pozioma 320x240; kalibracja dotyku osobna od wersji pionowej."
         }
       ]
     }
