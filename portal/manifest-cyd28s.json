@@ -1,6 +1,6 @@
 {
   "name": "K-OS - KORONA OS for CYD 2.8\" ST7789 (ESP32-2432S028 \"2 USB\", NIESPRAWDZONA)",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [

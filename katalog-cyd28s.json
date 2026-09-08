@@ -38,10 +38,10 @@
     },
     {
       "plik": "bin/cyd28s/gry-vol1.bin",
-      "rozmiar": 622128,
-      "sha256": "21b92374a213ace5dc059a5e1f42cf12afeef866cc37fe420036697dfb916e3e",
+      "rozmiar": 629344,
+      "sha256": "156954801cd2667672fc587a3e9fbad7e94846df163e6bb7c717f87b54790dfa",
       "nazwa": "K-OS GAME VOL1",
-      "wersja": "0.8.0",
+      "wersja": "0.9.0",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
