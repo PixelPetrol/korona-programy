@@ -1,0 +1,1 @@
+openHASP turns the CYD into a Home Assistant touch panel: LVGL pages and widgets from pages.jsonl, control over MQTT. First start: AP 'HASP-xxxxxx' password 'haspadmin', four-corner calibration, then WiFi and MQTT over www 192.168.4.1. Screen in landscape; rotation and inversion are changed in Configuration - Display.

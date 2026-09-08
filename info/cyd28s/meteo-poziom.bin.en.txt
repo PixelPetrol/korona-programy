@@ -1,0 +1,1 @@
+The landscape version for the CYD 2.8" with the ST7789 driver. As in the other landscape versions the touch calibration goes DIRECTLY in landscape orientation, because a calibration from portrait gives a stretch in landscape and not a rotation. NOT TESTED ON HARDWARE.

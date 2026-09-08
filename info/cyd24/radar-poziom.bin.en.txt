@@ -1,0 +1,1 @@
+The same application as SkyCYD portrait, but in landscape orientation 320x240 (the original SkyCYD layout). Touch calibration separate from the portrait version.

@@ -1,0 +1,1 @@
+ESP32 Marauder in the CYD_24 profile: scanning networks and BLE devices, sniffing, tests of YOUR OWN network. It keeps its settings in SPIFFS - thanks to K-OS snapshots they stay between starts.

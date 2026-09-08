@@ -1,0 +1,1 @@
+The landscape version for the CYD 2.8". Note: on this board the calibration goes DIRECTLY in landscape orientation and not through a recomputation from portrait - a recomputed guess would still be a guess. NOT TESTED ON HARDWARE.

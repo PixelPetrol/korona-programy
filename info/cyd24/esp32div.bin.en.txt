@@ -1,0 +1,1 @@
+HaleHound-CYD: a WiFi/BLE scanner, deauth, RF, NFC (the modules are optional). A K-OS port for the CYD 2.4": XPT2046 touch over the LCD bus (TFT_eSPI, TOUCH_CS 33) instead of bit-banging on the screen pins, which froze the start screen. Tested on hardware 03.09.2026: start, menu, touch, RST returns to K-OS.

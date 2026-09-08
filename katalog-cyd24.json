@@ -18,7 +18,8 @@
       },
       "ikona": "bin/cyd24/bruce.ico",
       "info": {
-        "pl": "info/cyd24/bruce.bin.pl.txt"
+        "pl": "info/cyd24/bruce.bin.pl.txt",
+        "en": "info/cyd24/bruce.bin.en.txt"
       }
     },
     {
@@ -35,15 +36,16 @@
       },
       "ikona": "bin/cyd24/esp32div.ico",
       "info": {
-        "pl": "info/cyd24/esp32div.bin.pl.txt"
+        "pl": "info/cyd24/esp32div.bin.pl.txt",
+        "en": "info/cyd24/esp32div.bin.en.txt"
       }
     },
     {
       "plik": "bin/cyd24/gry-vol1.bin",
-      "rozmiar": 630560,
-      "sha256": "25f0e88e6a4e5108ef790a31a8a45a215f2573e458c4e397823ffe877022ecc2",
+      "rozmiar": 631280,
+      "sha256": "3efa62752c79ff07b924ee8924eb7e3d5ce4a4b0cbcbf72f5c462034ee4ca1cf",
       "nazwa": "K-OS GAME VOL1",
-      "wersja": "0.9.0",
+      "wersja": "0.9.1",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -52,7 +54,8 @@
       },
       "ikona": "bin/cyd24/gry-vol1.ico",
       "info": {
-        "pl": "info/cyd24/gry-vol1.bin.pl.txt"
+        "pl": "info/cyd24/gry-vol1.bin.pl.txt",
+        "en": "info/cyd24/gry-vol1.bin.en.txt"
       }
     },
     {
@@ -69,7 +72,8 @@
       },
       "ikona": "bin/cyd24/marauder.ico",
       "info": {
-        "pl": "info/cyd24/marauder.bin.pl.txt"
+        "pl": "info/cyd24/marauder.bin.pl.txt",
+        "en": "info/cyd24/marauder.bin.en.txt"
       }
     },
     {
@@ -86,7 +90,8 @@
       },
       "ikona": "bin/cyd24/mesh.ico",
       "info": {
-        "pl": "info/cyd24/mesh.bin.pl.txt"
+        "pl": "info/cyd24/mesh.bin.pl.txt",
+        "en": "info/cyd24/mesh.bin.en.txt"
       }
     },
     {
@@ -103,7 +108,8 @@
       },
       "ikona": "bin/cyd24/meteo-pion.ico",
       "info": {
-        "pl": "info/cyd24/meteo-pion.bin.pl.txt"
+        "pl": "info/cyd24/meteo-pion.bin.pl.txt",
+        "en": "info/cyd24/meteo-pion.bin.en.txt"
       }
     },
     {
@@ -120,7 +126,8 @@
       },
       "ikona": "bin/cyd24/meteo-poziom.ico",
       "info": {
-        "pl": "info/cyd24/meteo-poziom.bin.pl.txt"
+        "pl": "info/cyd24/meteo-poziom.bin.pl.txt",
+        "en": "info/cyd24/meteo-poziom.bin.en.txt"
       }
     },
     {
@@ -137,7 +144,8 @@
       },
       "ikona": "bin/cyd24/nerdminer.ico",
       "info": {
-        "pl": "info/cyd24/nerdminer.bin.pl.txt"
+        "pl": "info/cyd24/nerdminer.bin.pl.txt",
+        "en": "info/cyd24/nerdminer.bin.en.txt"
       }
     },
     {
@@ -154,7 +162,8 @@
       },
       "ikona": "bin/cyd24/office.ico",
       "info": {
-        "pl": "info/cyd24/office.bin.pl.txt"
+        "pl": "info/cyd24/office.bin.pl.txt",
+        "en": "info/cyd24/office.bin.en.txt"
       }
     },
     {
@@ -171,7 +180,8 @@
       },
       "ikona": "bin/cyd24/openhasp.ico",
       "info": {
-        "pl": "info/cyd24/openhasp.bin.pl.txt"
+        "pl": "info/cyd24/openhasp.bin.pl.txt",
+        "en": "info/cyd24/openhasp.bin.en.txt"
       }
     },
     {
@@ -188,7 +198,8 @@
       },
       "ikona": "bin/cyd24/pogoda.ico",
       "info": {
-        "pl": "info/cyd24/pogoda.bin.pl.txt"
+        "pl": "info/cyd24/pogoda.bin.pl.txt",
+        "en": "info/cyd24/pogoda.bin.en.txt"
       }
     },
     {
@@ -205,7 +216,8 @@
       },
       "ikona": "bin/cyd24/radar-pion.ico",
       "info": {
-        "pl": "info/cyd24/radar-pion.bin.pl.txt"
+        "pl": "info/cyd24/radar-pion.bin.pl.txt",
+        "en": "info/cyd24/radar-pion.bin.en.txt"
       }
     },
     {
@@ -222,7 +234,8 @@
       },
       "ikona": "bin/cyd24/radar-poziom.ico",
       "info": {
-        "pl": "info/cyd24/radar-poziom.bin.pl.txt"
+        "pl": "info/cyd24/radar-poziom.bin.pl.txt",
+        "en": "info/cyd24/radar-poziom.bin.en.txt"
       }
     }
   ]

@@ -1,0 +1,1 @@
+A weather station for the CYD 2.8" (2432S028R), portrait orientation. Touch bit-banged on the board's own pins, backlight GPIO 21. When there is no system calibration for this board, the program offers its own instead of using guesswork. NOT TESTED ON HARDWARE.

@@ -1,0 +1,1 @@
+A weather station for the CYD 2.8" in the revision with the ST7789 driver (the board with two USB sockets), portrait orientation. Built from the same source as the cyd28 version - it differs only in the screen driver flags. NOT TESTED ON HARDWARE. If the image comes out as a negative or with red and blue swapped, that is a one-flag fix.
