@@ -150,10 +150,10 @@
     },
     {
       "plik": "bin/cyd28/radar-pion.bin",
-      "rozmiar": 1498928,
-      "sha256": "1a61d5afe72fd12df33f9b5ac8b9185111d8a748d26a48a25b3ba0f9261e0960",
-      "nazwa": "SkyCYD 4.4.1 pion",
-      "wersja": "4.4.1",
+      "rozmiar": 1507984,
+      "sha256": "8f3f271ac2f0bec2519e7f51e79a7fd47ba3fea684fdffdc1dfcc99678cb6208",
+      "nazwa": "SkyCYD 4.4.2 pion",
+      "wersja": "4.4.2",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -168,10 +168,10 @@
     },
     {
       "plik": "bin/cyd28/radar-poziom.bin",
-      "rozmiar": 1500544,
-      "sha256": "4c69e4bdae3a0de8dd6b84b8e08cef4ad141f51336f1aac1b5a92bcdbc1d327e",
-      "nazwa": "SkyCYD 4.4.1 poziom",
-      "wersja": "4.4.1",
+      "rozmiar": 1509488,
+      "sha256": "82e58f02007c39035f44e07f0f3194c3de026bba7fc52732537080271fd3f8dd",
+      "nazwa": "SkyCYD 4.4.2 poziom",
+      "wersja": "4.4.2",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
