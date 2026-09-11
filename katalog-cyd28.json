@@ -186,15 +186,15 @@
     },
     {
       "plik": "bin/cyd28/ropeburn-mini.bin",
-      "rozmiar": 673392,
-      "sha256": "4d73081d1e796d6ce58a592aa6c40d8fb00177fadf6b8420dc11512bb3830baf",
+      "rozmiar": 780592,
+      "sha256": "05ac8e30456c3db104daa60cf6882cb2f1e5c97abce1bd8cac08ffbd38ed8a51",
       "nazwa": "Ropeburn Mini",
-      "wersja": "0.1.0",
+      "wersja": "0.2.0",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "skakanka na rytm: 1 dotkniecie, 3 zycia; 2.8\" NIESPRAWDZONE",
-        "en": "jump rope to the beat: 1 touch, 3 lives; 2.8\" UNTESTED"
+        "pl": "skakanka na rytm: 1 dotkniecie, TY skaczesz, 3 zycia; 2.8\" NIESPRAWDZONE",
+        "en": "jump rope to the beat: 1 touch, YOU jump, 3 lives; 2.8\" UNTESTED"
       },
       "ikona": "bin/cyd28/ropeburn-mini.ico",
       "info": {
