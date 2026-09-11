@@ -237,6 +237,24 @@
         "pl": "info/cyd24/radar-poziom.bin.pl.txt",
         "en": "info/cyd24/radar-poziom.bin.en.txt"
       }
+    },
+    {
+      "plik": "bin/cyd24/ropeburn-mini.bin",
+      "rozmiar": 673856,
+      "sha256": "939fe3048ac136c0c340c9e235225e7fd051a380d51c96092cbfb2485796f5f5",
+      "nazwa": "Ropeburn Mini",
+      "wersja": "0.1.0",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "skakanka na rytm: 1 dotkniecie, 3 zycia, 1 postac, 2 poziomy; NIESPRAWDZONE",
+        "en": "jump rope to the beat: 1 touch, 3 lives, 1 character, 2 levels; UNTESTED"
+      },
+      "ikona": "bin/cyd24/ropeburn-mini.ico",
+      "info": {
+        "pl": "info/cyd24/ropeburn-mini.bin.pl.txt",
+        "en": "info/cyd24/ropeburn-mini.bin.en.txt"
+      }
     }
   ]
 }

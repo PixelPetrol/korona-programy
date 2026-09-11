@@ -160,6 +160,18 @@
           "autor": "Piotr Korona",
           "info": "Ta sama aplikacja co SkyCYD pion, ale w orientacji poziomej 320x240 (oryginalny uklad SkyCYD). Kalibracja dotyku osobna od wersji pionowej. Interfejs SkyCYD jest tylko po polsku.",
           "info_pelny": "info/cyd24/radar-poziom.bin.pl.txt"
+        },
+        {
+          "plik": "bin/cyd24/ropeburn-mini.bin",
+          "rozmiar": 673856,
+          "sha256": "939fe3048ac136c0c340c9e235225e7fd051a380d51c96092cbfb2485796f5f5",
+          "nazwa": "Ropeburn Mini",
+          "opis": "skakanka na rytm: 1 dotkniecie, 3 zycia, 1 postac, 2 poziomy; NIESPRAWDZONE",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Gra zrecznosciowa na rytm, ekran pionowy: bohaterka skacze przez skakanke SAMA, a gracz ma jedno zadanie - dotknac ekranu w dobrym momencie, co robi PODWOJNY PRZESKOK za duze punkty.",
+          "info_pelny": "info/cyd24/ropeburn-mini.bin.pl.txt"
         }
       ]
     },
@@ -286,6 +298,18 @@
           "autor": "Piotr Korona",
           "info": "Wersja dla CYD 2.8\" (2432S028R) - zbudowana, nie sprawdzona na sprzecie. Interfejs SkyCYD jest tylko po polsku.",
           "info_pelny": "info/cyd28/radar-poziom.bin.pl.txt"
+        },
+        {
+          "plik": "bin/cyd28/ropeburn-mini.bin",
+          "rozmiar": 673392,
+          "sha256": "4d73081d1e796d6ce58a592aa6c40d8fb00177fadf6b8420dc11512bb3830baf",
+          "nazwa": "Ropeburn Mini",
+          "opis": "skakanka na rytm: 1 dotkniecie, 3 zycia; 2.8\" NIESPRAWDZONE",
+          "wersja": "0.1.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona",
+          "info": "Ta sama gra co na 2.4\", zbudowana dla CYD 2.8\" (2432S028R): dotyk XPT2046 czytany bit-bangiem na wlasnych pinach plytki (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), podswietlenie GPIO 21.",
+          "info_pelny": "info/cyd28/ropeburn-mini.bin.pl.txt"
         }
       ]
     },

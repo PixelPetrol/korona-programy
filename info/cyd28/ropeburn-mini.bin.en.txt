@@ -1,0 +1,1 @@
+The same game as on the 2.4", built for the CYD 2.8" (2432S028R): the XPT2046 touch is bit-banged on the board's own pins (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), backlight on GPIO 21. Touch calibration comes from K-OS (/dotyk-cyd28.txt); without it a default is used and the serial port says so. The same game image, the same saved state. NEVER RUN ON THIS BOARD.

@@ -1,0 +1,1 @@
+Ta sama gra co na 2.4", zbudowana dla CYD 2.8" (2432S028R): dotyk XPT2046 czytany bit-bangiem na wlasnych pinach plytki (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), podswietlenie GPIO 21. Kalibracje dotyku bierze z K-OS (/dotyk-cyd28.txt); bez niej uzywa domyslnej i mowi o tym na porcie szeregowym. Ten sam obraz gry, ten sam zapis stanu. NIE URUCHOMIONA NA TEJ PLYTCE ANI RAZU.
