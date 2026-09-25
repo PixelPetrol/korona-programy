@@ -132,8 +132,8 @@ PLYTKI=(24 28R 28R-st7789)
 id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; 28R-st7789) echo cyd28s ;; *) blad "nieznana plytka $1" ;; esac; }
 opis_plytki() { case "$1" in
                   24)         echo 'CYD 2.4" ESP32-2432S024R' ;;
-                  28R)        echo 'CYD 2.8" ESP32-2432S028R - dotyk niesprawdzony' ;;
-                  28R-st7789) echo 'CYD 2.8" ST7789 ESP32-2432S028 "2 USB" - NIESPRAWDZONA' ;;
+                  28R)        echo 'CYD 2.8" ESP32-2432S028R - sprawdzona przez testera' ;;
+                  28R-st7789) echo 'CYD 2.8" ST7789 ESP32-2432S028 "2 USB" - ekran niepotwierdzony' ;;
                 esac; }
 # Podpowiedz, jak zbudowac brakujacy obraz - rozna dla panelu ST7789.
 jak_zbudowac() { case "$1" in

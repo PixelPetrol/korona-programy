@@ -14,8 +14,8 @@ Autor: Piotr Korona.
 index.html            strona (bez frameworków; skrypty: ESP Web Tools z unpkg + esptool-js z jsDelivr
                       ładowany dopiero po kliknięciu „Zrób kopię” — §8)
 manifest-cyd24.json   manifest ESP Web Tools — CYD 2.4" (ESP32-2432S024R)
-manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R; dotyk niesprawdzony)
-manifest-cyd28s.json  manifest ESP Web Tools — CYD 2.8" ST7789 (ESP32-2432S028 „2 USB”, NIESPRAWDZONA)
+manifest-cyd28.json   manifest ESP Web Tools — CYD 2.8" (ESP32-2432S028R)
+manifest-cyd28s.json  manifest ESP Web Tools — CYD 2.8" ST7789 (ESP32-2432S028 „2 USB”, ekran niepotwierdzony)
 programy.html         dla autorów: jak napisać program pod K-OS i jak go zgłosić
 zglos.html            zgłoszenie programu: sprawdzanie .bin w przeglądarce + formularz (§9)
 zglos.js              walidator .bin i meta.json w JS — KOPIA reguł z tools/sprawdz_bin.py (§9)
@@ -203,11 +203,13 @@ Wersja i data obrazów są w nagłówku tabeli wyżej (czyli w `obrazy/SUMY.txt`
 pozwoli zapisać obrazu starszego niż `version.h`, więc obrazy `cyd28`/`cyd28s` i manifesty
 zawsze pochodzą z tego samego biegu co binarka.
 
-Płytka 2.8" ILI9341 (`cyd28`) **wystartowała na sprzęcie**: zewnętrzny tester uruchomił na
-ESP32-2432S028R K-OS 0.4.3 — system wstaje, ekran, karta, sklep, uruchamianie programów i WiFi
-działają. **Niesprawdzone zostają dotyk** (kalibracja startowa jest zgadywana, więc może być
-przekręcona) **i komendy po USB**. Rewizja ST7789 (`cyd28s`) nie była uruchomiona na żadnej
-płytce (§6).
+Płytka 2.8" ILI9341 (`cyd28`) **jest sprawdzona przez zewnętrznego testera** na ESP32-2432S028R
+(zgłoszenie #2): na K-OS 0.4.3 system wstaje, ekran, karta, sklep, uruchamianie programów i WiFi
+działają; na K-OS 0.7.1 dotyk trafia na całym ekranie z kalibracją zmierzoną na jego płytce
+(`KAL:525,3036,373,3323,2`), a komendy po USB odpowiadają. Od 0.7.4 te liczby są domyślne dla
+`cyd28` i `cyd28s`. Samego 0.7.4 tester nie zgłosił. Rewizja ST7789 (`cyd28s`): według telemetrii
+obraz startuje i łączy się z WiFi w ok. 20 instalacjach (25.09.2026), a sieć ustawia się w K-OS
+tylko na ekranie dotykowym — ale kolorów i celności dotyku nikt nam nie potwierdził (§6).
 
 Gdyby `.build-28R/` kiedyś zniknęło albo zestarzało się względem `version.h`, skrypt **przerwie
 z błędem przed zapisem czegokolwiek** — nie ma trybu „pomiń jedną płytkę”, bo strona i oba
@@ -302,12 +304,13 @@ Bez owijania:
    scalonego obrazu, renderowanie strony i to, że `<esp-web-install-button>` wchodzi w stan
    *aktywny* na `localhost` (`isSupported`/`isAllowed`/`isSecureContext` = `true`, widoczny
    slot `activate`). **Pierwsze prawdziwe wgranie z portalu jest przed Tobą.**
-2. **Obraz 2.8" jest sprawdzony tylko częściowo, a ST7789 wcale.** Na ESP32-2432S028R
-   (`cyd28`) zewnętrzny tester uruchomił K-OS 0.4.3: ekran, karta, sklep, uruchamianie
-   programów i WiFi działają — ale **dotyku i komend po USB nikt nie potwierdził**, a domyślna
-   kalibracja dotyku jest zgadywana. Rewizja ST7789 (`cyd28s`) nadal jest przygotowana
-   „w ciemno”. Strona mówi to wprost i przyciski obu wersji 2.8" są pomarańczowe, ale portal
-   nie ma jak tego sprawdzić.
+2. **Obraz 2.8" sprawdził zewnętrzny tester, ST7789 nikt z nas.** Na ESP32-2432S028R (`cyd28`)
+   tester uruchomił K-OS 0.4.3 (ekran, karta, sklep, programy, WiFi) i 0.7.1 (dotyk celny na
+   całym ekranie ze zmierzoną kalibracją, komendy po USB); od 0.7.4 ta kalibracja jest domyślna.
+   Rewizja ST7789 (`cyd28s`) działa u użytkowników według telemetrii, ale obrazu na ekranie nikt
+   nam nie potwierdził. Strona mówi to wprost, a przyciski obu wersji 2.8" zostają pomarańczowe
+   („na własne ryzyko”) — nikt po naszej stronie nie ma tych płytek, a portal nie ma jak tego
+   sprawdzić.
 3. **Portal nie rozpozna, jaką masz płytkę.** ESP32 nie zdradza modelu obudowy — 2.4" i 2.8"
    są elektronicznie tym samym chipem. Wybór jest ręczny; zły wybór to czarny ekran albo martwy
    dotyk (odkręcalne: wgraj drugi obraz).
