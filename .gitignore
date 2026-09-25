@@ -2,3 +2,6 @@
 # Python
 __pycache__/
 *.pyc
+
+# Materialy robocze dla Piotra (latki, szkice odpowiedzi, stan prac) - nie sa trescia sklepu
+_przygotowane/

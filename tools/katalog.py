@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
-"""Generuje katalog.json (format v2, per plytka) z plikow bin/<plytka>/*.bin i tabeli META
-oraz z programow uzytkownikow bin/<plytka>/uzytkownicy/*.bin (META z pliku <nazwa>.meta.json obok bina).
+"""Generuje katalogi sklepu z plikow bin/<plytka>/*.bin i tabeli META oraz z programow
+uzytkownikow bin/<plytka>/uzytkownicy/*.bin (META z pliku <nazwa>.meta.json obok bina):
+  * katalog-<plytka>.json (format v3, jeden plik na plytke) + plytki.json - czyta je K-OS >= 0.4.7
+    i portal/sklep.html; dlugie opisy leza w info/<plytka>/<plik>.<jezyk>.txt,
+  * katalog.json (stary wspolny format v2) - TYLKO POLA MINIMALNE (V2_POLA nizej), bo ma twardy
+    sufit KATALOG_STOP, a czytaja go juz tylko stare K-OS i strona WWW plytki do 0.7.6.
 
-Uzycie (z katalogu repo):  python3 tools/katalog.py
+Uzycie (z katalogu repo):  python3 tools/katalog.py              - generuje i zapisuje
+                           python3 tools/katalog.py --sprawdz     - NIC nie zapisuje: mierzy v2
+                               i porownuje wszystkie pliki z dyskiem. Kod wyjscia: 0 = w porzadku,
+                               1 = v2 ponad KATALOG_STOP, 3 = pliki na dysku sa nieaktualne
+                               (ktos zmienil bin/ albo META i nie przegenerowal katalogow).
 Rozmiary sa czytane z plikow; opisy/wersje z tabeli ponizej (programy sklepu) albo z
 <nazwa>.meta.json (programy uzytkownikow - te trafiaja tam automatem z zgloszenia/, patrz
 tools/przyjmij_zgloszenia.py). Plik bez META nie trafia do katalogu (ostrzezenie na stderr).
@@ -146,29 +154,56 @@ META = {
 UZYTK_POLA = ("nazwa", "opis", "wersja", "kategoria", "autor", "info", "licencja", "zrodlo", "orientacja", "zgloszono")
 
 
-# ROZMIAR KATALOGU JEST OGRANICZENIEM SPRZETOWYM, NIE ESTETYCZNYM.
-# K-OS pobiera katalog.json W CALOSCI do Stringa, a potem parsuje go do JsonDocument -
-# oba zyja w RAM naraz, na plytce bez PSRAM. 08.09.2026 katalog urosl z 22,9 kB do 35,1 kB
-# (dlugie opisy nowych programow) i SKLEP NA PLYTCE PRZESTAL DZIALAC. Stad dwie rzeczy:
-#   1. do katalogu idzie tylko SKROT opisu, a pelny tekst ladzie w info/<plytka>/<plik>.txt
-#      (pole "info_pelny" wskazuje sciezke - portal moze go pokazac, K-OS pobrac na zadanie);
-#   2. generator SAM SIE ZATRZYMUJE, gdy plik przekroczy KATALOG_STOP - patrz koniec main().
-INFO_MAX = 200          # znakow opisu w samym katalogu (pelny tekst: info/<plytka>/)
+# ROZMIAR STAREGO katalog.json (v2) JEST OGRANICZENIEM SPRZETOWYM, NIE ESTETYCZNYM.
+# K-OS <= 0.4.6 pobiera go W CALOSCI do Stringa, a potem parsuje do JsonDocument - oba zyja
+# w RAM naraz, na plytce bez PSRAM. 08.09.2026 katalog urosl z 22,9 kB do 35,1 kB (dlugie opisy
+# nowych programow) i SKLEP NA PLYTCE PRZESTAL DZIALAC. Dlatego generator SAM SIE ZATRZYMUJE, gdy
+# v2 przekroczy KATALOG_STOP - i wtedy NIE ZAPISUJE NICZEGO, czyli jeden program za duzo
+# zatrzymuje publikacje wszystkich. Od 25.09.2026 (D4) v2 dostaje wiec tylko pola z V2_POLA.
+# Katalogi v3 (per plytka) tego sufitu nie maja: K-OS >= 0.4.7 laduje je na karte i parsuje
+# strumieniem, a dlugie opisy pobiera dopiero przy otwarciu karty programu.
 KATALOG_OSTRZEZ = 20000 # B - powyzej tego glosne ostrzezenie
 KATALOG_STOP = 26000    # B - powyzej tego generator konczy sie bledem i nie zapisuje pliku
 ROOT = ""               # ustawiane w main()
+ZAPISUJ = True          # False przy --sprawdz: nic nie trafia na dysk
+NIEAKTUALNE = []        # --sprawdz: pliki, ktore generator zapisalby inaczej, niz leza na dysku
+
+# POLA STAREGO KATALOGU v2 - TYLKO TE, KTORE KTOS NAPRAWDE CZYTA (D4 z PROPOZYCJE-2026-09-24).
+# Czytelnicy v2 - sprawdzone w zrodlach loader/ ORAZ w kazdym opublikowanym obrazie K-OS
+# (portal/obrazy/*/loader.bin z historii tego repo, 0.3.6 ... 0.7.4):
+#   * strona WWW plytki (PAGE_HTML w loader/net.cpp), we wszystkich wydanych K-OS: plik, nazwa,
+#     opis (wypisywany WPROST - musi byc napisem, nie obiektem), rozmiar, wersja, kategoria,
+#     autor, info, od 0.4.3 takze sha256. WERSJA i SHA256 jada w /fetch (?v= trafia do
+#     /korona/<plytka>/wersje.txt, ?s= sprawdza plik po pobraniu), KATEGORIA dzieli liste na
+#     autorskie / uzytkownicy / zewnetrzne - bez niej programy Piotra wyladowalyby w "zewnetrzne";
+#   * sklep na plytce w K-OS <= 0.4.6 (przed katalogami per plytka) - te same pola;
+#   * K-OS >= 0.4.7 tylko w drodze awaryjnej, gdy katalog-<plytka>.json odpowie 404;
+#   * portal/zglos.js - samo "plik" (kolizja nazwy zgloszenia z programem w sklepie).
+# WYPADAJA: "info" (skrot 200 znakow - tylko tekst doklejany pod opisem na stronie plytki i na
+# karcie programu w K-OS <= 0.4.6; to ~6,5 kB z 22,7 kB), "info_pelny" (nie czyta go nic - zero
+# wystapien w obrazach K-OS) oraz licencja/zrodlo/orientacja/zgloszono z programow uzytkownikow
+# (tez zero wystapien). Pelne opisy dalej leza w info/<plytka>/ i czyta je v3.
+# "autor" jest takze tylko wyswietlany, ale kosztuje ~38 B na wpis i jest podpisem autorow portow
+# na stronie plytki - zostaje. Wyrzucenie go daje miejsce na kolejne ~7 wpisow.
+V2_POLA = ("plik", "rozmiar", "sha256", "nazwa", "opis", "wersja", "kategoria", "autor")
 
 
-def skroc_info(pelny):
-    """Zwraca (skrot, czy_uciety). Tnie na granicy zdania, a nie w polowie slowa."""
-    if len(pelny) <= INFO_MAX:
-        return pelny, False
-    ciach = pelny.rfind(". ", 0, INFO_MAX)
-    if ciach < INFO_MAX // 2:
-        ciach = pelny.rfind(" ", 0, INFO_MAX)
-    if ciach <= 0:
-        ciach = INFO_MAX
-    return pelny[:ciach + 1].rstrip(), True
+def zapisz(rel, tekst):
+    """Zapis pliku wyjsciowego (sciezka wzgledem repo). Przy --sprawdz niczego nie zapisuje,
+    tylko porownuje z tym, co lezy na dysku, i notuje roznice w NIEAKTUALNE."""
+    sciezka = os.path.join(ROOT, rel)
+    if not ZAPISUJ:
+        try:
+            with open(sciezka, encoding="utf-8") as fh:
+                if fh.read() == tekst:
+                    return
+        except OSError:
+            pass
+        NIEAKTUALNE.append(rel)
+        return
+    os.makedirs(os.path.dirname(sciezka), exist_ok=True)
+    with open(sciezka, "w", encoding="utf-8") as fh:
+        fh.write(tekst)
 
 
 # Limit dlugosci pliku opisu. K-OS czyta go do bufora o stalym rozmiarze i powyzej tego
@@ -242,28 +277,20 @@ def zapisz_info(pid, nazwa_pliku, lang, tekst):
     if len(tekst) > INFO_PLIK_MAX:
         tekst = tekst[:INFO_PLIK_MAX].rsplit(" ", 1)[0] + " ..."
     rel = "info/%s/%s.%s.txt" % (pid, nazwa_pliku, lang)
-    sciezka = os.path.join(ROOT, rel)
-    os.makedirs(os.path.dirname(sciezka), exist_ok=True)
-    with open(sciezka, "w", encoding="utf-8") as fh:
-        fh.write(tekst + "\n")
+    zapisz(rel, tekst + "\n")
     return rel
 
 
 def wpis(pid, rel, data, meta):
-    """Wpis do STAREGO katalogu v2 - jeden wspolny plik, tylko po polsku.
-    Ten format zostaje, bo czyta go i starszy K-OS, i strona www w przegladarce
-    (PAGE_HTML w net.cpp wypisuje p.opis WPROST, wiec musi to byc napis, nie obiekt)."""
+    """Wpis do STAREGO katalogu v2 - jeden wspolny plik, tylko po polsku, TYLKO pola V2_POLA
+    (kto co czyta - komentarz przy V2_POLA). "opis" zostaje zwyklym napisem, bo strona WWW plytki
+    w K-OS <= 0.7.6 wypisuje p.opis WPROST. Przy okazji odklada dlugie opisy do info/<plytka>/ -
+    z nich korzysta v3 (wpis3), wiec to musi sie dziac dalej, choc v2 ich juz nie wskazuje."""
     e = {"plik": rel, "rozmiar": len(data), "sha256": hashlib.sha256(data).hexdigest()}
-    e.update({k: v for k, v in meta.items() if k not in ("opis_en", "info_en")})
+    e.update({k: v for k, v in meta.items() if k in V2_POLA})
     nazwa = rel.rsplit("/", 1)[-1]
-    pelny = e.get("info", "")
-    krotki, uciety = skroc_info(pelny)
-    sc_pl = zapisz_info(pid, nazwa, "pl", pelny)
+    zapisz_info(pid, nazwa, "pl", meta.get("info", ""))
     zapisz_info(pid, nazwa, "en", meta.get("info_en", ""))
-    if uciety:
-        e["info"] = krotki
-        if sc_pl:
-            e["info_pelny"] = sc_pl
     return e
 
 
@@ -314,7 +341,13 @@ def meta_uzytkownika(path_json):
 
 
 def main():
-    global ROOT
+    global ROOT, ZAPISUJ
+    argumenty = sys.argv[1:]
+    nieznane = [a for a in argumenty if a != "--sprawdz"]
+    if nieznane:
+        print("nieznany argument: %s (jest tylko --sprawdz)" % " ".join(nieznane), file=sys.stderr)
+        sys.exit(2)
+    ZAPISUJ = "--sprawdz" not in argumenty
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     ROOT = root
     out = {"sklep": "KORONA", "wersja": 2, "plytki": []}
@@ -353,30 +386,38 @@ def main():
 
     tekst = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     rozmiar = len(tekst.encode("utf-8"))
+    n2 = sum(len(p["programy"]) for p in out["plytki"])
     if rozmiar > KATALOG_STOP:
-        print("BLAD: katalog ma %d B, a limit to %d B. NIC NIE ZAPISANO.\n"
-              "      Plytka pobiera katalog w calosci do RAM - za duzy plik wywala sklep.\n"
-              "      Skroc opisy w META albo zmniejsz INFO_MAX." % (rozmiar, KATALOG_STOP),
+        print("BLAD: katalog.json (v2) ma %d B, a limit to %d B. NIC NIE ZAPISANO.\n"
+              "      K-OS <= 0.4.6 pobiera go w calosci do RAM - za duzy plik wywala tam sklep.\n"
+              "      v2 ma juz tylko pola V2_POLA; nastepny krok to zamrozenie v2 na obecnej liscie\n"
+              "      albo wyrzucenie \"autor\" z V2_POLA (komentarz przy V2_POLA)." % (rozmiar, KATALOG_STOP),
               file=sys.stderr)
         sys.exit(1)
-    with open(os.path.join(root, "katalog.json"), "w") as fh:
-        fh.write(tekst)
-    print("katalog.json:", sum(len(p["programy"]) for p in out["plytki"]), "programow,",
-          rozmiar, "B")
+    zapisz("katalog.json", tekst)
+    # ZAPAS W v2 - ile wpisow jeszcze wejdzie. Sredni wpis liczony z roznicy miedzy katalogiem
+    # z wpisami a samym szkieletem (te same plytki, puste listy), wiec obejmuje wciecia i przecinki.
+    szkielet = json.dumps({"sklep": "KORONA", "wersja": 2, "plytki": [
+        {"id": p["id"], "nazwa": p["nazwa"], "programy": []} for p in out["plytki"]]},
+        ensure_ascii=False, indent=2) + "\n"
+    sredni = (rozmiar - len(szkielet.encode("utf-8"))) / n2 if n2 else 0
+    print("katalog.json (v2, pola minimalne): %d programow, %d B" % (n2, rozmiar))
+    if sredni:
+        print("  zapas v2: %d B do sufitu %d = ~%d wpisow po ~%.0f B (do progu ostrzegawczego %d: ~%d)"
+              % (KATALOG_STOP - rozmiar, KATALOG_STOP, (KATALOG_STOP - rozmiar) // sredni, sredni,
+                 KATALOG_OSTRZEZ, max(0, KATALOG_OSTRZEZ - rozmiar) // sredni))
     # --- format v3: JEDEN PLIK NA PLYTKE + maly spis plytek -------------------------------
     # Plytka pobiera odtad TYLKO swoja liste, a nie wszystkie trzy. Dlugie opisy siedza
     # w info/ i schodza na karte dopiero przy otwarciu karty programu.
     for pid, pname in PLYTKI:
         t3 = json.dumps(v3[pid], ensure_ascii=False, indent=2) + "\n"
-        with open(os.path.join(root, "katalog-%s.json" % pid), "w") as fh:
-            fh.write(t3)
+        zapisz("katalog-%s.json" % pid, t3)
         print("  katalog-%s.json: %d programow, %d B" % (pid, len(v3[pid]["programy"]),
                                                          len(t3.encode("utf-8"))))
     # Spis plytek - potrzebny K-OS do kafelka "inne plytki". Bez niego trzeba by po to
     # dociagac caly stary katalog.json, czyli dokladnie to, od czego uciekamy.
-    with open(os.path.join(root, "plytki.json"), "w") as fh:
-        fh.write(json.dumps([{"id": i, "nazwa": n} for i, n in PLYTKI],
-                            ensure_ascii=False, indent=2) + "\n")
+    zapisz("plytki.json", json.dumps([{"id": i, "nazwa": n} for i, n in PLYTKI],
+                                     ensure_ascii=False, indent=2) + "\n")
 
     # --- ile opisow czeka na angielski ---------------------------------------------------
     braki = sum(1 for pid, _ in PLYTKI for e in v3[pid]["programy"] if "en" not in e.get("opis", {}))
@@ -389,6 +430,14 @@ def main():
         print("UWAGA: katalog ma %d B (prog ostrzegawczy %d, twardy %d). Zbliza sie do granicy,\n"
               "       przy ktorej sklep na plytce przestaje dzialac." % (rozmiar, KATALOG_OSTRZEZ, KATALOG_STOP),
               file=sys.stderr)
+
+    if not ZAPISUJ:
+        if NIEAKTUALNE:
+            print("SPRAWDZENIE: nic nie zapisano. NIEAKTUALNE na dysku (%d): %s\n"
+                  "             -> uruchom python3 tools/katalog.py i przejrzyj git diff"
+                  % (len(NIEAKTUALNE), ", ".join(NIEAKTUALNE)), file=sys.stderr)
+            sys.exit(3)
+        print("SPRAWDZENIE: nic nie zapisano; wszystkie pliki na dysku sa aktualne.")
 
 
 if __name__ == "__main__":
