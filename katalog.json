@@ -17,6 +17,16 @@
           "autor": "pr3y"
         },
         {
+          "plik": "bin/cyd24/control.bin",
+          "rozmiar": 1480384,
+          "sha256": "bf5d1a23706d4f30c279147a3b17ba54442364816bafd5f51bdc0888ff651749",
+          "nazwa": "K-OS Control",
+          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "wersja": "0.1.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
           "plik": "bin/cyd24/doom.bin",
           "rozmiar": 637168,
           "sha256": "320f5c89cebd0b4f2745ec13f381d26dc1c1fefced59431ba4304ee586d16a90",
@@ -173,6 +183,16 @@
           "autor": "pr3y"
         },
         {
+          "plik": "bin/cyd28/control.bin",
+          "rozmiar": 1480560,
+          "sha256": "27b98bcfa1610999fd30f6ee6ee3d0dd4f2ad56a480e8bc78aa04d6bc76e21a9",
+          "nazwa": "K-OS Control",
+          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "wersja": "0.1.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
           "plik": "bin/cyd28/doom.bin",
           "rozmiar": 637088,
           "sha256": "a1353f4bc34f2ae762af3b067297ebb3b26148ae19dabc9140ee0ef813217c9e",
@@ -297,6 +317,16 @@
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y"
+        },
+        {
+          "plik": "bin/cyd28s/control.bin",
+          "rozmiar": 1480496,
+          "sha256": "c44889204cdb82a0bfb214c5bcbe9384abc229cd03b7d9c81ef7fc5b1c3eee79",
+          "nazwa": "K-OS Control",
+          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "wersja": "0.1.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28s/doom.bin",

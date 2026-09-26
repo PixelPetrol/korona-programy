@@ -23,6 +23,24 @@
       }
     },
     {
+      "plik": "bin/cyd24/control.bin",
+      "rozmiar": 1480384,
+      "sha256": "bf5d1a23706d4f30c279147a3b17ba54442364816bafd5f51bdc0888ff651749",
+      "nazwa": "K-OS Control",
+      "wersja": "0.1.0-beta",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+        "en": "BETA - not yet run on a board; Bluetooth keyboard, mouse and TV remote for your computer, phone and TV"
+      },
+      "ikona": "bin/cyd24/control.ico",
+      "info": {
+        "pl": "info/cyd24/control.bin.pl.txt",
+        "en": "info/cyd24/control.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd24/doom.bin",
       "rozmiar": 637168,
       "sha256": "320f5c89cebd0b4f2745ec13f381d26dc1c1fefced59431ba4304ee586d16a90",
