@@ -1,5 +1,7 @@
 # Po merge do main: poprawne zgloszenia z zgloszenia/<id>/ trafiaja do bin/<plytka>/uzytkownicy/,
-# katalog.json jest regenerowany, a wynik commitowany jako github-actions[bot].
+# katalogi sklepu sa regenerowane (v3 katalog-<plytka>.json + plytki.json, stary katalog.json i info/),
+# a wynik commitowany jako github-actions[bot]. Do 26.09.2026 bot commitowal tylko katalog.json (v2),
+# wiec program uzytkownika nie trafialby do K-OS >= 0.4.7 ani do portal/sklep.html (czytaja v3).
 # Wymaga w Settings > Actions > General > Workflow permissions: "Read and write permissions".
 # Zgloszenie odrzucone (np. ktos wgral recznie z pominieciem checka) zostaje w zgloszenia/ i job
 # jest czerwony - trzeba je poprawic albo usunac recznie.
@@ -33,7 +35,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Przenies zgloszenia do sklepu i przebuduj katalog.json
+      - name: Przenies zgloszenia do sklepu i przebuduj katalogi
         id: przyjmij
         run: |
           set +e
@@ -47,7 +49,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A bin/ katalog.json zgloszenia/
+          git add -A bin/ katalog.json katalog-*.json plytki.json info/ zgloszenia/
           if git diff --cached --quiet; then
             echo "nic do commitowania"; exit 0
           fi

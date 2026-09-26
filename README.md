@@ -140,7 +140,7 @@ portal/                           strona instalacyjna (GitHub Pages) z obrazami 
                                   zglos.html (sprawdzenie .bin w przeglądarce); jak to wypuścić: portal/README.md
 art/                              podgląd ikon, obrazki tego README (art/galeria/), źródła SVG ikon (art/icons/)
 .github/workflows/zgloszenie.yml  PR ze zgłoszeniem -> walidacja + komentarz
-.github/workflows/przyjmij.yml    merge do main -> przeniesienie do bin/ + katalog.json + commit bota
+.github/workflows/przyjmij.yml    merge do main -> przeniesienie do bin/ + katalogi i info/ + commit bota
 ```
 
 ### Katalogi
@@ -169,13 +169,13 @@ Każdy może zgłosić swój program. Najkrótsza droga: [portal/zglos.html](htt
 3. Sprawdź lokalnie: `python3 tools/sprawdz_zgloszenie.py zgloszenia/<id>` (albo w przeglądarce na `portal/zglos.html`).
 4. Otwórz Pull Request. Action `zgloszenie` sprawdza zgłoszenie i wkleja raport (rozmiar, sha256, app_desc, błędy). Czerwony check = popraw i wypchnij jeszcze raz.
 5. Przeglądający (Piotr) robi to, czego automat nie umie: wgrywa `.bin` na kartę, uruchamia, naciska RST. Jeśli menu wraca, a licencja i autorstwo się zgadzają — merge.
-6. Po merge Action `przyjmij` przenosi `.bin` do `bin/<plytka>/uzytkownicy/<id>.bin`, zapisuje obok `<id>.meta.json`, uruchamia `tools/katalog.py` i commituje zmiany w `bin/` i `katalog.json` jako `github-actions[bot]`. Program pojawia się w sklepie kilka minut po tym, jak na GitHubie są nowe katalogi (cache raw.githubusercontent.com).
+6. Po merge Action `przyjmij` przenosi `.bin` do `bin/<plytka>/uzytkownicy/<id>.bin`, zapisuje obok `<id>.meta.json`, uruchamia `tools/katalog.py` i commituje `bin/`, katalogi (v3, `plytki.json`, `katalog.json`) i `info/` jako `github-actions[bot]`. Program pojawia się w sklepie kilka minut po tym, jak na GitHubie są nowe katalogi (cache raw.githubusercontent.com).
 
 Aktualizacja: ten sam `<id>`, wyższa `wersja`, znowu PR. Zgłoszenie może być scalonym obrazem flasha (bootloader + tablica + aplikacja) — automat wycina z niego aplikację, ale lepiej wysyłać czysty `firmware.bin` / `*.ino.bin`.
 
 Reguły: `autor` to autor programu (przy porcie — oryginalny autor, zgłaszający w polu `zglaszajacy`); GPL wymaga `zrodlo`; `model_b: true` to oświadczenie autora. `nazwa`, `opis`, `info` i `autor` piszemy w ASCII — czcionka K-OS nie ma polskich znaków. Programy, które po RST nie wracają do menu, nie będą przyjęte — płytkę odzyskuje się wtedy tylko po USB.
 
-Dla przeglądającego: PR z forka może zmieniać też `tools/` i `.github/` — Action ostrzega o plikach poza `zgloszenia/`; takich PR nie scalać bez przeczytania różnicy. Po każdym przyjętym zgłoszeniu: `git pull` i `python3 tools/katalog.py --sprawdz`. Kod 3 znaczy, że katalogi v3 albo `info/` nie weszły do commita bota — wtedy `python3 tools/katalog.py`, commit i push; bez nich programu nie pokażą K-OS ≥ 0.4.7 ani `portal/sklep.html`.
+Dla przeglądającego: PR z forka może zmieniać też `tools/` i `.github/` — Action ostrzega o plikach poza `zgloszenia/`; takich PR nie scalać bez przeczytania różnicy. Po każdym przyjętym zgłoszeniu: `git pull` i `python3 tools/katalog.py --sprawdz` — kod 0 znaczy, że katalogi na GitHubie zgadzają się z `bin/`. Kod 3: `python3 tools/katalog.py`, commit i push; bez aktualnych katalogów v3 programu nie pokażą K-OS ≥ 0.4.7 ani `portal/sklep.html`.
 
 ### Jak K-OS traktuje kategorie
 
