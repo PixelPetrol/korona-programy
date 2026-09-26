@@ -190,6 +190,9 @@ IKONY = {
     "esp32div":     "memory",             # scalak
     "openhasp":     "home",               # dom
     "nerdminer":    "currency_bitcoin",
+    "doom":         "skull",              # czaszka - bez logo DOOM (znak towarowy id Software)
+    "control":      "keyboard",           # K-OS Control: klawiatura/mysz/pilot po Bluetooth
+    "subs":         "subscriptions",      # K-OS Subs: subskrypcje i wyswietlenia
 }
 MATERIAL_URL = ("https://fonts.gstatic.com/s/i/short-term/release/"
                 "materialsymbolsoutlined/{name}/default/24px.svg")

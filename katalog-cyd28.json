@@ -23,6 +23,24 @@
       }
     },
     {
+      "plik": "bin/cyd28/doom.bin",
+      "rozmiar": 637088,
+      "sha256": "a1353f4bc34f2ae762af3b067297ebb3b26148ae19dabc9140ee0ef813217c9e",
+      "nazwa": "DOOM (BETA)",
+      "wersja": "0.1.0-beta",
+      "kategoria": "zewnetrzne",
+      "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona",
+      "opis": {
+        "pl": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
+        "en": "DOOM engine; BETA - not yet run on a board; needs game data that the store does not provide"
+      },
+      "ikona": "bin/cyd28/doom.ico",
+      "info": {
+        "pl": "info/cyd28/doom.bin.pl.txt",
+        "en": "info/cyd28/doom.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd28/esp32div.bin",
       "rozmiar": 2420240,
       "sha256": "0c68c29f6f4f2ac2792ad0911b204986bb6de0d50ceface4bc9ed576c57c176e",
@@ -78,10 +96,10 @@
     },
     {
       "plik": "bin/cyd28/mesh.bin",
-      "rozmiar": 872704,
-      "sha256": "c73c5f6294d32379dd67a97b0e0c8a750b2c87d28cc1d59a0d970281a1b98f32",
+      "rozmiar": 874064,
+      "sha256": "4ccb9869d0d457e9bfe86558f1d7a70fca72b8baa1186bb36ddafecb39377da6",
       "nazwa": "K-OS Handset",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -96,10 +114,10 @@
     },
     {
       "plik": "bin/cyd28/meteo-pion.bin",
-      "rozmiar": 1148816,
-      "sha256": "006df7b197587e3b9fdebd3ae752c9165888bab7815b6b87dd63b55350bbd0b8",
+      "rozmiar": 1150672,
+      "sha256": "0e38b2c52837189389e80c89f113fd7abb2a8f4485d47948bb27402cba8973b4",
       "nazwa": "Meteo K-OS pion",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -114,10 +132,10 @@
     },
     {
       "plik": "bin/cyd28/meteo-poziom.bin",
-      "rozmiar": 1150816,
-      "sha256": "e51fb62030632126bc6b50df1669ab9e21b1910e5a51cbdad435161325ceea31",
+      "rozmiar": 1152768,
+      "sha256": "ce925d548cb04d6a95e227b0aa298e939a3da254f8eefa3e0ce6fb05287f80a8",
       "nazwa": "Meteo K-OS poziom",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -132,10 +150,10 @@
     },
     {
       "plik": "bin/cyd28/office.bin",
-      "rozmiar": 1197664,
-      "sha256": "23f73ec4b5f026f9f84af8ae4466bafb79a87a23017585e74d65b4b9d961ef43",
+      "rozmiar": 1199040,
+      "sha256": "895ae8483e8db1461c05565fcf33ecf839db8aecd4de7aec96d2345b70bdcd9d",
       "nazwa": "K-OS Office",
-      "wersja": "1.3.1",
+      "wersja": "1.3.2",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {

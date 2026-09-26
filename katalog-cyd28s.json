@@ -23,6 +23,24 @@
       }
     },
     {
+      "plik": "bin/cyd28s/doom.bin",
+      "rozmiar": 637104,
+      "sha256": "eaee66ebb02180473ea4ea2849f9170cc54a1ae0d82522a66b6327c54755a1a1",
+      "nazwa": "DOOM (BETA)",
+      "wersja": "0.1.0-beta",
+      "kategoria": "zewnetrzne",
+      "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona",
+      "opis": {
+        "pl": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
+        "en": "DOOM engine; BETA - not yet run on a board; needs game data that the store does not provide"
+      },
+      "ikona": "bin/cyd28s/doom.ico",
+      "info": {
+        "pl": "info/cyd28s/doom.bin.pl.txt",
+        "en": "info/cyd28s/doom.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd28s/esp32div.bin",
       "rozmiar": 2420176,
       "sha256": "9ded3ab19004a66391dae370f59b24ba1be4c95f9511292c49e99ed382c7dfe6",
@@ -78,10 +96,10 @@
     },
     {
       "plik": "bin/cyd28s/mesh.bin",
-      "rozmiar": 872608,
-      "sha256": "4c39e8e72872ec781a09b0319ed2b23f8fa30c4366d45cf4afd465b362eeb5f5",
+      "rozmiar": 873952,
+      "sha256": "48d285192aeb28a75e216f223cd44d5351167f68b24a3a6ebada96bdec8eefd4",
       "nazwa": "K-OS Handset",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -96,10 +114,10 @@
     },
     {
       "plik": "bin/cyd28s/meteo-pion.bin",
-      "rozmiar": 1148688,
-      "sha256": "134f473c768e02f017f2c35d63f6e38934337ae1ea7d9c7db7b4477ee9aeff6f",
+      "rozmiar": 1150560,
+      "sha256": "0b2497edb1608b85829dba9928e1ff8affeb18e365aecd58797729b300e44560",
       "nazwa": "Meteo K-OS pion",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -114,10 +132,10 @@
     },
     {
       "plik": "bin/cyd28s/meteo-poziom.bin",
-      "rozmiar": 1150704,
-      "sha256": "b03abd32cb138856a9c0a52f1d46eab78b8bd98e173ed404189b1bd9a1447d58",
+      "rozmiar": 1152656,
+      "sha256": "2c2aff09c713cd4c769767db9eb8d5e745214f61f18d9d1a4498af238dfe8854",
       "nazwa": "Meteo K-OS poziom",
-      "wersja": "0.2.3",
+      "wersja": "0.2.4",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -132,10 +150,10 @@
     },
     {
       "plik": "bin/cyd28s/office.bin",
-      "rozmiar": 1197584,
-      "sha256": "7938977363e95ad87bf1d913cd9373d3354c159ed51e90e2966b21c2e60078f7",
+      "rozmiar": 1198976,
+      "sha256": "2a8142d4c267ef86c647371bf653294b0e2da772d2c933a17767e9345f0c9e30",
       "nazwa": "K-OS Office",
-      "wersja": "1.3.1",
+      "wersja": "1.3.2",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
@@ -182,6 +200,24 @@
       "info": {
         "pl": "info/cyd28s/radar-poziom.bin.pl.txt",
         "en": "info/cyd28s/radar-poziom.bin.en.txt"
+      }
+    },
+    {
+      "plik": "bin/cyd28s/ropeburn-mini.bin",
+      "rozmiar": 780480,
+      "sha256": "cd0e8b9e6eb2c4927a9057cd02d5822a43e87b4ad040683797e1714c195c24f7",
+      "nazwa": "Ropeburn Mini",
+      "wersja": "0.2.0",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "skakanka na rytm: 1 dotkniecie, TY skaczesz, 3 zycia; ST7789 NIESPRAWDZONE",
+        "en": "jump rope to the beat: 1 touch, YOU jump, 3 lives; ST7789 UNTESTED"
+      },
+      "ikona": "bin/cyd28s/ropeburn-mini.ico",
+      "info": {
+        "pl": "info/cyd28s/ropeburn-mini.bin.pl.txt",
+        "en": "info/cyd28s/ropeburn-mini.bin.en.txt"
       }
     }
   ]

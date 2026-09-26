@@ -17,6 +17,16 @@
           "autor": "pr3y"
         },
         {
+          "plik": "bin/cyd24/doom.bin",
+          "rozmiar": 637168,
+          "sha256": "320f5c89cebd0b4f2745ec13f381d26dc1c1fefced59431ba4304ee586d16a90",
+          "nazwa": "DOOM (BETA)",
+          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
+          "wersja": "0.1.0-beta",
+          "kategoria": "zewnetrzne",
+          "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
+        },
+        {
           "plik": "bin/cyd24/esp32div.bin",
           "rozmiar": 2424304,
           "sha256": "1ad1eab2d98eec68f77c6490c5bf196ab0217074787d1e7f34bf05ee858d3d5c",
@@ -48,31 +58,31 @@
         },
         {
           "plik": "bin/cyd24/mesh.bin",
-          "rozmiar": 873600,
-          "sha256": "22c73b7b4edb8061b22d2f696f5bdbd425d3ae6af76b2fcd77c471b6f06e5ec2",
+          "rozmiar": 874960,
+          "sha256": "a2ad059f969a9e7773ce7a8115f9bec1df5b8e2e3ed2246d2104085e3a5c9a74",
           "nazwa": "K-OS Handset",
           "opis": "komunikator MeshCore po Bluetooth",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd24/meteo-pion.bin",
-          "rozmiar": 1149728,
-          "sha256": "4f094768c72ddfb37c4873af608deec9dc2f4b46df7eaebc70fdbf49c92a0ab7",
+          "rozmiar": 1151584,
+          "sha256": "83c1fca4c7816f1898e13875162ec35a17252ffa8daa9ba13ad88e02ec7fb4ff",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW, 4 widoki",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd24/meteo-poziom.bin",
-          "rozmiar": 1151712,
-          "sha256": "ec281e86a6cff2fa434bf6dcee7f91bf6137990866e5d7db1397222b1ad44921",
+          "rozmiar": 1153616,
+          "sha256": "e4ca00fdc91287733adf5e0982c75c97aced4294451dda529b15ce7fada0658c",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -88,11 +98,11 @@
         },
         {
           "plik": "bin/cyd24/office.bin",
-          "rozmiar": 1197680,
-          "sha256": "4ed7052ee8e9838bfcbe61fc1bef101b2b3a7d400953791b14de9b98b3c02e15",
+          "rozmiar": 1199040,
+          "sha256": "695f085711ff17427f37df5666f71723caac8deaaa7740a0aa9cb5f886a6078c",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
-          "wersja": "1.3.1",
+          "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -163,6 +173,16 @@
           "autor": "pr3y"
         },
         {
+          "plik": "bin/cyd28/doom.bin",
+          "rozmiar": 637088,
+          "sha256": "a1353f4bc34f2ae762af3b067297ebb3b26148ae19dabc9140ee0ef813217c9e",
+          "nazwa": "DOOM (BETA)",
+          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
+          "wersja": "0.1.0-beta",
+          "kategoria": "zewnetrzne",
+          "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
+        },
+        {
           "plik": "bin/cyd28/esp32div.bin",
           "rozmiar": 2420240,
           "sha256": "0c68c29f6f4f2ac2792ad0911b204986bb6de0d50ceface4bc9ed576c57c176e",
@@ -194,41 +214,41 @@
         },
         {
           "plik": "bin/cyd28/mesh.bin",
-          "rozmiar": 872704,
-          "sha256": "c73c5f6294d32379dd67a97b0e0c8a750b2c87d28cc1d59a0d970281a1b98f32",
+          "rozmiar": 874064,
+          "sha256": "4ccb9869d0d457e9bfe86558f1d7a70fca72b8baa1186bb36ddafecb39377da6",
           "nazwa": "K-OS Handset",
           "opis": "komunikator MeshCore po Bluetooth; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28/meteo-pion.bin",
-          "rozmiar": 1148816,
-          "sha256": "006df7b197587e3b9fdebd3ae752c9165888bab7815b6b87dd63b55350bbd0b8",
+          "rozmiar": 1150672,
+          "sha256": "0e38b2c52837189389e80c89f113fd7abb2a8f4485d47948bb27402cba8973b4",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28/meteo-poziom.bin",
-          "rozmiar": 1150816,
-          "sha256": "e51fb62030632126bc6b50df1669ab9e21b1910e5a51cbdad435161325ceea31",
+          "rozmiar": 1152768,
+          "sha256": "ce925d548cb04d6a95e227b0aa298e939a3da254f8eefa3e0ce6fb05287f80a8",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28/office.bin",
-          "rozmiar": 1197664,
-          "sha256": "23f73ec4b5f026f9f84af8ae4466bafb79a87a23017585e74d65b4b9d961ef43",
+          "rozmiar": 1199040,
+          "sha256": "895ae8483e8db1461c05565fcf33ecf839db8aecd4de7aec96d2345b70bdcd9d",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; 2.8\" NIESPRAWDZONE",
-          "wersja": "1.3.1",
+          "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -279,6 +299,16 @@
           "autor": "pr3y"
         },
         {
+          "plik": "bin/cyd28s/doom.bin",
+          "rozmiar": 637104,
+          "sha256": "eaee66ebb02180473ea4ea2849f9170cc54a1ae0d82522a66b6327c54755a1a1",
+          "nazwa": "DOOM (BETA)",
+          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
+          "wersja": "0.1.0-beta",
+          "kategoria": "zewnetrzne",
+          "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
+        },
+        {
           "plik": "bin/cyd28s/esp32div.bin",
           "rozmiar": 2420176,
           "sha256": "9ded3ab19004a66391dae370f59b24ba1be4c95f9511292c49e99ed382c7dfe6",
@@ -310,41 +340,41 @@
         },
         {
           "plik": "bin/cyd28s/mesh.bin",
-          "rozmiar": 872608,
-          "sha256": "4c39e8e72872ec781a09b0319ed2b23f8fa30c4366d45cf4afd465b362eeb5f5",
+          "rozmiar": 873952,
+          "sha256": "48d285192aeb28a75e216f223cd44d5351167f68b24a3a6ebada96bdec8eefd4",
           "nazwa": "K-OS Handset",
           "opis": "komunikator MeshCore po Bluetooth; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28s/meteo-pion.bin",
-          "rozmiar": 1148688,
-          "sha256": "134f473c768e02f017f2c35d63f6e38934337ae1ea7d9c7db7b4477ee9aeff6f",
+          "rozmiar": 1150560,
+          "sha256": "0b2497edb1608b85829dba9928e1ff8affeb18e365aecd58797729b300e44560",
           "nazwa": "Meteo K-OS pion",
           "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28s/meteo-poziom.bin",
-          "rozmiar": 1150704,
-          "sha256": "b03abd32cb138856a9c0a52f1d46eab78b8bd98e173ed404189b1bd9a1447d58",
+          "rozmiar": 1152656,
+          "sha256": "2c2aff09c713cd4c769767db9eb8d5e745214f61f18d9d1a4498af238dfe8854",
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.3",
+          "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
         {
           "plik": "bin/cyd28s/office.bin",
-          "rozmiar": 1197584,
-          "sha256": "7938977363e95ad87bf1d913cd9373d3354c159ed51e90e2966b21c2e60078f7",
+          "rozmiar": 1198976,
+          "sha256": "2a8142d4c267ef86c647371bf653294b0e2da772d2c933a17767e9345f0c9e30",
           "nazwa": "K-OS Office",
           "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE",
-          "wersja": "1.3.1",
+          "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -365,6 +395,16 @@
           "nazwa": "SkyCYD 4.4.2 poziom",
           "opis": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.2",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
+          "plik": "bin/cyd28s/ropeburn-mini.bin",
+          "rozmiar": 780480,
+          "sha256": "cd0e8b9e6eb2c4927a9057cd02d5822a43e87b4ad040683797e1714c195c24f7",
+          "nazwa": "Ropeburn Mini",
+          "opis": "skakanka na rytm: 1 dotkniecie, TY skaczesz, 3 zycia; ST7789 NIESPRAWDZONE",
+          "wersja": "0.2.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         }

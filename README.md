@@ -84,7 +84,8 @@ Piotr Korona's own apps plus ports of other people's projects, reworked so that 
 | **K-OS Office** | notatnik, kalkulator, kalendarz, pliki, kody QR, kursy walut<br>notes, calculator, calendar, files, QR codes, exchange rates | Piotr Korona | cyd24 cyd28 cyd28s |
 | **K-OS Handset** | komunikator MeshCore po Bluetooth, do własnego węzła<br>MeshCore messenger over Bluetooth, for your own node | Piotr Korona | cyd24 cyd28 cyd28s |
 | **K-OS GAME VOL1** | tom gier: 2048, Lunar Lander i inne<br>a games volume: 2048, Lunar Lander and more | Piotr Korona | cyd24 cyd28 cyd28s |
-| **Ropeburn Mini** | skakanka na rytm — skaczesz Ty<br>jump rope to the beat — you do the jumping | Piotr Korona | cyd24 cyd28 |
+| **Ropeburn Mini** | skakanka na rytm — skaczesz Ty<br>jump rope to the beat — you do the jumping | Piotr Korona | cyd24 cyd28 cyd28s |
+| **DOOM (BETA)** | silnik DOOM jako program K-OS; dane gry (Freedoom albo własna kopia) przygotowujesz sam — [źródło i instrukcja](https://github.com/PixelPetrol/cyd-doom-kos)<br>DOOM engine as a K-OS program; you bring the game data (Freedoom or your own copy) — [source and instructions](https://github.com/PixelPetrol/cyd-doom-kos) | id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port: Piotr Korona | cyd24 cyd28 cyd28s |
 | **Bruce (LITE)** | pentest toolkit WiFi / BLE / IR / RF<br>WiFi / BLE / IR / RF pentest toolkit | pr3y | cyd24 cyd28 cyd28s |
 | **Marauder** | audyt WiFi / BLE<br>WiFi / BLE auditing | justcallmekoko / Fr4nkFletcher | cyd24 cyd28 cyd28s |
 | **ESP32-DIV** | multitool WiFi / BLE / RF<br>WiFi / BLE / RF multitool | cifertech / Wontfallo (HaleHound-CYD) | cyd24 cyd28 cyd28s |
