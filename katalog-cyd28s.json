@@ -49,8 +49,8 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "2048, Lunar Lander, Overload, Punch-Through i Payload; ST7789 NIESPRAWDZONE",
-        "en": "2048, Lunar Lander, Overload, Punch-Through and Payload; ST7789 UNTESTED"
+        "pl": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot; ST7789 NIESPRAWDZONE",
+        "en": "2048, Lunar Lander, Overload, Punch-Through, Payload and Longshot; ST7789 UNTESTED"
       },
       "ikona": "bin/cyd28s/gry-vol1.ico",
       "info": {
