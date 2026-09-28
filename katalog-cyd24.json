@@ -24,10 +24,10 @@
     },
     {
       "plik": "bin/cyd24/control.bin",
-      "rozmiar": 1480384,
-      "sha256": "bf5d1a23706d4f30c279147a3b17ba54442364816bafd5f51bdc0888ff651749",
+      "rozmiar": 1497088,
+      "sha256": "8e3fac7f57982e90d34323d36831463c089b7feb466c28aae478b978a9224e20",
       "nazwa": "K-OS Control",
-      "wersja": "0.1.0-beta",
+      "wersja": "0.2.1-beta",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {

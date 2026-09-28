@@ -18,11 +18,11 @@
         },
         {
           "plik": "bin/cyd24/control.bin",
-          "rozmiar": 1480384,
-          "sha256": "bf5d1a23706d4f30c279147a3b17ba54442364816bafd5f51bdc0888ff651749",
+          "rozmiar": 1497088,
+          "sha256": "8e3fac7f57982e90d34323d36831463c089b7feb466c28aae478b978a9224e20",
           "nazwa": "K-OS Control",
           "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
-          "wersja": "0.1.0-beta",
+          "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -184,11 +184,11 @@
         },
         {
           "plik": "bin/cyd28/control.bin",
-          "rozmiar": 1480560,
-          "sha256": "27b98bcfa1610999fd30f6ee6ee3d0dd4f2ad56a480e8bc78aa04d6bc76e21a9",
+          "rozmiar": 1496224,
+          "sha256": "e73ecd3c2f88bb45a4cd989058c2dbf1bc751c440d049745046e232802442e0a",
           "nazwa": "K-OS Control",
           "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
-          "wersja": "0.1.0-beta",
+          "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
@@ -320,11 +320,11 @@
         },
         {
           "plik": "bin/cyd28s/control.bin",
-          "rozmiar": 1480496,
-          "sha256": "c44889204cdb82a0bfb214c5bcbe9384abc229cd03b7d9c81ef7fc5b1c3eee79",
+          "rozmiar": 1496144,
+          "sha256": "56440981f279d23e73d61628833aa74b33acbd7dff109306e93e66a8b5237a4e",
           "nazwa": "K-OS Control",
           "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
-          "wersja": "0.1.0-beta",
+          "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },
