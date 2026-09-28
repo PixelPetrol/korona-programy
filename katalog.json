@@ -158,11 +158,11 @@
         },
         {
           "plik": "bin/cyd24/ropeburn-mini.bin",
-          "rozmiar": 781056,
-          "sha256": "a55222fbd8e05409e8de84a23efa580271b919f11b35e6bf25d4d8494188a0f7",
+          "rozmiar": 788096,
+          "sha256": "c1fddf9c0bf00d659a8b20416a55b313bd2459912e2b91d1db517bf0dd3d666a",
           "nazwa": "Ropeburn Mini",
-          "opis": "skakanka na rytm: TY skaczesz, 3 zycia, 1 postac, 2 poziomy; NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen - TY skaczesz, 3 zycia; NIESPRAWDZONE",
+          "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         }
@@ -294,11 +294,11 @@
         },
         {
           "plik": "bin/cyd28/ropeburn-mini.bin",
-          "rozmiar": 780592,
-          "sha256": "05ac8e30456c3db104daa60cf6882cb2f1e5c97abce1bd8cac08ffbd38ed8a51",
+          "rozmiar": 787584,
+          "sha256": "143b5a3e2e01e76710b362188dcc6f441abf0365798b24bb279591405ca93a93",
           "nazwa": "Ropeburn Mini",
-          "opis": "skakanka na rytm: 1 dotkniecie, TY skaczesz, 3 zycia; 2.8\" NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen; 2.8\" NIESPRAWDZONE",
+          "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         }
@@ -430,11 +430,11 @@
         },
         {
           "plik": "bin/cyd28s/ropeburn-mini.bin",
-          "rozmiar": 780480,
-          "sha256": "cd0e8b9e6eb2c4927a9057cd02d5822a43e87b4ad040683797e1714c195c24f7",
+          "rozmiar": 787488,
+          "sha256": "4c9037479f0f3159afa1a635d9745d8ad336fe284ff33bbe8c29e51ea055f0d2",
           "nazwa": "Ropeburn Mini",
-          "opis": "skakanka na rytm: 1 dotkniecie, TY skaczesz, 3 zycia; ST7789 NIESPRAWDZONE",
-          "wersja": "0.2.0",
+          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen; ST7789 NIESPRAWDZONE",
+          "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         }

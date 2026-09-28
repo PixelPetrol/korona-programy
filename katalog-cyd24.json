@@ -276,15 +276,15 @@
     },
     {
       "plik": "bin/cyd24/ropeburn-mini.bin",
-      "rozmiar": 781056,
-      "sha256": "a55222fbd8e05409e8de84a23efa580271b919f11b35e6bf25d4d8494188a0f7",
+      "rozmiar": 788096,
+      "sha256": "c1fddf9c0bf00d659a8b20416a55b313bd2459912e2b91d1db517bf0dd3d666a",
       "nazwa": "Ropeburn Mini",
-      "wersja": "0.2.0",
+      "wersja": "0.3.0",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "skakanka na rytm: TY skaczesz, 3 zycia, 1 postac, 2 poziomy; NIESPRAWDZONE",
-        "en": "jump rope to the beat: YOU jump, 3 lives, 1 character, 2 levels; UNTESTED"
+        "pl": "BETA 0.3.0: skakanka na rytm z kartami ulepszen - TY skaczesz, 3 zycia; NIESPRAWDZONE",
+        "en": "BETA 0.3.0: jump rope to the beat with upgrade cards - YOU jump, 3 lives; UNTESTED"
       },
       "ikona": "bin/cyd24/ropeburn-mini.ico",
       "info": {
