@@ -49,8 +49,8 @@
       "kategoria": "zewnetrzne",
       "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona",
       "opis": {
-        "pl": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; wymaga danych gry, ktorych sklep nie dostarcza",
-        "en": "DOOM engine; BETA - not yet run on a board; needs game data that the store does not provide"
+        "pl": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; darmowe dane Freedoom do pobrania ze strony sklepu",
+        "en": "DOOM engine; BETA - not yet run on a board; free Freedoom game data to download from the store website"
       },
       "ikona": "bin/cyd24/doom.ico",
       "info": {
