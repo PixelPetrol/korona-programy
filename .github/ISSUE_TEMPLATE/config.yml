@@ -1,0 +1,8 @@
+# blank_issues_enabled MUSI zostac true: K-OS (Ustawienia -> zglos usterke) otwiera przez QR adres
+# /issues/new?title=...&body=... z wypelniona trescia. Wylaczenie pustych zgloszen moze przekierowac
+# ten adres na wybor szablonu i tresc z plytki by przepadla.
+blank_issues_enabled: true
+contact_links:
+  - name: "Instalacja i przywracanie K-OS · Installing and restoring K-OS"
+    url: "https://pixelpetrol.github.io/korona-programy/portal/"
+    about: "Strona instalacyjna z instrukcją przywrócenia · Install page with restore instructions"

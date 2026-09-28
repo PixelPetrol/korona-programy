@@ -1,0 +1,74 @@
+name: "Usterka / Bug report"
+description: "Coś nie działa w K-OS albo w programie ze sklepu · Something is broken in K-OS or in a store program"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Dziękujemy za zgłoszenie. Najbardziej pomagają: **płytka**, **wersje** i **log z USB**.
+        Thank you for reporting. What helps most: **board**, **versions** and the **USB log**.
+        Piszesz po polsku albo po angielsku — jak Ci wygodnie. · Polish or English, whichever you prefer.
+  - type: dropdown
+    id: plytka
+    attributes:
+      label: "Płytka · Board"
+      description: "Wersja K-OS pokazuje nazwę płytki w Ustawienia → system · K-OS shows the board name in Settings → system"
+      options:
+        - "cyd24 — CYD 2.4\" (ESP32-2432S024)"
+        - "cyd28 — CYD 2.8\" ILI9341 (ESP32-2432S028R, jedno USB · one USB port)"
+        - "cyd28s — CYD 2.8\" ST7789 (\"2 USB\")"
+        - "nie wiem · not sure"
+    validations:
+      required: true
+  - type: input
+    id: kos
+    attributes:
+      label: "Wersja K-OS · K-OS version"
+      description: "Ustawienia → system · Settings → system"
+      placeholder: "np. / e.g. 0.7.6"
+    validations:
+      required: true
+  - type: input
+    id: program
+    attributes:
+      label: "Program i jego wersja · Program and its version"
+      description: "Jeśli usterka dotyczy programu ze sklepu · If the problem is in a store program"
+      placeholder: "np. / e.g. SkyCYD 4.4.2 pion, Office 1.3.2 — albo „sam K-OS” / or “K-OS itself”"
+  - type: textarea
+    id: co
+    attributes:
+      label: "Co się stało? · What happened?"
+      description: "Co zrobiłeś, czego się spodziewałeś, co zobaczyłeś · What you did, what you expected, what you saw"
+    validations:
+      required: true
+  - type: textarea
+    id: kroki
+    attributes:
+      label: "Jak to powtórzyć · Steps to reproduce"
+      placeholder: |
+        1.
+        2.
+        3.
+  - type: dropdown
+    id: czesto
+    attributes:
+      label: "Jak często · How often"
+      options:
+        - "za każdym razem · every time"
+        - "czasem · sometimes"
+        - "raz · once"
+  - type: textarea
+    id: log
+    attributes:
+      label: "Log z USB · USB serial log"
+      description: |
+        Podłącz płytkę do komputera, otwórz port szeregowy **115200** (Arduino IDE → Serial Monitor, albo `python -m serial.tools.miniterm <port> 115200`), naciśnij RST i skopiuj wszystko od startu.
+        Pomocne komendy (tylko odczyt, wpisz i naciśnij Enter): `KAL` — kalibracja dotyku, `STAN` — zapisane stany programów, `NAZWY` — programy na karcie, `UPDATE?` — sprawdza wersję K-OS na serwerze.
+        Connect the board, open the serial port at **115200**, press RST and paste everything from boot. Helpful read-only commands: `KAL` (touch calibration), `STAN` (saved program states), `NAZWY` (programs on the card), `UPDATE?` (checks the K-OS version on the server).
+        **Nie wklejaj haseł WiFi · Do not paste WiFi passwords.**
+      render: text
+  - type: textarea
+    id: inne
+    attributes:
+      label: "Coś jeszcze? · Anything else?"
+      description: "Zdjęcie ekranu, karta SD (pojemność, system plików), zasilanie… · Photo of the screen, SD card (size, file system), power supply…"

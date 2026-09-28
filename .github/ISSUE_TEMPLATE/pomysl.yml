@@ -1,0 +1,26 @@
+name: "Pomysł albo prośba · Idea or request"
+description: "Nowy program, funkcja albo zmiana · A new program, feature or change"
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: pomysl
+    attributes:
+      label: "Co by się przydało? · What would help?"
+      description: "Opisz, do czego to ma służyć — nie tylko jak ma wyglądać · Describe what it is for, not only how it should look"
+    validations:
+      required: true
+  - type: dropdown
+    id: plytka
+    attributes:
+      label: "Na jakiej płytce · Which board"
+      multiple: true
+      options:
+        - "cyd24 — 2.4\""
+        - "cyd28 — 2.8\" ILI9341"
+        - "cyd28s — 2.8\" ST7789"
+        - "obojętnie · any"
+  - type: markdown
+    attributes:
+      value: |
+        Masz gotowy program dla K-OS? Zgłoszenia programów idą przez pull request do katalogu `zgloszenia/` — instrukcja w README repozytorium.
+        Have a finished K-OS program? Program submissions go through a pull request to `zgloszenia/` — see the repository README.
