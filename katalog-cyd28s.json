@@ -42,10 +42,10 @@
     },
     {
       "plik": "bin/cyd28s/doom.bin",
-      "rozmiar": 637104,
-      "sha256": "eaee66ebb02180473ea4ea2849f9170cc54a1ae0d82522a66b6327c54755a1a1",
+      "rozmiar": 640784,
+      "sha256": "2e73587b3127d960039ce4e32c5b3b5aa1880fa28cbed83c19b029563834ea6d",
       "nazwa": "DOOM (BETA)",
-      "wersja": "0.1.0-beta",
+      "wersja": "0.1.1-beta",
       "kategoria": "zewnetrzne",
       "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona",
       "opis": {
