@@ -56,7 +56,21 @@
       "info": {
         "pl": "info/cyd28/doom.bin.pl.txt",
         "en": "info/cyd28/doom.bin.en.txt"
-      }
+      },
+      "pliki": [
+        {
+          "plik": "dane/doom/doom.kwad",
+          "cel": "/doom/doom.kwad",
+          "rozmiar": 1750448,
+          "sha256": "5e58085193759c205bf4442bd07b191d03d59c3a9964757159fd137c9ce588e3"
+        },
+        {
+          "plik": "dane/doom/LICENCJA-FREEDOOM.txt",
+          "cel": "/doom/LICENCJA-FREEDOOM.txt",
+          "rozmiar": 19287,
+          "sha256": "6c8bcaeb13013009a73d3e2f0922235b1e4133715309152025137ad36df61f7e"
+        }
+      ]
     },
     {
       "plik": "bin/cyd28/esp32div.bin",
@@ -146,7 +160,21 @@
       "info": {
         "pl": "info/cyd28/meteo-pion.bin.pl.txt",
         "en": "info/cyd28/meteo-pion.bin.en.txt"
-      }
+      },
+      "pliki": [
+        {
+          "plik": "dane/meteo/mapa.bin",
+          "cel": "/meteo/mapa.bin",
+          "rozmiar": 31214,
+          "sha256": "2423b9939f16d0d279849ce8e4137a92548d8f69937765ae36e526a7d3ef745a"
+        },
+        {
+          "plik": "dane/meteo/LICENCJA.txt",
+          "cel": "/meteo/LICENCJA-MAPA.txt",
+          "rozmiar": 2507,
+          "sha256": "531966c5f7e7f95a896ea189b9b826ee6ee7a0270b3f03d7af265a29513f52cd"
+        }
+      ]
     },
     {
       "plik": "bin/cyd28/meteo-poziom.bin",
@@ -164,7 +192,21 @@
       "info": {
         "pl": "info/cyd28/meteo-poziom.bin.pl.txt",
         "en": "info/cyd28/meteo-poziom.bin.en.txt"
-      }
+      },
+      "pliki": [
+        {
+          "plik": "dane/meteo/mapa.bin",
+          "cel": "/meteo/mapa.bin",
+          "rozmiar": 31214,
+          "sha256": "2423b9939f16d0d279849ce8e4137a92548d8f69937765ae36e526a7d3ef745a"
+        },
+        {
+          "plik": "dane/meteo/LICENCJA.txt",
+          "cel": "/meteo/LICENCJA-MAPA.txt",
+          "rozmiar": 2507,
+          "sha256": "531966c5f7e7f95a896ea189b9b826ee6ee7a0270b3f03d7af265a29513f52cd"
+        }
+      ]
     },
     {
       "plik": "bin/cyd28/office.bin",

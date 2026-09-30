@@ -15,6 +15,11 @@ Rozmiary sa czytane z plikow; opisy/wersje z tabeli ponizej (programy sklepu) al
 <nazwa>.meta.json (programy uzytkownikow - te trafiaja tam automatem z zgloszenia/, patrz
 tools/przyjmij_zgloszenia.py). Plik bez META nie trafia do katalogu (ostrzezenie na stderr).
 
+Pliki danych programow (tabela DANE nizej): DOOM potrzebuje /doom/doom.kwad, Meteo /meteo/mapa.bin.
+Leza w dane/<program>/ i ida do katalogu v3 jako pole "pliki" wpisu programu - K-OS >= 0.7.8 pobiera
+je na karte razem z programem (po TLS, z kontrola rozmiaru i sha256). Starsze K-OS pole ignoruja,
+a stary katalog.json (v2) go NIE dostaje (V2_POLA).
+
 Kategorie: "autorskie" (programy K-OS / Piotra), "zewnetrzne" (porty cudzych projektow
 robione tu), "uzytkownicy" (zgloszone przez uzytkownikow przez PR do zgloszenia/).
 K-OS <= 0.3.6 zna tylko dwie pierwsze i wszystko, co nie jest "autorskie", pokazuje
@@ -182,6 +187,87 @@ META = {
                           "HaleHound-CYD: skaner WiFi/BLE, deauth, RF, NFC (moduly opcjonalne). Port K-OS dla CYD 2.4\": dotyk XPT2046 przez magistrale LCD (TFT_eSPI, TOUCH_CS 33) zamiast bit-bangu po pinach ekranu, ktory zamrazal plansze startowa. Sprawdzone na sprzecie 03.09.2026: start, menu, dotyk, RST wraca do K-OS.",
                           info_en='HaleHound-CYD: a WiFi/BLE scanner, deauth, RF, NFC (the modules are optional). A K-OS port for the CYD 2.4": XPT2046 touch over the LCD bus (TFT_eSPI, TOUCH_CS 33) instead of bit-banging on the screen pins, which froze the start screen. Tested on hardware 03.09.2026: start, menu, touch, RST returns to K-OS.'),
 }
+
+# PLIKI DANYCH PROGRAMOW -> pole "pliki" w katalogu v3 (K-OS >= 0.7.8 pobiera je razem z programem).
+# Klucz jak w META: (plytka, plik) albo plik (wszystkie plytki); wartosc: lista (plik w repo, cel na karcie).
+# rozmiar i sha256 generator liczy z pliku - recznie wpisana suma rozjechalaby sie przy podmianie danych.
+# CEL MUSI PRZEJSC ZASADY K-OS (loader/loader/plikilogika.h), inaczej plytka po cichu pominie wpis -
+# dlatego generator sprawdza je tu tak samo (pliki_danych) i przy bledzie NIC nie zapisuje:
+#   /<katalog>/<plik> albo /<katalog>/<podkatalog>/<plik>, znaki [A-Za-z0-9._-], najwyzej 39 znakow,
+#   zaden czlon nie zaczyna sie ani nie konczy kropka, nie /korona i nie /programy (bez wielkosci liter),
+#   nie *.part / *.bak; plik w repo 1 B .. 4 MB; najwyzej 4 pliki na program; sciezka w repo
+#   tymi samymi znakami, najwyzej 120 znakow.
+# Licencje ida RAZEM z danymi na karte: BSD-3-Clause (Freedoom) wymaga dolaczenia tekstu licencji,
+# a CC BY 4.0 (GeoNames w mapie Meteo) - atrybucji.
+_DOOM_DANE = [("dane/doom/doom.kwad", "/doom/doom.kwad"),
+              ("dane/doom/LICENCJA-FREEDOOM.txt", "/doom/LICENCJA-FREEDOOM.txt")]
+_METEO_DANE = [("dane/meteo/mapa.bin", "/meteo/mapa.bin"),
+               ("dane/meteo/LICENCJA.txt", "/meteo/LICENCJA-MAPA.txt")]
+DANE = {
+    "doom.bin": _DOOM_DANE,              # cyd24, cyd28, cyd28s - dane gry wspolne dla plytek
+    "meteo-pion.bin": _METEO_DANE,       # obie orientacje Meteo czytaja ten sam /meteo/mapa.bin
+    "meteo-poziom.bin": _METEO_DANE,
+}
+DANE_MAX_PLIKOW = 4                      # = PLIKI_MAX w plikilogika.h
+DANE_MAX_ROZMIAR = 4 * 1024 * 1024       # = PLIK_ROZMIAR_MAX
+DANE_CEL_MAX = 39                        # = PLIK_CEL_MAX
+DANE_ZRODLO_MAX = 120                    # = PLIK_ZRODLO_MAX
+_SUMY_DANYCH = {}                        # plik -> (rozmiar, sha256); dane DOOM sa wspolne dla 3 plytek
+
+
+def _czlon_ok(c):
+    return bool(c) and c[0] != "." and c[-1] != "." and all(
+        ch.isascii() and (ch.isalnum() or ch in "._-") for ch in c)
+
+
+def sprawdz_cel(cel):
+    """Te same zasady co plikCelOk() w loader/loader/plikilogika.h. Zwraca None albo powod."""
+    if not cel.startswith("/") or len(cel) > DANE_CEL_MAX:
+        return "cel musi zaczynac sie od / i miec najwyzej %d znakow" % DANE_CEL_MAX
+    czlony = cel[1:].split("/")
+    if not 2 <= len(czlony) <= 3:
+        return "cel to /<katalog>/<plik> albo /<katalog>/<podkatalog>/<plik>"
+    if not all(_czlon_ok(c) for c in czlony):
+        return "znaki spoza [A-Za-z0-9._-], pusty czlon albo kropka na poczatku/koncu czlonu"
+    if czlony[0].lower() in ("korona", "programy"):
+        return "/korona i /programy naleza do K-OS"
+    if czlony[-1].lower().endswith((".part", ".bak")):
+        return ".part i .bak to nazwy robocze zapisu K-OS"
+    return None
+
+
+def pliki_danych(pid, f):
+    """Pole "pliki" wpisu v3 (albo None). Blad w tabeli DANE = koniec pracy bez zapisu."""
+    lista = DANE.get((pid, f), DANE.get(f))
+    if not lista:
+        return None
+    if len(lista) > DANE_MAX_PLIKOW:
+        sys.exit("BLAD: DANE %s/%s: %d plikow, K-OS bierze najwyzej %d. NIC NIE ZAPISANO."
+                 % (pid, f, len(lista), DANE_MAX_PLIKOW))
+    wynik, cele = [], set()
+    for plik, cel in lista:
+        powod = sprawdz_cel(cel)
+        if not powod and cel.lower() in cele:
+            powod = "ten sam cel drugi raz"
+        if not powod and (plik.startswith("/") or len(plik) > DANE_ZRODLO_MAX
+                          or not all(_czlon_ok(c) for c in plik.split("/"))):
+            powod = "zla sciezka pliku w repo (%s)" % plik
+        if powod:
+            sys.exit("BLAD: DANE %s/%s -> %s: %s. NIC NIE ZAPISANO." % (pid, f, cel, powod))
+        if plik not in _SUMY_DANYCH:
+            sciezka = os.path.join(ROOT, plik)
+            if not os.path.isfile(sciezka):
+                sys.exit("BLAD: DANE %s/%s: brak pliku %s w repo. NIC NIE ZAPISANO." % (pid, f, plik))
+            with open(sciezka, "rb") as fh:
+                dane = fh.read()
+            if not 0 < len(dane) <= DANE_MAX_ROZMIAR:
+                sys.exit("BLAD: DANE %s: %d B (K-OS bierze 1..%d B). NIC NIE ZAPISANO."
+                         % (plik, len(dane), DANE_MAX_ROZMIAR))
+            _SUMY_DANYCH[plik] = (len(dane), hashlib.sha256(dane).hexdigest())
+        rozmiar, sha = _SUMY_DANYCH[plik]
+        cele.add(cel.lower())
+        wynik.append({"plik": plik, "cel": cel, "rozmiar": rozmiar, "sha256": sha})
+    return wynik
 # Pola z <nazwa>.meta.json, ktore trafiaja do katalogu (w tej kolejnosci). Reszta (np. model_b, plytka) zostaje w pliku.
 UZYTK_POLA = ("nazwa", "opis", "wersja", "kategoria", "autor", "info", "licencja", "zrodlo", "orientacja", "zgloszono")
 
@@ -358,6 +444,10 @@ def wpis3(pid, rel, data, meta):
         info["en"] = "info/%s/%s.en.txt" % (pid, nazwa)
     if info:
         e["info"] = info
+    # PLIKI DANYCH (tabela DANE) - TYLKO v3; wpis() (v2) ich nie zna, wiec rozmiar v2 sie nie zmienia.
+    pliki = pliki_danych(pid, nazwa)
+    if pliki:
+        e["pliki"] = pliki
     return e
 
 
@@ -451,6 +541,10 @@ def main():
     zapisz("plytki.json", json.dumps([{"id": i, "nazwa": n} for i, n in PLYTKI],
                                      ensure_ascii=False, indent=2) + "\n")
 
+    dane_n = sum(len(e.get("pliki", ())) for pid, _ in PLYTKI for e in v3[pid]["programy"])
+    if dane_n:
+        print("  pliki danych (v3, pole \"pliki\"): %d wpisow, %d roznych plikow, %d B"
+              % (dane_n, len(_SUMY_DANYCH), sum(r for r, _ in _SUMY_DANYCH.values())))
     # --- ile opisow czeka na angielski ---------------------------------------------------
     braki = sum(1 for pid, _ in PLYTKI for e in v3[pid]["programy"] if "en" not in e.get("opis", {}))
     ile = sum(len(v3[pid]["programy"]) for pid, _ in PLYTKI)

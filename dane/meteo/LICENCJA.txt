@@ -1,0 +1,43 @@
+K-OS Meteo - plik mapy /meteo/mapa.bin: zrodla danych i licencje
+==================================================================
+
+Plik mapa.bin (format KMP1, 31 214 B) zawiera rzeki i miejscowosci Polski dla widoku radaru
+opadow w programie K-OS Meteo. Zrobiony skryptami meteo/tools/gen_dane.py i gen_mapa.py
+(Piotr Korona) z dwoch zbiorow danych:
+
+1) RZEKI - Natural Earth (https://www.naturalearthdata.com/), warstwy 1:10 mln
+   ne_10m_rivers_lake_centerlines i ne_10m_rivers_europe.
+   Licencja: DOMENA PUBLICZNA. Atrybucja nie jest wymagana, podajemy ja z grzecznosci:
+   "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com"
+
+2) MIEJSCOWOSCI - GeoNames (https://www.geonames.org/), zbior cities1000.
+   Licencja: Creative Commons Uznanie autorstwa 4.0 Miedzynarodowa (CC BY 4.0),
+   https://creativecommons.org/licenses/by/4.0/deed.pl
+   Dane o miejscowosciach: GeoNames (https://www.geonames.org/), licencja CC BY 4.0.
+   ZMIANY: wyciety prostokat Polski (lat 48.90..55.00, lon 13.90..24.50), tylko miejscowosci
+   od 2000 mieszkancow, nazwy przepisane bez polskich znakow (ASCII), wspolrzedne zaokraglone,
+   rekordy posortowane po liczbie mieszkancow i zapisane w formacie binarnym KMP1.
+   GeoNames nie udziela zadnych gwarancji co do danych.
+
+Mapa obejmuje tylko Polske (tak jak radar IMGW w programie).
+
+-------------------------------------------------------------------------------------------
+
+K-OS Meteo - map file /meteo/mapa.bin: data sources and licences
+
+mapa.bin (KMP1 format, 31 214 B) holds the rivers and towns of Poland for the rain radar view
+of K-OS Meteo. Made with meteo/tools/gen_dane.py and gen_mapa.py (Piotr Korona) from:
+
+1) RIVERS - Natural Earth (https://www.naturalearthdata.com/), 1:10m layers
+   ne_10m_rivers_lake_centerlines and ne_10m_rivers_europe. Public domain.
+   "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com"
+
+2) TOWNS - GeoNames (https://www.geonames.org/), cities1000 dataset.
+   Licence: Creative Commons Attribution 4.0 International (CC BY 4.0),
+   https://creativecommons.org/licenses/by/4.0/
+   Town data: GeoNames (https://www.geonames.org/), CC BY 4.0.
+   CHANGES: clipped to Poland (lat 48.90..55.00, lon 13.90..24.50), towns of 2000+ people only,
+   names transliterated to ASCII, coordinates rounded, records sorted by population and stored
+   in the binary KMP1 format. GeoNames gives no warranty for the data.
+
+The map covers Poland only (as does the IMGW radar in the program).
