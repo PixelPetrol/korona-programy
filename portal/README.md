@@ -152,7 +152,7 @@ układ K-OS. Skrypt jej **nie używa** — generuje własną z CSV. Nie „upras
 skopiowanie pliku z builda.
 
 <!--TABELA-ROZMIAROW-->
-### Zmierzone — K-OS 0.7.8, 2026-09-30 13:50
+### Zmierzone — K-OS 0.7.9, 2026-10-05 11:35
 
 **Tabela jest generowana** z `obrazy/SUMY.txt` przez `zbuduj-obrazy.sh`
 (`tabela-rozmiarow.py`) — nie poprawiaj jej ręcznie, następny bieg skryptu i tak ją
@@ -161,23 +161,23 @@ pobranie, a nie nieaktualną dokumentację.
 
 | plik | rozmiar | zapas w `factory` (1 441 792 B) | SHA-256 |
 |---|---|---|---|
-| `cyd24/loader.bin` | 1 421 776 B | 20 016 B (1,4 %) | `dc8768ab761cd46150b11c31541f0c5a05a8c6fce5d87feb97fdff4ed75a91f2` |
+| `cyd24/loader.bin` | 1 424 336 B | 17 456 B (1,2 %) | `772946dfc180d1ad616527305ce06fe7998c00cc1e5deaf1ea0442b369cedbc1` |
 | `cyd24/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
 | `cyd24/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
 | `cyd24/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
-| `cyd24/korona-cyd24-scalony.bin` | 1 487 312 B | — | `979af6fc5d01e475d692f0db4d7f1f9ad3684b8033ccdb6b33c3cfcc671bd9aa` |
-| `cyd28/loader.bin` | 1 419 856 B | 21 936 B (1,5 %) | `27f4dbe11462933734350f58934a863e156d630f5f2b7f5a54af6a856ce6401f` |
+| `cyd24/korona-cyd24-scalony.bin` | 1 489 872 B | — | `d966173560bd40f228b173f1c69b15f2f8d11ae303752db5fd83badd0c311c5a` |
+| `cyd28/loader.bin` | 1 422 304 B | 19 488 B (1,4 %) | `d727185aa23185e9236049f5bdd625026f6855396b063e668aa425f3d523ead3` |
 | `cyd28/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
 | `cyd28/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
 | `cyd28/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
-| `cyd28/korona-cyd28-scalony.bin` | 1 485 392 B | — | `3cccbee90a37cd52e00a1e17f11edcf9cfd1750c2302698259673ef04f82321c` |
-| `cyd28s/loader.bin` | 1 419 760 B | 22 032 B (1,5 %) | `9f93e309c4c8d8acfa6322f9f20ff7c5ecb67774e36baeb27512e947a0cd3f55` |
+| `cyd28/korona-cyd28-scalony.bin` | 1 487 840 B | — | `592f65f58632cc1e7078dd466e6ac8d38b1d6ebd1ea83095b9c355b86c3cfacd` |
+| `cyd28s/loader.bin` | 1 422 192 B | 19 600 B (1,4 %) | `9afe85154e91df2dddb4fc607207f47e596ba271aa91c7abfeb3bc62426d1a18` |
 | `cyd28s/bootloader.bin` | 24 992 B | — | `427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379` |
 | `cyd28s/partitions.bin` | 3 072 B | — | `28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b` |
 | `cyd28s/otadata-pusta.bin` | 8 192 B | — | `7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f` |
-| `cyd28s/korona-cyd28s-scalony.bin` | 1 485 296 B | — | `eafdb35f2b28988d8718b1ab31c5b2fcd0c03e516797f3f78768e0d6ea722a7c` |
+| `cyd28s/korona-cyd28s-scalony.bin` | 1 487 728 B | — | `1333f5d5f36b8a4c202584a118caed629c836b177414679f132c9891e28b98e0` |
 
-Najciaśniej jest w `cyd24/loader.bin`: zapas 20 016 B (1,4 %) w partycji `factory`.
+Najciaśniej jest w `cyd24/loader.bin`: zapas 17 456 B (1,2 %) w partycji `factory`.
 <!--/TABELA-ROZMIAROW-->
 
 Zapas w `factory` topnieje z każdą grafiką i fontem — ile go zostało, mówi wiersz pod tabelą.
