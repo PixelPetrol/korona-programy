@@ -192,6 +192,7 @@ IKONY = {
     "nerdminer":    "currency_bitcoin",
     "doom":         "skull",              # czaszka - bez logo DOOM (znak towarowy id Software)
     "control":      "keyboard",           # K-OS Control: klawiatura/mysz/pilot po Bluetooth
+    "monitor":      "speed",              # K-OS Monitor
     "subs":         "subscriptions",      # K-OS Subs: subskrypcje i wyswietlenia
 }
 MATERIAL_URL = ("https://fonts.gstatic.com/s/i/short-term/release/"

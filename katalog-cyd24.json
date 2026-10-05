@@ -233,6 +233,24 @@
       ]
     },
     {
+      "plik": "bin/cyd24/monitor.bin",
+      "rozmiar": 1204176,
+      "sha256": "68e55c5308b1d90e5ea86d70fba7aaf16ee0612f71d73d97a12f5c37c95bc04d",
+      "nazwa": "K-OS Monitor",
+      "wersja": "0.1.0-beta",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "monitor komputera (LHM); BETA, NIESPRAWDZONE",
+        "en": "PC monitor (LHM); BETA, UNTESTED"
+      },
+      "ikona": "bin/cyd24/monitor.ico",
+      "info": {
+        "pl": "info/cyd24/monitor.bin.pl.txt",
+        "en": "info/cyd24/monitor.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd24/nerdminer.bin",
       "rozmiar": 2157264,
       "sha256": "dd033d344f55227aaa4534a7804383cfd408fb62461028fa52cf5526f908dc80",

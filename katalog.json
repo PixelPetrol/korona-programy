@@ -97,6 +97,16 @@
           "autor": "Piotr Korona"
         },
         {
+          "plik": "bin/cyd24/monitor.bin",
+          "rozmiar": 1204176,
+          "sha256": "68e55c5308b1d90e5ea86d70fba7aaf16ee0612f71d73d97a12f5c37c95bc04d",
+          "nazwa": "K-OS Monitor",
+          "opis": "monitor komputera (LHM); BETA, NIESPRAWDZONE",
+          "wersja": "0.1.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
           "plik": "bin/cyd24/nerdminer.bin",
           "rozmiar": 2157264,
           "sha256": "dd033d344f55227aaa4534a7804383cfd408fb62461028fa52cf5526f908dc80",
@@ -273,6 +283,16 @@
           "autor": "Piotr Korona"
         },
         {
+          "plik": "bin/cyd28/monitor.bin",
+          "rozmiar": 1203232,
+          "sha256": "67ec4d3bde54b9eeceac50ec599731dcddc3dc45ab02a12de70661ed40ef42d1",
+          "nazwa": "K-OS Monitor",
+          "opis": "monitor komputera (LHM); BETA, NIESPRAWDZONE",
+          "wersja": "0.1.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
           "plik": "bin/cyd28/office.bin",
           "rozmiar": 1199040,
           "sha256": "895ae8483e8db1461c05565fcf33ecf839db8aecd4de7aec96d2345b70bdcd9d",
@@ -415,6 +435,16 @@
           "nazwa": "Meteo K-OS poziom",
           "opis": "pogoda i radar, poziomo; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
+          "plik": "bin/cyd28s/monitor.bin",
+          "rozmiar": 1203088,
+          "sha256": "84c34a489986445ee639bd2a1e0ec1c4760b0bda270142967192aae7fea8601f",
+          "nazwa": "K-OS Monitor",
+          "opis": "monitor komputera (LHM); BETA, NIESPRAWDZONE",
+          "wersja": "0.1.0-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         },

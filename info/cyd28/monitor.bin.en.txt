@@ -1,0 +1,6 @@
+A desk PC monitor: CPU, GPU, RAM, disk and network from LibreHardwareMonitor (Windows) as tiles, charts and a big number, in Polish and English.
+Status: BETA, UNTESTED - it has not been run on a board yet, on 2.8" neither.
+Board: CYD 2.8" (2432S028R).
+Features: CPU load, temperature and clock, GPU with VRAM, RAM, disk, upload and download; threshold colours; 5-minute charts; a big number for any sensor (favourites). Up to 3 computers; LHM search on the network, address from the keyboard or from a phone (QR and session code). Refresh every 1, 2 or 5 s. Clear help when the PC or the LHM web server is off.
+Needs: LibreHardwareMonitor on the PC with Options -> Remote Web Server -> Run (port 8085, allowed by the Windows firewall), WiFi from K-OS, an SD card for the settings. Without a K-OS calibration it offers its own at start.
+Limits: Windows only (LHM); plain http in your network; the LHM password (if on) is stored on the card as plain text.

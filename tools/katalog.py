@@ -281,6 +281,46 @@ META = {
                           "Features: four views (board, big channel, goal with a bar, 7/30-day chart), K-OS theme or Storm, Dawn, Neon, channel rotation; channels, key and look are set from your phone (QR) or in the menu.\n"
                           "Needs: WiFi from K-OS and your OWN free YouTube Data API v3 key (step-by-step guide on the board); an SD card for settings and history. No server - the board asks YouTube itself, every 30 min.\n"
                           "Limits: the key is stored on the card in plain text and travels from the phone over plain http - enter it only on a trusted network; YouTube rounds subscriber counts; no Instagram or TikTok."),
+    "monitor.bin": m("K-OS Monitor", "monitor komputera (LHM); BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Monitor komputera na biurku: CPU, GPU, RAM, dysk i siec z LibreHardwareMonitor (Windows) na kafelkach, wykresach i jako duza liczba, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce.\n"
+                          "Umie: obciazenie, temperatura i takt CPU, GPU z VRAM, RAM, dysk, wysylanie i pobieranie; kolory progow; wykresy 5 min; duza liczba dowolnego czujnika (ulubione). Do 3 komputerow; szukanie LHM w sieci, adres z klawiatury albo z telefonu (QR i kod sesji). Odswiezanie co 1, 2 albo 5 s. Jasny komunikat z instrukcja, gdy PC wylaczony albo LHM bez serwera WWW.\n"
+                          "Potrzebne: LibreHardwareMonitor na PC z Options -> Remote Web Server -> Run (port 8085, zgoda zapory Windows), WiFi z K-OS, karta SD na ustawienia.\n"
+                          "Ograniczenia: tylko Windows (LHM); zwykle http w Twojej sieci; haslo LHM (jesli wlaczone) lezy na karcie jawnym tekstem.",
+                          opis_en="PC monitor (LHM); BETA, UNTESTED",
+                          info_en="A desk PC monitor: CPU, GPU, RAM, disk and network from LibreHardwareMonitor (Windows) as tiles, charts and a big number, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet.\n"
+                          "Features: CPU load, temperature and clock, GPU with VRAM, RAM, disk, upload and download; threshold colours; 5-minute charts; a big number for any sensor (favourites). Up to 3 computers; LHM search on the network, address from the keyboard or from a phone (QR and session code). Refresh every 1, 2 or 5 s. Clear help when the PC or the LHM web server is off.\n"
+                          "Needs: LibreHardwareMonitor on the PC with Options -> Remote Web Server -> Run (port 8085, allowed by the Windows firewall), WiFi from K-OS, an SD card for the settings.\n"
+                          "Limits: Windows only (LHM); plain http in your network; the LHM password (if on) is stored on the card as plain text."),
+    ("cyd28", "monitor.bin"): m("K-OS Monitor", "monitor komputera (LHM); BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Monitor komputera na biurku: CPU, GPU, RAM, dysk i siec z LibreHardwareMonitor (Windows) na kafelkach, wykresach i jako duza liczba, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce, na 2.8\" tez nie.\n"
+                          "Plytka: CYD 2.8\" (2432S028R).\n"
+                          "Umie: obciazenie, temperatura i takt CPU, GPU z VRAM, RAM, dysk, wysylanie i pobieranie; kolory progow; wykresy 5 min; duza liczba dowolnego czujnika (ulubione). Do 3 komputerow; szukanie LHM w sieci, adres z klawiatury albo z telefonu (QR i kod sesji). Odswiezanie co 1, 2 albo 5 s. Jasny komunikat z instrukcja, gdy PC wylaczony albo LHM bez serwera WWW.\n"
+                          "Potrzebne: LibreHardwareMonitor na PC z Options -> Remote Web Server -> Run (port 8085, zgoda zapory Windows), WiFi z K-OS, karta SD na ustawienia. Bez kalibracji z K-OS zaproponuje wlasna przy starcie.\n"
+                          "Ograniczenia: tylko Windows (LHM); zwykle http w Twojej sieci; haslo LHM (jesli wlaczone) lezy na karcie jawnym tekstem.",
+                          opis_en="PC monitor (LHM); BETA, UNTESTED",
+                          info_en="A desk PC monitor: CPU, GPU, RAM, disk and network from LibreHardwareMonitor (Windows) as tiles, charts and a big number, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet, on 2.8\" neither.\n"
+                          "Board: CYD 2.8\" (2432S028R).\n"
+                          "Features: CPU load, temperature and clock, GPU with VRAM, RAM, disk, upload and download; threshold colours; 5-minute charts; a big number for any sensor (favourites). Up to 3 computers; LHM search on the network, address from the keyboard or from a phone (QR and session code). Refresh every 1, 2 or 5 s. Clear help when the PC or the LHM web server is off.\n"
+                          "Needs: LibreHardwareMonitor on the PC with Options -> Remote Web Server -> Run (port 8085, allowed by the Windows firewall), WiFi from K-OS, an SD card for the settings. Without a K-OS calibration it offers its own at start.\n"
+                          "Limits: Windows only (LHM); plain http in your network; the LHM password (if on) is stored on the card as plain text."),
+    ("cyd28s", "monitor.bin"): m("K-OS Monitor", "monitor komputera (LHM); BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Monitor komputera na biurku: CPU, GPU, RAM, dysk i siec z LibreHardwareMonitor (Windows) na kafelkach, wykresach i jako duza liczba, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce, na tej rewizji tez nie.\n"
+                          "Plytka: CYD 2.8\" ST7789 (dwa gniazda USB).\n"
+                          "Umie: obciazenie, temperatura i takt CPU, GPU z VRAM, RAM, dysk, wysylanie i pobieranie; kolory progow; wykresy 5 min; duza liczba dowolnego czujnika (ulubione). Do 3 komputerow; szukanie LHM w sieci, adres z klawiatury albo z telefonu (QR i kod sesji). Odswiezanie co 1, 2 albo 5 s. Jasny komunikat z instrukcja, gdy PC wylaczony albo LHM bez serwera WWW.\n"
+                          "Potrzebne: LibreHardwareMonitor na PC z Options -> Remote Web Server -> Run (port 8085, zgoda zapory Windows), WiFi z K-OS, karta SD na ustawienia. Bez kalibracji z K-OS zaproponuje wlasna przy starcie.\n"
+                          "Ograniczenia: tylko Windows (LHM); zwykle http w Twojej sieci; haslo LHM (jesli wlaczone) lezy na karcie jawnym tekstem.",
+                          opis_en="PC monitor (LHM); BETA, UNTESTED",
+                          info_en="A desk PC monitor: CPU, GPU, RAM, disk and network from LibreHardwareMonitor (Windows) as tiles, charts and a big number, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet, on this revision neither.\n"
+                          "Board: CYD 2.8\" ST7789 (two USB sockets).\n"
+                          "Features: CPU load, temperature and clock, GPU with VRAM, RAM, disk, upload and download; threshold colours; 5-minute charts; a big number for any sensor (favourites). Up to 3 computers; LHM search on the network, address from the keyboard or from a phone (QR and session code). Refresh every 1, 2 or 5 s. Clear help when the PC or the LHM web server is off.\n"
+                          "Needs: LibreHardwareMonitor on the PC with Options -> Remote Web Server -> Run (port 8085, allowed by the Windows firewall), WiFi from K-OS, an SD card for the settings. Without a K-OS calibration it offers its own at start.\n"
+                          "Limits: Windows only (LHM); plain http in your network; the LHM password (if on) is stored on the card as plain text."),
     "gry-vol1.bin":     m("K-OS GAME VOL1",  "6 gier: 2048, Lander i inne", "0.9.2", A, "Piotr Korona",
                           "Tom szesciu gier dla K-OS, po polsku i po angielsku, ekran pionowo, z maskotka Chip-K. Gry wybierasz z kafelkow w menu tomu.\n"
                           "Stan: gry sprawdzone testami na komputerze; opis sklepu nie zawiera zapisu o sprawdzeniu tej wersji na plytce, a liczby klatek na plytce nie mierzono.\n"

@@ -1,0 +1,5 @@
+Monitor komputera na biurku: CPU, GPU, RAM, dysk i siec z LibreHardwareMonitor (Windows) na kafelkach, wykresach i jako duza liczba, po polsku i po angielsku.
+Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce.
+Umie: obciazenie, temperatura i takt CPU, GPU z VRAM, RAM, dysk, wysylanie i pobieranie; kolory progow; wykresy 5 min; duza liczba dowolnego czujnika (ulubione). Do 3 komputerow; szukanie LHM w sieci, adres z klawiatury albo z telefonu (QR i kod sesji). Odswiezanie co 1, 2 albo 5 s. Jasny komunikat z instrukcja, gdy PC wylaczony albo LHM bez serwera WWW.
+Potrzebne: LibreHardwareMonitor na PC z Options -> Remote Web Server -> Run (port 8085, zgoda zapory Windows), WiFi z K-OS, karta SD na ustawienia.
+Ograniczenia: tylko Windows (LHM); zwykle http w Twojej sieci; haslo LHM (jesli wlaczone) lezy na karcie jawnym tekstem.
