@@ -1,1 +1,6 @@
-The same game as on the 2.4" (0.3.0 BETA: upgrade cards during the run), built for the CYD 2.8" (2432S028R): the XPT2046 touch is bit-banged on the board's own pins (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), backlight on GPIO 21. Touch calibration comes from K-OS (/dotyk-cyd28.txt); without it a default is used and the serial port says so. The same game image, the same saved state. NEVER RUN ON THIS BOARD.
+A rhythm skill game, portrait screen: the rope turns faster and faster and you jump - every touch of the screen is a jump that must land in the window.
+Status: BETA, UNTESTED - the game has not been run on this board even once.
+Board: CYD 2.8" (2432S028R).
+Features: the same as on 2.4" - three lives, a bonus for the window centre, a multiplier up to x32, upgrade cards during the run, a metronome, records with initials, unlocks with no shop and no currency.
+Needs: nothing but the board - no network. Touch calibration comes from K-OS (/korona/cyd28/dotyk.txt); without it a measured default is used. Progress in the board memory, a readable copy on the card in /ropeburn/.
+Limits: 1 character of 5 and 2 levels of 5 are ready.

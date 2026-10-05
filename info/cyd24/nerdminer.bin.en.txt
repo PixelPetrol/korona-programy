@@ -1,1 +1,5 @@
-A solo Bitcoin miner on the ESP32 (~60 kH/s - a lottery and a statistics gadget). First start: AP 'NerdMinerAP', password 'MineYourCoins', portal 192.168.4.1 (pool, BTC address, brightness). After saving the settings the board goes back to K-OS - start the program again, the settings stay thanks to the snapshot.
+NerdMiner v2 - a solo Bitcoin miner on the ESP32 (about 60 kH/s): a lottery and a statistics gadget with price and blocks. A third-party program.
+Status: UNTESTED on a board.
+Needs: WiFi, a BTC address and a pool. First start: access point 'NerdMinerAP', password 'MineYourCoins', portal 192.168.4.1 (pool, BTC address, brightness).
+Limits: after saving the settings the board goes back to K-OS - start the program again; the settings stay thanks to the snapshot. The chance of mining a block is negligible.
+Author: BitMaker-hub (the NerdMiner project). Image prepared for K-OS: RST returns to the menu.

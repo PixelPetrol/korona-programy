@@ -1,1 +1,5 @@
-Bruce - a multi-protocol 'pentest toolkit' (WiFi, BLE, IR, RF), the LITE variant. Env KORONA_CYD24: corrected colours (INVON). TOUCH: the calibration is separate for each screen orientation - the first start asks for four corners in the landscape layout, and after changing Config > Orientation Bruce asks for them once for the new layout and then remembers it (K-OS keeps this in a snapshot). Without that, touch in portrait did not hit anything at all: TFT_eSPI computes touch from the calibration bounds, but with the dimensions of the current rotation, so a calibration from landscape gave a stretch in portrait instead of a rotation.
+Bruce - a multi-protocol security testing toolkit (WiFi, BLE, IR, RF), LITE variant. A third-party program, built for the CYD 2.4" with corrected colours.
+Status: the store description has no record of this binary being tested on a board.
+Needs: nothing but the board; you add IR and RF modules yourself. The first start asks for a four-corner touch calibration (landscape); after changing Config > Orientation Bruce asks once for the new layout and remembers it (K-OS keeps it in the snapshot).
+Limits: use it only on your own networks and devices.
+Author: pr3y (the Bruce project). Image prepared for K-OS: RST returns to the menu.

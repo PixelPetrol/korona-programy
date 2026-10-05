@@ -1,1 +1,6 @@
-A version for the CYD 2.8" with an ST7789 panel (the board with two USB sockets). Hardware-identical to the ordinary 2.8" model - the same screen pins, the same XPT2046 touch, backlight GPIO 21 - it differs only in the display driver. The author has no ready profile for the ST7789 (he has only ILI9341 and ST7796), so the profile was added here. The image contains the return-to-K-OS patch: a reset goes back to the system. NOT TESTED ON HARDWARE - if the colours come out like a negative or with red and blue swapped, those are one-flag fixes. Touch and the buttons should work unchanged, because the controller and the pins are the same as in the tested 2.8" version.
+ESP32-DIV (HaleHound-CYD variant): a WiFi and BLE scanner, RF and NFC tools. A third-party program.
+Status: UNTESTED. A negative picture or swapped red and blue is a one-flag fix; touch and pins as in the 2.8" version.
+Board: CYD 2.8" ST7789 (two USB sockets); the profile for this panel was added here, the author does not have one.
+Needs: nothing but the board; you add RF/NFC modules yourself.
+Limits: use it only on your own networks and devices.
+Authors: cifertech / Wontfallo (HaleHound-CYD). Image prepared for K-OS: RST returns to the menu.

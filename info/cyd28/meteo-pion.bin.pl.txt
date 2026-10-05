@@ -1,1 +1,6 @@
-0.2.4 (BETA - ta wersja nie byla jeszcze uruchomiona na plytce): STREFA CZASOWA z ustawien K-OS 0.7.6 - zegar idzie za strefa z K-OS, a prognoza dzieli dni wedlug tej samej strefy (inaczej dni tygodnia przesuwalyby sie o jeden); ze starszym K-OS jak dotad (CET). Poprzednia binarka miala w srodku numer 0.2.1, choc sklep podawal 0.2.3. Stacja pogodowa dla CYD 2.8" (2432S028R), orientacja pionowa. Dotyk bit-bangiem na wlasnych pinach plytki, podswietlenie GPIO 21. Przy braku kalibracji systemowej dla tej plytki program proponuje wlasna zamiast uzywac zgadywanki. NIESPRAWDZONE NA SPRZECIE.
+Stacja pogodowa pod palec, po polsku i po angielsku, ekran pionowo: prognoza z Open-Meteo i radar opadow IMGW.
+Stan: BETA, NIESPRAWDZONE - na 2.8" nie byla jeszcze uruchomiona.
+Plytka: CYD 2.8" (2432S028R).
+Umie: to samo co na 2.4" - cztery widoki, stan biezacy, 5 dni, 24 godziny, prognoza co kwadrans, radar IMGW z mapa, tryb offline z karty.
+Potrzebne: WiFi (Open-Meteo bez klucza), karta SD (dane w /meteo/; mape /meteo/mapa.bin K-OS od 0.7.8 pobiera sam, ze starszym skopiuj ja ze strony sklepu). Sieci, jezyk, strefe czasowa i kalibracje bierze z K-OS; bez kalibracji dla tej plytki proponuje wlasna.
+Mapa: Natural Earth (domena publiczna), GeoNames (CC BY 4.0).

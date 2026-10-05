@@ -1,1 +1,6 @@
-0.2.4 (BETA - this version has not been run on a board yet): TIME ZONE from the K-OS 0.7.6 settings - the clock follows the K-OS zone and the forecast splits days by the same zone (otherwise weekdays would shift by one); with an older K-OS it works as before (CET). The previous binary carried version 0.2.1 inside, although the store said 0.2.3. A weather station for the CYD 2.8" in the revision with the ST7789 driver (the board with two USB sockets), portrait orientation. Built from the same source as the cyd28 version - it differs only in the screen driver flags. NOT TESTED ON HARDWARE. If the image comes out as a negative or with red and blue swapped, that is a one-flag fix.
+A weather station for your fingertip, in Polish and English, portrait screen: an Open-Meteo forecast and the IMGW rain radar.
+Status: BETA, UNTESTED - it has not been run on this revision yet. If the picture comes out as a negative or with red and blue swapped, tell us - it is a one-flag fix.
+Board: CYD 2.8" ST7789 (two USB sockets).
+Features: the same as on 2.4" - four views, current conditions, 5 days, 24 hours, a quarter-hourly nowcast, the IMGW radar with a map, offline mode from the card.
+Needs: WiFi (Open-Meteo, no key), an SD card (data in /meteo/; K-OS 0.7.8 or newer fetches the map /meteo/mapa.bin itself, with an older one copy it from the store website). Networks, language, time zone and calibration come from K-OS.
+Map: Natural Earth (public domain), GeoNames (CC BY 4.0).

@@ -1,1 +1,6 @@
-Wersja dla CYD 2.8" z panelem ST7789 (plytka z dwoma gniazdami USB). Sprzetowo identyczna ze zwyklym modelem 2.8" - te same piny ekranu, ten sam dotyk XPT2046, podswietlenie GPIO 21 - rozni sie wylacznie sterownikiem wyswietlacza. Autor nie ma gotowego profilu dla ST7789 (ma tylko ILI9341 i ST7796), wiec profil dopisano tutaj. Obraz zawiera latke powrotu do K-OS: reset wraca do systemu. NIESPRAWDZONE NA SPRZECIE - jesli kolory wyjda jak negatyw albo z zamienionym czerwonym i niebieskim, to sa poprawki na jedna flage. Dotyk i przyciski powinny dzialac bez zmian, bo kontroler i piny sa te same co w sprawdzonej wersji 2.8".
+ESP32-DIV (odmiana HaleHound-CYD): skaner WiFi i BLE, narzedzia RF i NFC. Program zewnetrzny.
+Stan: NIESPRAWDZONE. Negatyw albo zamieniony czerwony z niebieskim to poprawka jednej flagi; dotyk i piny jak w wersji 2.8".
+Plytka: CYD 2.8" ST7789 (dwa gniazda USB); profil dla tego panelu dopisano tutaj, autor go nie ma.
+Potrzebne: nic poza plytka; moduly RF/NFC dokladasz sam.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autorzy: cifertech / Wontfallo (HaleHound-CYD). Obraz przygotowany dla K-OS: RST wraca do menu.

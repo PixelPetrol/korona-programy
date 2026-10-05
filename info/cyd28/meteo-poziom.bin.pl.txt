@@ -1,1 +1,6 @@
-0.2.4 (BETA - ta wersja nie byla jeszcze uruchomiona na plytce): STREFA CZASOWA z ustawien K-OS 0.7.6 - zegar idzie za strefa z K-OS, a prognoza dzieli dni wedlug tej samej strefy (inaczej dni tygodnia przesuwalyby sie o jeden); ze starszym K-OS jak dotad (CET). Poprzednia binarka miala w srodku numer 0.2.1, choc sklep podawal 0.2.3. Wersja pozioma dla CYD 2.8". Uwaga: na tej plytce kalibracja idzie WPROST w orientacji poziomej, a nie przez przeliczenie z pionowej - przeliczona zgadywanka byla by nadal zgadywanka. NIESPRAWDZONE NA SPRZECIE.
+Ta sama stacja pogodowa co Meteo K-OS pion, w orientacji poziomej 320x240, z panelem bocznym radaru.
+Stan: BETA, NIESPRAWDZONE - na 2.8" nie byla jeszcze uruchomiona.
+Plytka: CYD 2.8" (2432S028R).
+Umie: prognoza z Open-Meteo, radar IMGW z mapa, tryb offline z karty.
+Potrzebne: WiFi, karta SD (dane w /meteo/; mape /meteo/mapa.bin K-OS od 0.7.8 pobiera sam, ze starszym skopiuj ja ze strony sklepu). Kalibracja dotyku robi sie tu wprost w orientacji poziomej, a nie przez przeliczenie z pionowej.
+Mapa: Natural Earth (domena publiczna), GeoNames (CC BY 4.0).

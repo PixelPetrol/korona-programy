@@ -1,1 +1,6 @@
-ESP32 Marauder for the CYD 2.8" (2432S028R) with an ILI9341 panel. The XPT2046 touch works over a SEPARATE, software SPI bus (CLK 25, MOSI 32, MISO 39) - the TFT_eSPI library variant bundled with the project already has that built in, so nothing had to be rewritten or soldered. It keeps its settings in SPIFFS, so they stay between starts thanks to K-OS snapshots. Return to K-OS after RST is assured. NOT TESTED ON HARDWARE - the image only went through compilation; the touch calibration is to be confirmed with a finger.
+ESP32 Marauder - WiFi and Bluetooth LE auditing: scanning networks and BLE devices, sniffing, testing your own network. A third-party program.
+Status: UNTESTED - the image has only been compiled; the touch calibration still needs a finger to confirm it.
+Board: CYD 2.8" (2432S028R) with the ILI9341 panel.
+Needs: nothing but the board. Settings in SPIFFS - thanks to the K-OS snapshots they survive between starts.
+Limits: use it only on your own networks and devices.
+Authors: justcallmekoko / Fr4nkFletcher. Image prepared for K-OS: RST returns to the menu.

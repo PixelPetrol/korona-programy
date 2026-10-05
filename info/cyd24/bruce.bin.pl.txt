@@ -1,1 +1,5 @@
-Bruce - wieloprotokolowy 'pentest toolkit' (WiFi, BLE, IR, RF), wariant LITE. Env KORONA_CYD24: poprawione kolory (INVON). DOTYK: kalibracja jest osobna dla kazdej orientacji ekranu - pierwszy start prosi o cztery rogi w ukladzie poziomym, a po zmianie Config > Orientation Bruce pyta o nie raz dla nowego ukladu i juz go pamieta (K-OS trzyma to w migawce). Bez tego dotyk w pionie nie trafial wcale: TFT_eSPI liczy dotyk z granic kalibracji, ale z wymiarow biezacej rotacji, wiec kalibracja z poziomu dawala w pionie rozciagniecie zamiast obrotu.
+Bruce - wieloprotokolowy zestaw do testow bezpieczenstwa (WiFi, BLE, IR, RF), wariant LITE. Program zewnetrzny, zbudowany dla CYD 2.4" z poprawionymi kolorami.
+Stan: opis sklepu nie zawiera zapisu o sprawdzeniu tej binarki na plytce.
+Potrzebne: nic poza plytka; moduly IR i RF dokladasz sam. Pierwszy start prosi o kalibracje dotyku w czterech rogach (w poziomie); po zmianie Config > Orientation Bruce pyta o nia raz dla nowego ukladu i ja pamieta (K-OS trzyma to w migawce).
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autor: pr3y (projekt Bruce). Obraz przygotowany dla K-OS: RST wraca do menu.

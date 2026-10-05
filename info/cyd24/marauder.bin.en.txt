@@ -1,1 +1,5 @@
-ESP32 Marauder in the CYD_24 profile: scanning networks and BLE devices, sniffing, tests of YOUR OWN network. It keeps its settings in SPIFFS - thanks to K-OS snapshots they stay between starts.
+ESP32 Marauder - WiFi and Bluetooth LE auditing: scanning networks and BLE devices, sniffing, testing your own network. A third-party program.
+Status: the store description has no record of this binary being tested on a board.
+Needs: nothing but the board. Settings live in SPIFFS - thanks to the K-OS snapshots they survive between starts.
+Limits: use it only on your own networks and devices.
+Authors: justcallmekoko / Fr4nkFletcher. Image prepared for K-OS: RST returns to the menu.

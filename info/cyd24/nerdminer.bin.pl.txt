@@ -1,1 +1,5 @@
-Solo-miner Bitcoin na ESP32 (~60 kH/s - loteria i gadzet statystyczny). Pierwszy start: AP 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc). Po zapisie ustawien plytka wraca do K-OS - uruchom program ponownie, ustawienia zostaja dzieki migawce.
+NerdMiner v2 - kopacz Bitcoina solo na ESP32 (ok. 60 kH/s): loteria i gadzet ze statystykami, kursem i blokami. Program zewnetrzny.
+Stan: NIESPRAWDZONE na plytce.
+Potrzebne: WiFi, adres BTC i pool. Pierwszy start: punkt dostepowy 'NerdMinerAP', haslo 'MineYourCoins', portal 192.168.4.1 (pool, adres BTC, jasnosc).
+Ograniczenia: po zapisie ustawien plytka wraca do K-OS - uruchom program ponownie; ustawienia zostaja dzieki migawce. Szansa na wykopanie bloku jest znikoma.
+Autor: BitMaker-hub (projekt NerdMiner). Obraz przygotowany dla K-OS: RST wraca do menu.

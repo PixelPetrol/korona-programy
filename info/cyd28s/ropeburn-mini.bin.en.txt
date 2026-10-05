@@ -1,1 +1,6 @@
-The same game as on the 2.8" (0.3.0 BETA: upgrade cards during the run), built for the revision with the ST7789 screen driver (the board with TWO USB sockets). The XPT2046 touch, bit-banged on the board's own pins (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), and the GPIO 21 backlight are the same as on cyd28 - only the screen driver differs; it is compiled into the library, hence a separate image. Touch calibration comes from K-OS (/korona/cyd28s/dotyk.txt); without it a default is used and the serial port says so. The same game image, the same saved state. NEVER RUN ON THIS BOARD. If the image comes out as a negative or with red and blue swapped - write in, the fix is one flag.
+A rhythm skill game, portrait screen: the rope turns faster and faster and you jump - every touch of the screen is a jump that must land in the window.
+Status: BETA, UNTESTED - the game has not been run on this board even once. If the picture comes out as a negative or with red and blue swapped, tell us - it is a one-flag fix.
+Board: CYD 2.8" with the ST7789 panel (two USB sockets).
+Features: the same as on 2.4" - three lives, a bonus for the window centre, a multiplier up to x32, upgrade cards during the run, a metronome, records with initials, unlocks with no shop and no currency.
+Needs: nothing but the board - no network. Touch calibration comes from K-OS (/korona/cyd28s/dotyk.txt); without it a measured default is used. Progress in the board memory, a readable copy on the card in /ropeburn/.
+Limits: 1 character of 5 and 2 levels of 5 are ready.

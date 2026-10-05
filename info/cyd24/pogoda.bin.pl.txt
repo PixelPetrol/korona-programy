@@ -1,1 +1,5 @@
-Stacja pogodowa na LVGL: duza temperatura, ikona, prognoza 3-dniowa, wykres godzinowy, motywy. Dane z Open-Meteo bez klucza API - lokalizacja po IP albo wspolrzedne. Pierwszy start: AP 'cyd-weather-station-XXXX' (otwarty), portal 192.168.4.1 (WiFi, lokalizacja, strefa); potem http://cyd-weather-station.local/. Po 'zapisz i restart' plytka wraca do K-OS i autostart wznawia aplikacje.
+Stacja pogodowa na LVGL: duza temperatura, ikona pogody, prognoza na 3 dni, wykres godzinowy, motywy. Program zewnetrzny.
+Stan: NIESPRAWDZONE na plytce.
+Potrzebne: WiFi. Dane z Open-Meteo bez klucza API, lokalizacja po IP albo ze wspolrzednych. Pierwszy start: otwarty punkt dostepowy 'cyd-weather-station-XXXX', portal 192.168.4.1 (WiFi, lokalizacja, strefa czasowa); potem strona http://cyd-weather-station.local/.
+Ograniczenia: po 'zapisz i restart' plytka wraca do K-OS, a autostart wznawia aplikacje.
+Autor: nicholaswilde. Obraz przygotowany dla K-OS: RST wraca do menu.

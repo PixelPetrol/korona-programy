@@ -1,1 +1,6 @@
-Wersja dla CYD 2.8" (2432S028R) ze srodowiska KORONA_CYD28, zbudowana z natywnego profilu autora `CYD-2432S028` - dotyk na dedykowanych pinach, bez naszej latki dla 2.4". Kolory bez odwracania, bo baza dla tej plytki nie definiuje TFT_INVERSION_ON. Powrot do K-OS po RST zapewniony. NIESPRAWDZONE NA SPRZECIE. Znane ryzyko: domyslna korekta rotacji dotyku w InputHandler sklada sie z wewnetrzna rotacja sterownika - to kod upstreamowy uzywany przez spolecznosc na prawdziwych 2.8", ale my go nie potwierdzilismy.
+Bruce - zestaw do testow bezpieczenstwa (WiFi, BLE, IR, RF), wariant LITE. Program zewnetrzny.
+Stan: NIESPRAWDZONE - tej binarki nikt jeszcze nie uruchomil. Znane ryzyko: obrot dotyku wzgledem obrazu (kod autora, uzywany przez spolecznosc na 2.8", u nas niepotwierdzony).
+Plytka: CYD 2.8" (2432S028R); obraz z natywnego profilu autora.
+Potrzebne: nic poza plytka; moduly IR i RF dokladasz sam.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autor: pr3y (projekt Bruce). Obraz przygotowany dla K-OS: RST wraca do menu.

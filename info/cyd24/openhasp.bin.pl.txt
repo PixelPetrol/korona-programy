@@ -1,1 +1,5 @@
-openHASP zamienia CYD w panel dotykowy Home Assistant: strony/widgety LVGL z pages.jsonl, sterowanie MQTT. Pierwszy start: AP 'HASP-xxxxxx' haslo 'haspadmin', kalibracja 4 rogow, potem WiFi i MQTT przez www 192.168.4.1. Ekran poziomo; rotacje i inwersje zmienia sie w Configuration - Display.
+openHASP zamienia plytke w panel dotykowy Home Assistant: strony z przyciskami i widzetami, sterowanie przez MQTT. Program zewnetrzny.
+Stan: NIESPRAWDZONE na plytce.
+Potrzebne: WiFi i serwer MQTT (zwykle przy Home Assistant). Pierwszy start: punkt dostepowy 'HASP-xxxxxx', haslo 'haspadmin', kalibracja czterech rogow, potem WiFi i MQTT na stronie 192.168.4.1.
+Ograniczenia: ekran poziomo; rotacje i inwersje zmienia sie w Configuration - Display. Strony opisuje plik pages.jsonl (LVGL).
+Autor: Francis Van Roie (fvanroie), projekt openHASP. Obraz przygotowany dla K-OS: RST wraca do menu.

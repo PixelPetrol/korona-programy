@@ -1,1 +1,5 @@
-HaleHound-CYD: skaner WiFi/BLE, deauth, RF, NFC (moduly opcjonalne). Port K-OS dla CYD 2.4": dotyk XPT2046 przez magistrale LCD (TFT_eSPI, TOUCH_CS 33) zamiast bit-bangu po pinach ekranu, ktory zamrazal plansze startowa. Sprawdzone na sprzecie 03.09.2026: start, menu, dotyk, RST wraca do K-OS.
+ESP32-DIV w odmianie HaleHound-CYD: skaner WiFi i BLE, deauth, narzedzia RF i NFC (moduly opcjonalne). Program zewnetrzny, port dla CYD 2.4".
+Stan: sprawdzone na plytce 03.09.2026: start, menu, dotyk, RST wraca do K-OS. Poszczegolnych narzedzi nie opisano jako sprawdzonych.
+Potrzebne: nic poza plytka; moduly RF/NFC dokladasz sam.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autorzy: cifertech / Wontfallo (HaleHound-CYD). W porcie dla K-OS dotyk czytany jest przez magistrale ekranu (poprzedni sposob zamrazal plansze startowa).

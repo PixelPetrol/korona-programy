@@ -1,1 +1,6 @@
-Marauder for the CYD 2.8" in the 2 USB revision, with an ST7789 panel. Hardware-identical to the cyd28 version - the same screen pins, the same touch on a separate bus, backlight GPIO 21 - it differs only in the display driver, the colour order and the inversion setting. Return to K-OS after RST is assured, settings in SPIFFS. NOT TESTED ON HARDWARE. To look at on the board: the colours, the image orientation and the layout of the status bar - Marauder for the ST7789 uses coordinates tuned for a bigger screen, so small text shifts are possible.
+ESP32 Marauder - WiFi and Bluetooth LE auditing: scanning networks and BLE devices, sniffing, testing your own network. A third-party program.
+Status: UNTESTED. Things to look at: colours, image orientation and the status bar - Marauder for the ST7789 uses coordinates tuned for a bigger screen, so text may be slightly shifted.
+Board: CYD 2.8" ST7789 (two USB sockets).
+Needs: nothing but the board. Settings in SPIFFS - thanks to the K-OS snapshots they survive between starts.
+Limits: use it only on your own networks and devices.
+Authors: justcallmekoko / Fr4nkFletcher. Image prepared for K-OS: RST returns to the menu.

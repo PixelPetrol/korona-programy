@@ -1,1 +1,6 @@
-Bruce for the CYD 2.8" in the two USB socket revision - the same board as cyd28, but with an ST7789 panel. The screen, touch, backlight and SD card pins are identical; only the display controller changed, so the image is produced from the same code and differs in the driver, the BGR colour order and the inversion setting. The settings were derived FROM THE CODE of the library and from the canonical configuration of this board, not from a check on hardware. If anything is to come out wrong, it will be the colours (a negative or red swapped with blue) or an image rotated by 180 degrees relative to cyd28 - and with a rotated image the touch hits mirrored places. Return to K-OS with the RST button works as in the other images. NOT TESTED ON HARDWARE.
+Bruce - a security testing toolkit (WiFi, BLE, IR, RF), LITE variant. A third-party program.
+Status: UNTESTED - the screen settings are derived from the library code, not from a test on a board. Possible faults: colours (negative, red and blue swapped) or a picture rotated by 180 degrees - then touch lands in mirrored places.
+Board: CYD 2.8" ST7789 (two USB sockets).
+Needs: nothing but the board; you add IR and RF modules yourself.
+Limits: use it only on your own networks and devices.
+Author: pr3y (the Bruce project). Image prepared for K-OS: RST returns to the menu.

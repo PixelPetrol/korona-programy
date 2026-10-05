@@ -1,0 +1,5 @@
+Store 30.09.2026 (no change to the program): K-OS 0.7.8 or newer downloads the map /meteo/mapa.bin (Natural Earth, GeoNames CC BY 4.0) together with the program, checking its size and checksum, and puts its licence next to it. With an older K-OS you still copy the map to the card yourself - without it the radar has no rivers or names.
+0.2.4 (BETA - not yet run on a board): the time zone from the K-OS 0.7.6 settings - the clock follows the K-OS zone and the forecast splits days by the same zone (otherwise weekdays would shift by one); with an older K-OS as before (CET).
+0.2.3: the binary in the store carried version 0.2.1 inside, although the store said 0.2.3 (aligned in 0.2.4).
+0.2.1: several WiFi networks - the program takes the whole list of remembered networks from the card (K-OS remembers up to six), scans first and tries only the visible ones, strongest first. Until then every invisible network cost 12 s of waiting at start. Networks with a hidden SSID are tried last.
+The landscape version is built from the same source as the portrait one, which was tested on a 2.4" board; the landscape version itself has not been run yet.

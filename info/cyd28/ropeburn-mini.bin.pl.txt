@@ -1,1 +1,6 @@
-Ta sama gra co na 2.4" (0.3.0 BETA: karty ulepszen w biegu), zbudowana dla CYD 2.8" (2432S028R): dotyk XPT2046 czytany bit-bangiem na wlasnych pinach plytki (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), podswietlenie GPIO 21. Kalibracje dotyku bierze z K-OS (/dotyk-cyd28.txt); bez niej uzywa zmierzonej domyslnej i mowi o tym na porcie szeregowym. Ten sam obraz gry, ten sam zapis stanu. NIE URUCHOMIONA NA TEJ PLYTCE ANI RAZU.
+Gra zrecznosciowa na rytm, ekran pionowy: lina kreci sie coraz szybciej, a Ty skaczesz - kazde dotkniecie ekranu to skok, ktory musi trafic w okno.
+Stan: BETA, NIESPRAWDZONE - na tej plytce gra nie byla uruchomiona ani razu.
+Plytka: CYD 2.8" (2432S028R).
+Umie: to samo co na 2.4" - trzy zycia, premia za srodek okna, mnoznik do x32, karty ulepszen w biegu, metronom, rekordy z inicjalami, odblokowania bez sklepu i waluty.
+Potrzebne: nic poza plytka - bez sieci. Kalibracje dotyku bierze z K-OS (/korona/cyd28/dotyk.txt); bez niej uzywa zmierzonej domyslnej. Postep w pamieci plytki, czytelna kopia na karcie w /ropeburn/.
+Ograniczenia: gotowa 1 postac z 5 i 2 poziomy z 5.

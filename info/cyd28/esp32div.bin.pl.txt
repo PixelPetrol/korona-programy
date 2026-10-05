@@ -1,1 +1,6 @@
-Wersja dla CYD 2.8" (2432S028R). Zbudowana z NATYWNEGO profilu autora - na tej plytce dotyk XPT2046 siedzi na wlasnych pinach (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), wiec nasza poprawka dotyku dla 2.4" nie jest tu w ogole uzywana i zero linii kodu trzeba bylo zmieniac. Powrot do K-OS po RST zapewniony (kasowanie otadata bezwarunkowe). NIESPRAWDZONE NA SPRZECIE - baza kodu dziala na 2.4", ale tej binarki nikt jeszcze nie uruchomil.
+ESP32-DIV (odmiana HaleHound-CYD): skaner WiFi i BLE, narzedzia RF i NFC. Program zewnetrzny.
+Stan: NIESPRAWDZONE - tej binarki nikt jeszcze nie uruchomil; ta sama baza kodu dziala na 2.4".
+Plytka: CYD 2.8" (2432S028R); obraz z natywnego profilu autora.
+Potrzebne: nic poza plytka; moduly RF/NFC dokladasz sam.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autorzy: cifertech / Wontfallo (HaleHound-CYD). Obraz przygotowany dla K-OS: RST wraca do menu.

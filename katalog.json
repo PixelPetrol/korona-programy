@@ -11,7 +11,7 @@
           "rozmiar": 2419792,
           "sha256": "a70f8a2cc1f874f31d85ac1fa7270cd1f850d35ded6f6249a592f7d5298e41db",
           "nazwa": "Bruce (LITE)",
-          "opis": "pentest toolkit WiFi / BLE / IR / RF",
+          "opis": "pentest WiFi / BLE / IR / RF",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y"
@@ -21,7 +21,7 @@
           "rozmiar": 1497088,
           "sha256": "8e3fac7f57982e90d34323d36831463c089b7feb466c28aae478b978a9224e20",
           "nazwa": "K-OS Control",
-          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "opis": "klawiatura, mysz i pilot BT; BETA, NIESPRAWDZONE",
           "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -31,7 +31,7 @@
           "rozmiar": 640896,
           "sha256": "5ef5d9579e6dd0172ea6022b9597e8af1bb25d3f9088e13c6e97d334f70617fe",
           "nazwa": "DOOM (BETA)",
-          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; darmowe dane Freedoom do pobrania ze strony sklepu",
+          "opis": "DOOM z plansza Freedoom; NIESPRAWDZONE",
           "wersja": "0.1.1-beta",
           "kategoria": "zewnetrzne",
           "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
@@ -41,7 +41,7 @@
           "rozmiar": 2424304,
           "sha256": "1ad1eab2d98eec68f77c6490c5bf196ab0217074787d1e7f34bf05ee858d3d5c",
           "nazwa": "ESP32-DIV",
-          "opis": "multitool WiFi/BLE/RF (HaleHound-CYD 2.4\")",
+          "opis": "multitool WiFi/BLE/RF",
           "wersja": "3.3.0",
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)"
@@ -51,7 +51,7 @@
           "rozmiar": 631344,
           "sha256": "237ba8b373cf3b137ec33f943b49dcc4e68acd3c9882fe78a8e532ba373a9693",
           "nazwa": "K-OS GAME VOL1",
-          "opis": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot",
+          "opis": "6 gier: 2048, Lander i inne",
           "wersja": "0.9.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -71,7 +71,7 @@
           "rozmiar": 874960,
           "sha256": "a2ad059f969a9e7773ce7a8115f9bec1df5b8e2e3ed2246d2104085e3a5c9a74",
           "nazwa": "K-OS Handset",
-          "opis": "komunikator MeshCore po Bluetooth",
+          "opis": "komunikator MeshCore po BT; BETA",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -81,7 +81,7 @@
           "rozmiar": 1151584,
           "sha256": "83c1fca4c7816f1898e13875162ec35a17252ffa8daa9ba13ad88e02ec7fb4ff",
           "nazwa": "Meteo K-OS pion",
-          "opis": "pogoda, radar opadow IMGW, 4 widoki",
+          "opis": "pogoda i radar opadow IMGW; BETA",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -91,7 +91,7 @@
           "rozmiar": 1153616,
           "sha256": "e4ca00fdc91287733adf5e0982c75c97aced4294451dda529b15ce7fada0658c",
           "nazwa": "Meteo K-OS poziom",
-          "opis": "pogoda, radar opadow IMGW; NIESPRAWDZONE",
+          "opis": "pogoda i radar, poziomo; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -101,7 +101,7 @@
           "rozmiar": 2157264,
           "sha256": "dd033d344f55227aaa4534a7804383cfd408fb62461028fa52cf5526f908dc80",
           "nazwa": "NerdMiner v2",
-          "opis": "kopacz-loteria BTC + kurs i bloki; NIETESTOWANY",
+          "opis": "kopacz-loteria Bitcoin; NIESPRAWDZONE",
           "wersja": "1.8.3",
           "kategoria": "zewnetrzne",
           "autor": "BitMaker-hub"
@@ -111,7 +111,7 @@
           "rozmiar": 1199040,
           "sha256": "695f085711ff17427f37df5666f71723caac8deaaa7740a0aa9cb5f886a6078c",
           "nazwa": "K-OS Office",
-          "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy",
+          "opis": "notatnik, kalkulator, pliki; BETA",
           "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -121,7 +121,7 @@
           "rozmiar": 1732448,
           "sha256": "3574a8555d0fccc31d12d88a0df32fa0e20ebaa8cca841ab92d6e9eaea83c231",
           "nazwa": "openHASP",
-          "opis": "panel dotykowy Home Assistant; NIETESTOWANY",
+          "opis": "panel Home Assistant, MQTT; NIESPRAWDZONE",
           "wersja": "0.7.0",
           "kategoria": "zewnetrzne",
           "autor": "Francis Van Roie (fvanroie)"
@@ -131,7 +131,7 @@
           "rozmiar": 1619168,
           "sha256": "15183cc35df85b4e6717b161cbad8a5ce78c5ddb7e8d58efb7d865c1e31fcb91",
           "nazwa": "Pogoda",
-          "opis": "prognoza pogody, Open-Meteo bez klucza; NIETESTOWANY",
+          "opis": "prognoza pogody, Open-Meteo; NIESPRAWDZONE",
           "wersja": "0.1.36",
           "kategoria": "zewnetrzne",
           "autor": "nicholaswilde"
@@ -141,7 +141,7 @@
           "rozmiar": 1506656,
           "sha256": "b38b685ee1d521f3d4b0dfea0d629fc55892f33b53efcf068a03e8b9b26a96f6",
           "nazwa": "SkyCYD 4.4.2 pion",
-          "opis": "radar ADS-B, samoloty wokol domu; tylko po polsku",
+          "opis": "radar samolotow ADS-B; tylko po polsku",
           "wersja": "4.4.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -161,7 +161,7 @@
           "rozmiar": 788096,
           "sha256": "c1fddf9c0bf00d659a8b20416a55b313bd2459912e2b91d1db517bf0dd3d666a",
           "nazwa": "Ropeburn Mini",
-          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen - TY skaczesz, 3 zycia; NIESPRAWDZONE",
+          "opis": "skakanka w rytm, skaczesz Ty; BETA, NIESPRAWDZONE",
           "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -177,7 +177,7 @@
           "rozmiar": 2417360,
           "sha256": "035f34b48eace824f4101d3f573c06564e45b368d4781ac6243dab9261ad2c05",
           "nazwa": "Bruce (LITE)",
-          "opis": "pentest toolkit WiFi / BLE / IR / RF; 2.8\" NIESPRAWDZONE",
+          "opis": "pentest WiFi / BLE / IR / RF; NIESPRAWDZONE",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y"
@@ -187,7 +187,7 @@
           "rozmiar": 1496224,
           "sha256": "e73ecd3c2f88bb45a4cd989058c2dbf1bc751c440d049745046e232802442e0a",
           "nazwa": "K-OS Control",
-          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "opis": "klawiatura, mysz i pilot BT; BETA, NIESPRAWDZONE",
           "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -197,7 +197,7 @@
           "rozmiar": 640816,
           "sha256": "1a25d026991694fde311234c5a2c0b7b6d4367f119c2ae218f429e7aadd9931e",
           "nazwa": "DOOM (BETA)",
-          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; darmowe dane Freedoom do pobrania ze strony sklepu",
+          "opis": "DOOM z plansza Freedoom; NIESPRAWDZONE",
           "wersja": "0.1.1-beta",
           "kategoria": "zewnetrzne",
           "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
@@ -207,7 +207,7 @@
           "rozmiar": 2420240,
           "sha256": "0c68c29f6f4f2ac2792ad0911b204986bb6de0d50ceface4bc9ed576c57c176e",
           "nazwa": "ESP32-DIV",
-          "opis": "multitool WiFi/BLE/RF; 2.8\" NIESPRAWDZONE",
+          "opis": "multitool WiFi/BLE/RF; NIESPRAWDZONE",
           "wersja": "3.3.0",
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)"
@@ -217,7 +217,7 @@
           "rozmiar": 630240,
           "sha256": "c1dba278470954e0193eb32893f4be2c8a8edc57800b9aaff9a003e84711d8bc",
           "nazwa": "K-OS GAME VOL1",
-          "opis": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot; 2.8\" NIESPRAWDZONE",
+          "opis": "6 gier: 2048, Lander i inne; NIESPRAWDZONE",
           "wersja": "0.9.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -227,7 +227,7 @@
           "rozmiar": 1589360,
           "sha256": "8f018278844fa8b3a8458647a8c9da87f9888434c602e7e8a1129ec6b6abad03",
           "nazwa": "Marauder",
-          "opis": "audyt WiFi / BLE; 2.8\" NIESPRAWDZONE",
+          "opis": "audyt WiFi / BLE; NIESPRAWDZONE",
           "wersja": "1.4.3",
           "kategoria": "zewnetrzne",
           "autor": "justcallmekoko / Fr4nkFletcher"
@@ -237,7 +237,7 @@
           "rozmiar": 874064,
           "sha256": "4ccb9869d0d457e9bfe86558f1d7a70fca72b8baa1186bb36ddafecb39377da6",
           "nazwa": "K-OS Handset",
-          "opis": "komunikator MeshCore po Bluetooth; 2.8\" NIESPRAWDZONE",
+          "opis": "komunikator MeshCore po BT; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -247,7 +247,7 @@
           "rozmiar": 1150672,
           "sha256": "0e38b2c52837189389e80c89f113fd7abb2a8f4485d47948bb27402cba8973b4",
           "nazwa": "Meteo K-OS pion",
-          "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
+          "opis": "pogoda i radar opadow IMGW; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -257,7 +257,7 @@
           "rozmiar": 1152768,
           "sha256": "ce925d548cb04d6a95e227b0aa298e939a3da254f8eefa3e0ce6fb05287f80a8",
           "nazwa": "Meteo K-OS poziom",
-          "opis": "pogoda, radar opadow IMGW; 2.8\" NIESPRAWDZONE",
+          "opis": "pogoda i radar, poziomo; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -267,7 +267,7 @@
           "rozmiar": 1199040,
           "sha256": "895ae8483e8db1461c05565fcf33ecf839db8aecd4de7aec96d2345b70bdcd9d",
           "nazwa": "K-OS Office",
-          "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; 2.8\" NIESPRAWDZONE",
+          "opis": "notatnik, kalkulator, pliki; BETA, NIESPRAWDZONE",
           "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -277,7 +277,7 @@
           "rozmiar": 1507984,
           "sha256": "8f3f271ac2f0bec2519e7f51e79a7fd47ba3fea684fdffdc1dfcc99678cb6208",
           "nazwa": "SkyCYD 4.4.2 pion",
-          "opis": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
+          "opis": "radar samolotow ADS-B; NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -287,7 +287,7 @@
           "rozmiar": 1509488,
           "sha256": "82e58f02007c39035f44e07f0f3194c3de026bba7fc52732537080271fd3f8dd",
           "nazwa": "SkyCYD 4.4.2 poziom",
-          "opis": "radar ADS-B; 2.8\" NIETESTOWANE; tylko po polsku",
+          "opis": "radar ADS-B, poziomo; NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -297,7 +297,7 @@
           "rozmiar": 787584,
           "sha256": "143b5a3e2e01e76710b362188dcc6f441abf0365798b24bb279591405ca93a93",
           "nazwa": "Ropeburn Mini",
-          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen; 2.8\" NIESPRAWDZONE",
+          "opis": "skakanka w rytm, skaczesz Ty; BETA, NIESPRAWDZONE",
           "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -313,7 +313,7 @@
           "rozmiar": 2417328,
           "sha256": "719fbadc354aeb549ff61ade5d23d7fdb0961f8317badefbe11c56da00c0fa29",
           "nazwa": "Bruce (LITE)",
-          "opis": "pentest toolkit WiFi / BLE / IR / RF; ST7789 NIESPRAWDZONE",
+          "opis": "pentest WiFi / BLE / IR / RF; NIESPRAWDZONE",
           "wersja": "lite",
           "kategoria": "zewnetrzne",
           "autor": "pr3y"
@@ -323,7 +323,7 @@
           "rozmiar": 1496144,
           "sha256": "56440981f279d23e73d61628833aa74b33acbd7dff109306e93e66a8b5237a4e",
           "nazwa": "K-OS Control",
-          "opis": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
+          "opis": "klawiatura, mysz i pilot BT; BETA, NIESPRAWDZONE",
           "wersja": "0.2.1-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -333,7 +333,7 @@
           "rozmiar": 640784,
           "sha256": "2e73587b3127d960039ce4e32c5b3b5aa1880fa28cbed83c19b029563834ea6d",
           "nazwa": "DOOM (BETA)",
-          "opis": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; darmowe dane Freedoom do pobrania ze strony sklepu",
+          "opis": "DOOM z plansza Freedoom; NIESPRAWDZONE",
           "wersja": "0.1.1-beta",
           "kategoria": "zewnetrzne",
           "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona"
@@ -343,7 +343,7 @@
           "rozmiar": 2420176,
           "sha256": "9ded3ab19004a66391dae370f59b24ba1be4c95f9511292c49e99ed382c7dfe6",
           "nazwa": "ESP32-DIV",
-          "opis": "multitool WiFi/BLE/RF; ST7789 NIESPRAWDZONE",
+          "opis": "multitool WiFi/BLE/RF; NIESPRAWDZONE",
           "wersja": "3.3.0",
           "kategoria": "zewnetrzne",
           "autor": "cifertech / Wontfallo (HaleHound-CYD)"
@@ -353,7 +353,7 @@
           "rozmiar": 630096,
           "sha256": "ba18673caf42bc4523af23d97460f3820b2902a058d391c70c1db2fa475c2872",
           "nazwa": "K-OS GAME VOL1",
-          "opis": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot; ST7789 NIESPRAWDZONE",
+          "opis": "6 gier: 2048, Lander i inne; NIESPRAWDZONE",
           "wersja": "0.9.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -363,7 +363,7 @@
           "rozmiar": 1589248,
           "sha256": "8279f4291f4c8cb1b5d9a8a047a644449bf973dac1d35e6897f1ed39d6bb9de7",
           "nazwa": "Marauder",
-          "opis": "audyt WiFi / BLE; ST7789 NIESPRAWDZONE",
+          "opis": "audyt WiFi / BLE; NIESPRAWDZONE",
           "wersja": "1.4.3",
           "kategoria": "zewnetrzne",
           "autor": "justcallmekoko / Fr4nkFletcher"
@@ -373,7 +373,7 @@
           "rozmiar": 873952,
           "sha256": "48d285192aeb28a75e216f223cd44d5351167f68b24a3a6ebada96bdec8eefd4",
           "nazwa": "K-OS Handset",
-          "opis": "komunikator MeshCore po Bluetooth; ST7789 NIESPRAWDZONE",
+          "opis": "komunikator MeshCore po BT; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -383,7 +383,7 @@
           "rozmiar": 1150560,
           "sha256": "0b2497edb1608b85829dba9928e1ff8affeb18e365aecd58797729b300e44560",
           "nazwa": "Meteo K-OS pion",
-          "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
+          "opis": "pogoda i radar opadow IMGW; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -393,7 +393,7 @@
           "rozmiar": 1152656,
           "sha256": "2c2aff09c713cd4c769767db9eb8d5e745214f61f18d9d1a4498af238dfe8854",
           "nazwa": "Meteo K-OS poziom",
-          "opis": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
+          "opis": "pogoda i radar, poziomo; BETA, NIESPRAWDZONE",
           "wersja": "0.2.4",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -403,7 +403,7 @@
           "rozmiar": 1198976,
           "sha256": "2a8142d4c267ef86c647371bf653294b0e2da772d2c933a17767e9345f0c9e30",
           "nazwa": "K-OS Office",
-          "opis": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE",
+          "opis": "notatnik, kalkulator, pliki; BETA, NIESPRAWDZONE",
           "wersja": "1.3.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -413,7 +413,7 @@
           "rozmiar": 1507888,
           "sha256": "1ba48c76284de0f1e01ec4821b248d8cc615743e20723d6a653e8f923af15cfe",
           "nazwa": "SkyCYD 4.4.2 pion",
-          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
+          "opis": "radar samolotow ADS-B; NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -423,7 +423,7 @@
           "rozmiar": 1509376,
           "sha256": "e51d3f1f7abeb4b26079db104774474a93816bce85a07026dde19342be8ad4f9",
           "nazwa": "SkyCYD 4.4.2 poziom",
-          "opis": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
+          "opis": "radar ADS-B, poziomo; NIESPRAWDZONE; tylko po polsku",
           "wersja": "4.4.2",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
@@ -433,7 +433,7 @@
           "rozmiar": 787488,
           "sha256": "4c9037479f0f3159afa1a635d9745d8ad336fe284ff33bbe8c29e51ea055f0d2",
           "nazwa": "Ropeburn Mini",
-          "opis": "BETA 0.3.0: skakanka na rytm z kartami ulepszen; ST7789 NIESPRAWDZONE",
+          "opis": "skakanka w rytm, skaczesz Ty; BETA, NIESPRAWDZONE",
           "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"

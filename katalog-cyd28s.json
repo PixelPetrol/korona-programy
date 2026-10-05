@@ -13,8 +13,8 @@
       "kategoria": "zewnetrzne",
       "autor": "pr3y",
       "opis": {
-        "pl": "pentest toolkit WiFi / BLE / IR / RF; ST7789 NIESPRAWDZONE",
-        "en": "WiFi / BLE / IR / RF pentest toolkit; ST7789 UNTESTED"
+        "pl": "pentest WiFi / BLE / IR / RF; NIESPRAWDZONE",
+        "en": "WiFi / BLE / IR / RF pentest; UNTESTED"
       },
       "ikona": "bin/cyd28s/bruce.ico",
       "info": {
@@ -31,13 +31,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "BETA - nie byla jeszcze uruchomiona na plytce; klawiatura, mysz i pilot TV po Bluetooth dla komputera, telefonu i telewizora",
-        "en": "BETA - not yet run on a board; Bluetooth keyboard, mouse and TV remote for your computer, phone and TV"
+        "pl": "klawiatura, mysz i pilot BT; BETA, NIESPRAWDZONE",
+        "en": "BT keyboard, mouse, remote; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/control.ico",
       "info": {
         "pl": "info/cyd28s/control.bin.pl.txt",
         "en": "info/cyd28s/control.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/control.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/control.bin.zmiany.en.txt"
       }
     },
     {
@@ -49,13 +53,17 @@
       "kategoria": "zewnetrzne",
       "autor": "id Software, doomhack (GBADoom), HenrysCat (cyd-doom) / port K-OS: Piotr Korona",
       "opis": {
-        "pl": "silnik DOOM; BETA - nie byla jeszcze uruchomiona na plytce; darmowe dane Freedoom do pobrania ze strony sklepu",
-        "en": "DOOM engine; BETA - not yet run on a board; free Freedoom game data to download from the store website"
+        "pl": "DOOM z plansza Freedoom; NIESPRAWDZONE",
+        "en": "DOOM with a Freedoom level; UNTESTED"
       },
       "ikona": "bin/cyd28s/doom.ico",
       "info": {
         "pl": "info/cyd28s/doom.bin.pl.txt",
         "en": "info/cyd28s/doom.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/doom.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/doom.bin.zmiany.en.txt"
       },
       "pliki": [
         {
@@ -81,8 +89,8 @@
       "kategoria": "zewnetrzne",
       "autor": "cifertech / Wontfallo (HaleHound-CYD)",
       "opis": {
-        "pl": "multitool WiFi/BLE/RF; ST7789 NIESPRAWDZONE",
-        "en": "WiFi/BLE/RF multitool; ST7789 UNTESTED"
+        "pl": "multitool WiFi/BLE/RF; NIESPRAWDZONE",
+        "en": "WiFi/BLE/RF multitool; UNTESTED"
       },
       "ikona": "bin/cyd28s/esp32div.ico",
       "info": {
@@ -99,13 +107,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "2048, Lunar Lander, Overload, Punch-Through, Payload i Longshot; ST7789 NIESPRAWDZONE",
-        "en": "2048, Lunar Lander, Overload, Punch-Through, Payload and Longshot; ST7789 UNTESTED"
+        "pl": "6 gier: 2048, Lander i inne; NIESPRAWDZONE",
+        "en": "6 games: 2048, Lander & more; UNTESTED"
       },
       "ikona": "bin/cyd28s/gry-vol1.ico",
       "info": {
         "pl": "info/cyd28s/gry-vol1.bin.pl.txt",
         "en": "info/cyd28s/gry-vol1.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/gry-vol1.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/gry-vol1.bin.zmiany.en.txt"
       }
     },
     {
@@ -117,8 +129,8 @@
       "kategoria": "zewnetrzne",
       "autor": "justcallmekoko / Fr4nkFletcher",
       "opis": {
-        "pl": "audyt WiFi / BLE; ST7789 NIESPRAWDZONE",
-        "en": "WiFi / BLE auditing; ST7789 UNTESTED"
+        "pl": "audyt WiFi / BLE; NIESPRAWDZONE",
+        "en": "WiFi / BLE auditing; UNTESTED"
       },
       "ikona": "bin/cyd28s/marauder.ico",
       "info": {
@@ -135,13 +147,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "komunikator MeshCore po Bluetooth; ST7789 NIESPRAWDZONE",
-        "en": "MeshCore messenger over Bluetooth; ST7789 UNTESTED"
+        "pl": "komunikator MeshCore po BT; BETA, NIESPRAWDZONE",
+        "en": "MeshCore messenger over BT; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/mesh.ico",
       "info": {
         "pl": "info/cyd28s/mesh.bin.pl.txt",
         "en": "info/cyd28s/mesh.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/mesh.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/mesh.bin.zmiany.en.txt"
       }
     },
     {
@@ -153,13 +169,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-        "en": "weather, IMGW rain radar; ST7789 UNTESTED"
+        "pl": "pogoda i radar opadow IMGW; BETA, NIESPRAWDZONE",
+        "en": "weather and IMGW rain radar; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/meteo-pion.ico",
       "info": {
         "pl": "info/cyd28s/meteo-pion.bin.pl.txt",
         "en": "info/cyd28s/meteo-pion.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/meteo-pion.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/meteo-pion.bin.zmiany.en.txt"
       },
       "pliki": [
         {
@@ -185,13 +205,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "pogoda, radar opadow IMGW; ST7789 NIESPRAWDZONE",
-        "en": "weather, IMGW rain radar; ST7789 UNTESTED"
+        "pl": "pogoda i radar, poziomo; BETA, NIESPRAWDZONE",
+        "en": "weather and radar, landscape; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/meteo-poziom.ico",
       "info": {
         "pl": "info/cyd28s/meteo-poziom.bin.pl.txt",
         "en": "info/cyd28s/meteo-poziom.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/meteo-poziom.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/meteo-poziom.bin.zmiany.en.txt"
       },
       "pliki": [
         {
@@ -217,13 +241,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "notatnik, kalkulator, kalendarz, pliki, QR, kursy; ST7789 NIESPRAWDZONE",
-        "en": "notes, calculator, calendar, files, QR, rates; ST7789 UNTESTED"
+        "pl": "notatnik, kalkulator, pliki; BETA, NIESPRAWDZONE",
+        "en": "notes, calculator, files; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/office.ico",
       "info": {
         "pl": "info/cyd28s/office.bin.pl.txt",
         "en": "info/cyd28s/office.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/office.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/office.bin.zmiany.en.txt"
       }
     },
     {
@@ -235,13 +263,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
-        "en": "ADS-B radar; ST7789 UNTESTED; Polish only"
+        "pl": "radar samolotow ADS-B; NIESPRAWDZONE; tylko po polsku",
+        "en": "ADS-B aircraft radar; UNTESTED; Polish only"
       },
       "ikona": "bin/cyd28s/radar-pion.ico",
       "info": {
         "pl": "info/cyd28s/radar-pion.bin.pl.txt",
         "en": "info/cyd28s/radar-pion.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/radar-pion.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/radar-pion.bin.zmiany.en.txt"
       }
     },
     {
@@ -253,13 +285,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B; ST7789 NIESPRAWDZONE; tylko po polsku",
-        "en": "ADS-B radar; ST7789 UNTESTED; Polish only"
+        "pl": "radar ADS-B, poziomo; NIESPRAWDZONE; tylko po polsku",
+        "en": "ADS-B radar, landscape; UNTESTED; Polish only"
       },
       "ikona": "bin/cyd28s/radar-poziom.ico",
       "info": {
         "pl": "info/cyd28s/radar-poziom.bin.pl.txt",
         "en": "info/cyd28s/radar-poziom.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/radar-poziom.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/radar-poziom.bin.zmiany.en.txt"
       }
     },
     {
@@ -271,13 +307,17 @@
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "BETA 0.3.0: skakanka na rytm z kartami ulepszen; ST7789 NIESPRAWDZONE",
-        "en": "BETA 0.3.0: jump rope to the beat with upgrade cards; ST7789 UNTESTED"
+        "pl": "skakanka w rytm, skaczesz Ty; BETA, NIESPRAWDZONE",
+        "en": "rhythm jump rope, you jump; BETA, UNTESTED"
       },
       "ikona": "bin/cyd28s/ropeburn-mini.ico",
       "info": {
         "pl": "info/cyd28s/ropeburn-mini.bin.pl.txt",
         "en": "info/cyd28s/ropeburn-mini.bin.en.txt"
+      },
+      "zmiany": {
+        "pl": "info/cyd28s/ropeburn-mini.bin.zmiany.pl.txt",
+        "en": "info/cyd28s/ropeburn-mini.bin.zmiany.en.txt"
       }
     }
   ]

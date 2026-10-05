@@ -1,1 +1,6 @@
-ESP32 Marauder dla CYD 2.8" (2432S028R) z panelem ILI9341. Dotyk XPT2046 dziala przez OSOBNA, programowa magistrale SPI (CLK 25, MOSI 32, MISO 39) - dolaczony do projektu wariant biblioteki TFT_eSPI ma to juz wbudowane, wiec nie trzeba bylo niczego przepisywac ani lutowac. Ustawienia trzyma w SPIFFS, wiec zostaja miedzy startami dzieki migawkom K-OS. Powrot do K-OS po RST zapewniony. NIESPRAWDZONE NA SPRZECIE - obraz przeszedl tylko kompilacje; kalibracja dotyku do potwierdzenia palcem.
+ESP32 Marauder - audyt WiFi i Bluetooth LE: skan sieci i urzadzen BLE, podsluch ruchu, testy wlasnej sieci. Program zewnetrzny.
+Stan: NIESPRAWDZONE - obraz przeszedl tylko kompilacje; kalibracja dotyku do potwierdzenia palcem.
+Plytka: CYD 2.8" (2432S028R) z panelem ILI9341.
+Potrzebne: nic poza plytka. Ustawienia w SPIFFS - dzieki migawkom K-OS zostaja miedzy startami.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autorzy: justcallmekoko / Fr4nkFletcher. Obraz przygotowany dla K-OS: RST wraca do menu.

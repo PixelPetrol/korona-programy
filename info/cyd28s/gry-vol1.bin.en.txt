@@ -1,1 +1,6 @@
-The same volume of games as on the 2.8", rebuilt for the revision with an ST7789 panel (the board with two USB sockets). Touch, pins and the GPIO 21 backlight are the same as in the ILI9341 version. The games have no calibration of their own - they take it from K-OS; when there is none on the card for this board, the volume says so outright at start instead of using guessed numbers (file /korona/cyd28s/dotyk.txt). NOT TESTED ON HARDWARE.
+A volume of six games for K-OS, in Polish and English, portrait screen, with the Chip-K mascot.
+Status: UNTESTED - nobody has run this binary on this revision yet.
+Board: CYD 2.8" ST7789 (two USB sockets).
+Games: 2048, Lunar Lander, Overload (a runner), Punch-Through (Arkanoid style), Payload (Tetris style), Longshot (how far will it fly). The same as on 2.4".
+Needs: nothing but the board - no network. Scores and progress on the card in /gry/. Touch calibration comes from K-OS (/korona/cyd28s/dotyk.txt); when there is none, it says so at start instead of guessing. Theme and language from K-OS.
+Limits: the full tile look needs K-OS 0.7.1 or newer.

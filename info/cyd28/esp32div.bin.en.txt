@@ -1,1 +1,6 @@
-A version for the CYD 2.8" (2432S028R). Built from the author's NATIVE profile - on this board the XPT2046 touch sits on its own pins (CLK 25, MOSI 32, MISO 39, CS 33, IRQ 36), so our touch fix for the 2.4" is not used here at all and not a single line of code had to be changed. Return to K-OS after RST is assured (otadata erased unconditionally). NOT TESTED ON HARDWARE - the code base works on the 2.4", but nobody has run this binary yet.
+ESP32-DIV (HaleHound-CYD variant): a WiFi and BLE scanner, RF and NFC tools. A third-party program.
+Status: UNTESTED - nobody has run this binary yet; the same code base works on 2.4".
+Board: CYD 2.8" (2432S028R); image from the author's native profile.
+Needs: nothing but the board; you add RF/NFC modules yourself.
+Limits: use it only on your own networks and devices.
+Authors: cifertech / Wontfallo (HaleHound-CYD). Image prepared for K-OS: RST returns to the menu.

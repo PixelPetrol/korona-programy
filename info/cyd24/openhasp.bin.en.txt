@@ -1,1 +1,5 @@
-openHASP turns the CYD into a Home Assistant touch panel: LVGL pages and widgets from pages.jsonl, control over MQTT. First start: AP 'HASP-xxxxxx' password 'haspadmin', four-corner calibration, then WiFi and MQTT over www 192.168.4.1. Screen in landscape; rotation and inversion are changed in Configuration - Display.
+openHASP turns the board into a Home Assistant touch panel: pages with buttons and widgets, control over MQTT. A third-party program.
+Status: UNTESTED on a board.
+Needs: WiFi and an MQTT server (usually next to Home Assistant). First start: access point 'HASP-xxxxxx', password 'haspadmin', four-corner calibration, then WiFi and MQTT on the page 192.168.4.1.
+Limits: landscape screen; rotation and inversion are changed in Configuration - Display. Pages are described in pages.jsonl (LVGL).
+Author: Francis Van Roie (fvanroie), the openHASP project. Image prepared for K-OS: RST returns to the menu.

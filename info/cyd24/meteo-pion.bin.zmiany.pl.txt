@@ -1,0 +1,6 @@
+Sklep 30.09.2026 (bez zmiany programu): K-OS 0.7.8 i nowszy pobiera mape /meteo/mapa.bin (Natural Earth, GeoNames CC BY 4.0) razem z programem, z kontrola rozmiaru i sumy, i kladzie obok jej licencje. Ze starszym K-OS mape nadal kopiuje sie na karte samemu - bez niej radar jest bez rzek i nazw.
+0.2.4 (BETA - nie byla jeszcze uruchomiona na plytce): strefa czasowa z ustawien K-OS 0.7.6 - zegar idzie za strefa z K-OS, a prognoza dzieli dni wedlug tej samej strefy (inaczej dni tygodnia przesuwalyby sie o jeden); ze starszym K-OS jak dotad (CET).
+0.2.3: binarka w sklepie miala w srodku numer 0.2.1, choc sklep podawal 0.2.3 (wyrownane w 0.2.4).
+0.2.1: kilka sieci WiFi - program bierze z karty cala liste zapamietanych sieci (K-OS pamieta ich do szesciu), najpierw skanuje i probuje tylko widocznych, od najmocniejszej. Dotad kazda niewidoczna siec kosztowala 12 s czekania na starcie. Sieci z ukrytym SSID probuje na koncu.
+0.1.1: naprawiony urwany adres zapytania (bufor 560 znakow na adres dlugi na 589) - serwer oddawal HTTP 400 i pogody nie bylo wcale.
+Wczesniejsza wersja byla sprawdzona na plytce 2.4" 04.09.2026: start, motyw i jezyk z K-OS, kalibracja z karty, polaczenie z siecia, pobranie pogody i klatki radaru IMGW, zapis do trybu offline, powrot do K-OS po RST.

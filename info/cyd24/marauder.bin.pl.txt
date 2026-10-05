@@ -1,1 +1,5 @@
-ESP32 Marauder w profilu CYD_24: skan sieci i urzadzen BLE, sniffing, testy WLASNEJ sieci. Ustawienia trzyma w SPIFFS - dzieki migawkom K-OS zostaja miedzy startami.
+ESP32 Marauder - audyt WiFi i Bluetooth LE: skan sieci i urzadzen BLE, podsluch ruchu, testy wlasnej sieci. Program zewnetrzny.
+Stan: opis sklepu nie zawiera zapisu o sprawdzeniu tej binarki na plytce.
+Potrzebne: nic poza plytka. Ustawienia trzyma w SPIFFS - dzieki migawkom K-OS zostaja miedzy startami.
+Ograniczenia: uzywaj tylko wobec wlasnych sieci i urzadzen.
+Autorzy: justcallmekoko / Fr4nkFletcher. Obraz przygotowany dla K-OS: RST wraca do menu.
