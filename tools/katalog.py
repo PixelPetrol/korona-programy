@@ -321,6 +321,49 @@ META = {
                           "Features: CPU load, temperature and clock, GPU with VRAM, RAM, disk, upload and download; threshold colours; 5-minute charts; a big number for any sensor (favourites). Up to 3 computers; LHM search on the network, address from the keyboard or from a phone (QR and session code). Refresh every 1, 2 or 5 s. Clear help when the PC or the LHM web server is off.\n"
                           "Needs: LibreHardwareMonitor on the PC with Options -> Remote Web Server -> Run (port 8085, allowed by the Windows firewall), WiFi from K-OS, an SD card for the settings. Without a K-OS calibration it offers its own at start.\n"
                           "Limits: Windows only (LHM); plain http in your network; the LHM password (if on) is stored on the card as plain text."),
+    "chat.bin": m("K-OS Chat", "pokoj i wiadomosci na numer; BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Pokoj ogolny dla wszystkich plytek z K-OS Chat i wiadomosci prywatne na numer plytki, jak SMS. Prywatne sa szyfrowane od konca do konca: serwer widzi tylko kto, do kogo i kiedy.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byla jeszcze uruchomiona na plytce; kryptografia i protokol sprawdzone testami na komputerze.\n"
+                          "Umie: numer z klucza (9 cyfr z cyfra kontrolna), kontakty, 'nowy numer - przyjac?', blokowanie, potwierdzenie doreczenia, pokoj z przyciskiem 'zglos', moj numer z kodem QR i kodem bezpieczenstwa, kopia klucza z haslem.\n"
+                          "Potrzebne: WiFi zapamietane w K-OS, internet, karta SD (historia i kontakty w /chat/). Motyw, jezyk, strefe i kalibracje bierze z K-OS.\n"
+                          "Ograniczenia: zwykle http - tresc chroni szyfr, nie TLS. Historia lezy na karcie jawnym tekstem. Pokoj jest jawny. Wyczyszczenie plytki bez kopii klucza = utrata numeru.",
+                          opis_en="room and messages by number; BETA, UNTESTED",
+                          info_en="A public room for every board with K-OS Chat and private messages to a board's number, like SMS. Private messages are end-to-end encrypted: the server only sees who, to whom and when.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet; the cryptography and protocol are tested on a computer.\n"
+                          "Features: a number derived from the key (9 digits with a check digit), contacts, 'new number - accept?', blocking, delivery receipts, a room with a 'report' button, my number with a QR code and safety code, a password key backup.\n"
+                          "Needs: WiFi remembered by K-OS, internet, an SD card (history and contacts in /chat/). Theme, language, time zone and calibration come from K-OS.\n"
+                          "Limits: plain http - the cipher protects content, not TLS. History is stored on the card as plain text. The room is public. Wiping the board without a key backup = losing the number."),
+    # cyd24: info PL 879 znakow, EN 914 znakow (limit 1000)
+    ("cyd28", "chat.bin"): m("K-OS Chat", "pokoj i wiadomosci na numer; BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Pokoj ogolny dla wszystkich plytek z K-OS Chat i wiadomosci prywatne na numer plytki, jak SMS. Prywatne sa szyfrowane od konca do konca: serwer widzi tylko kto, do kogo i kiedy.\n"
+                          "Stan: BETA, NIESPRAWDZONE - na 2.8\" nie byla jeszcze uruchomiona; kryptografia i protokol sprawdzone testami na komputerze.\n"
+                          "Plytka: CYD 2.8\" (2432S028R).\n"
+                          "Umie: numer z klucza (9 cyfr z cyfra kontrolna), kontakty, 'nowy numer - przyjac?', blokowanie, potwierdzenie doreczenia, pokoj z przyciskiem 'zglos', moj numer z kodem QR i kodem bezpieczenstwa, kopia klucza z haslem.\n"
+                          "Potrzebne: WiFi zapamietane w K-OS, internet, karta SD (historia i kontakty w /chat/). Motyw, jezyk, strefe i kalibracje bierze z K-OS.\n"
+                          "Ograniczenia: zwykle http - tresc chroni szyfr, nie TLS. Historia lezy na karcie jawnym tekstem. Pokoj jest jawny. Wyczyszczenie plytki bez kopii klucza = utrata numeru.",
+                          opis_en="room and messages by number; BETA, UNTESTED",
+                          info_en="A public room for every board with K-OS Chat and private messages to a board's number, like SMS. Private messages are end-to-end encrypted: the server only sees who, to whom and when.\n"
+                          "Status: BETA, UNTESTED - it has not been run on 2.8\" yet; the cryptography and protocol are tested on a computer.\n"
+                          "Board: CYD 2.8\" (2432S028R).\n"
+                          "Features: a number derived from the key (9 digits with a check digit), contacts, 'new number - accept?', blocking, delivery receipts, a room with a 'report' button, my number with a QR code and safety code, a password key backup.\n"
+                          "Needs: WiFi remembered by K-OS, internet, an SD card (history and contacts in /chat/). Theme, language, time zone and calibration come from K-OS.\n"
+                          "Limits: plain http - the cipher protects content, not TLS. History is stored on the card as plain text. The room is public. Wiping the board without a key backup = losing the number."),
+    # cyd28: info PL 907 znakow, EN 940 znakow (limit 1000)
+    ("cyd28s", "chat.bin"): m("K-OS Chat", "pokoj i wiadomosci na numer; BETA, NIESPRAWDZONE", "0.1.0-beta", A, "Piotr Korona",
+                          "Pokoj ogolny dla wszystkich plytek z K-OS Chat i wiadomosci prywatne na numer plytki, jak SMS. Prywatne sa szyfrowane od konca do konca: serwer widzi tylko kto, do kogo i kiedy.\n"
+                          "Stan: BETA, NIESPRAWDZONE - na tej rewizji nie byla jeszcze uruchomiona; kryptografia i protokol sprawdzone testami na komputerze.\n"
+                          "Plytka: CYD 2.8\" ST7789 (dwa gniazda USB).\n"
+                          "Umie: numer z klucza (9 cyfr z cyfra kontrolna), kontakty, 'nowy numer - przyjac?', blokowanie, potwierdzenie doreczenia, pokoj z przyciskiem 'zglos', moj numer z kodem QR i kodem bezpieczenstwa, kopia klucza z haslem.\n"
+                          "Potrzebne: WiFi zapamietane w K-OS, internet, karta SD (historia i kontakty w /chat/). Motyw, jezyk, strefe i kalibracje bierze z K-OS.\n"
+                          "Ograniczenia: zwykle http - tresc chroni szyfr, nie TLS. Historia lezy na karcie jawnym tekstem. Pokoj jest jawny. Wyczyszczenie plytki bez kopii klucza = utrata numeru.",
+                          opis_en="room and messages by number; BETA, UNTESTED",
+                          info_en="A public room for every board with K-OS Chat and private messages to a board's number, like SMS. Private messages are end-to-end encrypted: the server only sees who, to whom and when.\n"
+                          "Status: BETA, UNTESTED - it has not been run on this revision yet; the cryptography and protocol are tested on a computer.\n"
+                          "Board: CYD 2.8\" ST7789 (two USB sockets).\n"
+                          "Features: a number derived from the key (9 digits with a check digit), contacts, 'new number - accept?', blocking, delivery receipts, a room with a 'report' button, my number with a QR code and safety code, a password key backup.\n"
+                          "Needs: WiFi remembered by K-OS, internet, an SD card (history and contacts in /chat/). Theme, language, time zone and calibration come from K-OS.\n"
+                          "Limits: plain http - the cipher protects content, not TLS. History is stored on the card as plain text. The room is public. Wiping the board without a key backup = losing the number."),
+    # cyd28s: info PL 927 znakow, EN 962 znakow (limit 1000)
     "gry-vol1.bin":     m("K-OS GAME VOL1",  "6 gier: 2048, Lander i inne", "0.9.2", A, "Piotr Korona",
                           "Tom szesciu gier dla K-OS, po polsku i po angielsku, ekran pionowo, z maskotka Chip-K. Gry wybierasz z kafelkow w menu tomu.\n"
                           "Stan: gry sprawdzone testami na komputerze; opis sklepu nie zawiera zapisu o sprawdzeniu tej wersji na plytce, a liczby klatek na plytce nie mierzono.\n"

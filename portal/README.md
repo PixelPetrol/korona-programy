@@ -19,6 +19,8 @@ manifest-cyd28s.json  manifest ESP Web Tools — CYD 2.8" ST7789 (ESP32-2432S028
 programy.html         dla autorów: jak napisać program pod K-OS i jak go zgłosić
 zglos.html            zgłoszenie programu: sprawdzanie .bin w przeglądarce + formularz (§9)
 zglos.js              walidator .bin i meta.json w JS — KOPIA reguł z tools/sprawdz_bin.py (§9)
+otwarte.html          strefa otwarta: przeglądanie, dodawanie linku, „zgłoś”, regulamin; Worker k-os-otwarte
+                      (otwarte/PROJEKT.md). ŹRÓDŁO — nie skopiowane do korona-programy, nie opublikowane
 zbuduj-obrazy.sh      składa obrazy z wyników builda; NICZEGO NIE WGRYWA na płytkę
                       (skrypt na macOS — patrz §4)
 tabela-rozmiarow.py   przepisuje tabelę rozmiarów w tym README z obrazy/SUMY.txt;

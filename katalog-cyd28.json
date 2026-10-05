@@ -23,6 +23,23 @@
       }
     },
     {
+      "plik": "bin/cyd28/chat.bin",
+      "rozmiar": 1179776,
+      "sha256": "e4e6704c0a9915916ba2e173b6bc2ab2e3a42b486b4ab81448f3469c9c3c93bf",
+      "nazwa": "K-OS Chat",
+      "wersja": "0.1.0-beta",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "pokoj i wiadomosci na numer; BETA, NIESPRAWDZONE",
+        "en": "room and messages by number; BETA, UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd28/chat.bin.pl.txt",
+        "en": "info/cyd28/chat.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd28/control.bin",
       "rozmiar": 1496224,
       "sha256": "e73ecd3c2f88bb45a4cd989058c2dbf1bc751c440d049745046e232802442e0a",

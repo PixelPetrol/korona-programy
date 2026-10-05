@@ -1,0 +1,6 @@
+Pokoj ogolny dla wszystkich plytek z K-OS Chat i wiadomosci prywatne na numer plytki, jak SMS. Prywatne sa szyfrowane od konca do konca: serwer widzi tylko kto, do kogo i kiedy.
+Stan: BETA, NIESPRAWDZONE - na 2.8" nie byla jeszcze uruchomiona; kryptografia i protokol sprawdzone testami na komputerze.
+Plytka: CYD 2.8" (2432S028R).
+Umie: numer z klucza (9 cyfr z cyfra kontrolna), kontakty, 'nowy numer - przyjac?', blokowanie, potwierdzenie doreczenia, pokoj z przyciskiem 'zglos', moj numer z kodem QR i kodem bezpieczenstwa, kopia klucza z haslem.
+Potrzebne: WiFi zapamietane w K-OS, internet, karta SD (historia i kontakty w /chat/). Motyw, jezyk, strefe i kalibracje bierze z K-OS.
+Ograniczenia: zwykle http - tresc chroni szyfr, nie TLS. Historia lezy na karcie jawnym tekstem. Pokoj jest jawny. Wyczyszczenie plytki bez kopii klucza = utrata numeru.

@@ -1,0 +1,6 @@
+A public room for every board with K-OS Chat and private messages to a board's number, like SMS. Private messages are end-to-end encrypted: the server only sees who, to whom and when.
+Status: BETA, UNTESTED - it has not been run on this revision yet; the cryptography and protocol are tested on a computer.
+Board: CYD 2.8" ST7789 (two USB sockets).
+Features: a number derived from the key (9 digits with a check digit), contacts, 'new number - accept?', blocking, delivery receipts, a room with a 'report' button, my number with a QR code and safety code, a password key backup.
+Needs: WiFi remembered by K-OS, internet, an SD card (history and contacts in /chat/). Theme, language, time zone and calibration come from K-OS.
+Limits: plain http - the cipher protects content, not TLS. History is stored on the card as plain text. The room is public. Wiping the board without a key backup = losing the number.

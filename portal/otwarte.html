@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-OS — strefa otwarta</title>
+<meta name="description" content="Strefa otwarta K-OS: programy na płytki CYD od użytkowników, bez sprawdzania, z ostrzeżeniem. / K-OS open zone: user programs for CYD boards, unchecked, with a warning.">
+<link rel="icon" type="image/png" href="korona-godlo.png">
+<style>
+/* Motyw "zielony" K-OS jak sklep.html i zglos.html. Nowe: ostrzezenia strefy, znaczki zrodla, formularz zglos. */
+:root{
+  --bg:#000; --card:#070a07; --sel:#00220f; --edge:#005d00; --edge2:#00a000;
+  --txt:#00e600; --txt2:#00b000; --acc:#00ff00; --warn:#ff9a00; --err:#ff3b30; --ink:#001a00;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:15.5px/1.6 var(--mono)}
+a{color:var(--acc);text-decoration:none;border-bottom:1px solid var(--edge);overflow-wrap:anywhere}
+a:hover,a:focus-visible{border-bottom-color:var(--acc);background:var(--sel)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+code{font-family:var(--mono);font-size:.92em;background:var(--sel);border:1px solid var(--edge);border-radius:3px;padding:0 5px;color:var(--acc);overflow-wrap:anywhere}
+main{max-width:940px;margin:0 auto;padding:22px 16px 64px}
+html[data-lang="pl"] [lang="en"]{display:none!important}
+html[data-lang="en"] [lang="pl"]{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.top a{border:0;color:var(--txt2);font-size:.9rem}
+.lang{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--txt2);font:700 13px var(--mono);letter-spacing:.08em;padding:6px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--acc);color:var(--ink)}
+h1{font-size:1.5rem;margin:6px 0 4px;color:var(--acc)}
+.pod{color:var(--txt2);margin:0 0 16px}
+h2{font-size:1.05rem;letter-spacing:.04em;margin:40px 0 12px;color:var(--acc);text-transform:uppercase}
+h2::before{content:"// ";color:var(--edge2)}
+.alarm{border:3px solid var(--err);background:#160404;border-radius:6px;padding:16px 18px;margin:0 0 22px}
+.alarm h3{margin:0 0 8px;color:var(--err);font-size:1.15rem;letter-spacing:.06em}
+.alarm p{margin:6px 0}
+.alarm b{color:var(--err)}
+.warnbox{border:1px solid var(--warn);border-left-width:4px;background:#120c00;padding:10px 14px;border-radius:0 4px 4px 0;margin:12px 0}
+.warnbox b{color:var(--warn)}
+.warnbox.err{border-color:var(--err);background:#160404}
+.warnbox.err b{color:var(--err)}
+.warnbox.ok{border-color:var(--edge2);background:var(--sel)}
+.warnbox.ok b{color:var(--acc)}
+.filtry{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px}
+.filtry button{font:inherit;color:var(--txt);background:var(--card);border:2px solid var(--edge);border-radius:8px;padding:6px 12px;cursor:pointer}
+.filtry button[aria-pressed=true]{background:var(--sel);border-color:var(--acc);color:var(--acc)}
+.filtry label{color:var(--txt2);display:flex;gap:6px;align-items:center;cursor:pointer}
+.lista{display:grid;gap:14px}
+.w{background:var(--card);border:2px solid var(--edge);border-radius:10px;padding:14px 16px;box-shadow:4px 4px 0 #041a04}
+.w.bez{border-color:#5a1410}
+.w.ukryty{opacity:.6;border-style:dashed}
+.tyt{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.tyt b{color:var(--acc);font-size:1.05rem;overflow-wrap:anywhere}
+.meta{color:var(--txt2);font-size:.88rem;overflow-wrap:anywhere}
+.zn{display:inline-block;font:700 12px var(--mono);letter-spacing:.06em;border-radius:4px;padding:1px 8px;margin:6px 6px 0 0;border:1px solid}
+.zn.os{color:var(--ink);background:var(--acc);border-color:var(--acc)}
+.zn.zr{color:var(--warn);border-color:var(--warn)}
+.zn.bez{color:#fff;background:var(--err);border-color:var(--err)}
+.zn.zgl{color:var(--warn);border-color:var(--warn)}
+.zn.mar{color:var(--txt2);border-color:var(--txt2)}
+.opis{margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.sha{font-size:.8rem;color:var(--txt2);overflow-wrap:anywhere}
+.akcje{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{font:700 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--acc);
+     border:1px solid var(--acc);border-radius:4px;padding:8px 14px;cursor:pointer}
+.btn:hover:enabled{background:var(--txt)}
+.btn:disabled{background:none;color:var(--txt2);border-color:var(--edge);cursor:not-allowed}
+.btn.plain{background:none;color:var(--acc);border-color:var(--edge2)}
+.btn.plain:hover:enabled{background:var(--sel)}
+.btn.zly{background:none;color:var(--err);border-color:var(--err)}
+details{border:1px solid var(--edge);border-radius:4px;margin:10px 0 0;background:#000;padding:0 12px}
+details[open]{padding-bottom:10px}
+summary{cursor:pointer;color:var(--txt2);padding:6px 0}
+.pola{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 18px}
+.pole{display:flex;flex-direction:column;min-width:0}
+.pole.szer{grid-column:1/-1}
+.pole label,.pole .lab{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+.pole .hint{color:var(--txt2);font-size:.85rem;line-height:1.45;margin:4px 0 0}
+.pole input,.pole select,.pole textarea{background:#000;color:var(--txt);border:1px solid var(--edge2);border-radius:4px;font:15px var(--mono);padding:8px 10px;width:100%}
+.pole textarea{resize:vertical;min-height:70px}
+.ptaki{display:flex;gap:14px;flex-wrap:wrap}
+.ptaki label{display:flex;gap:6px;align-items:center;color:var(--txt);text-transform:none;letter-spacing:0;font:15px var(--mono)}
+.zgoda{display:flex;gap:10px;align-items:flex-start;margin:18px 0 0;border:1px solid var(--err);border-left-width:4px;background:#160404;padding:12px 16px;border-radius:0 4px 4px 0}
+.zgoda input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc);flex:none}
+input[type=checkbox]{accent-color:var(--acc)}
+.wynik{margin-top:14px}
+.wynik .klucz{font-size:1.05rem;color:var(--acc);background:var(--sel);border:1px dashed var(--acc);padding:6px 10px;display:inline-block;overflow-wrap:anywhere}
+.reg ol{padding-left:22px}
+.reg li{margin:6px 0}
+.blad{color:var(--err)}
+.ok{color:var(--acc)}
+footer{color:var(--txt2);margin-top:30px;font-size:.88rem}
+#admin{display:none}
+#admin.wid{display:block}
+@media (max-width:520px){h1{font-size:1.2rem}.btn{width:100%}.akcje{flex-direction:column}}
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <span><a href="sklep.html"><span lang="pl">← sklep (programy sprawdzone)</span><span lang="en">← store (checked programs)</span></a> ·
+  <a href="index.html"><span lang="pl">wgraj K-OS</span><span lang="en">flash K-OS</span></a></span>
+  <div class="lang" role="group" aria-label="Język / Language">
+    <button type="button" data-set="pl" aria-pressed="true">PL</button>
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<h1><span lang="pl">K-OS — strefa otwarta</span><span lang="en">K-OS — open zone</span></h1>
+<p class="pod"><span lang="pl">Programy na płytki CYD dodane przez kogokolwiek, <b>bez sprawdzania i bez akceptacji</b>. Każdy może dodać swój, każdy może go zainstalować. Programy z kodem źródłowym mają znaczek „otwarte źródło”.</span>
+<span lang="en">Programs for CYD boards added by anyone, <b>unchecked and unapproved</b>. Anyone can add one, anyone can install it. Programs with source code get the "open source" badge.</span></p>
+
+<div class="alarm" role="alert">
+  <h3><span lang="pl">⚠ UWAGA: NIKT TEGO NIE SPRAWDZIŁ</span><span lang="en">⚠ WARNING: NOBODY HAS CHECKED THIS</span></h3>
+  <p lang="pl">Program ze strefy otwartej może zrobić na płytce <b>wszystko</b>: odczytać hasła WiFi z karty SD i z pamięci płytki i wysłać je w świat, <b>udawać klawiaturę</b> po Bluetooth i wpisywać polecenia na Twoim komputerze, atakować sieci wokół, skasować K-OS (wtedy pomoże tylko USB i <a href="index.html">portal</a>).</p>
+  <p lang="en">A program from the open zone can do <b>anything</b> on the board: read WiFi passwords from the SD card and the board's memory and send them out, <b>pretend to be a keyboard</b> over Bluetooth and type commands on your computer, attack networks around you, erase K-OS (then only USB and the <a href="index.html">portal</a> help).</p>
+  <p lang="pl">Instalujesz <b>na własne ryzyko</b>. Wybieraj programy z otwartym źródłem i znanych autorów. Nie trzymaj na tej karcie haseł, których nie chcesz stracić.</p>
+  <p lang="en">You install <b>at your own risk</b>. Prefer open-source programs and authors you know. Do not keep passwords you care about on that card.</p>
+  <p lang="pl" style="color:var(--txt2);font-size:.9rem">Płytka gwarantuje tylko jedno: zainstaluje <b>dokładnie ten plik</b>, który został zgłoszony (sprawdza sumę sha256 z podpisanego katalogu). To nie mówi nic o tym, co ten plik robi.</p>
+  <p lang="en" style="color:var(--txt2);font-size:.9rem">The board guarantees one thing only: it installs <b>exactly the file</b> that was submitted (it checks the sha256 from the signed catalog). That says nothing about what the file does.</p>
+</div>
+
+<div class="filtry" id="filtry"></div>
+<div class="lista" id="lista" aria-live="polite"></div>
+<div class="akcje"><button type="button" class="btn plain" id="wiecej" hidden><span lang="pl">pokaż więcej</span><span lang="en">show more</span></button></div>
+
+<!-- ============================================================ jak zainstalowac -->
+<h2><span lang="pl">Jak zainstalować na płytce</span><span lang="en">How to install on a board</span></h2>
+<p lang="pl">Na płytce z K-OS (od wersji ze strefą): <b>sklep → strefa otwarta</b> → wybierz program → przeczytaj ostrzeżenie → przytrzymaj „rozumiem, instaluj”. Albo na stronie WWW płytki (adres IP z ekranu): karta <b>strefa otwarta</b> → zainstaluj → potwierdź palcem na płytce. Ta strona niczego do płytki nie wysyła.</p>
+<p lang="en">On a board running K-OS (a version with the zone): <b>store → open zone</b> → pick a program → read the warning → hold "I understand, install". Or on the board's web page (IP address from the screen): the <b>open zone</b> tab → install → confirm with a finger on the board. This page sends nothing to the board.</p>
+
+<!-- ============================================================ formularz -->
+<h2 id="dodaj"><span lang="pl">Dodaj swój program</span><span lang="en">Add your program</span></h2>
+<p lang="pl">Wrzuć plik <code>.bin</code> tam, gdzie chcesz (Google Drive z udostępnieniem „każdy z linkiem”, Dropbox, GitHub — najlepiej wydanie albo plik w repo), i wklej link. Serwer pobierze plik raz, sprawdzi, czy to obraz ESP32 mieszczący się w slocie (≤ 2 555 904 B), policzy sumę sha256 i zapisze wpis. <b>Pliku nie przechowujemy</b> — płytki pobierają go z Twojego linku. Jeśli później podmienisz plik pod tym linkiem, płytki go odrzucą: zgłoś wtedy nową wersję.</p>
+<p lang="en">Put your <code>.bin</code> wherever you like (Google Drive shared as "anyone with the link", Dropbox, GitHub — ideally a release or a file in a repo) and paste the link. The server downloads the file once, checks it is an ESP32 image that fits the slot (≤ 2,555,904 B), computes the sha256 and saves the entry. <b>We do not store the file</b> — boards download it from your link. If you later replace the file behind that link, boards will reject it: submit a new version instead.</p>
+<div class="warnbox ok"><p lang="pl"><b>Podaj kod źródłowy.</b> Strefa ma być otwarta: z linkiem do źródła (GitHub, GitLab…) i licencją z listy wpis dostaje zielony znaczek <b>„otwarte źródło”</b>, a ludzie mogą sprawdzić, co program robi. Bez źródła wpis ma czerwone ostrzeżenie „bez źródła”. Program pod GPL musisz udostępnić ze źródłem.</p>
+<p lang="en"><b>Give the source code.</b> The zone is meant to be open: with a source link (GitHub, GitLab…) and a licence from the list your entry gets the green <b>"open source"</b> badge, and people can check what the program does. Without source the entry carries a red "no source" warning. A GPL program must be shared with its source.</p></div>
+
+<form id="form" novalidate>
+<div class="pola">
+  <div class="pole"><label for="f_nazwa"><span lang="pl">nazwa</span><span lang="en">name</span></label>
+    <input id="f_nazwa" maxlength="40" required placeholder="Zegar binarny"><p class="hint"><span lang="pl">3–40 znaków</span><span lang="en">3–40 characters</span></p></div>
+  <div class="pole"><label for="f_autor"><span lang="pl">pseudonim autora</span><span lang="en">author nickname</span></label>
+    <input id="f_autor" maxlength="24" required placeholder="kowal"><p class="hint"><span lang="pl">2–24: litery, cyfry, spacja . _ - (nie podawaj e-maila)</span><span lang="en">2–24: letters, digits, space . _ - (no e-mail)</span></p></div>
+  <div class="pole szer"><label for="f_opis_pl"><span lang="pl">opis po polsku</span><span lang="en">description in Polish</span></label>
+    <textarea id="f_opis_pl" maxlength="300" required></textarea><p class="hint"><span lang="pl">10–300 znaków. Co robi, jak się obsługuje, czy wraca do K-OS po RST (Model B).</span><span lang="en">10–300 characters (Polish text, or English if you don't speak Polish). What it does, how to use it, whether RST returns to K-OS (Model B).</span></p></div>
+  <div class="pole szer"><label for="f_opis_en"><span lang="pl">opis po angielsku (opcjonalnie)</span><span lang="en">description in English (optional)</span></label>
+    <textarea id="f_opis_en" maxlength="300"></textarea></div>
+  <div class="pole szer"><span class="lab"><span lang="pl">płytki</span><span lang="en">boards</span></span>
+    <div class="ptaki">
+      <label><input type="checkbox" name="pl" value="cyd24"> CYD 2.4"</label>
+      <label><input type="checkbox" name="pl" value="cyd28"> CYD 2.8"</label>
+      <label><input type="checkbox" name="pl" value="cyd28s"> CYD 2.8" ST7789</label>
+    </div><p class="hint"><span lang="pl">Zaznacz tylko te, na których program naprawdę działa (dotyk i ekran różnią się między płytkami). Inny plik dla innej płytki = osobny wpis.</span><span lang="en">Tick only those it really works on (touch and display differ between boards). A different file for another board = a separate entry.</span></p></div>
+  <div class="pole szer"><label for="f_link"><span lang="pl">link do pliku .bin</span><span lang="en">link to the .bin file</span></label>
+    <input id="f_link" type="url" maxlength="500" required placeholder="https://drive.google.com/file/d/…/view?usp=sharing">
+    <p class="hint"><span lang="pl">Tylko https. Linki „Udostępnij” z Drive i Dropbox zamienimy na bezpośrednie sami. Sam obraz aplikacji (<code>*.ino.bin</code>, <code>firmware.bin</code>), nie scalony — <a href="zglos.html">zglos.html</a> wytnie go w przeglądarce.</span><span lang="en">https only. Drive and Dropbox "Share" links are turned into direct ones automatically. The application image only (<code>*.ino.bin</code>, <code>firmware.bin</code>), not a merged one — <a href="zglos.html">zglos.html</a> extracts it in the browser.</span></p></div>
+  <div class="pole"><label for="f_zrodlo"><span lang="pl">kod źródłowy (zalecane)</span><span lang="en">source code (recommended)</span></label>
+    <input id="f_zrodlo" type="url" maxlength="200" placeholder="https://github.com/kowal/cyd-zegar"></div>
+  <div class="pole"><label for="f_licencja"><span lang="pl">licencja</span><span lang="en">licence</span></label>
+    <select id="f_licencja"></select></div>
+  <div class="pole szer" id="poziom"></div>
+  <div class="pole szer"><details id="nowawersja"><summary><span lang="pl">to nowa wersja mojego wpisu (zastąpi poprzedni)</span><span lang="en">this is a new version of my entry (replaces the old one)</span></summary>
+    <div class="pola"><div class="pole"><label for="f_zast">id</label><input id="f_zast" maxlength="8" placeholder="abcd2345" autocapitalize="off" spellcheck="false"></div>
+    <div class="pole"><label for="f_klucz"><span lang="pl">klucz autora</span><span lang="en">author key</span></label><input id="f_klucz" maxlength="64" autocapitalize="off" spellcheck="false"></div></div></details></div>
+</div>
+<label class="zgoda"><input type="checkbox" id="f_reg"><span><span lang="pl">Akceptuję <a href="#regulamin">regulamin strefy</a>: <b>mam prawo udostępnić ten program, nie jest złośliwy</b> i odpowiadam za ten wpis.</span><span lang="en">I accept the <a href="#regulamin">zone rules</a>: <b>I have the right to share this program, it is not malicious</b> and I am responsible for this entry.</span></span></label>
+<div class="akcje"><button type="submit" class="btn" id="wyslij"><span lang="pl">sprawdź i dodaj</span><span lang="en">check and add</span></button></div>
+<div class="wynik" id="wynik" aria-live="polite"></div>
+</form>
+
+<!-- ============================================================ wycofanie -->
+<h2><span lang="pl">Mój wpis</span><span lang="en">My entry</span></h2>
+<details><summary><span lang="pl">wycofaj swój wpis (id + klucz autora)</span><span lang="en">withdraw your entry (id + author key)</span></summary>
+  <div class="pola"><div class="pole"><label for="w_id">id</label><input id="w_id" maxlength="8"></div>
+  <div class="pole"><label for="w_klucz"><span lang="pl">klucz autora</span><span lang="en">author key</span></label><input id="w_klucz" maxlength="64"></div></div>
+  <div class="akcje"><button type="button" class="btn zly" id="wycofaj"><span lang="pl">wycofaj wpis</span><span lang="en">withdraw</span></button></div>
+  <div id="w_wynik" class="wynik"></div>
+</details>
+
+<!-- ============================================================ regulamin -->
+<h2 id="regulamin"><span lang="pl">Regulamin strefy</span><span lang="en">Zone rules</span></h2>
+<div class="reg">
+<ol lang="pl">
+  <li>Strefa otwarta to spis linków do programów dodanych przez użytkowników. <b>Nikt ich nie sprawdza.</b> Instalujesz na własne ryzyko.</li>
+  <li>Dodając wpis, oświadczasz, że masz prawo udostępnić program i że <b>nie jest złośliwy</b>: nie wykrada danych, nie ukrywa swojego działania, nie atakuje cudzych sieci ani urządzeń.</li>
+  <li>Zakazane: cudze oprogramowanie bez zgody autora albo wbrew jego licencji (także firmware innych producentów), treści naruszające prawo. Kod na licencji GPL udostępniaj ze źródłem.</li>
+  <li>Za wpis i plik odpowiada jego autor. Piotr Korona prowadzi spis i może usunąć każdy wpis po zgłoszeniu albo z własnej decyzji; usunięty plik nie wróci pod innym linkiem.</li>
+  <li>Naruszenie zgłoś przyciskiem <b>zgłoś</b> przy wpisie (możesz podać kontakt, np. jako właściciel praw). Wpis zgłoszony przez 3 różne osoby jest ukrywany do decyzji Piotra. Zgłoszenia są rozpatrywane bez zbędnej zwłoki.</li>
+  <li>Strefa działa bez żadnej gwarancji i może zostać zmieniona albo wyłączona.</li>
+</ol>
+<ol lang="en">
+  <li>The open zone is a list of links to programs added by users. <b>Nobody checks them.</b> You install at your own risk.</li>
+  <li>By adding an entry you declare that you have the right to share the program and that it is <b>not malicious</b>: it does not steal data, hide what it does, or attack other people's networks or devices.</li>
+  <li>Forbidden: other people's software without the author's consent or against its licence (including other vendors' firmware), unlawful content. Share GPL code with its source.</li>
+  <li>The entry's author is responsible for the entry and the file. Piotr Korona keeps the list and may remove any entry after a report or at his own discretion; a removed file cannot come back under another link.</li>
+  <li>Report a violation with the <b>report</b> button on the entry (you may leave a contact, e.g. as the rights holder). An entry reported by 3 different people is hidden until Piotr decides. Reports are handled without undue delay.</li>
+  <li>The zone comes with no warranty whatsoever and may be changed or shut down.</li>
+</ol>
+</div>
+
+<h2><span lang="pl">Prywatność</span><span lang="en">Privacy</span></h2>
+<p lang="pl">Zapisujemy to, co wpisujesz w formularzu (pseudonim, opisy, linki, licencję; w zgłoszeniu: powód, opis i opcjonalny kontakt), a także rozmiar i sumę pliku oraz datę. <b>Adresu IP nie zapisujemy</b> — do limitów i liczenia „różnych osób” służy jego skrót (HMAC z tajną solą), kasowany po 2 dobach, a przy zgłoszeniach po 90 dniach. Bez ciasteczek i analityki; ta strona pamięta w przeglądarce tylko wybrany język. Plik pobieramy raz, do sprawdzenia, i go nie przechowujemy. Serwer działa na Cloudflare, który technicznie przetwarza adres połączenia według własnej polityki. Usunięcie danych: wycofaj wpis kluczem autora albo zgłoś wpis z prośbą o usunięcie.</p>
+<p lang="en">We store what you type into the form (nickname, descriptions, links, licence; in a report: reason, text and an optional contact), plus the file size, hash and date. <b>We do not store IP addresses</b> — limits and counting "different people" use a hash of it (HMAC with a secret salt), deleted after 2 days, and after 90 days for reports. No cookies, no analytics; this page only remembers the chosen language in your browser. We download the file once to check it and do not keep it. The server runs on Cloudflare, which technically processes the connection address under its own policy. To remove data: withdraw the entry with your author key, or report the entry asking for removal.</p>
+
+<!-- ============================================================ panel Piotra (#admin) -->
+<section id="admin">
+  <h2>panel Piotra</h2>
+  <div class="pola"><div class="pole"><label for="a_haslo">ADMIN_HASLO</label><input id="a_haslo" type="password" autocomplete="off"></div></div>
+  <div class="akcje"><button type="button" class="btn plain" id="a_wczytaj">zgłoszone</button></div>
+  <p class="meta">Hasło żyje tylko w pamięci tej karty (nie zapisuje się nigdzie). 5 złych haseł z adresu na dobę = blokada.</p>
+  <div id="a_lista" class="lista"></div>
+</section>
+
+<footer id="stopka"></footer>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang button');
+  function set(l,save){
+    root.setAttribute('data-lang',l); root.setAttribute('lang',l);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l));});
+    if(save){try{localStorage.setItem('korona-lang',l);}catch(e){}}
+  }
+  var saved=null; try{saved=localStorage.getItem('korona-lang');}catch(e){}
+  if(saved==='pl'||saved==='en') set(saved,false);
+  else if(navigator.language&&!/^pl/i.test(navigator.language)) set('en',false);
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set,true);});});
+})();
+</script>
+<script>
+/* Strefa otwarta: wszystko leci z Workera k-os-otwarte (otwarte/serwer, PROJEKT.md).
+   Strona jest statyczna i nie trzyma zadnego stanu poza jezykiem. Kazdy tekst od ludzi idzie przez
+   textContent, a linki dostaja href tylko, gdy zaczynaja sie od https:// (nic innego nie jest klikalne). */
+var API = "https://k-os-otwarte.juskabluzka.workers.dev";
+(function(){                                  /* do testow lokalnych: ?api=http://127.0.0.1:8799 (tylko localhost) */
+  var m = /[?&]api=([^&]+)/.exec(location.search);
+  if (m) { var a = decodeURIComponent(m[1]); if (/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(a)) API = a; }
+})();
+var PLYTKI = [["", "wszystkie", "all"], ["cyd24", "CYD 2.4\"", "CYD 2.4\""], ["cyd28", "CYD 2.8\"", "CYD 2.8\""], ["cyd28s", "CYD 2.8\" ST7789", "CYD 2.8\" ST7789"]];
+var LICENCJE = ["MIT","Apache-2.0","GPL-2.0-only","GPL-2.0-or-later","GPL-3.0-only","GPL-3.0-or-later","LGPL-2.1-or-later",
+  "LGPL-3.0-or-later","AGPL-3.0-or-later","MPL-2.0","BSD-2-Clause","BSD-3-Clause","ISC","Unlicense","CC0-1.0","0BSD","Zlib","EUPL-1.2"];
+var stan = { b: "", od: 0, tylkoOs: false };
+
+function $(id){ return document.getElementById(id); }
+function el(t, k, tx){ var e=document.createElement(t); if(k) e.className=k; if(tx!=null) e.textContent=tx; return e; }
+/* dwa jezyki naraz - przelacznik u gory chowa jeden z nich, bez przerysowania */
+function dw(pl, en, tag){ var f=document.createDocumentFragment(); var a=el(tag||"span",null,pl); a.lang="pl"; var b=el(tag||"span",null,en); b.lang="en"; f.appendChild(a); f.appendChild(b); return f; }
+function link(url, tekst){
+  if (typeof url === "string" && /^https:\/\//i.test(url)) { var a=el("a",null,tekst||url); a.href=url; a.rel="noopener nofollow ugc"; a.target="_blank"; return a; }
+  return el("span", null, tekst || "");
+}
+function host(u){ try { return new URL(u).hostname; } catch(e){ return ""; } }
+function kB(n){ return n >= 1048576 ? (n/1048576).toFixed(2).replace(".", ",") + " MB" : Math.round(n/1024) + " kB"; }
+function api(sciezka, opcje){
+  opcje = opcje || {}; opcje.cache = "no-store";
+  return fetch(API + sciezka, opcje).then(function(r){
+    return r.json().catch(function(){ return { ok:false, blad:"HTTP_" + r.status, opis_pl:"Serwer odpowiedział HTTP " + r.status, opis_en:"Server answered HTTP " + r.status }; });
+  });
+}
+function post(sciezka, obj, naglowki){
+  var h = { "content-type": "application/json" }; for (var k in (naglowki||{})) h[k] = naglowki[k];
+  return api(sciezka, { method: "POST", headers: h, body: JSON.stringify(obj) });
+}
+function bladJson(j){ return dw((j && j.opis_pl) || "Błąd: " + ((j && j.blad) || "?"), (j && j.opis_en) || "Error: " + ((j && j.blad) || "?")); }
+var BRAK_SERWERA = function(){ return dw("Serwer strefy nie odpowiada (może jeszcze nie działa). Spróbuj później.", "The zone server does not answer (it may not be running yet). Try later."); };
+
+/* ---------------- filtry ---------------- */
+(function(){
+  var box = $("filtry");
+  PLYTKI.forEach(function(p){
+    var b = el("button"); b.type="button"; b.dataset.b = p[0]; b.appendChild(dw(p[1], p[2]));
+    b.setAttribute("aria-pressed", String(p[0] === stan.b));
+    b.addEventListener("click", function(){ stan.b = p[0]; stan.od = 0;
+      box.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x.dataset.b === stan.b)); }); wczytaj(false); });
+    box.appendChild(b);
+  });
+  var l = el("label"); var c = el("input"); c.type="checkbox"; c.id="tylkoos";
+  c.addEventListener("change", function(){ stan.tylkoOs = c.checked; wczytaj(false); });
+  l.appendChild(c); l.appendChild(dw("tylko otwarte źródło", "open source only")); box.appendChild(l);
+})();
+
+/* ---------------- karta wpisu ---------------- */
+function karta(w){
+  var k = el("div", "w" + (w.otwarte_zrodlo ? "" : (w.zrodlo ? "" : " bez")) + (w.stan === "ukryty" ? " ukryty" : ""));
+  var t = el("div", "tyt");
+  t.appendChild(el("b", null, w.nazwa));
+  var rdzen = w.projekt === "arduino-lib-builder" || !w.projekt;   /* app_desc z rdzenia Arduino: wersja to wersja rdzenia, nie programu */
+  var wer = !rdzen && w.wersja && /^[\w.\-]{1,20}$/.test(w.wersja) ? (/^\d/.test(w.wersja) ? "v" : "") + w.wersja + " · " : "";
+  t.appendChild(el("span", "meta", wer + kB(w.rozmiar) + " · " + w.autor + " · " + w.data + " · " + w.plytki.join(", ")));
+  k.appendChild(t);
+
+  var z = el("div");
+  if (w.otwarte_zrodlo) { var a = el("span", "zn os"); a.appendChild(dw("OTWARTE ŹRÓDŁO · " + w.licencja, "OPEN SOURCE · " + w.licencja)); z.appendChild(a); }
+  else if (w.zrodlo) { var b = el("span", "zn zr"); b.appendChild(dw("ŹRÓDŁO DOSTĘPNE · " + (w.licencja || "bez licencji"), "SOURCE AVAILABLE · " + (w.licencja === "inna" ? "other licence" : (w.licencja || "no licence")))); z.appendChild(b); }
+  else { var c = el("span", "zn bez"); c.appendChild(dw("BEZ ŹRÓDŁA", "NO SOURCE")); z.appendChild(c); }
+  if (w.zgloszen > 0) { var d = el("span", "zn zgl"); d.appendChild(dw("⚠ zgłoszony " + w.zgloszen + "×", "⚠ reported " + w.zgloszen + "×")); z.appendChild(d); }
+  if (w.martwy) { var e = el("span", "zn mar"); e.appendChild(dw("martwy link", "dead link")); z.appendChild(e); }
+  if (w.stan === "ukryty") { var f = el("span", "zn mar"); f.appendChild(dw("ukryty po zgłoszeniach — czeka na decyzję", "hidden after reports — awaiting a decision")); z.appendChild(f); }
+  k.appendChild(z);
+
+  if (!w.zrodlo) {
+    var ost = el("div", "warnbox err");
+    ost.appendChild(dw("Bez kodu źródłowego nikt nie może sprawdzić, co ten program robi. Zainstaluj tylko, jeśli ufasz autorowi.", "Without source code nobody can check what this program does. Install only if you trust the author.", "p"));
+    k.appendChild(ost);
+  }
+  var opis = el("p", "opis"); opis.appendChild(dw(w.opis_pl, w.opis_en || w.opis_pl)); k.appendChild(opis);
+
+  if (w.zrodlo) { var s = el("div", "meta"); s.appendChild(dw("kod: ", "code: ")); s.appendChild(link(w.zrodlo)); k.appendChild(s);
+    if (w.otwarte_zrodlo) { var u = el("div", "meta"); u.appendChild(dw("Znaczek znaczy: autor podał źródło i licencję. Nikt nie sprawdził, że plik zbudowano z tego kodu.", "The badge means: the author gave source and licence. Nobody verified the file was built from that code.")); k.appendChild(u); } }
+  var p = el("div", "meta");
+  if (w.link_podany) { p.appendChild(dw("plik: ", "file: ")); p.appendChild(link(w.link_podany, host(w.link_podany) + " …")); }
+  k.appendChild(p);
+  k.appendChild(el("div", "sha", "sha256 " + w.sha256 + (rdzen ? "" : "  ·  " + w.projekt)));
+
+  var ak = el("div", "akcje");
+  var zg = el("button", "btn plain"); zg.type = "button"; zg.appendChild(dw("zgłoś", "report"));
+  ak.appendChild(zg); k.appendChild(ak);
+  var miejsce = el("div"); k.appendChild(miejsce);
+  zg.addEventListener("click", function(){ if (!miejsce.firstChild) miejsce.appendChild(formZgloszenia(w)); else miejsce.innerHTML = ""; });
+  return k;
+}
+
+function formZgloszenia(w){
+  var f = el("div", "warnbox");
+  var pola = el("div", "pola");
+  var p1 = el("div", "pole"); var l1 = el("label"); l1.appendChild(dw("powód", "reason")); var sel = el("select");
+  [["zlosliwy","złośliwy / wykrada dane","malicious / steals data"],["prawa","narusza moje / cudze prawa autorskie","infringes my / someone's copyright"],
+   ["nie_dziala","nie działa na mojej płytce","does not work on my board"],["martwy","link nie działa / plik nie pasuje","link dead / file does not match"],["inne","inne","other"]]
+    .forEach(function(o){ var op = el("option", null, o[1] + " / " + o[2]); op.value = o[0]; sel.appendChild(op); });
+  p1.appendChild(l1); p1.appendChild(sel); pola.appendChild(p1);
+  var p2 = el("div", "pole"); var l2 = el("label"); l2.appendChild(dw("kontakt (opcjonalnie)", "contact (optional)")); var kon = el("input"); kon.maxLength = 100;
+  p2.appendChild(l2); p2.appendChild(kon); pola.appendChild(p2);
+  var p3 = el("div", "pole szer"); var l3 = el("label"); l3.appendChild(dw("opis (opcjonalnie)", "details (optional)")); var op = el("textarea"); op.maxLength = 300;
+  p3.appendChild(l3); p3.appendChild(op); pola.appendChild(p3);
+  f.appendChild(pola);
+  var b = el("button", "btn zly"); b.type = "button"; b.appendChild(dw("wyślij zgłoszenie", "send report"));
+  var wy = el("div", "wynik");
+  b.addEventListener("click", function(){
+    b.disabled = true; wy.textContent = "";
+    post("/zglos-wpis", { id: w.id, powod: sel.value, opis: op.value, kontakt: kon.value }).then(function(j){
+      if (j.ok) { wy.className = "wynik ok"; wy.appendChild(dw("Dziękujemy. Zgłoszeń od różnych osób: " + j.zgloszen + (j.stan === "ukryty" ? " — wpis ukryty do decyzji Piotra." : "."), "Thank you. Reports from different people: " + j.zgloszen + (j.stan === "ukryty" ? " — entry hidden until Piotr decides." : "."))); }
+      else { wy.className = "wynik blad"; wy.appendChild(bladJson(j)); b.disabled = false; }
+    }).catch(function(){ wy.className = "wynik blad"; wy.appendChild(BRAK_SERWERA()); b.disabled = false; });
+  });
+  var ak = el("div", "akcje"); ak.appendChild(b); f.appendChild(ak); f.appendChild(wy);
+  return f;
+}
+
+/* ---------------- lista ---------------- */
+var NA = 50;
+function wczytaj(dalej){
+  var lista = $("lista");
+  if (!dalej) { stan.od = 0; lista.textContent = ""; lista.appendChild(dw("wczytuję…", "loading…")); }
+  api("/lista?n=" + NA + "&od=" + stan.od + (stan.b ? "&b=" + stan.b : "")).then(function(j){
+    if (!dalej) lista.textContent = "";
+    if (!j.ok) { lista.appendChild(bladJson(j)); return; }
+    var wpisy = j.wpisy.filter(function(w){ return !stan.tylkoOs || w.otwarte_zrodlo; });
+    wpisy.forEach(function(w){ lista.appendChild(karta(w)); });
+    if (!dalej && !lista.firstChild) lista.appendChild(dw("Na razie pusto. Bądź pierwszy — formularz niżej.", "Empty for now. Be the first — the form is below."));
+    stan.od += j.wpisy.length;
+    $("wiecej").hidden = stan.od >= j.razem;
+    $("stopka").textContent = "";
+    $("stopka").appendChild(dw("wpisów: " + j.razem + " · serwer: " + host(API), "entries: " + j.razem + " · server: " + host(API)));
+  }).catch(function(){ lista.textContent = ""; lista.appendChild(BRAK_SERWERA()); });
+}
+$("wiecej").addEventListener("click", function(){ wczytaj(true); });
+
+/* ---------------- formularz ---------------- */
+(function(){
+  var s = $("f_licencja");
+  var o0 = el("option", null, "— brak / none —"); o0.value = ""; s.appendChild(o0);
+  LICENCJE.forEach(function(l){ var o = el("option", null, l); o.value = l; s.appendChild(o); });
+  var oi = el("option", null, "inna / other"); oi.value = "inna"; s.appendChild(oi);
+})();
+function poziom(){
+  var z = $("f_zrodlo").value.trim(), l = $("f_licencja").value, box = $("poziom");
+  box.textContent = "";
+  var d;
+  if (/^https:\/\//i.test(z) && LICENCJE.indexOf(l) >= 0) { d = el("div", "warnbox ok"); d.appendChild(dw("Wpis dostanie znaczek „otwarte źródło · " + l + "”.", "The entry will get the \"open source · " + l + "\" badge.", "p")); }
+  else if (/^https:\/\//i.test(z)) { d = el("div", "warnbox"); d.appendChild(dw("Źródło jest, ale bez licencji z listy: wpis będzie „źródło dostępne”, bez znaczka. Wybierz licencję SPDX.", "Source given but no licence from the list: the entry will be \"source available\", no badge. Pick an SPDX licence.", "p")); }
+  else { d = el("div", "warnbox err"); d.appendChild(dw("Bez linku do źródła wpis dostanie czerwone ostrzeżenie „bez źródła”. Podaj kod — ludzie chętniej instalują to, co mogą sprawdzić.", "Without a source link the entry gets a red \"no source\" warning. Share the code — people prefer installing what they can check.", "p")); }
+  box.appendChild(d);
+}
+$("f_zrodlo").addEventListener("input", poziom); $("f_licencja").addEventListener("change", poziom); poziom();
+
+$("form").addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var wy = $("wynik"); wy.textContent = ""; wy.className = "wynik";
+  var plytki = Array.prototype.map.call(document.querySelectorAll('input[name="pl"]:checked'), function(c){ return c.value; });
+  var z = { regulamin: $("f_reg").checked, nazwa: $("f_nazwa").value, opis_pl: $("f_opis_pl").value, opis_en: $("f_opis_en").value,
+            autor: $("f_autor").value, plytki: plytki, link: $("f_link").value.trim(), zrodlo: $("f_zrodlo").value.trim(), licencja: $("f_licencja").value };
+  if ($("nowawersja").open && $("f_zast").value.trim()) { z.zastepuje = $("f_zast").value.trim(); z.klucz = $("f_klucz").value.trim(); }
+  if (!z.regulamin) { wy.className = "wynik blad"; wy.appendChild(dw("Zaznacz akceptację regulaminu.", "Tick the rules acceptance.")); return; }
+  if (!plytki.length) { wy.className = "wynik blad"; wy.appendChild(dw("Zaznacz co najmniej jedną płytkę.", "Tick at least one board.")); return; }
+  var b = $("wyslij"); b.disabled = true;
+  wy.appendChild(dw("Serwer pobiera i sprawdza plik (do 20 s)…", "The server is downloading and checking the file (up to 20 s)…"));
+  post("/zglos", z).then(function(j){
+    wy.textContent = ""; b.disabled = false;
+    if (!j.ok) {
+      wy.className = "wynik blad"; wy.appendChild(bladJson(j));
+      if (j.blad === "DUPLIKAT" && j.id) { wy.appendChild(el("br")); wy.appendChild(document.createTextNode("id: " + j.id)); }
+      return;
+    }
+    wy.className = "wynik";
+    var ok = el("p", "ok"); ok.appendChild(dw("Dodane. Wpis jest już widoczny w strefie.", "Added. The entry is already visible in the zone.")); wy.appendChild(ok);
+    wy.appendChild(el("p", null, "id: " + j.id + "   ·   sha256: " + j.wpis.sha256 + "   ·   " + kB(j.wpis.rozmiar)));
+    var kp = el("div", "warnbox"); kp.appendChild(dw("KLUCZ AUTORA — zapisz go teraz, pokazujemy go tylko raz. Służy do wycofania wpisu i dodania nowej wersji. Nie da się go odzyskać.", "AUTHOR KEY — save it now, it is shown only once. You need it to withdraw the entry or add a new version. It cannot be recovered.", "p"));
+    kp.appendChild(el("span", "klucz", j.klucz_autora)); wy.appendChild(kp);
+    (j.uwagi || []).forEach(function(u){ var d = el("div", "warnbox"); d.appendChild(dw(u.pl, u.en, "p")); wy.appendChild(d); });
+    wczytaj(false);
+  }).catch(function(){ b.disabled = false; wy.textContent = ""; wy.className = "wynik blad"; wy.appendChild(BRAK_SERWERA()); });
+});
+
+$("wycofaj").addEventListener("click", function(){
+  var wy = $("w_wynik"); wy.textContent = "";
+  post("/autor/wycofaj", { id: $("w_id").value.trim(), klucz: $("w_klucz").value.trim() }).then(function(j){
+    if (j.ok) { wy.className = "wynik ok"; wy.appendChild(dw("Wycofany. Płytki już go nie zobaczą.", "Withdrawn. Boards will no longer see it.")); wczytaj(false); }
+    else { wy.className = "wynik blad"; wy.appendChild(bladJson(j)); }
+  }).catch(function(){ wy.className = "wynik blad"; wy.appendChild(BRAK_SERWERA()); });
+});
+
+/* ---------------- panel Piotra ---------------- */
+if (location.hash === "#admin") $("admin").classList.add("wid");
+window.addEventListener("hashchange", function(){ $("admin").classList.toggle("wid", location.hash === "#admin"); });
+function adm(sciezka, obj){
+  var h = { authorization: "Bearer " + $("a_haslo").value };
+  return obj ? post(sciezka, obj, h) : api(sciezka, { headers: h });
+}
+function wczytajAdmin(){
+  var box = $("a_lista"); box.textContent = "wczytuję…";
+  adm("/admin/zgloszone").then(function(j){
+    box.textContent = "";
+    if (!j.ok) { box.appendChild(bladJson(j)); return; }
+    if (!j.wpisy.length) box.textContent = "nic zgłoszonego";
+    j.wpisy.forEach(function(w){
+      var k = karta(w);
+      j.zgloszenia.filter(function(z){ return z.wpis === w.id; }).forEach(function(z){
+        k.appendChild(el("div", "meta", new Date(z.data * 1000).toISOString().slice(0, 16) + "  " + z.powod + (z.opis ? "  · " + z.opis : "") + (z.kontakt ? "  · kontakt: " + z.kontakt : "")));
+      });
+      var ak = el("div", "akcje");
+      [["usuń + zakaz sumy", { zakaz: true }, "/admin/usun"], ["usuń bez zakazu", { zakaz: false }, "/admin/usun"], ["przywróć", {}, "/admin/przywroc"]].forEach(function(a){
+        var b = el("button", "btn " + (a[2] === "/admin/usun" ? "zly" : "plain"), a[0]); b.type = "button";
+        b.addEventListener("click", function(){
+          var powod = a[2] === "/admin/usun" ? (prompt("powód (do bazy, widzi tylko Piotr):", "") || "") : "";
+          var o = { id: w.id, powod: powod }; for (var x in a[1]) o[x] = a[1][x];
+          adm(a[2], o).then(function(r){ if (!r.ok) alert(r.blad); wczytajAdmin(); wczytaj(false); });
+        });
+        ak.appendChild(b);
+      });
+      k.appendChild(ak); box.appendChild(k);
+    });
+  }).catch(function(){ box.textContent = ""; box.appendChild(BRAK_SERWERA()); });
+}
+$("a_wczytaj").addEventListener("click", wczytajAdmin);
+
+wczytaj(false);
+</script>
+</body>
+</html>
