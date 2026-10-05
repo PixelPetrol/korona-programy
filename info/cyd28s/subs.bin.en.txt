@@ -1,0 +1,6 @@
+A subscriber and view counter for up to five YouTube channels on an animated split-flap board, in Polish and English.
+Status: BETA, UNTESTED - it has not been run on a board yet, not on this board either.
+Board: CYD 2.8" with the ST7789 panel (two USB sockets).
+Features: four views (board, big channel, goal with a bar, 7/30-day chart), K-OS theme or Storm, Dawn, Neon, channel rotation; channels, key and look are set from your phone (QR) or in the menu.
+Needs: WiFi from K-OS and your OWN free YouTube Data API v3 key (step-by-step guide on the board); an SD card for settings and history. No server - the board asks YouTube itself, every 30 min.
+Limits: the key is stored on the card in plain text and travels from the phone over plain http - enter it only on a trusted network; YouTube rounds subscriber counts; no Instagram or TikTok.

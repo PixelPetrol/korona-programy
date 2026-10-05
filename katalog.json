@@ -165,6 +165,16 @@
           "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
+        },
+        {
+          "plik": "bin/cyd24/subs.bin",
+          "rozmiar": 1317024,
+          "sha256": "9810befde47758b92b86af14c5092d6045b2f06fae859a85625d13ec01487ad5",
+          "nazwa": "K-OS Subs",
+          "opis": "licznik subow YouTube; BETA, NIESPRAWDZONE",
+          "wersja": "0.2.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
         }
       ]
     },
@@ -301,6 +311,16 @@
           "wersja": "0.3.0",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
+        },
+        {
+          "plik": "bin/cyd28/subs.bin",
+          "rozmiar": 1316272,
+          "sha256": "e0138cf15f5233fd55ab962a6a8d62d0ab773da419ef747ad107157bd398a5ef",
+          "nazwa": "K-OS Subs",
+          "opis": "licznik subow YouTube; BETA, NIESPRAWDZONE",
+          "wersja": "0.2.0-beta",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
         }
       ]
     },
@@ -435,6 +455,16 @@
           "nazwa": "Ropeburn Mini",
           "opis": "skakanka w rytm, skaczesz Ty; BETA, NIESPRAWDZONE",
           "wersja": "0.3.0",
+          "kategoria": "autorskie",
+          "autor": "Piotr Korona"
+        },
+        {
+          "plik": "bin/cyd28s/subs.bin",
+          "rozmiar": 1316160,
+          "sha256": "6c016ae2e990c02de558c30c507c29d1b372e10d94114af9dbf049a64fcb541c",
+          "nazwa": "K-OS Subs",
+          "opis": "licznik subow YouTube; BETA, NIESPRAWDZONE",
+          "wersja": "0.2.0-beta",
           "kategoria": "autorskie",
           "autor": "Piotr Korona"
         }

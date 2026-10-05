@@ -373,6 +373,23 @@
         "pl": "info/cyd24/ropeburn-mini.bin.zmiany.pl.txt",
         "en": "info/cyd24/ropeburn-mini.bin.zmiany.en.txt"
       }
+    },
+    {
+      "plik": "bin/cyd24/subs.bin",
+      "rozmiar": 1317024,
+      "sha256": "9810befde47758b92b86af14c5092d6045b2f06fae859a85625d13ec01487ad5",
+      "nazwa": "K-OS Subs",
+      "wersja": "0.2.0-beta",
+      "kategoria": "autorskie",
+      "autor": "Piotr Korona",
+      "opis": {
+        "pl": "licznik subow YouTube; BETA, NIESPRAWDZONE",
+        "en": "YouTube subscriber counter; BETA, UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/subs.bin.pl.txt",
+        "en": "info/cyd24/subs.bin.en.txt"
+      }
     }
   ]
 }

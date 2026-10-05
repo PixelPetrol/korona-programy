@@ -241,6 +241,46 @@ META = {
                           "Features: portrait touchpad, on-screen keyboard, TV remote, a 3x4 shortcut grid with profiles and text/macro tiles, typing text from your phone. You edit shortcuts on the board or from your phone (QR and session code). Up to 4 devices, one at a time; pairing is confirmed on the board.\n"
                           "Needs: an SD card (profiles; without it the pairing is not remembered); WiFi from K-OS only for editing from the phone. Without a K-OS calibration it offers its own at start.\n"
                           "Limits: the board sends key codes, so you set the keyboard layout per device; one-finger touchpad; on iPhone the mouse works only with AssistiveTouch; the editing page is plain http. The card holds the pairing keys - protect it. Only for your own devices."),
+    "subs.bin": m("K-OS Subs", "licznik subow YouTube; BETA, NIESPRAWDZONE", "0.2.0-beta", A, "Piotr Korona",
+                          "Licznik subskrypcji i wyswietlen do pieciu kanalow YouTube na animowanej tablicy klapkowej, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce.\n"
+                          "Umie: cztery widoki (tablica, duzy kanal, cel z paskiem, wykres 7/30 dni), motywy jak K-OS albo Burza, Swit, Neon, przewijanie kanalow; kanaly, klucz i wyglad ustawiasz z telefonu (QR) albo w menu.\n"
+                          "Potrzebne: WiFi z K-OS i WLASNY darmowy klucz YouTube Data API v3 (instrukcja krok po kroku na plytce); karta SD na ustawienia i historie. Bez serwera - plytka pyta YouTube sama, co 30 min.\n"
+                          "Ograniczenia: klucz lezy na karcie jawnym tekstem i jedzie z telefonu zwyklym http - wpisuj go tylko w zaufanej sieci; YouTube zaokragla liczby subskrypcji; bez Instagrama i TikToka.",
+                          opis_en="YouTube subscriber counter; BETA, UNTESTED",
+                          info_en="A subscriber and view counter for up to five YouTube channels on an animated split-flap board, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet.\n"
+                          "Features: four views (board, big channel, goal with a bar, 7/30-day chart), K-OS theme or Storm, Dawn, Neon, channel rotation; channels, key and look are set from your phone (QR) or in the menu.\n"
+                          "Needs: WiFi from K-OS and your OWN free YouTube Data API v3 key (step-by-step guide on the board); an SD card for settings and history. No server - the board asks YouTube itself, every 30 min.\n"
+                          "Limits: the key is stored on the card in plain text and travels from the phone over plain http - enter it only on a trusted network; YouTube rounds subscriber counts; no Instagram or TikTok."),
+    ("cyd28", "subs.bin"): m("K-OS Subs", "licznik subow YouTube; BETA, NIESPRAWDZONE", "0.2.0-beta", A, "Piotr Korona",
+                          "Licznik subskrypcji i wyswietlen do pieciu kanalow YouTube na animowanej tablicy klapkowej, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce, na 2.8\" tez nie.\n"
+                          "Plytka: CYD 2.8\" (2432S028R).\n"
+                          "Umie: cztery widoki (tablica, duzy kanal, cel z paskiem, wykres 7/30 dni), motywy jak K-OS albo Burza, Swit, Neon, przewijanie kanalow; kanaly, klucz i wyglad ustawiasz z telefonu (QR) albo w menu.\n"
+                          "Potrzebne: WiFi z K-OS i WLASNY darmowy klucz YouTube Data API v3 (instrukcja krok po kroku na plytce); karta SD na ustawienia i historie. Bez serwera - plytka pyta YouTube sama, co 30 min.\n"
+                          "Ograniczenia: klucz lezy na karcie jawnym tekstem i jedzie z telefonu zwyklym http - wpisuj go tylko w zaufanej sieci; YouTube zaokragla liczby subskrypcji; bez Instagrama i TikToka.",
+                          opis_en="YouTube subscriber counter; BETA, UNTESTED",
+                          info_en="A subscriber and view counter for up to five YouTube channels on an animated split-flap board, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet, not on the 2.8\" either.\n"
+                          "Board: CYD 2.8\" (2432S028R).\n"
+                          "Features: four views (board, big channel, goal with a bar, 7/30-day chart), K-OS theme or Storm, Dawn, Neon, channel rotation; channels, key and look are set from your phone (QR) or in the menu.\n"
+                          "Needs: WiFi from K-OS and your OWN free YouTube Data API v3 key (step-by-step guide on the board); an SD card for settings and history. No server - the board asks YouTube itself, every 30 min.\n"
+                          "Limits: the key is stored on the card in plain text and travels from the phone over plain http - enter it only on a trusted network; YouTube rounds subscriber counts; no Instagram or TikTok."),
+    ("cyd28s", "subs.bin"): m("K-OS Subs", "licznik subow YouTube; BETA, NIESPRAWDZONE", "0.2.0-beta", A, "Piotr Korona",
+                          "Licznik subskrypcji i wyswietlen do pieciu kanalow YouTube na animowanej tablicy klapkowej, po polsku i po angielsku.\n"
+                          "Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce, na tej plytce tez nie.\n"
+                          "Plytka: CYD 2.8\" z panelem ST7789 (dwa gniazda USB).\n"
+                          "Umie: cztery widoki (tablica, duzy kanal, cel z paskiem, wykres 7/30 dni), motywy jak K-OS albo Burza, Swit, Neon, przewijanie kanalow; kanaly, klucz i wyglad ustawiasz z telefonu (QR) albo w menu.\n"
+                          "Potrzebne: WiFi z K-OS i WLASNY darmowy klucz YouTube Data API v3 (instrukcja krok po kroku na plytce); karta SD na ustawienia i historie. Bez serwera - plytka pyta YouTube sama, co 30 min.\n"
+                          "Ograniczenia: klucz lezy na karcie jawnym tekstem i jedzie z telefonu zwyklym http - wpisuj go tylko w zaufanej sieci; YouTube zaokragla liczby subskrypcji; bez Instagrama i TikToka.",
+                          opis_en="YouTube subscriber counter; BETA, UNTESTED",
+                          info_en="A subscriber and view counter for up to five YouTube channels on an animated split-flap board, in Polish and English.\n"
+                          "Status: BETA, UNTESTED - it has not been run on a board yet, not on this board either.\n"
+                          "Board: CYD 2.8\" with the ST7789 panel (two USB sockets).\n"
+                          "Features: four views (board, big channel, goal with a bar, 7/30-day chart), K-OS theme or Storm, Dawn, Neon, channel rotation; channels, key and look are set from your phone (QR) or in the menu.\n"
+                          "Needs: WiFi from K-OS and your OWN free YouTube Data API v3 key (step-by-step guide on the board); an SD card for settings and history. No server - the board asks YouTube itself, every 30 min.\n"
+                          "Limits: the key is stored on the card in plain text and travels from the phone over plain http - enter it only on a trusted network; YouTube rounds subscriber counts; no Instagram or TikTok."),
     "gry-vol1.bin":     m("K-OS GAME VOL1",  "6 gier: 2048, Lander i inne", "0.9.2", A, "Piotr Korona",
                           "Tom szesciu gier dla K-OS, po polsku i po angielsku, ekran pionowo, z maskotka Chip-K. Gry wybierasz z kafelkow w menu tomu.\n"
                           "Stan: gry sprawdzone testami na komputerze; opis sklepu nie zawiera zapisu o sprawdzeniu tej wersji na plytce, a liczby klatek na plytce nie mierzono.\n"

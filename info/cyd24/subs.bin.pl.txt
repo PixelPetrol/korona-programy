@@ -1,0 +1,5 @@
+Licznik subskrypcji i wyswietlen do pieciu kanalow YouTube na animowanej tablicy klapkowej, po polsku i po angielsku.
+Stan: BETA, NIESPRAWDZONE - nie byl jeszcze uruchomiony na plytce.
+Umie: cztery widoki (tablica, duzy kanal, cel z paskiem, wykres 7/30 dni), motywy jak K-OS albo Burza, Swit, Neon, przewijanie kanalow; kanaly, klucz i wyglad ustawiasz z telefonu (QR) albo w menu.
+Potrzebne: WiFi z K-OS i WLASNY darmowy klucz YouTube Data API v3 (instrukcja krok po kroku na plytce); karta SD na ustawienia i historie. Bez serwera - plytka pyta YouTube sama, co 30 min.
+Ograniczenia: klucz lezy na karcie jawnym tekstem i jedzie z telefonu zwyklym http - wpisuj go tylko w zaufanej sieci; YouTube zaokragla liczby subskrypcji; bez Instagrama i TikToka.
