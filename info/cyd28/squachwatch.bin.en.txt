@@ -1,0 +1,7 @@
+SquachWatch listens to WiFi and Bluetooth LE and recognises cameras (Flock, Axon, IP), camera glasses, skimmers, AirTags and other trackers, Remote ID drones and gear like the Flipper. A third-party program.
+Status: BETA, UNTESTED - it has not been run on a board yet.
+Board: CYD 2.8" ILI9341 (ESP32-2432S028R).
+Features: on-screen alerts, a detection log, a log on the SD card (/squachwatch-*.log), RST returns to K-OS.
+Needs: nothing; an SD card is optional. On the first start it may ask you to touch the corners (calibration).
+Limits: detection is passive and signature based - false alarms and misses are possible. The squad features (SquachMesh) send their own BLE packets. Updates only via the K-OS store (WiFi/BT updates in the program are off).
+Author: skizzophrenic (SquachWatch), K-OS port: Piotr Korona. GPL-3.0, source: github.com/PixelPetrol/SquachWatch-CYD (galaz kos-port; oryginal: github.com/skizzophrenic/SquachWatch-CYD). Image prepared for K-OS: RST returns to the menu.

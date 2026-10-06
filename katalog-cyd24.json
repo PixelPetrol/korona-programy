@@ -410,6 +410,23 @@
       }
     },
     {
+      "plik": "bin/cyd24/squachwatch.bin",
+      "rozmiar": 1751232,
+      "sha256": "14e94e5730ddd713c0e601e1b96112978d65ebfb0d21586a2ad9a0da4cd30578",
+      "nazwa": "SquachWatch",
+      "wersja": "1.32.0-kos1",
+      "kategoria": "zewnetrzne",
+      "autor": "skizzophrenic (SquachWatch), port K-OS: Piotr Korona",
+      "opis": {
+        "pl": "wykrywacz kamer i trackerow; BETA, NIESPRAWDZONE",
+        "en": "camera & tracker detector; BETA, UNTESTED"
+      },
+      "info": {
+        "pl": "info/cyd24/squachwatch.bin.pl.txt",
+        "en": "info/cyd24/squachwatch.bin.en.txt"
+      }
+    },
+    {
       "plik": "bin/cyd24/subs.bin",
       "rozmiar": 1317024,
       "sha256": "9810befde47758b92b86af14c5092d6045b2f06fae859a85625d13ec01487ad5",
