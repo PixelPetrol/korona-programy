@@ -13,6 +13,8 @@ Chrome or Edge on a computer · a USB data cable · a microSD card (FAT32)
 
 Lista programów z opisami i ocenami / App list with descriptions and ratings: **[portal/sklep.html](https://pixelpetrol.github.io/korona-programy/portal/sklep.html)**
 
+☕ **Wesprzyj projekt / Support the project:** [postaw kawę / buy me a coffee](https://buycoffee.to/piotr.korona) — K-OS i programy są darmowe, robione po godzinach. / K-OS and the apps are free, made after hours.
+
 ## Którą mam płytkę? / Which board do I have?
 
 | obraz / image | płytka / board | po czym poznać / how to tell | stan / status |
