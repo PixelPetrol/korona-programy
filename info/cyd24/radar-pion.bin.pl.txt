@@ -1,5 +1,5 @@
-Radar lotniczy: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.
-Stan: poprawki portalu z tej wersji (wydawanie adresow, nazwa AP) nie byly jeszcze sprawdzone na plytce.
+Radar lotniczy, po polsku i po angielsku: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.
+Stan: BETA - wersja 4.5.0 (jezyk angielski) nie byla jeszcze uruchomiona na plytce. Poprawki portalu z 4.4.2 (wydawanie adresow, nazwa AP) tez czekaja na sprawdzenie.
 Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.
 Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji - tam podajesz siec i ustawienia. Karta SD nie jest uzywana.
-Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.
+Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.

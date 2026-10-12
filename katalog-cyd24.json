@@ -345,15 +345,15 @@
     },
     {
       "plik": "bin/cyd24/radar-pion.bin",
-      "rozmiar": 1506656,
-      "sha256": "b38b685ee1d521f3d4b0dfea0d629fc55892f33b53efcf068a03e8b9b26a96f6",
-      "nazwa": "SkyCYD 4.4.2 pion",
-      "wersja": "4.4.2",
+      "rozmiar": 1517664,
+      "sha256": "704ab1cb069a97b547b1f35f4fa47dffe0701e2df3e071d13c23437b1e226d5a",
+      "nazwa": "SkyCYD 4.5.0 pion",
+      "wersja": "4.5.0",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar samolotow ADS-B; tylko po polsku",
-        "en": "ADS-B aircraft radar; Polish only"
+        "pl": "radar samolotow ADS-B; BETA",
+        "en": "ADS-B aircraft radar; BETA"
       },
       "ikona": "bin/cyd24/radar-pion.ico",
       "info": {
@@ -367,15 +367,15 @@
     },
     {
       "plik": "bin/cyd24/radar-poziom.bin",
-      "rozmiar": 1508160,
-      "sha256": "939813ede161d878c9bd374154802e4042a5e353f44913fe0008f31629ea1b93",
-      "nazwa": "SkyCYD 4.4.2 poziom",
-      "wersja": "4.4.2",
+      "rozmiar": 1519232,
+      "sha256": "beb442765aa53eb27201c4eef3550e963246b001570bbd68363efa6ec8eaec9f",
+      "nazwa": "SkyCYD 4.5.0 poziom",
+      "wersja": "4.5.0",
       "kategoria": "autorskie",
       "autor": "Piotr Korona",
       "opis": {
-        "pl": "radar ADS-B, ekran poziomo; tylko po polsku",
-        "en": "ADS-B radar, landscape; Polish only"
+        "pl": "radar ADS-B, ekran poziomo; BETA",
+        "en": "ADS-B radar, landscape; BETA"
       },
       "ikona": "bin/cyd24/radar-poziom.ico",
       "info": {

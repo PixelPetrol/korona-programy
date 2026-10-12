@@ -1,5 +1,5 @@
-An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
-Status: the portal fixes in this version (handing out addresses, the AP name) have not been tested on a board yet.
+An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
+Status: BETA - version 4.5.0 (English language) has not been run on a board yet. The portal fixes from 4.4.2 (handing out addresses, the AP name) are also waiting for a test.
 Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.
 Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal - you enter the network and settings there. The SD card is not used.
-Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal.
+Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal.

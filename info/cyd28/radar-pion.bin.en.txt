@@ -1,6 +1,6 @@
-An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
-Status: UNTESTED - nobody has run this binary yet. An outside tester used the previous version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.
+An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
+Status: UNTESTED, BETA - nobody has run this binary (4.5.0) yet. An outside tester used an earlier version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.
 Board: CYD 2.8" (2432S028R).
 Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.
 Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8" touch calibration is in the portal (Network -> Touch calibration), with a live raw reading. The SD card is not used.
-Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration).
+Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own.

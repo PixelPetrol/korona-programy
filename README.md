@@ -81,7 +81,7 @@ Piotr Korona's own apps plus ports of other people's projects, reworked so that 
 
 | program | co robi / what it does | autor / author | płytki / boards |
 |---|---|---|---|
-| **SkyCYD** (pion, poziom) | radar ADS-B: samoloty wokół domu, dane z adsb.lol przez internet; tylko po polsku<br>ADS-B radar: planes around your home, data from adsb.lol over the internet; Polish only | Piotr Korona | cyd24 cyd28 cyd28s |
+| **SkyCYD** (pion, poziom) | radar ADS-B: samoloty wokół domu, dane z adsb.lol przez internet; po polsku i po angielsku<br>ADS-B radar: planes around your home, data from adsb.lol over the internet; Polish and English | Piotr Korona | cyd24 cyd28 cyd28s |
 | **Meteo K-OS** (pion, poziom) | pogoda z Open-Meteo i radar opadów IMGW<br>weather from Open-Meteo and the IMGW rain radar | Piotr Korona | cyd24 cyd28 cyd28s |
 | **K-OS Office** | notatnik, kalkulator, kalendarz, pliki, kody QR, kursy walut<br>notes, calculator, calendar, files, QR codes, exchange rates | Piotr Korona | cyd24 cyd28 cyd28s |
 | **K-OS Handset** | komunikator MeshCore po Bluetooth, do własnego węzła<br>MeshCore messenger over Bluetooth, for your own node | Piotr Korona | cyd24 cyd28 cyd28s |

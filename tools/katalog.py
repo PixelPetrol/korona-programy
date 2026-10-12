@@ -53,30 +53,30 @@ def m(nazwa, opis, wersja, kategoria, autor, info="", opis_en="", info_en=""):
     return dict(nazwa=nazwa, opis=opis, wersja=wersja, kategoria=kategoria, autor=autor, info=info,
                 opis_en=opis_en, info_en=info_en)
 META = {
-    "radar-pion.bin":   m("SkyCYD 4.4.2 pion",   "radar samolotow ADS-B; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Radar lotniczy: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
-                          "Stan: poprawki portalu z tej wersji (wydawanie adresow, nazwa AP) nie byly jeszcze sprawdzone na plytce.\n"
+    "radar-pion.bin":   m("SkyCYD 4.5.0 pion",   "radar samolotow ADS-B; BETA", "4.5.0", A, "Piotr Korona",
+                          "Radar lotniczy, po polsku i po angielsku: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
+                          "Stan: BETA - wersja 4.5.0 (jezyk angielski) nie byla jeszcze uruchomiona na plytce. Poprawki portalu z 4.4.2 (wydawanie adresow, nazwa AP) tez czekaja na sprawdzenie.\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji - tam podajesz siec i ustawienia. Karta SD nie jest uzywana.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.",
-                          opis_en="ADS-B aircraft radar; Polish only",
-                          info_en="An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
-                          "Status: the portal fixes in this version (handing out addresses, the AP name) have not been tested on a board yet.\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.",
+                          opis_en="ADS-B aircraft radar; BETA",
+                          info_en="An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
+                          "Status: BETA - version 4.5.0 (English language) has not been run on a board yet. The portal fixes from 4.4.2 (handing out addresses, the AP name) are also waiting for a test.\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal - you enter the network and settings there. The SD card is not used.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal."),
-    "radar-poziom.bin": m("SkyCYD 4.4.2 poziom", "radar ADS-B, ekran poziomo; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Ten sam radar lotniczy co SkyCYD pion, w orientacji poziomej 320x240 - to oryginalny uklad SkyCYD.\n"
-                          "Stan: poprawki portalu z tej wersji (wydawanie adresow, nazwa AP) nie byly jeszcze sprawdzone na plytce.\n"
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal."),
+    "radar-poziom.bin": m("SkyCYD 4.5.0 poziom", "radar ADS-B, ekran poziomo; BETA", "4.5.0", A, "Piotr Korona",
+                          "Ten sam radar lotniczy co SkyCYD pion, po polsku i po angielsku, w orientacji poziomej 320x240 - to oryginalny uklad SkyCYD.\n"
+                          "Stan: BETA - wersja 4.5.0 (jezyk angielski) nie byla jeszcze uruchomiona na plytce. Poprawki portalu z 4.4.2 (wydawanie adresow, nazwa AP) tez czekaja na sprawdzenie.\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Karta SD nie jest uzywana. Kalibracja dotyku jest osobna od wersji pionowej.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.",
-                          opis_en="ADS-B radar, landscape; Polish only",
-                          info_en="The same aircraft radar as SkyCYD portrait, in landscape 320x240 - the original SkyCYD layout.\n"
-                          "Status: the portal fixes in this version (handing out addresses, the AP name) have not been tested on a board yet.\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne, ustawiane w swoim portalu.",
+                          opis_en="ADS-B radar, landscape; BETA",
+                          info_en="The same aircraft radar as SkyCYD portrait, in Polish and English, in landscape 320x240 - the original SkyCYD layout.\n"
+                          "Status: BETA - version 4.5.0 (English language) has not been run on a board yet. The portal fixes from 4.4.2 (handing out addresses, the AP name) are also waiting for a test.\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The SD card is not used. Touch calibration is separate from the portrait version.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal."),
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own, set in its portal."),
     "office.bin":       m("K-OS Office",     "notatnik, kalkulator, pliki; BETA", "1.3.2", A, "Piotr Korona",
                           "Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator, kalendarz, menedzer plikow, kody QR, kursy walut.\n"
                           "Stan: BETA - ta wersja nie byla jeszcze uruchomiona na plytce. Wczesniejsza sprawdzona na 2.4\": start, motyw i jezyk z K-OS, kalibracja, powrot RST; modulow palcem nie sprawdzano.\n"
@@ -536,34 +536,34 @@ META = {
                           "Needs: nothing but the board; you add IR and RF modules yourself.\n"
                           "Limits: use it only on your own networks and devices.\n"
                           "Author: pr3y (the Bruce project). Image prepared for K-OS: RST returns to the menu."),
-    ("cyd28", "radar-pion.bin"): m("SkyCYD 4.4.2 pion", "radar samolotow ADS-B; NIESPRAWDZONE; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Radar lotniczy: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
-                          "Stan: NIESPRAWDZONE - tej binarki nikt jeszcze nie uruchomil. Zewnetrzny tester uzywal na 2432S028R poprzedniej wersji: skan sieci w portalu dziala, wydawania adresow telefonowi nie potwierdzono.\n"
+    ("cyd28", "radar-pion.bin"): m("SkyCYD 4.5.0 pion", "radar samolotow ADS-B; BETA, NIESPRAWDZONE", "4.5.0", A, "Piotr Korona",
+                          "Radar lotniczy, po polsku i po angielsku: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
+                          "Stan: NIESPRAWDZONE, BETA - tej binarki (4.5.0) nikt jeszcze nie uruchomil. Zewnetrzny tester uzywal na 2432S028R wczesniejszej wersji: skan sieci w portalu dziala, wydawania adresow telefonowi nie potwierdzono.\n"
                           "Plytka: CYD 2.8\" (2432S028R).\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Kalibracja dotyku 2.8\" jest w portalu (Siec -> Kalibracja dotyku), z podgladem surowego odczytu. Karta SD nie jest uzywana.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku).",
-                          opis_en="ADS-B aircraft radar; UNTESTED; Polish only",
-                          info_en="An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
-                          "Status: UNTESTED - nobody has run this binary yet. An outside tester used the previous version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne.",
+                          opis_en="ADS-B aircraft radar; BETA, UNTESTED",
+                          info_en="An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
+                          "Status: UNTESTED, BETA - nobody has run this binary (4.5.0) yet. An outside tester used an earlier version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.\n"
                           "Board: CYD 2.8\" (2432S028R).\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8\" touch calibration is in the portal (Network -> Touch calibration), with a live raw reading. The SD card is not used.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration)."),
-    ("cyd28", "radar-poziom.bin"): m("SkyCYD 4.4.2 poziom", "radar ADS-B, poziomo; NIESPRAWDZONE; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Ten sam radar lotniczy co SkyCYD pion, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).\n"
-                          "Stan: NIESPRAWDZONE - tej binarki nikt jeszcze nie uruchomil. Zewnetrzny tester uzywal na 2432S028R poprzedniej wersji: skan sieci w portalu dziala, wydawania adresow telefonowi nie potwierdzono.\n"
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own."),
+    ("cyd28", "radar-poziom.bin"): m("SkyCYD 4.5.0 poziom", "radar ADS-B, poziomo; BETA, NIESPRAWDZONE", "4.5.0", A, "Piotr Korona",
+                          "Ten sam radar lotniczy co SkyCYD pion, po polsku i po angielsku, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).\n"
+                          "Stan: NIESPRAWDZONE, BETA - tej binarki (4.5.0) nikt jeszcze nie uruchomil. Zewnetrzny tester uzywal na 2432S028R wczesniejszej wersji: skan sieci w portalu dziala, wydawania adresow telefonowi nie potwierdzono.\n"
                           "Plytka: CYD 2.8\" (2432S028R).\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Kalibracja dotyku 2.8\" jest w portalu (Siec -> Kalibracja dotyku), osobna od wersji pionowej. Karta SD nie jest uzywana.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku).",
-                          opis_en="ADS-B radar, landscape; UNTESTED; Polish only",
-                          info_en="The same aircraft radar as SkyCYD portrait, in landscape 320x240 (the original SkyCYD layout).\n"
-                          "Status: UNTESTED - nobody has run this binary yet. An outside tester used the previous version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne.",
+                          opis_en="ADS-B radar, landscape; BETA, UNTESTED",
+                          info_en="The same aircraft radar as SkyCYD portrait, in Polish and English, in landscape 320x240 (the original SkyCYD layout).\n"
+                          "Status: UNTESTED, BETA - nobody has run this binary (4.5.0) yet. An outside tester used an earlier version on a 2432S028R: the network scan in the portal works, handing out an address to the phone is not confirmed.\n"
                           "Board: CYD 2.8\" (2432S028R).\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8\" touch calibration is in the portal (Network -> Touch calibration), separate from the portrait version. The SD card is not used.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration)."),
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own."),
     ("cyd28s", "gry-vol1.bin"): m("K-OS GAME VOL1", "6 gier: 2048, Lander i inne; NIESPRAWDZONE", "0.9.2", A, "Piotr Korona",
                           "Tom szesciu gier dla K-OS, po polsku i po angielsku, ekran pionowo, z maskotka Chip-K.\n"
                           "Stan: NIESPRAWDZONE - na tej rewizji nikt jeszcze nie uruchomil tej binarki.\n"
@@ -620,34 +620,34 @@ META = {
                           "Features: an Open-Meteo forecast, the IMGW radar with a map, offline mode from the card.\n"
                           "Needs: WiFi, an SD card (data in /meteo/; K-OS 0.7.8 or newer fetches the map /meteo/mapa.bin itself, with an older one copy it from the store website). Touch calibration is done here directly in landscape, because a portrait calibration would stretch instead of rotate.\n"
                           "Map: Natural Earth (public domain), GeoNames (CC BY 4.0)."),
-    ("cyd28s", "radar-pion.bin"): m("SkyCYD 4.4.2 pion", "radar samolotow ADS-B; NIESPRAWDZONE; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Radar lotniczy: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
-                          "Stan: NIESPRAWDZONE - na tej rewizji nikt jeszcze nie uruchomil SkyCYD. Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (ustawienia -> inwersja).\n"
+    ("cyd28s", "radar-pion.bin"): m("SkyCYD 4.5.0 pion", "radar samolotow ADS-B; BETA, NIESPRAWDZONE", "4.5.0", A, "Piotr Korona",
+                          "Radar lotniczy, po polsku i po angielsku: samoloty wokol Twojego domu na mapie, zdjecia samolotow i pogoda. Ekran pionowo 240x320.\n"
+                          "Stan: NIESPRAWDZONE, BETA - na tej rewizji nikt jeszcze nie uruchomil SkyCYD (wersji 4.5.0 nie uruchomiono jeszcze na zadnej plytce). Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (Inwersja kolorow).\n"
                           "Plytka: CYD 2.8\" ST7789 (dwa gniazda USB).\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Kalibracja dotyku 2.8\" jest w portalu (Siec -> Kalibracja dotyku). Karta SD nie jest uzywana.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku).",
-                          opis_en="ADS-B aircraft radar; UNTESTED; Polish only",
-                          info_en="An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
-                          "Status: UNTESTED - nobody has run SkyCYD on this revision yet. If the picture comes out as a negative, you switch it in the radar menu (settings -> inversion).\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne.",
+                          opis_en="ADS-B aircraft radar; BETA, UNTESTED",
+                          info_en="An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.\n"
+                          "Status: UNTESTED, BETA - nobody has run SkyCYD on this revision yet (version 4.5.0 has not been run on any board yet). If the picture comes out as a negative, you switch it in the radar menu (Invert colours).\n"
                           "Board: CYD 2.8\" ST7789 (two USB sockets).\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8\" touch calibration is in the portal (Network -> Touch calibration). The SD card is not used.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration)."),
-    ("cyd28s", "radar-poziom.bin"): m("SkyCYD 4.4.2 poziom", "radar ADS-B, poziomo; NIESPRAWDZONE; tylko po polsku", "4.4.2", A, "Piotr Korona",
-                          "Ten sam radar lotniczy co SkyCYD pion, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).\n"
-                          "Stan: NIESPRAWDZONE - na tej rewizji nikt jeszcze nie uruchomil SkyCYD. Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (ustawienia -> inwersja).\n"
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own."),
+    ("cyd28s", "radar-poziom.bin"): m("SkyCYD 4.5.0 poziom", "radar ADS-B, poziomo; BETA, NIESPRAWDZONE", "4.5.0", A, "Piotr Korona",
+                          "Ten sam radar lotniczy co SkyCYD pion, po polsku i po angielsku, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).\n"
+                          "Stan: NIESPRAWDZONE, BETA - na tej rewizji nikt jeszcze nie uruchomil SkyCYD (wersji 4.5.0 nie uruchomiono jeszcze na zadnej plytce). Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (Inwersja kolorow).\n"
                           "Plytka: CYD 2.8\" ST7789 (dwa gniazda USB).\n"
                           "Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.\n"
                           "Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Kalibracja dotyku 2.8\" jest w portalu (Siec -> Kalibracja dotyku), osobna od wersji pionowej. Karta SD nie jest uzywana.\n"
-                          "Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku).",
-                          opis_en="ADS-B radar, landscape; UNTESTED; Polish only",
-                          info_en="The same aircraft radar as SkyCYD portrait, in landscape 320x240 (the original SkyCYD layout).\n"
-                          "Status: UNTESTED - nobody has run SkyCYD on this revision yet. If the picture comes out as a negative, you switch it in the radar menu (settings -> inversion).\n"
+                          "Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne.",
+                          opis_en="ADS-B radar, landscape; BETA, UNTESTED",
+                          info_en="The same aircraft radar as SkyCYD portrait, in Polish and English, in landscape 320x240 (the original SkyCYD layout).\n"
+                          "Status: UNTESTED, BETA - nobody has run SkyCYD on this revision yet (version 4.5.0 has not been run on any board yet). If the picture comes out as a negative, you switch it in the radar menu (Invert colours).\n"
                           "Board: CYD 2.8\" ST7789 (two USB sockets).\n"
                           "Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.\n"
                           "Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8\" touch calibration is in the portal (Network -> Touch calibration), separate from the portrait version. The SD card is not used.\n"
-                          "Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration)."),
+                          "Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own."),
     ("cyd28s", "bruce.bin"): m("Bruce (LITE)",  "pentest WiFi / BLE / IR / RF; NIESPRAWDZONE", "lite", Z, "pr3y",
                           "Bruce - zestaw do testow bezpieczenstwa (WiFi, BLE, IR, RF), wariant LITE. Program zewnetrzny.\n"
                           "Stan: NIESPRAWDZONE - ustawienia ekranu wyprowadzone z kodu biblioteki, nie ze sprawdzenia na plytce. Mozliwe bledy: kolory (negatyw, zamieniony czerwony z niebieskim) albo obraz obrocony o 180 stopni - wtedy dotyk trafia w lustrzane miejsca.\n"

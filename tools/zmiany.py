@@ -20,11 +20,17 @@ def z(pl, en):
 
 
 _SKYCYD = z([
+    "4.5.0 (BETA - nie byla jeszcze uruchomiona na plytce): jezyk angielski. Caly radar - ekrany, menu, komunikaty, ekran diagnostyczny i portal konfiguracji - mowi po polsku albo po angielsku. "
+    "Jezyk wybierasz w menu radaru (Jezyk / Language) albo w portalu (zakladka Wyglad); plytka go pamieta, a bez wyboru zostaje polski, wiec po aktualizacji nic sie nie zmienia. "
+    "Za dlugie napisy diagnostyki i komunikatow w wersji pionowej, ktore wychodzily za krawedz ekranu, sa skrocone. Jezyka z ustawien K-OS radar nie czyta.",
     "4.4.2: portal na cudzej plytce - ze zgloszenia zewnetrznego testera, ktory uruchomil 4.4.1 na wlasnej 2432S028R. "
     "SPRAWDZONE NA SPRZECIE: skan sieci w portalu byl zawsze pusty, bo nieskonfigurowana plytka wlaczala sam punkt dostepowy, a skan wymaga interfejsu klienta (do tego wynik skanu byl ignorowany); teraz radio pracuje jako AP+STA i tester widzi 13 sieci zamiast zera. "
     "POPRAWIONE, ALE NIESPRAWDZONE NA SPRZECIE: punkt dostepowy nie rozdawal adresow (softAP() idzie teraz przed softAPConfig(), serwer DHCP jest wlaczany recznie, gdy nie chodzi, a dzierzawa niesie DNS); nazwa AP wychodzila jako SkyCYD-0000, bo MAC czytal sie za wczesnie; reczne wpisanie SSID i hasla odpowiada od razu zamiast po 18 s. "
     "TAKZE NIESPRAWDZONE: kalibracja dotyku 2.8\" przeniesiona z firmware do portalu (Siec -> Kalibracja dotyku), a ekran w menu plytki pokazuje na zywo surowy odczyt przetwornika.",
 ], [
+    "4.5.0 (BETA - not yet run on a board): English. The whole radar - screens, menu, messages, the diagnostic screen and the setup portal - speaks Polish or English. "
+    "You pick the language in the radar menu (Jezyk / Language) or in the portal (Look tab); the board remembers it, and with no choice it stays Polish, so nothing changes after the update. "
+    "Diagnostic and message texts in the portrait version that ran past the screen edge are shortened. The radar does not read the language from the K-OS settings.",
     "4.4.2: the portal on someone else's board - from an external tester who ran 4.4.1 on his own 2432S028R. "
     "TESTED ON HARDWARE: the network list in the portal was always empty, because an unconfigured board started the access point only, while scanning needs a client interface (and the scan result was ignored on top of that); the radio now runs AP+STA and the tester sees 13 networks instead of none. "
     "FIXED BUT NOT TESTED ON HARDWARE: the access point handed out no addresses (softAP() now runs before softAPConfig(), the DHCP server is started by hand when it is not running, and the lease carries a DNS server); the AP name came out as SkyCYD-0000 because the MAC was read too early; entering SSID and password by hand answers at once instead of after 18 s. "

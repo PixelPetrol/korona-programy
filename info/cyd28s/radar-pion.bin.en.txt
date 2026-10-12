@@ -1,6 +1,6 @@
-An aircraft radar: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
-Status: UNTESTED - nobody has run SkyCYD on this revision yet. If the picture comes out as a negative, you switch it in the radar menu (settings -> inversion).
+An aircraft radar, in Polish and English: the planes around your home on a map, aircraft photos and the weather. Portrait screen 240x320.
+Status: UNTESTED, BETA - nobody has run SkyCYD on this revision yet (version 4.5.0 has not been run on any board yet). If the picture comes out as a negative, you switch it in the radar menu (Invert colours).
 Board: CYD 2.8" ST7789 (two USB sockets).
 Features: aircraft positions from adsb.lol (through the SkyCYD Worker), a map of the area, aircraft photos, weather.
 Needs: WiFi with internet. On the first start the board opens its own access point with a setup portal. The 2.8" touch calibration is in the portal (Network -> Touch calibration). The SD card is not used.
-Limits: the interface is in Polish only. SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration).
+Limits: you pick the language (Polish or English, Polish by default) in the radar menu (Jezyk / Language) or in its portal (Look tab). SkyCYD predates K-OS and does not read its settings from the card (theme, language, touch calibration) - it has its own.

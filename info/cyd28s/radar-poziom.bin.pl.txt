@@ -1,6 +1,6 @@
-Ten sam radar lotniczy co SkyCYD pion, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).
-Stan: NIESPRAWDZONE - na tej rewizji nikt jeszcze nie uruchomil SkyCYD. Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (ustawienia -> inwersja).
+Ten sam radar lotniczy co SkyCYD pion, po polsku i po angielsku, w orientacji poziomej 320x240 (oryginalny uklad SkyCYD).
+Stan: NIESPRAWDZONE, BETA - na tej rewizji nikt jeszcze nie uruchomil SkyCYD (wersji 4.5.0 nie uruchomiono jeszcze na zadnej plytce). Gdyby obraz wyszedl negatywem, przelaczysz to w menu radaru (Inwersja kolorow).
 Plytka: CYD 2.8" ST7789 (dwa gniazda USB).
 Umie: pozycje samolotow z adsb.lol (przez Worker SkyCYD), mapa okolicy, zdjecia maszyn, pogoda.
 Potrzebne: WiFi z internetem. Przy pierwszym starcie plytka wystawia wlasny punkt dostepowy z portalem konfiguracji. Kalibracja dotyku 2.8" jest w portalu (Siec -> Kalibracja dotyku), osobna od wersji pionowej. Karta SD nie jest uzywana.
-Ograniczenia: interfejs tylko po polsku. SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku).
+Ograniczenia: jezyk (polski albo angielski, domyslnie polski) wybierasz w menu radaru (Jezyk / Language) albo w jego portalu (zakladka Wyglad). SkyCYD powstal przed K-OS i nie czyta jego ustawien z karty (motyw, jezyk, kalibracja dotyku) - ma wlasne.
