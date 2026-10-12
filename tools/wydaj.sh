@@ -61,7 +61,8 @@ IO_BUF=4096                              # sdprog.h IO_BUF_SIZE - SUMY.txt i man
 CZEKAJ_S="${CZEKAJ_S:-900}"              # po-pushu: ile najwyzej czekac na GitHub Pages
 
 # profil = "BOARD|PANEL|katalog budowy|id plytki" (bash 3.2 - bez tablic asocjacyjnych)
-PROFILE="24||.build-24|cyd24 28R||.build-28R|cyd28 28R|st7789|.build-28R-st7789|cyd28s"
+# cyd35 (CYD 3,5" ESP32-3248S035R, ST7796) - od 0.8.1, NIESPRAWDZONE NA SPRZECIE (decyzja Piotra 12.10)
+PROFILE="24||.build-24|cyd24 28R||.build-28R|cyd28 28R|st7789|.build-28R-st7789|cyd28s 35|st7796|.build-35|cyd35"
 
 TRYB="pelny"
 NAPISY_DOD=""
@@ -198,7 +199,9 @@ else
 fi
 LOK24="$(wersja_manifestu < "$SKLEP/portal/manifest-cyd24.json" || true)"
 for p in $PROFILE; do
-  id="${p##*|}"; w="$(wersja_manifestu < "$SKLEP/portal/manifest-$id.json" || true)"
+  id="${p##*|}"
+  if [ ! -f "$SKLEP/portal/manifest-$id.json" ]; then info "repo sklepu: brak portal/manifest-$id.json - nowa plytka, przyjdzie z rsync portal/"; continue; fi
+  w="$(wersja_manifestu < "$SKLEP/portal/manifest-$id.json" || true)"
   [ "$w" = "$LOK24" ] || ostrz "repo sklepu: manifest-$id.json ma version '$w', a manifest-cyd24.json '$LOK24' - manifesty rozjechane"
 done
 if [ "$SKAD" = "GitHub Pages" ] && [ "$LOK24" != "$OPUB" ]; then
@@ -212,7 +215,7 @@ if [ -x "$LOADER/tests/run.sh" ]; then
   else blad "testy hostowe: kod $rc - ostatnie linie:"; tail -15 "$LOGI/testy.txt" | sed 's/^/          /'; fi
 else ostrz "brak $LOADER/tests/run.sh - testow hostowych nie ma"; fi
 
-krok "4. budowanie trzech profili K-OS"
+krok "4. budowanie profili K-OS (cyd24, cyd28, cyd28s, cyd35)"
 ZNACZNIK="$LOGI/start-budowania"; : > "$ZNACZNIK"; sleep 1     # binarka musi byc NOWSZA niz ten plik
 if [ "$TRYB" = "pelny" ]; then
   [ "$NBLEDOW" -eq 0 ] || stop "$NBLEDOW blad(ow) przed budowaniem - najpierw je napraw (budowanie trwa kilka minut)"
@@ -301,7 +304,7 @@ if [ "$TRYB" = "pelny" ] && [ "$NBLEDOW" -eq 0 ]; then
     [ "$(rozmiar "$PORTAL/manifest-$I.json")" -lt "$IO_BUF" ] || blad "portal/manifest-$I.json ma >= $IO_BUF B - samoaktualizacja go nie przeczyta"
   done
   [ "$(rozmiar "$PORTAL/obrazy/SUMY.txt")" -lt "$IO_BUF" ] || blad "portal/obrazy/SUMY.txt ma >= $IO_BUF B - samoaktualizacja go nie przeczyta"
-  [ "$NBLEDOW" -ne 0 ] || ok "portal/: SUMY.txt i 3 manifesty mowia $WER, obrazy = binarki, pliki < $IO_BUF B"
+  [ "$NBLEDOW" -ne 0 ] || ok "portal/: SUMY.txt i manifesty wszystkich plytek mowia $WER, obrazy = binarki, pliki < $IO_BUF B"
 fi
 
 krok "7. katalog sklepu (tools/katalog.py --sprawdz)"
@@ -352,6 +355,7 @@ WYNIK: GOTOWE DO PUBLIKACJI K-OS $WER. NIC NIE ZOSTALO WYPCHNIETE - komendy do w
   cd "$LOADER" && ./flash.sh                                            # cyd24
   cd "$LOADER" && BUILDDIR="$LOADER/.build-28R" ./flash.sh              # cyd28
   cd "$LOADER" && BUILDDIR="$LOADER/.build-28R-st7789" ./flash.sh       # cyd28s
+  cd "$LOADER" && BOARD=35 ./flash.sh                                   # cyd35 (NIESPRAWDZONE NA SPRZECIE)
 
   # 2. strona do repo sklepu (repo PUBLICZNE) i do prywatnej kopii zrodel:
   rsync -a --delete "$PORTAL/" "$SKLEP/portal/"

@@ -10,5 +10,14 @@
   {
     "id": "cyd28s",
     "nazwa": "CYD 2.8\" ST7789 (ESP32-2432S028 \"2 USB\")"
+  },
+  {
+    "id": "cyd35",
+    "nazwa": "CYD 3.5\" (ESP32-3248S035R)",
+    "niesprawdzona": true,
+    "opis": {
+      "pl": "CYD 3,5\" ESP32-3248S035R (wariant R: z tylu ukl. XPT2046), ekran ST7796 320x480; K-OS rysuje w polu 240x320 na srodku. NIESPRAWDZONE na plytce - pierwszy test u Ciebie, zglos wynik.",
+      "en": "CYD 3.5\" ESP32-3248S035R (R variant: XPT2046 chip on the back), ST7796 320x480 display; K-OS draws in a 240x320 area in the middle. UNTESTED on the board - you are the first test, please report."
+    }
   }
 ]

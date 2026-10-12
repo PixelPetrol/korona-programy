@@ -39,7 +39,27 @@ PLYTKI = [
     # podswietlenie IDENTYCZNE - ale sterownik ekranu jest wkompilowany w TFT_eSPI, wiec
     # binarki musza byc osobne i plytka musi miec wlasny identyfikator.
     ("cyd28s", 'CYD 2.8" ST7789 (ESP32-2432S028 "2 USB")'),
+    # CYD 3,5" (ESP32-3248S035R, wariant R z dotykiem XPT2046): panel ST7796 320x480, K-OS >= 0.8.1
+    # i nasze programy rysuja w polu 240x320 na srodku ekranu. NIESPRAWDZONE NA PLYTCE (decyzja Piotra
+    # 12.10.2026: wydac od razu z adnotacja). Wariant C (dotyk GT911) NIE jest obslugiwany.
+    ("cyd35", 'CYD 3.5" (ESP32-3248S035R)'),
 ]
+# Dodatkowe pola plytki w plytki.json (czyta je tylko przegladarka: portal/sklep.html i strona WWW
+# plytki - obie biora z wpisu "id" i "nazwa", reszta jest dla ludzi i przyszlej strony).
+PLYTKI_EXTRA = {
+    "cyd35": {
+        "niesprawdzona": True,
+        "opis": {
+            "pl": 'CYD 3,5" ESP32-3248S035R (wariant R: z tylu ukl. XPT2046), ekran ST7796 320x480; '
+                  'K-OS rysuje w polu 240x320 na srodku. NIESPRAWDZONE na plytce - pierwszy test u Ciebie, zglos wynik.',
+            "en": 'CYD 3.5" ESP32-3248S035R (R variant: XPT2046 chip on the back), ST7796 320x480 display; '
+                  'K-OS draws in a 240x320 area in the middle. UNTESTED on the board - you are the first test, please report.',
+        },
+    },
+}
+# Plytki, ktorych NIE MA w starym katalogu.json (v2). Czytaja go tylko K-OS < 0.4.7 (cyd35 nie ma) i K-OS
+# w drodze awaryjnej po 404 katalogu v3; v2 ma twardy sufit KATALOG_STOP, wiec nowe plytki tylko w v3.
+V2_BEZ_PLYTEK = ("cyd35",)
 UZYTK_DIR = "uzytkownicy"          # bin/<plytka>/uzytkownicy/<nazwa>.bin + <nazwa>.meta.json
 # (plytka, plik) albo plik -> dict(nazwa, opis, wersja, kategoria, autor, info); wpis z plytka ma pierwszenstwo.
 # kategoria: "autorskie" (programy K-OS / Piotra) albo "zewnetrzne" (porty cudzych projektow).
@@ -592,6 +612,22 @@ META = {
                           "Features: the same as on 2.4\" - notes typed from a browser too, a calculator with a tape, a calendar with an NTP clock, a two-panel file manager, QR codes, stopwatch and timer, unit converter, NBP exchange rates.\n"
                           "Needs: an SD card (data in /office/); WiFi for rates, the clock and typing from a computer. Theme, language, networks, time zone and calibration (/korona/cyd28s/dotyk.txt) come from K-OS.\n"
                           "Limits: /korona is read-only; it does not delete .bin programs in /programy. Rates and the notes page use plain http."),
+    # cyd35 (CYD 3,5" ESP32-3248S035R): NIESPRAWDZONE NA 3,5" - Office rysuje w polu 240x320 na srodku
+    # ekranu 320x480 (kos_board.h kosPoleBegin), kalibracja domyslna jest ZGADYWANA (kosTouchCalIsGuess).
+    ("cyd35", "office.bin"): m("K-OS Office",   "notatnik, kalkulator, pliki; BETA, NIESPRAWDZONE", "1.3.2", A, "Piotr Korona",
+                          "Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator, kalendarz, menedzer plikow, kody QR, kursy walut.\n"
+                          "Stan: BETA, NIESPRAWDZONE na 3,5\" - nikt jeszcze nie uruchomil Office na tej plytce; jestes pierwszym testem, zglos wynik. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, napisz - to poprawka jednej flagi.\n"
+                          "Plytka: CYD 3,5\" ESP32-3248S035R (wariant R, dotyk XPT2046). Program rysuje w polu 240x320 na srodku ekranu, ramka w kolorze motywu. Wariant C (dotyk GT911) NIE jest obslugiwany.\n"
+                          "Umie: to samo co na 2.4\" - notatki pisane tez z przegladarki, kalkulator z tasma, kalendarz z zegarem NTP, dwupanelowy menedzer plikow, kody QR, stoper i minutnik, przelicznik jednostek, kursy NBP.\n"
+                          "Potrzebne: K-OS 0.8.1 lub nowszy, karta SD (dane w /office/); WiFi do kursow, zegara i pisania z komputera. Motyw, jezyk, sieci, strefe czasowa i kalibracje (/korona/cyd35/dotyk.txt) bierze z K-OS; bez kalibracji zaproponuje kalibracje czterech rogow, bo domyslna jest zgadywana.\n"
+                          "Ograniczenia: /korona tylko do odczytu; programow .bin z /programy nie kasuje. Kursy i strona notatnika ida zwyklym http.",
+                          opis_en="notes, calculator, files; BETA, UNTESTED",
+                          info_en="An office suite for your fingertip, in Polish and English: notes, calculator, calendar, file manager, QR codes, exchange rates.\n"
+                          "Status: BETA, UNTESTED on 3.5\" - nobody has run Office on this board yet; you are the first test, please report the result. If the picture comes out as a negative or with red and blue swapped, tell us - it is a one-flag fix.\n"
+                          "Board: CYD 3.5\" ESP32-3248S035R (R variant, XPT2046 touch). The app draws in a 240x320 area in the middle of the screen, framed in the theme colour. The C variant (GT911 touch) is NOT supported.\n"
+                          "Features: the same as on 2.4\" - notes typed from a browser too, a calculator with a tape, a calendar with an NTP clock, a two-panel file manager, QR codes, stopwatch and timer, unit converter, NBP exchange rates.\n"
+                          "Needs: K-OS 0.8.1 or newer, an SD card (data in /office/); WiFi for rates, the clock and typing from a computer. Theme, language, networks, time zone and calibration (/korona/cyd35/dotyk.txt) come from K-OS; without a calibration it offers a four-corner one, because the default is a guess.\n"
+                          "Limits: /korona is read-only; it does not delete .bin programs in /programy. Rates and the notes page use plain http."),
     ("cyd28s", "meteo-pion.bin"): m("Meteo K-OS pion", "pogoda i radar opadow IMGW; BETA, NIESPRAWDZONE", "0.2.4", A, "Piotr Korona",
                           "Stacja pogodowa pod palec, po polsku i po angielsku, ekran pionowo: prognoza z Open-Meteo i radar opadow IMGW.\n"
                           "Stan: BETA, NIESPRAWDZONE - na tej rewizji nie byla jeszcze uruchomiona. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, napisz - to poprawka jednej flagi.\n"
@@ -1090,12 +1126,13 @@ def main():
                     if data[:1] != b"\xe9": print("UWAGA: zly magic (nie obraz ESP32):", p, file=sys.stderr); continue
                     progs.append(wpis(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
                     progs3.append(wpis3(pid, f"bin/{pid}/{UZYTK_DIR}/{f}", data, meta))
-        out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
+        if pid not in V2_BEZ_PLYTEK:
+            out["plytki"].append({"id": pid, "nazwa": pname, "programy": progs})
         v3[pid] = {"sklep": "KORONA", "wersja": 3, "plytka": pid, "nazwa": pname, "programy": progs3}
 
     tekst = json.dumps(out, ensure_ascii=False, indent=2) + "\n"
     rozmiar = len(tekst.encode("utf-8"))
-    n2 = sum(len(p["programy"]) for p in out["plytki"])
+    n2 = sum(len(p["programy"]) for p in out["plytki"])   # bez plytek z V2_BEZ_PLYTEK
     if rozmiar > KATALOG_STOP:
         print("BLAD: katalog.json (v2) ma %d B, a limit to %d B. NIC NIE ZAPISANO.\n"
               "      K-OS <= 0.4.6 pobiera go w calosci do RAM - za duzy plik wywala tam sklep.\n"
@@ -1125,7 +1162,7 @@ def main():
                                                          len(t3.encode("utf-8"))))
     # Spis plytek - potrzebny K-OS do kafelka "inne plytki". Bez niego trzeba by po to
     # dociagac caly stary katalog.json, czyli dokladnie to, od czego uciekamy.
-    zapisz("plytki.json", json.dumps([{"id": i, "nazwa": n} for i, n in PLYTKI],
+    zapisz("plytki.json", json.dumps([dict({"id": i, "nazwa": n}, **PLYTKI_EXTRA.get(i, {})) for i, n in PLYTKI],
                                      ensure_ascii=False, indent=2) + "\n")
 
     zm_n = sum(1 for pid, _ in PLYTKI for e in v3[pid]["programy"] if "zmiany" in e)

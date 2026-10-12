@@ -1,7 +1,7 @@
 #!/bin/bash
 # K-OS (KORONA OS for CYD) - skladanie obrazow dla portalu instalacyjnego (ESP Web Tools).
 #
-# Bierze GOTOWE wyniki builda z loader/.build-24, .build-28R i .build-28R-st7789 i uklada
+# Bierze GOTOWE wyniki builda z loader/.build-24, .build-28R, .build-28R-st7789 i .build-35 i uklada
 # je w portal/obrazy/<plytka>/ tak, jak je ma serwowac GitHub Pages.
 #
 # TEN SKRYPT NICZEGO NIE WGRYWA NA PLYTKE. Nie dotyka portu szeregowego,
@@ -24,6 +24,7 @@
 #   ./build.sh                        (2.4")
 #   BOARD=28R ./build.sh              (2.8" ILI9341)
 #   BOARD=28R PANEL=st7789 ./build.sh (2.8" ST7789, rewizja "2 USB")
+#   BOARD=35 ./build.sh               (3.5" ESP32-3248S035R, ST7796 - NIESPRAWDZONE NA SPRZECIE)
 #
 # Przenosnosc: pisane i sprawdzane na macOS. Rozmiar pliku i czas modyfikacji
 # ida przez python3 (nie `stat -f`/`date -r`), sort -V jest w GNU i BSD sort -
@@ -128,18 +129,20 @@ PY
 # (bash 3.2 z macOS nie ma tablic asocjacyjnych - stad funkcje)
 # Element tablicy to SUFIKS KATALOGU BUILDA (.build-<element>), a nie sama plytka - odkad
 # 2.8" ma dwie rewizje panelu, jedna plytka daje dwa katalogi (.build-28R i .build-28R-st7789).
-PLYTKI=(24 28R 28R-st7789)
-id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; 28R-st7789) echo cyd28s ;; *) blad "nieznana plytka $1" ;; esac; }
+PLYTKI=(24 28R 28R-st7789 35)
+id_plytki()   { case "$1" in 24) echo cyd24 ;; 28R) echo cyd28 ;; 28R-st7789) echo cyd28s ;; 35) echo cyd35 ;; *) blad "nieznana plytka $1" ;; esac; }
 opis_plytki() { case "$1" in
                   24)         echo 'CYD 2.4" ESP32-2432S024R' ;;
                   28R)        echo 'CYD 2.8" ESP32-2432S028R - sprawdzona przez testera' ;;
                   28R-st7789) echo 'CYD 2.8" ST7789 ESP32-2432S028 "2 USB" - ekran niepotwierdzony' ;;
+                  35)         echo 'CYD 3.5" ESP32-3248S035R (ST7796) - NIESPRAWDZONE na plytce' ;;
                 esac; }
 # Podpowiedz, jak zbudowac brakujacy obraz - rozna dla panelu ST7789.
 jak_zbudowac() { case "$1" in
                    24)         echo 'cd loader && ./build.sh' ;;
                    28R)        echo 'cd loader && BOARD=28R ./build.sh' ;;
                    28R-st7789) echo 'cd loader && BOARD=28R PANEL=st7789 ./build.sh' ;;
+                   35)         echo 'cd loader && BOARD=35 ./build.sh' ;;
                  esac; }
 
 # ETAP 1: kontrola. Nic nie pisze do obrazy/. Kazdy problem = przerwanie.

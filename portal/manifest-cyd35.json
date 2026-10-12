@@ -1,0 +1,29 @@
+{
+  "name": "K-OS - KORONA OS for CYD 3.5\" (ESP32-3248S035R, niesprawdzony na sprzecie)",
+  "version": "0.8.1",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "obrazy/cyd35/bootloader.bin",
+          "offset": 4096
+        },
+        {
+          "path": "obrazy/cyd35/partitions.bin",
+          "offset": 32768
+        },
+        {
+          "path": "obrazy/cyd35/loader.bin",
+          "offset": 65536
+        },
+        {
+          "path": "obrazy/cyd35/otadata-pusta.bin",
+          "offset": 57344
+        }
+      ]
+    }
+  ]
+}

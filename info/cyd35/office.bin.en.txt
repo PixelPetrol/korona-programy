@@ -1,0 +1,6 @@
+An office suite for your fingertip, in Polish and English: notes, calculator, calendar, file manager, QR codes, exchange rates.
+Status: BETA, UNTESTED on 3.5" - nobody has run Office on this board yet; you are the first test, please report the result. If the picture comes out as a negative or with red and blue swapped, tell us - it is a one-flag fix.
+Board: CYD 3.5" ESP32-3248S035R (R variant, XPT2046 touch). The app draws in a 240x320 area in the middle of the screen, framed in the theme colour. The C variant (GT911 touch) is NOT supported.
+Features: the same as on 2.4" - notes typed from a browser too, a calculator with a tape, a calendar with an NTP clock, a two-panel file manager, QR codes, stopwatch and timer, unit converter, NBP exchange rates.
+Needs: K-OS 0.8.1 or newer, an SD card (data in /office/); WiFi for rates, the clock and typing from a computer. Theme, language, networks, time zone and calibration (/korona/cyd35/dotyk.txt) come from K-OS; without a calibration it offers a four-corner one, because the default is a guess.
+Limits: /korona is read-only; it does not delete .bin programs in /programy. Rates and the notes page use plain http.

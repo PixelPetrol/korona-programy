@@ -1,19 +1,24 @@
-# K-OS 0.8.0 - obrazy portalu, 2026-10-06 10:15
+# K-OS 0.8.1 - obrazy portalu, 2026-10-12 10:53
 # offsety: bootloader 0x1000, tablica 0x8000, otadata 0xe000, factory (K-OS) 0x10000
 # partycja factory: 1441792 B
 
-cyd24/loader.bin                                 1431312  042816bd88a383ba2d3c69e1609401bd8e2580aaab0daa4641f4bfe8e4565689
+cyd24/loader.bin                                 1431376  89fafc247068130ef1cb7da59ad5347bfb9ce40960a6033c75f254ca5b05ba37
 cyd24/bootloader.bin                               24992  427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379
 cyd24/partitions.bin                                3072  28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b
 cyd24/otadata-pusta.bin                             8192  7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
-cyd24/korona-cyd24-scalony.bin                   1496848  a694bfc9140f6f77631958fe58d2a6e533bf2f7b421a38fd86813668fe7203c8
-cyd28/loader.bin                                 1429312  244453e768949d6655241d54326de511b8685c8d99600c941e2327788867b3d2
+cyd24/korona-cyd24-scalony.bin                   1496912  0a08c720c906c6db1c89d325e34abe4ee21874e4300f2382e6ef16e67b44be5f
+cyd28/loader.bin                                 1429376  dd25235c3240d654cb9cfbd93835fc8cfe2b87638e2f660c5bffa174c1793faa
 cyd28/bootloader.bin                               24992  427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379
 cyd28/partitions.bin                                3072  28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b
 cyd28/otadata-pusta.bin                             8192  7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
-cyd28/korona-cyd28-scalony.bin                   1494848  ad7336a24a65c59e7234d485416d7f74a41d86175d7c0ea11274a0205d4edd15
-cyd28s/loader.bin                                1429200  f818f7d0a4298195ea980a29b1d8da8a52b4632e161a5781ba26150a36c2d4d8
+cyd28/korona-cyd28-scalony.bin                   1494912  551285643e7045e6ee7d6452c9d4c7a8217966dcf478aaef046096c3c58771e7
+cyd28s/loader.bin                                1429264  e0e80ae0b5227d715c0d4783a0f5f38d44ee9770cfe26023b789caa081f22396
 cyd28s/bootloader.bin                              24992  427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379
 cyd28s/partitions.bin                               3072  28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b
 cyd28s/otadata-pusta.bin                            8192  7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
-cyd28s/korona-cyd28s-scalony.bin                 1494736  9d3f92323fd9a46f6fa040b157191ff17e8f0b8c7dfc2cbd33d68d7094d454a3
+cyd28s/korona-cyd28s-scalony.bin                 1494800  dd2e114daccba85744f8f8a56e530bd5df2e49983d8dddf168c6daffcbea48a1
+cyd35/loader.bin                                 1430448  b7c4b4a1e7e613d8bade30ae5ba76e3e809dc3884af0b84b3e8ec19380341fb1
+cyd35/bootloader.bin                               24992  427f96e10c620c4f062dab15da54fc45494d897e8397ae6f3aecc98c42d7e379
+cyd35/partitions.bin                                3072  28e6bbb4c071a4a17f3d5fe762fc80aa15089ff431606b986a542d4f66fa454b
+cyd35/otadata-pusta.bin                             8192  7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
+cyd35/korona-cyd35-scalony.bin                   1495984  1fea669c22cf83be867a2787f52da704632d15b154e434a64d216d10bb9643ac

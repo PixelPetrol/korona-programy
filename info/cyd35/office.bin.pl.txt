@@ -1,0 +1,6 @@
+Pakiet biurowy pod palec, po polsku i po angielsku: notatnik, kalkulator, kalendarz, menedzer plikow, kody QR, kursy walut.
+Stan: BETA, NIESPRAWDZONE na 3,5" - nikt jeszcze nie uruchomil Office na tej plytce; jestes pierwszym testem, zglos wynik. Jesli obraz wyjdzie negatywem albo z zamienionym czerwonym i niebieskim, napisz - to poprawka jednej flagi.
+Plytka: CYD 3,5" ESP32-3248S035R (wariant R, dotyk XPT2046). Program rysuje w polu 240x320 na srodku ekranu, ramka w kolorze motywu. Wariant C (dotyk GT911) NIE jest obslugiwany.
+Umie: to samo co na 2.4" - notatki pisane tez z przegladarki, kalkulator z tasma, kalendarz z zegarem NTP, dwupanelowy menedzer plikow, kody QR, stoper i minutnik, przelicznik jednostek, kursy NBP.
+Potrzebne: K-OS 0.8.1 lub nowszy, karta SD (dane w /office/); WiFi do kursow, zegara i pisania z komputera. Motyw, jezyk, sieci, strefe czasowa i kalibracje (/korona/cyd35/dotyk.txt) bierze z K-OS; bez kalibracji zaproponuje kalibracje czterech rogow, bo domyslna jest zgadywana.
+Ograniczenia: /korona tylko do odczytu; programow .bin z /programy nie kasuje. Kursy i strona notatnika ida zwyklym http.
